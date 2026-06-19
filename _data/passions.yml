@@ -2,10 +2,24 @@
 # Passions & Interests cards.
 #   - "kind: panel" cards open an in-page zoom panel (Music, Gaming, Gym).
 #   - "kind: link" cards navigate to a full page (Sports -> /basketball/).
+#   - "featured: true" renders a large hero banner at the top of the grid.
+#     Sports is featured because it's the live, data-driven experience.
 # Each card carries its own accent (RGB triplet) used for icon tint + glow,
-# so the grid reads as four distinct, themed tiles in both light and dark.
+# so the grid reads as distinct, themed tiles in both light and dark.
 # Body copy for the placeholder panels is marked TODO(Kevin) — swap freely.
+# Order here is the render order; the featured card leads.
 # ---------------------------------------------------------------------------
+
+- id: sports
+  kind: link
+  featured: true
+  title: Sports
+  icon: basketball
+  tagline: On the court with Bagwork 2.0 — live game stats and the latest highlight reel, pulled straight from the league.
+  badge: Live stats & highlights
+  cta: Step onto the court
+  accent: "249, 115, 22"      # basketball orange
+  href: /basketball/
 
 - id: music
   kind: panel
@@ -37,14 +51,6 @@
     - "TODO(Kevin): Go-to games / genres"
     - "TODO(Kevin): Platform of choice"
     - "TODO(Kevin): Competitive rank or proudest moment"
-
-- id: sports
-  kind: link
-  title: Sports
-  icon: basketball
-  tagline: On the court with Bagwork 2.0. — see my live stats & highlights.
-  accent: "249, 115, 22"      # basketball orange
-  href: /basketball/
 
 - id: gym
   kind: panel

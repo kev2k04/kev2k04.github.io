@@ -26,7 +26,21 @@ permalink: /passions/
     <!-- Trigger row: 4 interest cards -->
     <div class="pass-grid">
       {%- for p in passions -%}
-        {%- if p.kind == 'link' -%}
+        {%- if p.featured -%}
+        <a class="pass-card pass-card--{{ p.id }} pass-card--featured" href="{{ p.href | relative_url }}"
+           style="--card-accent: {{ p.accent }};" aria-label="Open {{ p.title }} — basketball stats and highlights">
+          <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
+          <span class="pass-card__body">
+            {%- if p.badge -%}<span class="pass-card__badge"><span class="pass-card__dot" aria-hidden="true"></span>{{ p.badge }}</span>{%- endif -%}
+            <span class="pass-card__name">{{ p.title }}</span>
+            <span class="pass-card__tagline">{{ p.tagline }}</span>
+          </span>
+          <span class="pass-card__cta" aria-hidden="true">
+            {{ p.cta | default: "Explore" }}
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+        {%- elsif p.kind == 'link' -%}
         <a class="pass-card pass-card--{{ p.id }}" href="{{ p.href | relative_url }}"
            style="--card-accent: {{ p.accent }};" aria-label="Open {{ p.title }}">
           <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
