@@ -166,6 +166,10 @@ html[data-theme="minecraft"] {
   .btn--primary, .btn--ghost { background: var(--mc-stone); color: #fff; border-color: var(--mc-ink-dk); }
   .btn svg { filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.5)); }
 
+  /* Light/dark is a professional-theme concept; the Minecraft world has its
+     own fixed look, so hide the light/dark switch while it's active. */
+  .mode-toggle { display: none; }
+
   /* ---- theme toggle as a stone button ---- */
   .theme-toggle {
     font-family: var(--font-pixel);

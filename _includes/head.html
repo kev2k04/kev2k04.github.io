@@ -3,12 +3,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {%- comment -%} Apply the saved theme before paint to avoid a flash of the wrong theme. {%- endcomment -%}
+  {%- comment -%} Apply the saved theme + light/dark mode before paint to avoid a flash of the wrong theme. {%- endcomment -%}
   <script>
     (function () {
+      var el = document.documentElement;
       try {
         if (localStorage.getItem('kl-theme') === 'minecraft') {
-          document.documentElement.setAttribute('data-theme', 'minecraft');
+          el.setAttribute('data-theme', 'minecraft');
+        }
+        // Light/dark is a separate axis from the Minecraft theme.
+        // Default is dark (unset); only light is stored as an attribute.
+        if (localStorage.getItem('kl-mode') === 'light') {
+          el.setAttribute('data-mode', 'light');
         }
       } catch (e) {}
     })();

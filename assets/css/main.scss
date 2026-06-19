@@ -48,6 +48,60 @@
   --glow-dark:      0 12px 26px -14px rgba(0, 0, 0, 0.85);
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Surfaces that dim the page behind a zoom panel (kept dark in both modes). */
+  --scrim: rgba(5, 9, 18, 0.55);
+  /* Header nav links + footer fine print read against their own backgrounds. */
+  --nav-link:   rgba(236, 231, 217, 0.72);
+  --footer-soft: rgba(236, 231, 217, 0.4);
+  --footer-chip: rgba(236, 231, 217, 0.05);
+}
+
+/* =========================================================================
+   Light mode — "Daylight & Azure".
+   A designed light companion to the dark default: cool paper, deep navy ink,
+   a stronger azure that holds contrast on white. Scoped so it never touches
+   the Minecraft theme, which owns its own palette.
+   ========================================================================= */
+html[data-mode="light"]:not([data-theme="minecraft"]) {
+  --bg:         #f5f8fd;   /* cool paper                       */
+  --bg-alt:     #eaeff8;   /* alternating sections             */
+  --surface:    #ffffff;   /* cards / lifted panels            */
+  --surface-2:  #eef3fb;   /* hovered / nested surfaces        */
+  --header-bg:  rgba(245, 248, 253, 0.82);
+  --footer-bg:  #e9eef7;
+
+  --ink:        #0e1726;   /* headings / primary text          */
+  --ink-soft:   #36425a;   /* body copy                        */
+  --muted:      #5f6c84;   /* secondary text                   */
+
+  --accent:        #2160d8;   /* deep azure (AA on white)      */
+  --accent-soft:   #1a4fbd;   /* darker, for hover             */
+  --accent-deep:   #ffffff;   /* text that sits on the accent  */
+
+  --accent-rgb: 33, 96, 216;
+  --ink-rgb:    14, 23, 38;
+
+  --line:        rgba(14, 23, 38, 0.12);
+  --line-strong: rgba(14, 23, 38, 0.20);
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.08);
+  --shadow:    0 24px 50px -28px rgba(16, 24, 40, 0.30);
+  --glow-dark: 0 10px 24px -16px rgba(16, 24, 40, 0.35);
+
+  --scrim: rgba(20, 30, 52, 0.42);
+  --nav-link:   rgba(14, 23, 38, 0.66);
+  --footer-soft: rgba(14, 23, 38, 0.45);
+  --footer-chip: rgba(14, 23, 38, 0.04);
+}
+
+/* Smooth, flash-free transition when flipping light/dark. */
+@media (prefers-reduced-motion: no-preference) {
+  body, .site-header, .site-footer, .stats, .section--alt, .hero,
+  .resume__header, .project, .exp-card, .tag, .stat {
+    transition: background-color 0.4s var(--ease), color 0.4s var(--ease),
+                border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
 }
 
 /* =========================================================================
@@ -214,7 +268,7 @@ img { max-width: 100%; display: block; }
 
 .site-nav { display: flex; gap: 2rem; }
 .site-nav a {
-  color: rgba(236, 231, 217, 0.72);
+  color: var(--nav-link);
   font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -235,14 +289,73 @@ img { max-width: 100%; display: block; }
 
 .nav-toggle__label { display: none; }
 
+/* Light/dark switch — a compact sliding pill. Sun + moon sit under a thumb
+   that slides between them. Lives left of the Minecraft toggle. */
+.mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.mode-toggle__track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 58px;
+  height: 30px;
+  padding: 0 7px;
+  border-radius: 100px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.mode-toggle__icon {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  z-index: 1;
+  transition: color 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.mode-toggle__icon--sun  { color: #f4b740; opacity: 0.5; }
+.mode-toggle__icon--moon { color: var(--accent-soft); opacity: 1; }
+.mode-toggle__thumb {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transform: translateY(-50%);
+  transition: transform 0.32s var(--ease), background 0.3s var(--ease);
+}
+/* Light mode → thumb slides to the sun side, sun lights up, moon dims. */
+html[data-mode="light"] .mode-toggle__thumb { transform: translate(28px, -50%); }
+html[data-mode="light"] .mode-toggle__icon--sun  { opacity: 1; }
+html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
+.mode-toggle:focus-visible { outline: none; }
+.mode-toggle:focus-visible .mode-toggle__track {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.mode-toggle:hover .mode-toggle__track { border-color: var(--accent); }
+
 /* =========================================================================
    Hero
    ========================================================================= */
 .hero {
   position: relative;
   background:
-    radial-gradient(820px 440px at 84% -16%, rgba(91, 156, 255, 0.16), transparent 68%),
-    radial-gradient(680px 420px at 6% 116%, rgba(91, 156, 255, 0.07), transparent 70%),
+    radial-gradient(820px 440px at 84% -16%, rgba(var(--accent-rgb), 0.16), transparent 68%),
+    radial-gradient(680px 420px at 6% 116%, rgba(var(--accent-rgb), 0.07), transparent 70%),
     var(--bg);
   padding: 6.5rem 0 5rem;
   overflow: hidden;
@@ -720,7 +833,7 @@ a.project:hover::after { opacity: 1; transform: translate(0, 0); color: var(--ac
 .exp-scrim {
   position: absolute;
   inset: 0;
-  background: rgba(5, 9, 18, 0.55);
+  background: var(--scrim);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   opacity: 0;
@@ -829,7 +942,7 @@ body.exp-lock { overflow: hidden; }
 .site-footer__social { display: flex; gap: 0.7rem; }
 .site-footer .social-link {
   color: var(--ink);
-  background: rgba(236, 231, 217, 0.05);
+  background: var(--footer-chip);
   border-color: var(--line);
 }
 .site-footer .social-link:hover {
@@ -837,7 +950,7 @@ body.exp-lock { overflow: hidden; }
   background: var(--accent);
   border-color: var(--accent);
 }
-.site-footer__copy { font-size: 0.82rem; color: rgba(236, 231, 217, 0.4); margin: 0; }
+.site-footer__copy { font-size: 0.82rem; color: var(--footer-soft); margin: 0; }
 
 /* =========================================================================
    Motion: a gentle entrance for the hero (respects reduced-motion)
