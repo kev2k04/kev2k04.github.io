@@ -9,6 +9,9 @@ Gemfile.lock
 vendor/
 .bundle/
 
+# Local-only dev shims (e.g. tainted? compat for running old gems on Ruby 4)
+.local/
+
 # Node / serverless API deps & secrets
 node_modules/
 .env

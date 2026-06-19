@@ -16,7 +16,9 @@ layout: default
         <a class="btn btn--primary" href="{{ '/experience/' | relative_url }}">
           View Experience {% include icon.html name="arrow" %}
         </a>
-        <a class="btn btn--ghost" href="#projects">See Projects</a>
+        <a class="btn btn--ghost" href="{{ '/passions/' | relative_url }}">
+          View Passions {% include icon.html name="arrow" %}
+        </a>
       </div>
 
       <div class="hero__social">
@@ -64,42 +66,6 @@ layout: default
           {%- endfor -%}
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== PROJECTS ===================== -->
-<section class="section section--alt" id="projects">
-  <div class="container">
-    <div class="section__head">
-      <span class="section__kicker">Portfolio</span>
-      <h2 class="section__title">Selected projects</h2>
-    </div>
-
-    <div class="projects">
-      {%- for project in site.data.projects -%}
-        {%- if project.link and project.link != "#" -%}
-          <a class="project" href="{{ project.link }}" target="_blank" rel="noopener noreferrer">
-        {%- else -%}
-          <article class="project">
-        {%- endif -%}
-            <div class="project__top">
-              <span class="project__category">{{ project.category }}</span>
-              <span class="project__year">{{ project.year }}</span>
-            </div>
-            <h3 class="project__title">{{ project.title }}</h3>
-            <p class="project__summary">{{ project.summary }}</p>
-            <ul class="project__tags">
-              {%- for tag in project.tags -%}
-                <li>{{ tag }}</li>
-              {%- endfor -%}
-            </ul>
-        {%- if project.link and project.link != "#" -%}
-          </a>
-        {%- else -%}
-          </article>
-        {%- endif -%}
-      {%- endfor -%}
     </div>
   </div>
 </section>

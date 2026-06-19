@@ -2,8 +2,10 @@
 # Front matter (even empty) tells Jekyll to process this file with Sass.
 ---
 
+@charset "utf-8";
+
 /* =========================================================================
-   Design tokens — "Midnight & Azure" dark editorial.
+   Design tokens -- "Midnight & Azure" dark editorial.
    Deep navy paper, cool off-white text, one luminous blue accent.
    Space Grotesk (geometric display) carries the voice; Inter handles reading.
    ========================================================================= */
@@ -41,7 +43,7 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow:    0 28px 60px -30px rgba(0, 0, 0, 0.8);
 
-  /* Glow system — pick by what a button looks like in its state */
+  /* Glow system -- pick by what a button looks like in its state */
   --glow-accent:    0 0 0 1px rgba(var(--accent-rgb), 0.5), 0 18px 38px -10px rgba(var(--accent-rgb), 0.65);
   --glow-accent-sm: 0 0 0 1px rgba(var(--accent-rgb), 0.4), 0 10px 22px -8px rgba(var(--accent-rgb), 0.6);
   --glow-light:     0 0 0 1px rgba(var(--ink-rgb), 0.28), 0 16px 32px -12px rgba(var(--ink-rgb), 0.2);
@@ -58,7 +60,7 @@
 }
 
 /* =========================================================================
-   Light mode — "Daylight & Azure".
+   Light mode -- "Daylight & Azure".
    A designed light companion to the dark default: cool paper, deep navy ink,
    a stronger azure that holds contrast on white.
    ========================================================================= */
@@ -97,7 +99,7 @@ html[data-mode="light"] {
 /* Smooth, flash-free transition when flipping light/dark. */
 @media (prefers-reduced-motion: no-preference) {
   body, .site-header, .site-footer, .stats, .section--alt, .hero,
-  .resume__header, .project, .exp-card, .tag, .stat {
+  .resume__header, .exp-card, .tag, .stat {
     transition: background-color 0.4s var(--ease), color 0.4s var(--ease),
                 border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
@@ -198,7 +200,7 @@ img { max-width: 100%; display: block; }
 .btn:hover { transform: translateY(-2px); }
 .btn:hover svg { transform: translateX(3px); }
 
-/* Accent-filled button → carries an accent (light) glow, stronger on hover */
+/* Accent-filled button -> carries an accent (light) glow, stronger on hover */
 .btn--primary {
   background: var(--accent);
   color: var(--accent-deep);
@@ -211,7 +213,7 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--glow-accent);
 }
 
-/* Neutral ghost button → dark depth glow at rest; flips to a soft light
+/* Neutral ghost button -> dark depth glow at rest; flips to a soft light
    glow on hover because its fill becomes light (ink). */
 .btn--ghost {
   background: transparent;
@@ -288,7 +290,7 @@ img { max-width: 100%; display: block; }
 
 .nav-toggle__label { display: none; }
 
-/* Light/dark switch — a compact sliding pill. Sun + moon sit under a thumb
+/* Light/dark switch -- a compact sliding pill. Sun + moon sit under a thumb
    that slides between them. Lives left of the Minecraft toggle. */
 .mode-toggle {
   display: inline-flex;
@@ -336,7 +338,7 @@ img { max-width: 100%; display: block; }
   transform: translateY(-50%);
   transition: transform 0.32s var(--ease), background 0.3s var(--ease);
 }
-/* Light mode → thumb slides to the sun side, sun lights up, moon dims. */
+/* Light mode -> thumb slides to the sun side, sun lights up, moon dims. */
 html[data-mode="light"] .mode-toggle__thumb { transform: translate(28px, -50%); }
 html[data-mode="light"] .mode-toggle__icon--sun  { opacity: 1; }
 html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
@@ -552,78 +554,6 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 .tag:hover { border-color: var(--accent); color: var(--ink); }
 
 /* =========================================================================
-   Projects
-   ========================================================================= */
-.projects {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.6rem;
-}
-.project {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 2rem 2rem 1.8rem;
-  color: inherit;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
-              border-color 0.2s var(--ease), background 0.2s var(--ease);
-}
-a.project:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-  border-color: var(--line-strong);
-  background: var(--surface-2);
-}
-.project__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 1.1rem;
-}
-.project__category {
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--accent);
-}
-.project__year { font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.project__title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-  letter-spacing: -0.01em;
-}
-.project__summary { color: var(--ink-soft); font-size: 0.99rem; line-height: 1.65; margin-bottom: 1.4rem; }
-.project__tags {
-  list-style: none; padding: 0; margin: auto 0 0;
-  display: flex; flex-wrap: wrap; gap: 0.5rem;
-}
-.project__tags li {
-  font-size: 0.74rem;
-  font-weight: 500;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  padding: 0.28rem 0.66rem;
-  border-radius: 4px;
-}
-a.project::after {
-  content: "↗";
-  position: absolute;
-  top: 1.5rem; right: 1.6rem;
-  font-size: 1.05rem;
-  color: var(--muted);
-  opacity: 0;
-  transform: translate(-4px, 4px);
-  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), color 0.2s var(--ease);
-}
-a.project:hover::after { opacity: 1; transform: translate(0, 0); color: var(--accent); }
-
-/* =========================================================================
    Contact
    ========================================================================= */
 .contact { text-align: center; }
@@ -652,7 +582,7 @@ a.project:hover::after { opacity: 1; transform: translate(0, 0); color: var(--ac
 .social-link--lg:hover { color: var(--accent-deep); background: var(--accent); border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--glow-accent-sm); }
 
 /* =========================================================================
-   Résumé page
+   Resume page
    ========================================================================= */
 .resume { padding: 4.5rem 0 5.5rem; }
 .resume__header {
@@ -717,7 +647,7 @@ a.project:hover::after { opacity: 1; transform: translate(0, 0); color: var(--ac
 .resume__kv { margin: 0.45rem 0; font-size: 0.97rem; color: var(--ink-soft); }
 .resume__kv strong { color: var(--ink); }
 
-/* Back button — fixed so it follows scroll on the résumé page */
+/* Back button -- fixed so it follows scroll on the resume page */
 .back-btn {
   position: fixed;
   top: 84px;
@@ -745,7 +675,7 @@ a.project:hover::after { opacity: 1; transform: translate(0, 0); color: var(--ac
 }
 
 /* =========================================================================
-   Experience page — trigger cards + origin-aware zoom panels
+   Experience page -- trigger cards + origin-aware zoom panels
    ========================================================================= */
 .exp { padding: 4.5rem 0 5.5rem; }
 .exp__head { max-width: 760px; margin-bottom: 3rem; }
@@ -777,7 +707,7 @@ a.project:hover::after { opacity: 1; transform: translate(0, 0); color: var(--ac
   border-color: var(--line-strong);
   padding: 4px;
 }
-/* …but a logo that already has its own full background fills edge-to-edge */
+/* ...but a logo that already has its own full background fills edge-to-edge */
 .exp-card__logo--full:has(img),
 .exp-panel__logo--full:has(img) {
   background: transparent;
@@ -932,7 +862,7 @@ a.project:hover::after { opacity: 1; transform: translate(0, 0); color: var(--ac
 body.exp-lock { overflow: hidden; }
 
 /* =========================================================================
-   Passions & Interests — themed tiles + origin-aware zoom panels.
+   Passions & Interests -- themed tiles + origin-aware zoom panels.
    Each card carries its own --card-accent (RGB triplet from passions.yml).
    ========================================================================= */
 .pass { padding: 4.5rem 0 5.5rem; }
@@ -1023,7 +953,7 @@ body.exp-lock { overflow: hidden; }
 .pass-card__cue svg { transition: transform 0.2s var(--ease); }
 .pass-card:hover .pass-card__cue svg { transform: translateX(4px); }
 
-/* ---- Featured card (Sports/Basketball — the live, data-driven one) ----
+/* ---- Featured card (Sports/Basketball -- the live, data-driven one) ----
    Spans the full grid width as a hero banner above the other tiles. */
 .pass-card--featured {
   grid-column: 1 / -1;
@@ -1222,7 +1152,7 @@ body.exp-lock { overflow: hidden; }
 .pass-panel__points li::marker { color: rgb(var(--card-accent)); }
 
 /* =========================================================================
-   Basketball page — court-themed, orange/black. Self-contained accent vars
+   Basketball page -- court-themed, orange/black. Self-contained accent vars
    so it reads as a "court" in both light and dark themes.
    ========================================================================= */
 .bball {
@@ -1235,7 +1165,7 @@ body.exp-lock { overflow: hidden; }
   padding: 0 0 5.5rem;
 }
 
-/* ---- Court header (intentionally dark in both modes — it's a court) ---- */
+/* ---- Court header (intentionally dark in both modes -- it's a court) ---- */
 .bball-hero {
   position: relative;
   overflow: hidden;
@@ -1501,7 +1431,6 @@ html[data-mode="light"] .bball-stats[data-state="live"] .bball-stat__value { col
    ========================================================================= */
 @media (max-width: 880px) {
   .about { grid-template-columns: 1fr; gap: 2.4rem; }
-  .projects { grid-template-columns: 1fr; }
   .exp-grid { grid-template-columns: repeat(2, 1fr); }
   .pass-grid { grid-template-columns: repeat(2, 1fr); }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
