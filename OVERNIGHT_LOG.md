@@ -71,3 +71,9 @@ Autonomous build session. Newest sections are appended at the bottom; the
 
 ### How to deploy the API (summary — full version in `api/README.md`)
 GitHub Pages can't run functions. **Recommended:** keep the site on GitHub Pages, deploy `/api` to Vercel, add the two env vars there, and set `api_base` in `_data/basketball.yml` to the Vercel URL. Or deploy the whole site to Vercel/Netlify (leave `api_base` blank, `/api/*` is same-origin).
+
+### Task 4 — Polish ✅
+- **Both themes verified** via headless-Chrome screenshots: home (light), the Experience zoom panel + scrim (light *and* dark — the key existing feature is intact), Passions (both), Basketball (both). No contrast or layout regressions; all the hard-coded dark-only colors were already migrated to variables in Task 1.
+- **Mobile:** screenshotted Passions and Basketball at 390px — grids collapse to one column cleanly; ran the bounding-box overflow probe → no horizontal overflow.
+- **Header crowding fix:** adding "Passions" (5th link) + the light/dark switch overflowed the bar in the 680–860px range (the Minecraft pill overlapped the nav). Split the responsive rules: the **nav now collapses to the hamburger at ≤860px** while the hero/résumé tweaks stay at ≤680px. Mirrored the breakpoint in `minecraft.scss` so the wood-themed dropdown matches. Re-verified at 760px — clean.
+- **A11y:** new interactive elements are native `<button>`/`<a>` with `aria-label`s; the mode-toggle exposes `aria-pressed` + a state-aware label; panels are `role="dialog" aria-modal`; Esc-to-close + focus-return inherited from the FLIP pattern; the stats status line is `aria-live="polite"`; all animations (mode switch, shimmer, pulse, FLIP) respect `prefers-reduced-motion`; image placeholders carry descriptive `aria-label`/`role="img"`.

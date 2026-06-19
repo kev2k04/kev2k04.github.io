@@ -1433,7 +1433,10 @@ html[data-mode="light"] .bball-stats[data-state="live"] .bball-stat__value { col
   .pass-card { min-height: 0; }
 }
 
-@media (max-width: 680px) {
+/* Collapse the nav to a hamburger earlier than the hero/content tweaks: with
+   two theme switches + five links in the bar it gets crowded well before
+   phone widths. */
+@media (max-width: 860px) {
   .nav-toggle__label {
     display: flex;
     flex-direction: column;
@@ -1464,7 +1467,9 @@ html[data-mode="light"] .bball-stats[data-state="live"] .bball-stat__value { col
   .nav-toggle:checked ~ .nav-toggle__label span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle:checked ~ .nav-toggle__label span:nth-child(2) { opacity: 0; }
   .nav-toggle:checked ~ .nav-toggle__label span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
 
+@media (max-width: 680px) {
   .resume__header { align-items: center; text-align: center; }
   .hero { padding: 4.5rem 0 3.5rem; }
   .hero__inner { flex-direction: column-reverse; align-items: flex-start; gap: 2.4rem; }

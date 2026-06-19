@@ -467,10 +467,14 @@ html[data-theme="minecraft"] {
   }
 
   /* ---- responsive ---- */
-  @media (max-width: 860px) { .mc-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 680px) {
+  /* Nav collapses to a hamburger at <=860px (see main.scss); style the
+     dropdown + tighten the toggle to match. */
+  @media (max-width: 860px) {
+    .mc-grid { grid-template-columns: repeat(2, 1fr); }
     .site-nav { background: var(--mc-plank-dk); border-bottom: 4px solid var(--mc-ink-dk); }
     .theme-toggle { margin-right: 0.6rem; }
+  }
+  @media (max-width: 680px) {
     body { font-size: 20px; }
   }
 }
