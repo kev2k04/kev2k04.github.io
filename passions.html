@@ -41,23 +41,27 @@ permalink: /passions/
           </span>
         </a>
         {%- elsif p.kind == 'link' -%}
-        <a class="pass-card pass-card--{{ p.id }}" href="{{ p.href | relative_url }}"
+        <a class="pass-card pass-card--banner pass-card--{{ p.id }}" href="{{ p.href | relative_url }}"
            style="--card-accent: {{ p.accent }};" aria-label="Open {{ p.title }}">
           <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
-          <span class="pass-card__name">{{ p.title }}</span>
-          <span class="pass-card__tagline">{{ p.tagline }}</span>
+          <span class="pass-card__body">
+            <span class="pass-card__name">{{ p.title }}</span>
+            <span class="pass-card__tagline">{{ p.tagline }}</span>
+          </span>
           <span class="pass-card__cue" aria-hidden="true">
             Explore
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </a>
         {%- else -%}
-        <button type="button" class="pass-card pass-card--{{ p.id }}" id="pass-card-{{ p.id }}"
+        <button type="button" class="pass-card pass-card--banner pass-card--{{ p.id }}" id="pass-card-{{ p.id }}"
                 data-pass="{{ p.id }}" style="--card-accent: {{ p.accent }};"
                 aria-haspopup="dialog" aria-label="Open details for {{ p.title }}">
           <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
-          <span class="pass-card__name">{{ p.title }}</span>
-          <span class="pass-card__tagline">{{ p.tagline }}</span>
+          <span class="pass-card__body">
+            <span class="pass-card__name">{{ p.title }}</span>
+            <span class="pass-card__tagline">{{ p.tagline }}</span>
+          </span>
           <span class="pass-card__cue" aria-hidden="true">
             Open
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
