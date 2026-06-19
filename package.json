@@ -1,0 +1,12 @@
+{
+  "name": "kevin-liu-portfolio-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serverless API functions for the portfolio (basketball stats scrape + YouTube highlight). The site itself is a Jekyll static site; these power the /api/* routes when deployed to Vercel/Netlify.",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  }
+}

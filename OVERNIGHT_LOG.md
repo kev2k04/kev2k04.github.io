@@ -53,3 +53,21 @@ Autonomous build session. Newest sections are appended at the bottom; the
 - **Reuse decision:** I *copied* the FLIP logic into `assets/js/passions.js` (targeting `.pass-*`) instead of refactoring `experience.js`, to keep the working Experience feature zero-risk. The two could be unified into one generic `[data-zoom]` module later — noted as a possible cleanup.
 - Icons: added `music`, `gamepad`, `basketball`, `dumbbell` to the shared `_includes/icon.html`.
 - Responsive: 4 → 2 → 1 columns. Esc-to-close + focus management inherited from the FLIP pattern.
+
+### Task 3 — Basketball page ✅
+- New page `basketball.html` → `/basketball/`; the Sports passion card links here. Content config in `_data/basketball.yml` (team, league, jersey, position, blurb — invented bits marked `TODO(Kevin)`).
+- **Theme:** court-styled hero (charcoal-hardwood gradient + painted center-circle/key/arc lines, orange accent), intentionally dark in *both* light/dark modes because it reads as a court; the rest of the page (stat cards, blurb) uses the theme surfaces so it adapts. Verified both modes with headless Chrome.
+- **A) Stat cards** (PPG/APG/RPG): scoreboard tiles with four states driven by `data-state` — `loading` (shimmer skeleton), `preseason` (muted "—" + the required "Season hasn't started yet…" message), `live` (orange numbers + "updated <date>"), and `error`. Fully wired: the moment real data exists they populate with no code change.
+- **B) Highlight video:** large 16:9 box. JS injects a privacy-mode YouTube `<iframe>` when the API returns a match; otherwise the graceful "Latest Bagwork 2.0 highlights will appear here." placeholder stays. Loading + empty states handled.
+- **C)** `TODO(Kevin)` blurb area + a team/action photo placeholder.
+- **Frontend data flow** (`assets/js/basketball.js`): tries `{api_base}/api/basketball-stats` first, then falls back to the static `assets/data/basketball-stats.json` — so the page works on plain GitHub Pages today and upgrades to live data automatically once the API is deployed. `fetchJson()` only accepts OK + `application/json` responses, so a GitHub Pages 404 HTML page is safely ignored. Nothing can throw uncaught.
+
+### Task 3b/3c — Serverless API ✅
+- `api/basketball-stats.js`: **manual override** (`assets/data/basketball-stats.json`) wins when `seasonStarted:true`; otherwise scrapes `ROUNDBALL_PLAYER_URL` with **cheerio** (generic table walk → finds the "Kevin Liu" row → reads PPG/APG/RPG columns by header); otherwise pre-season. Returns `{seasonStarted, ppg, apg, rpg, lastUpdated, source}`. **Tested**: pre-season path + a sample scrape correctly parsed `PPG 14.6 / APG 6.2 / RPG 5.4`.
+- `api/latest-highlight.js`: resolves `@RoundballBC` → channelId, searches recent uploads for a title containing "Bagwork 2.0", returns the newest. Key read from `YOUTUBE_API_KEY` env (**server-side only**). **Tested**: no key → `{found:false}`.
+- Both: in-memory cache (10 min stats / 30 min video) + `s-maxage` edge cache header to protect quota; permissive CORS so the API can be hosted separately from the site; never throw.
+- Config in `api/_config.js` (the one constant you set: `ROUNDBALL_PLAYER_URL`). Secrets documented in `.env.example`. `package.json` pins cheerio. `api/README.md` has full deploy notes.
+- **Jekyll safety:** added `api`, `node_modules`, `package.json`, `.env*`, `OVERNIGHT_LOG.md` to `_config.yml` `exclude` so the static build ignores them; `node_modules`/`.env` gitignored.
+
+### How to deploy the API (summary — full version in `api/README.md`)
+GitHub Pages can't run functions. **Recommended:** keep the site on GitHub Pages, deploy `/api` to Vercel, add the two env vars there, and set `api_base` in `_data/basketball.yml` to the Vercel URL. Or deploy the whole site to Vercel/Netlify (leave `api_base` blank, `/api/*` is same-origin).

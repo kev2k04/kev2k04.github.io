@@ -33,6 +33,14 @@ exclude:
   - vendor
   - .sass-cache
   - .jekyll-cache
+  # Node / serverless API (run by Vercel/Netlify, not part of the static site)
+  - api
+  - node_modules
+  - package.json
+  - package-lock.json
+  - .env
+  - .env.example
+  - OVERNIGHT_LOG.md
 
 # Jekyll plugins (all whitelisted by GitHub Pages)
 plugins:

@@ -9,6 +9,14 @@ Gemfile.lock
 vendor/
 .bundle/
 
+# Node / serverless API deps & secrets
+node_modules/
+.env
+.env.*
+!.env.example
+.vercel/
+.netlify/
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
