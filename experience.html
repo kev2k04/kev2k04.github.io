@@ -6,7 +6,7 @@ permalink: /experience/
 
 {%- assign experiences = site.data.experiences -%}
 
-<a class="back-btn" href="{{ '/' | relative_url }}" aria-label="Back to home">
+<a class="back-btn" href="{{ '/' | relative_url }}" aria-label="Back to home" data-scroll-fade>
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
   Back
 </a>
@@ -120,3 +120,4 @@ permalink: /experience/
 </section>
 
 <script src="{{ '/assets/js/experience.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/scroll-fade.js' | relative_url }}" defer></script>

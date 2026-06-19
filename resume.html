@@ -31,7 +31,7 @@ permalink: /resume/
         </p>
       </div>
       {%- if r.pdf and r.pdf != "" -%}
-        <a class="btn btn--primary" href="{{ r.pdf | relative_url }}" download>
+        <a class="btn btn--primary" href="{{ r.pdf | relative_url }}" download data-scroll-fade>
           {% include icon.html name="download" %} Download PDF
         </a>
       {%- endif -%}
@@ -111,4 +111,4 @@ permalink: /resume/
   </div>
 </section>
 
-<script src="{{ '/assets/js/resume.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/scroll-fade.js' | relative_url }}" defer></script>
