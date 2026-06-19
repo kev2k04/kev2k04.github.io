@@ -1074,15 +1074,17 @@ body.exp-lock { overflow: hidden; }
   z-index: 100;
   display: grid;
   place-items: center;
-  padding: 1.5rem;
+  /* Horizontal padding matches .container so the open panel lines up edge-to
+     -edge with the banner cards it grows out of. */
+  padding: 1.5rem 1.6rem;
 }
 .pass-overlay[hidden] { display: none; }
 .pass-scrim {
   position: absolute;
   inset: 0;
   background: var(--scrim);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   opacity: 0;
   transition: opacity 0.4s var(--ease);
 }
@@ -1091,25 +1093,27 @@ body.exp-lock { overflow: hidden; }
 .pass-panel {
   position: relative;
   z-index: 1;
-  width: min(680px, 100%);
-  max-height: 86vh;
+  /* Full banner width — a big canvas for photos + long-form content. */
+  width: 100%;
+  max-width: calc(var(--maxw) - 3.2rem);
+  max-height: 90vh;
   overflow-y: auto;
   background: var(--surface);
   border: 1px solid rgba(var(--card-accent), 0.4);
-  border-radius: 16px;
-  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85);
+  border-radius: 18px;
+  box-shadow: 0 55px 120px -28px rgba(0, 0, 0, 0.9);
   will-change: transform, opacity;
   transform-origin: top left;
-  transition: transform 0.44s var(--ease), opacity 0.3s var(--ease);
+  transition: transform 0.46s var(--ease), opacity 0.3s var(--ease);
 }
 .pass-panel[hidden] { display: none; }
 .pass-panel__inner {
-  padding: 1.7rem 1.9rem 2.1rem;
+  padding: 2.1rem 2.5rem 2.6rem;
   opacity: 0;
   transition: opacity 0.28s var(--ease);
   /* Accent bar across the top of the panel ties it to its card. */
   border-top: 4px solid rgb(var(--card-accent));
-  border-radius: 16px 16px 0 0;
+  border-radius: 18px 18px 0 0;
 }
 .pass-panel.is-open .pass-panel__inner { opacity: 1; transition-delay: 0.1s; }
 
@@ -1182,7 +1186,12 @@ body.exp-lock { overflow: hidden; }
 /* ---- Sports panel: multi-sport history as athletic "stat-line" cards.
    Numbered like a roster, with meta chips and a standout-memory line.
    Themed via --card-accent so it reads distinctly from the basketball page. */
-.sport-list { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.3rem; }
+.sport-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.3rem;
+}
 .sport-sec {
   display: flex;
   gap: 1rem;
@@ -1291,7 +1300,7 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
 /* ---- Gaming panel: rank/identity grid + profile link ---- */
 .gg-id {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 0.7rem;
   margin-bottom: 1.1rem;
 }
