@@ -91,23 +91,15 @@ permalink: /passions/
             </div>
           </header>
 
-          <p class="pass-panel__blurb">{{ p.blurb }}</p>
-
-          <!-- PLACEHOLDER: swap for a real photo via an `image:` field in passions.yml -->
-          <div class="pass-panel__media pass-panel__media--placeholder" role="img"
-               aria-label="Image placeholder for {{ p.title }}">
-            <span class="pass-panel__media-label">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              TODO(Kevin): add a {{ p.title }} photo here
-            </span>
-          </div>
-
-          <h3 class="pass-panel__subhead">Highlights</h3>
-          <ul class="pass-panel__points">
-            {%- for h in p.highlights -%}
-              <li>{{ h }}</li>
-            {%- endfor -%}
-          </ul>
+          {%- comment -%}
+            Panel body. Cards with a bespoke layout render their own partial
+            from _includes/passions/<id>.html; everything else falls back to
+            the generic blurb + photo + highlights template.
+          {%- endcomment -%}
+          {%- case p.id -%}
+            {%- when 'sports' -%}{% include passions/sports.html p=p %}
+            {%- else -%}{% include passions/generic.html p=p %}
+          {%- endcase -%}
         </div>
       </article>
       {%- endif -%}

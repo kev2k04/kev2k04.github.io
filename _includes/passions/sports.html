@@ -1,0 +1,31 @@
+{%- comment -%}
+  Sports panel body — multi-sport history. One scrollable list; each sport in
+  _data/passions.yml's `sports:` list renders as a stat-line section.
+  To add / remove / rename a sport, just edit that list — no markup changes.
+  Expects: include.p with `intro` + `sports` (name/years/level/position/memory,
+  optional `image`).
+{%- endcomment -%}
+{%- assign p = include.p -%}
+<p class="pass-panel__blurb">{{ p.intro }}</p>
+
+<div class="sport-list">
+  {%- for s in p.sports -%}
+  <section class="sport-sec">
+    <span class="sport-sec__no" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+    <div class="sport-sec__body">
+      <h3 class="sport-sec__name">{{ s.name }}</h3>
+      <ul class="sport-sec__meta">
+        {%- if s.years and s.years != '' -%}<li class="sport-chip">{{ s.years }}</li>{%- endif -%}
+        {%- if s.level and s.level != '' -%}<li class="sport-chip">{{ s.level }}</li>{%- endif -%}
+        {%- if s.position and s.position != '' -%}<li class="sport-chip sport-chip--pos">{{ s.position }}</li>{%- endif -%}
+      </ul>
+      {%- if s.memory and s.memory != '' -%}
+        <p class="sport-sec__memory">{{ s.memory }}</p>
+      {%- endif -%}
+      {%- if s.image and s.image != '' -%}
+        <div class="sport-sec__media"><img src="{{ s.image | relative_url }}" alt="{{ s.name }}"></div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endfor -%}
+</div>
