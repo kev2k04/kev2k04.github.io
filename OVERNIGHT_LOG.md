@@ -21,6 +21,16 @@ Autonomous build session. Newest sections are appended at the bottom; the
 2. **Highlight video** — add a YouTube Data API v3 key as the `YOUTUBE_API_KEY` environment variable (see [`.env.example`](.env.example)).
 3. **Deploy the API** — GitHub Pages can't run serverless functions (it's static hosting). The `/api/` functions are written Vercel/Netlify-style. See **"Deploying the API"** below. *Until deployed, the site still works perfectly* — it falls back to the static `basketball-stats.json` and shows graceful placeholders.
 
+### 📦 How to publish (nothing was pushed — it's all local on a branch)
+All work is on the **`overnight-build`** branch (5 commits on top of a clean `Baseline` commit). To review and ship:
+```bash
+git checkout overnight-build         # look around, run the site
+# happy? publish — GitHub Actions will build & deploy on push to main:
+git checkout main && git merge overnight-build && git push
+# not happy with something? revert is trivial — main still points at Baseline.
+```
+*Preview locally:* the system Ruby is too old for `jekyll serve` (see project notes), but GitHub Actions builds fine on push. I validated everything statically (SCSS compiles, JS syntax, YAML parses, JSON parses) and screenshot-tested the pages in both themes with headless Chrome.
+
 ### ⚠️ Things to review / decisions I made (details below):
 - I used `data-mode="light"` for light/dark (the existing Minecraft toggle already owns `data-theme`). No collision.
 - Sports card **navigates** to a full `/basketball/` page rather than opening an in-place panel (basketball is too big/API-driven for a modal; better for mobile + SEO).
