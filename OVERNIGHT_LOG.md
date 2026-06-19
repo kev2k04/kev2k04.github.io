@@ -43,3 +43,13 @@ Autonomous build session. Newest sections are appended at the bottom; the
 - **Adaptive tokens:** replaced several hard-coded colors with variables so both modes work everywhere — hero gradient now uses `--accent-rgb`; added `--scrim`, `--nav-link`, `--footer-soft`, `--footer-chip` (nav links + footer fine print were cream-on-dark literals that would've been invisible on light).
 - **Toggle:** a compact sun/moon sliding-pill switch (`.mode-toggle`) in the header, left of the Minecraft toggle. Hidden while the Minecraft theme is active (light/dark doesn't apply there). Smooth `0.4s` color transition on structural surfaces, gated behind `prefers-reduced-motion`.
 - **Files:** `head.html`, `header.html`, `assets/css/main.scss`, `assets/css/minecraft.scss`, new `assets/js/theme.js`, `_layouts/default.html`. Both stylesheets validated with dart-sass.
+- **Verified:** rendered the home/passions markup with the compiled CSS via headless Chrome in both modes — contrast and the sliding sun/moon switch look correct.
+
+### Task 2 — Passions & Interests ✅
+- New page `passions.html` → `/passions/`, added **Passions** to the header nav (shows on every page, existing style).
+- **Title:** kept the prompt's "Passions & Interests" — it's clear and reads well.
+- Four themed tiles driven by `_data/passions.yml`; each card carries its own `--card-accent` RGB triplet (Music=violet, Gaming=emerald, Sports=orange, Gym=rose) used for the icon tint, hover wash, glow, and panel accent bar — so the grid reads as four distinct tiles in both themes.
+- **Interaction:** reused the Experience page's origin-aware FLIP zoom + scrim dim/blur. Music/Gaming/Gym open in-page zoom panels with **TODO(Kevin)** placeholder copy + an image placeholder. **Sports is a `kind: link` card that navigates to `/basketball/`** (Task 3) rather than opening a panel — a full API-driven page is better than a modal for that content, and the card still matches the others visually.
+- **Reuse decision:** I *copied* the FLIP logic into `assets/js/passions.js` (targeting `.pass-*`) instead of refactoring `experience.js`, to keep the working Experience feature zero-risk. The two could be unified into one generic `[data-zoom]` module later — noted as a possible cleanup.
+- Icons: added `music`, `gamepad`, `basketball`, `dumbbell` to the shared `_includes/icon.html`.
+- Responsive: 4 → 2 → 1 columns. Esc-to-close + focus management inherited from the FLIP pattern.

@@ -933,6 +933,210 @@ a.project:hover::after { opacity: 1; transform: translate(0, 0); color: var(--ac
 body.exp-lock { overflow: hidden; }
 
 /* =========================================================================
+   Passions & Interests — themed tiles + origin-aware zoom panels.
+   Each card carries its own --card-accent (RGB triplet from passions.yml).
+   ========================================================================= */
+.pass { padding: 4.5rem 0 5.5rem; }
+.pass__head { max-width: 760px; margin-bottom: 3rem; }
+.pass__title { font-size: clamp(2rem, 4.5vw, 3rem); margin: 1rem 0 1rem; }
+.pass__lede { color: var(--ink-soft); font-size: 1.1rem; }
+
+.pass-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.3rem;
+}
+
+.pass-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+  text-align: left;
+  padding: 1.8rem 1.6rem;
+  min-height: 230px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease),
+              border-color 0.22s var(--ease), background 0.22s var(--ease);
+}
+/* A soft accent wash blooms from the top corner on hover. */
+.pass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 0% 0%,
+              rgba(var(--card-accent), 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s var(--ease);
+  pointer-events: none;
+}
+.pass-card:hover,
+.pass-card:focus-visible {
+  transform: translateY(-5px);
+  border-color: rgba(var(--card-accent), 0.6);
+  background: var(--surface-2);
+  box-shadow: 0 22px 45px -24px rgba(var(--card-accent), 0.55),
+              var(--shadow-sm);
+}
+.pass-card:hover::before,
+.pass-card:focus-visible::before { opacity: 1; }
+.pass-card:focus-visible { outline: none; }
+
+.pass-card__icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  color: rgb(var(--card-accent));
+  background: rgba(var(--card-accent), 0.14);
+  border: 1px solid rgba(var(--card-accent), 0.32);
+  transition: transform 0.22s var(--ease);
+}
+.pass-card:hover .pass-card__icon { transform: scale(1.06) rotate(-4deg); }
+.pass-card__name {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.32rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.pass-card__tagline { font-size: 0.92rem; color: var(--muted); line-height: 1.5; }
+.pass-card__cue {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--card-accent));
+}
+.pass-card__cue svg { transition: transform 0.2s var(--ease); }
+.pass-card:hover .pass-card__cue svg { transform: translateX(4px); }
+
+/* Overlay = scrim (dims/blurs page) + active panel, mirrors the experience UI */
+.pass-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+.pass-overlay[hidden] { display: none; }
+.pass-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.pass-overlay.is-active .pass-scrim { opacity: 1; }
+
+.pass-panel {
+  position: relative;
+  z-index: 1;
+  width: min(680px, 100%);
+  max-height: 86vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid rgba(var(--card-accent), 0.4);
+  border-radius: 16px;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85);
+  will-change: transform, opacity;
+  transform-origin: top left;
+  transition: transform 0.44s var(--ease), opacity 0.3s var(--ease);
+}
+.pass-panel[hidden] { display: none; }
+.pass-panel__inner {
+  padding: 1.7rem 1.9rem 2.1rem;
+  opacity: 0;
+  transition: opacity 0.28s var(--ease);
+  /* Accent bar across the top of the panel ties it to its card. */
+  border-top: 4px solid rgb(var(--card-accent));
+  border-radius: 16px 16px 0 0;
+}
+.pass-panel.is-open .pass-panel__inner { opacity: 1; transition-delay: 0.1s; }
+
+.pass-panel__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.3rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: color 0.18s var(--ease);
+}
+.pass-panel__back:hover { color: rgb(var(--card-accent)); }
+
+.pass-panel__head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
+.pass-panel__icon {
+  display: grid;
+  place-items: center;
+  width: 60px; height: 60px;
+  flex: none;
+  border-radius: 14px;
+  color: rgb(var(--card-accent));
+  background: rgba(var(--card-accent), 0.14);
+  border: 1px solid rgba(var(--card-accent), 0.32);
+}
+.pass-panel__name { font-size: clamp(1.5rem, 3vw, 1.9rem); margin: 0; letter-spacing: -0.01em; }
+.pass-panel__tagline { color: rgb(var(--card-accent)); font-weight: 600; font-size: 0.95rem; margin: 0.2rem 0 0; }
+.pass-panel__blurb { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.65; margin: 0 0 1.5rem; }
+
+.pass-panel__media {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+.pass-panel__media--placeholder {
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1rem;
+  color: var(--muted);
+  border: 1.5px dashed rgba(var(--card-accent), 0.4);
+  background:
+    repeating-linear-gradient(-45deg,
+      rgba(var(--card-accent), 0.05) 0, rgba(var(--card-accent), 0.05) 10px,
+      transparent 10px, transparent 20px);
+}
+.pass-panel__media-label {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  font-size: 0.84rem; letter-spacing: 0.02em;
+}
+.pass-panel__subhead {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 1.6rem 0 0.9rem;
+}
+.pass-panel__points { margin: 0; padding-left: 1.15rem; }
+.pass-panel__points li { margin-bottom: 0.5rem; color: var(--ink-soft); line-height: 1.6; }
+.pass-panel__points li::marker { color: rgb(var(--card-accent)); }
+
+/* =========================================================================
    Footer
    ========================================================================= */
 .site-footer { background: var(--footer-bg); color: var(--muted); padding: 3.5rem 0; border-top: 1px solid var(--line); }
@@ -982,6 +1186,7 @@ body.exp-lock { overflow: hidden; }
   .about { grid-template-columns: 1fr; gap: 2.4rem; }
   .projects { grid-template-columns: 1fr; }
   .exp-grid { grid-template-columns: repeat(2, 1fr); }
+  .pass-grid { grid-template-columns: repeat(2, 1fr); }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   .stat { padding: 2rem 0.75rem; }
   .stat__value { font-size: clamp(1.5rem, 6vw, 2rem); }
@@ -992,6 +1197,8 @@ body.exp-lock { overflow: hidden; }
 
 @media (max-width: 520px) {
   .exp-grid { grid-template-columns: 1fr; }
+  .pass-grid { grid-template-columns: 1fr; }
+  .pass-card { min-height: 0; }
 }
 
 @media (max-width: 680px) {

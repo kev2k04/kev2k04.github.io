@@ -1,0 +1,61 @@
+# ---------------------------------------------------------------------------
+# Passions & Interests cards.
+#   - "kind: panel" cards open an in-page zoom panel (Music, Gaming, Gym).
+#   - "kind: link" cards navigate to a full page (Sports -> /basketball/).
+# Each card carries its own accent (RGB triplet) used for icon tint + glow,
+# so the grid reads as four distinct, themed tiles in both light and dark.
+# Body copy for the placeholder panels is marked TODO(Kevin) — swap freely.
+# ---------------------------------------------------------------------------
+
+- id: music
+  kind: panel
+  title: Music
+  icon: music
+  tagline: Always something playing in the background.
+  accent: "168, 85, 247"      # violet
+  # TODO(Kevin): write a few real lines about your music taste / playing.
+  blurb: >-
+    TODO(Kevin): A short intro to what music means to you — favourite genres,
+    artists on repeat, whether you play an instrument, go to shows, or just
+    curate playlists for every mood.
+  highlights:
+    - "TODO(Kevin): Favourite genres / artists"
+    - "TODO(Kevin): Instruments you play (if any)"
+    - "TODO(Kevin): A memorable concert or album"
+
+- id: gaming
+  kind: panel
+  title: Gaming
+  icon: gamepad
+  tagline: Strategy, competition, and the occasional all-nighter.
+  accent: "52, 211, 153"      # emerald
+  blurb: >-
+    TODO(Kevin): What you love about gaming — go-to titles, genres, whether
+    you play competitively or casually, favourite platforms, and any
+    communities you're part of.
+  highlights:
+    - "TODO(Kevin): Go-to games / genres"
+    - "TODO(Kevin): Platform of choice"
+    - "TODO(Kevin): Competitive rank or proudest moment"
+
+- id: sports
+  kind: link
+  title: Sports
+  icon: basketball
+  tagline: On the court with Bagwork 2.0. — see my live stats & highlights.
+  accent: "249, 115, 22"      # basketball orange
+  href: /basketball/
+
+- id: gym
+  kind: panel
+  title: Gym & Fitness
+  icon: dumbbell
+  tagline: Progressive overload, one session at a time.
+  accent: "244, 63, 94"       # rose / energy red
+  blurb: >-
+    TODO(Kevin): Your approach to training — split, goals, current lifts,
+    what keeps you consistent, and why fitness matters to you.
+  highlights:
+    - "TODO(Kevin): Current split / routine"
+    - "TODO(Kevin): A lift or PR you're proud of"
+    - "TODO(Kevin): Your next fitness goal"

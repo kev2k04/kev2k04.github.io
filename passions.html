@@ -1,0 +1,104 @@
+---
+layout: default
+title: Passions & Interests
+permalink: /passions/
+---
+
+{%- assign passions = site.data.passions -%}
+
+<a class="back-btn" href="{{ '/' | relative_url }}" aria-label="Back to home">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+  Back
+</a>
+
+<section class="pass">
+  <div class="container">
+
+    <div class="pass__head">
+      <span class="section__kicker">Beyond the résumé</span>
+      <h1 class="pass__title">Passions &amp; Interests</h1>
+      <p class="pass__lede">
+        The things I spend my time on when I'm not modeling cash flows. Open a
+        card to dig in — Sports takes you courtside with my live league stats.
+      </p>
+    </div>
+
+    <!-- Trigger row: 4 interest cards -->
+    <div class="pass-grid">
+      {%- for p in passions -%}
+        {%- if p.kind == 'link' -%}
+        <a class="pass-card pass-card--{{ p.id }}" href="{{ p.href | relative_url }}"
+           style="--card-accent: {{ p.accent }};" aria-label="Open {{ p.title }}">
+          <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
+          <span class="pass-card__name">{{ p.title }}</span>
+          <span class="pass-card__tagline">{{ p.tagline }}</span>
+          <span class="pass-card__cue" aria-hidden="true">
+            Explore
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+        {%- else -%}
+        <button type="button" class="pass-card pass-card--{{ p.id }}" id="pass-card-{{ p.id }}"
+                data-pass="{{ p.id }}" style="--card-accent: {{ p.accent }};"
+                aria-haspopup="dialog" aria-label="Open details for {{ p.title }}">
+          <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
+          <span class="pass-card__name">{{ p.title }}</span>
+          <span class="pass-card__tagline">{{ p.tagline }}</span>
+          <span class="pass-card__cue" aria-hidden="true">
+            Open
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- Expand overlay: scrim (dims/blurs page) + one detail panel per panel-card -->
+  <div class="pass-overlay" id="pass-overlay" hidden>
+    <div class="pass-scrim" data-pass-close></div>
+
+    {%- for p in passions -%}
+      {%- if p.kind == 'panel' -%}
+      <article class="pass-panel pass-panel--{{ p.id }}" id="pass-panel-{{ p.id }}"
+               data-panel="{{ p.id }}" style="--card-accent: {{ p.accent }};"
+               role="dialog" aria-modal="true" aria-labelledby="pass-panel-{{ p.id }}-title" hidden>
+        <div class="pass-panel__inner">
+          <button type="button" class="pass-panel__back" data-pass-close>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            Back
+          </button>
+
+          <header class="pass-panel__head">
+            <span class="pass-panel__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
+            <div>
+              <h2 class="pass-panel__name" id="pass-panel-{{ p.id }}-title">{{ p.title }}</h2>
+              <p class="pass-panel__tagline">{{ p.tagline }}</p>
+            </div>
+          </header>
+
+          <p class="pass-panel__blurb">{{ p.blurb }}</p>
+
+          <!-- PLACEHOLDER: swap for a real photo via an `image:` field in passions.yml -->
+          <div class="pass-panel__media pass-panel__media--placeholder" role="img"
+               aria-label="Image placeholder for {{ p.title }}">
+            <span class="pass-panel__media-label">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              TODO(Kevin): add a {{ p.title }} photo here
+            </span>
+          </div>
+
+          <h3 class="pass-panel__subhead">Highlights</h3>
+          <ul class="pass-panel__points">
+            {%- for h in p.highlights -%}
+              <li>{{ h }}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </article>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+<script src="{{ '/assets/js/passions.js' | relative_url }}" defer></script>
