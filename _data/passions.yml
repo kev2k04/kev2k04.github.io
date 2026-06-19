@@ -1,22 +1,28 @@
 # ---------------------------------------------------------------------------
-# Passions & Interests cards.
-#   - "kind: panel" cards open an in-page zoom panel (Music, Gaming, Gym).
-#   - "kind: link" cards navigate to a full page (Sports -> /basketball/).
-#   - "featured: true" renders a large hero banner at the top of the grid.
-#     Sports is featured because it's the live, data-driven experience.
+# Passions & Interests cards. Render order below = display order:
+#   1) Basketball Mens League — kind: link  -> /basketball/ (live data page)
+#   2) Sports                 — kind: panel (multi-sport history; see _includes/passions/sports.html)
+#   3) Music                  — kind: panel (music production)
+#   4) Gaming                 — kind: panel (League of Legends)
+#
+#   - "kind: panel" cards open an in-page zoom panel. Panels with a bespoke
+#     layout (sports/music/gaming) render via _includes/passions/<id>.html;
+#     any other panel falls back to _includes/passions/generic.html.
+#   - "kind: link" cards navigate to a full page.
+#   - "featured: true" renders a large hero banner at the top of the grid;
+#     Basketball is featured because it's the live, data-driven experience.
 # Each card carries its own accent (RGB triplet) used for icon tint + glow,
 # so the grid reads as distinct, themed tiles in both light and dark.
 # Body copy for the placeholder panels is marked TODO(Kevin) — swap freely.
-# Order here is the render order; the featured card leads.
 # ---------------------------------------------------------------------------
 
-- id: sports
+- id: basketball
   kind: link
   featured: true
-  title: Sports
+  title: Basketball Mens League
   icon: basketball
   tagline: On the court with Bagwork 2.0 — live game stats and the latest highlight reel, pulled straight from the league.
-  badge: Live stats & highlights
+  badge: Live stats
   cta: Step onto the court
   accent: "249, 115, 22"      # basketball orange
   href: /basketball/
@@ -51,17 +57,3 @@
     - "TODO(Kevin): Go-to games / genres"
     - "TODO(Kevin): Platform of choice"
     - "TODO(Kevin): Competitive rank or proudest moment"
-
-- id: gym
-  kind: panel
-  title: Gym & Fitness
-  icon: dumbbell
-  tagline: Progressive overload, one session at a time.
-  accent: "244, 63, 94"       # rose / energy red
-  blurb: >-
-    TODO(Kevin): Your approach to training — split, goals, current lifts,
-    what keeps you consistent, and why fitness matters to you.
-  highlights:
-    - "TODO(Kevin): Current split / routine"
-    - "TODO(Kevin): A lift or PR you're proud of"
-    - "TODO(Kevin): Your next fitness goal"
