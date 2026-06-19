@@ -1,0 +1,8 @@
+{
+  "_comment": "Manual override for Kevin's basketball stats. The /api/basketball-stats function reads this FIRST; if seasonStarted is true it uses these numbers and skips scraping. The site's frontend also reads this directly as a fallback when no serverless function is deployed (e.g. on plain GitHub Pages). To update weekly: set seasonStarted to true, fill in ppg/apg/rpg, and bump lastUpdated.",
+  "seasonStarted": false,
+  "ppg": null,
+  "apg": null,
+  "rpg": null,
+  "lastUpdated": null
+}

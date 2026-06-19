@@ -1,0 +1,23 @@
+# ---------------------------------------------------------------------------
+# Basketball page content. Editable copy lives here; live stats + the
+# highlight video are pulled by the JS from the /api/ functions (with a
+# static JSON fallback). Anything invented is marked TODO(Kevin).
+# ---------------------------------------------------------------------------
+
+team: "Bagwork 2.0"
+league: "Roundball"                       # TODO(Kevin): confirm league/division name
+player: "Kevin Liu"
+jersey: "00"                              # TODO(Kevin): your jersey number
+position: "Guard"                         # TODO(Kevin): your position
+youtube_channel: "https://www.youtube.com/@RoundballBC"
+
+# TODO(Kevin): write a few real lines about playing in the league.
+blurb: >-
+  TODO(Kevin): Write a short blurb about suiting up for Bagwork 2.0 — how you
+  got into the league, your role on the team, what you love about game night,
+  and any goals for the season. This sits next to a team/action photo below.
+
+# Optional: drop in an API base if you host the serverless functions on a
+# different domain than the site (e.g. a Vercel deployment). Leave blank to
+# call same-origin /api/* (works when the whole site is on Vercel/Netlify).
+api_base: ""
