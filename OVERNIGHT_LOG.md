@@ -123,7 +123,7 @@ work that its JS still resolves to the correct pre-season state.
 ### 🔧 TODO(Kevin) — what to fill in (search the repo for `TODO(Kevin)`)
 All in `_data/passions.yml` unless noted:
 - **Sports:** the `intro`, and for each sport the real `name` / `years` / `level` / `position` / `memory` (optional `image:` for a photo). Add or delete list items freely.
-- **Music:** `intro`, `daw`, `gear`, `genres`, the `current` line, and an `embed:` URL (SoundCloud/Spotify/YouTube iframe src) to turn the waveform placeholder into a live player.
+- **Music:** `intro`, `daw`, `gear`, the `current` line, and the three style **`sections`** (Pop / EDM / Experimental Rap) — each section's `blurb` + track `title`, and a track `file:` MP3 path. **Drop MP3s in `assets/audio/`** (see its README) and set each track's `file:` to play it inline; blank shows an upload placeholder. Add more tracks per section freely.
 - **Gaming:** `intro`, `ign`, `peak_rank`, `role`, `main_champ`, `champ_note`, your `opgg:` profile URL, and the `links[].url`s (YouTube/TikTok/Discord) — empty ones show as TODO chips.
 
 ### Notes

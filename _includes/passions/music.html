@@ -1,6 +1,9 @@
 {%- comment -%}
   Music production panel body. Expects include.p with:
-  intro, daw, gear, genres, embed (iframe src or ""), embed_title, current.
+  intro, daw, gear, current, and `sections` (each: name, optional label,
+  optional blurb, and `tracks` — each track has a title + `file` mp3 path).
+  A track with a non-empty `file` renders a native <audio> player; otherwise
+  it shows an upload placeholder.
 {%- endcomment -%}
 {%- assign p = include.p -%}
 <p class="pass-panel__blurb">{{ p.intro }}</p>
@@ -9,26 +12,49 @@
 <ul class="pass-chips">
   {%- if p.daw and p.daw != '' -%}<li class="pass-chip pass-chip--accent">{{ p.daw }}</li>{%- endif -%}
   {%- if p.gear and p.gear != '' -%}<li class="pass-chip">{{ p.gear }}</li>{%- endif -%}
-  {%- if p.genres and p.genres != '' -%}<li class="pass-chip">{{ p.genres }}</li>{%- endif -%}
 </ul>
 
-<h3 class="pass-panel__subhead">{{ p.embed_title | default: 'Featured track' }}</h3>
-{%- if p.embed and p.embed != '' -%}
-<div class="music-embed">
-  <iframe src="{{ p.embed }}" loading="lazy" title="{{ p.embed_title | default: 'Featured track' }}"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+<h3 class="pass-panel__subhead">My sound</h3>
+<div class="music-genres">
+  {%- for sec in p.sections -%}
+  <section class="genre">
+    <div class="genre__head">
+      <span class="genre__badge" aria-hidden="true">{{ forloop.index }}</span>
+      <div>
+        <h4 class="genre__name">{{ sec.name }}</h4>
+        {%- if sec.label and sec.label != '' -%}<span class="genre__label">{{ sec.label }}</span>{%- endif -%}
+      </div>
+    </div>
+    {%- if sec.blurb and sec.blurb != '' -%}<p class="genre__blurb">{{ sec.blurb }}</p>{%- endif -%}
+
+    <div class="genre__tracks">
+      {%- for t in sec.tracks -%}
+      <div class="track">
+        <span class="track__title">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          {{ t.title }}
+        </span>
+        {%- if t.file and t.file != '' -%}
+        <audio class="track__audio" controls preload="none">
+          <source src="{{ t.file | relative_url }}" type="audio/mpeg">
+          Your browser doesn't support inline audio — <a href="{{ t.file | relative_url }}">download the track</a>.
+        </audio>
+        {%- else -%}
+        <div class="track__ph" role="img" aria-label="MP3 upload placeholder for {{ sec.name }}">
+          <span class="track__ph-btn" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="track__ph-text">
+            TODO(Kevin): drop your {{ sec.name }} MP3 in <strong>assets/audio/</strong> and set <strong>file:</strong> in _data/passions.yml
+          </span>
+        </div>
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endfor -%}
 </div>
-{%- else -%}
-<div class="music-embed music-embed--placeholder" role="img" aria-label="Embedded player placeholder">
-  <div class="music-wave" aria-hidden="true">
-    {%- for i in (1..40) -%}<span style="--i: {{ i }}"></span>{%- endfor -%}
-  </div>
-  <p class="music-embed__msg">
-    TODO(Kevin): paste a SoundCloud / Spotify / YouTube embed URL into
-    <strong>embed:</strong> in _data/passions.yml to drop in a live player.
-  </p>
-</div>
-{%- endif -%}
 
 <h3 class="pass-panel__subhead">Currently working on</h3>
 <p class="pass-note">{{ p.current }}</p>

@@ -75,11 +75,27 @@
     what pulls you to it, and the kind of sound you're chasing.
   daw: "TODO(Kevin): DAW — e.g. FL Studio / Ableton Live"
   gear: "TODO(Kevin): key gear — MIDI keyboard, interface, monitors"
-  genres: "TODO(Kevin): genres — e.g. house, hip-hop, lo-fi"
-  embed_title: "Featured track"
-  # Paste an embed URL (SoundCloud / Spotify / YouTube "embed" iframe src) to
-  # show a live player. Leave blank to keep the styled waveform placeholder.
-  embed: ""
+  # The three styles I produce. Each section gets an inline MP3 player.
+  # To add a track: drop the .mp3 into `assets/audio/` and set its `file:`
+  # to e.g. /assets/audio/my-track.mp3 — leave `file:` blank for an upload
+  # placeholder. You can list more than one track per section.
+  sections:
+    - name: "Pop"
+      blurb: "TODO(Kevin): a line about your pop sound / influences."
+      tracks:
+        - title: "TODO(Kevin): Pop track title"
+          file: ""        # e.g. /assets/audio/pop.mp3
+    - name: "EDM"
+      label: "Electronic Dance Music"
+      blurb: "TODO(Kevin): a line about your EDM — subgenres, energy, sets."
+      tracks:
+        - title: "TODO(Kevin): EDM track title"
+          file: ""        # e.g. /assets/audio/edm.mp3
+    - name: "Experimental Rap"
+      blurb: "TODO(Kevin): a line about your experimental rap direction."
+      tracks:
+        - title: "TODO(Kevin): Experimental rap track title"
+          file: ""        # e.g. /assets/audio/experimental-rap.mp3
   current: >-
     TODO(Kevin): What you're working on right now — a track, an EP, a remix,
     or a sound you're trying to nail.
