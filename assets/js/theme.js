@@ -1,10 +1,10 @@
 /* =========================================================================
    Light / dark mode toggle.
 
-   Independent of the Minecraft theme (which owns `data-theme` + `kl-theme`).
-   Light/dark lives on `data-mode` (+ `kl-mode`); dark is the default and is
-   represented by the *absence* of the attribute. The pre-paint inline script
-   in head.html applies the saved mode before first paint to avoid a flash.
+   Light/dark lives on `data-mode` (+ localStorage `kl-mode`); dark is the
+   default and is represented by the *absence* of the attribute. The pre-paint
+   inline script in head.html applies the saved mode before first paint to
+   avoid a flash.
    ========================================================================= */
 (function () {
   'use strict';

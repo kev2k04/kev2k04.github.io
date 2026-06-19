@@ -35,38 +35,6 @@ layout: default
   </div>
 </section>
 
-<!-- ===================== MINE (Minecraft theme only) ===================== -->
-<section class="mc-mine" id="mine">
-  <div class="container">
-    <div class="mc-mine__head">
-      <h2 class="mc-mine__title">&#9935; Mine for Intel</h2>
-      <p class="mc-mine__sub">
-        Grab your pickaxe and whack the ore blocks to dig up Kevin's stats.
-        <span class="mc-progress" aria-live="polite">
-          <span id="mc-mined">0</span> / <span id="mc-total">0</span> ores mined
-        </span>
-      </p>
-    </div>
-
-    <div class="mc-grid">
-      {%- for ore in site.data.ores -%}
-        <div class="mc-block" data-ore="{{ ore.type }}" data-needed="{{ ore.hardness }}"
-             tabindex="0" role="button" aria-label="Mine ore: {{ ore.title }}">
-          <div class="mc-block__face">
-            <span class="mc-block__ore"></span>
-            <span class="mc-block__cracks" aria-hidden="true"></span>
-          </div>
-          <div class="mc-reward" hidden>
-            <div class="mc-reward__item" aria-hidden="true">{{ ore.icon }}</div>
-            <h3 class="mc-reward__title">{{ ore.title }}</h3>
-            <div class="mc-reward__body">{{ ore.body }}</div>
-          </div>
-        </div>
-      {%- endfor -%}
-    </div>
-  </div>
-</section>
-
 <!-- ===================== STATS ===================== -->
 <section class="stats">
   <div class="container stats__grid">

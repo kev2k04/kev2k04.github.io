@@ -3,18 +3,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {%- comment -%} Apply the saved theme + light/dark mode before paint to avoid a flash of the wrong theme. {%- endcomment -%}
+  {%- comment -%} Apply the saved light/dark mode before paint to avoid a flash of the wrong theme. {%- endcomment -%}
   <script>
     (function () {
-      var el = document.documentElement;
       try {
-        if (localStorage.getItem('kl-theme') === 'minecraft') {
-          el.setAttribute('data-theme', 'minecraft');
-        }
-        // Light/dark is a separate axis from the Minecraft theme.
-        // Default is dark (unset); only light is stored as an attribute.
+        // Default is dark (attribute unset); only light is stored.
         if (localStorage.getItem('kl-mode') === 'light') {
-          el.setAttribute('data-mode', 'light');
+          document.documentElement.setAttribute('data-mode', 'light');
         }
       } catch (e) {}
     })();
@@ -23,14 +18,12 @@
   <title>{% if page.title %}{{ page.title }} &middot; {{ site.title }}{% else %}{{ site.title }} &middot; {{ site.tagline | strip_html }}{% endif %}</title>
 
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/minecraft.css' | relative_url }}">
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
 
-  {%- comment -%} Fraunces (editorial serif display) + Inter (body) power the
-       professional theme. Press Start 2P / VT323 are used only by Minecraft. {%- endcomment -%}
+  {%- comment -%} Space Grotesk (geometric display) + Inter (body) power the site. {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   {% seo %}
 </head>

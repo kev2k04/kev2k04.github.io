@@ -60,10 +60,9 @@
 /* =========================================================================
    Light mode — "Daylight & Azure".
    A designed light companion to the dark default: cool paper, deep navy ink,
-   a stronger azure that holds contrast on white. Scoped so it never touches
-   the Minecraft theme, which owns its own palette.
+   a stronger azure that holds contrast on white.
    ========================================================================= */
-html[data-mode="light"]:not([data-theme="minecraft"]) {
+html[data-mode="light"] {
   --bg:         #f5f8fd;   /* cool paper                       */
   --bg-alt:     #eaeff8;   /* alternating sections             */
   --surface:    #ffffff;   /* cards / lifted panels            */
@@ -244,7 +243,7 @@ img { max-width: 100%; display: block; }
   height: 68px;
 }
 
-.site-brand { display: flex; align-items: center; gap: 0.7rem; }
+.site-brand { display: flex; align-items: center; gap: 0.7rem; margin-right: auto; }
 .site-brand__mark {
   display: grid;
   place-items: center;
