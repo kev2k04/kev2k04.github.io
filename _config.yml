@@ -1,0 +1,40 @@
+# --- Site settings ---------------------------------------------------------
+# Edit these values to personalize your portfolio.
+
+title: Kevin Liu
+tagline: Financial Analyst &middot; UBC Sauder
+description: >-
+  Personal portfolio of Kevin Liu, a UBC Sauder commerce student and financial
+  analyst specializing in FP&amp;A, financial modeling, and data-driven analytics.
+
+# Your contact email (used in the footer and contact section)
+email: Kev2k04@gmail.com
+
+# The URL where the site will live.
+# For a user/organization page (username.github.io) leave baseurl as "".
+# For a project page (username.github.io/repo-name) set:
+#   baseurl: "/repo-name"
+url: "https://username.github.io"
+baseurl: ""
+
+# --- Build settings --------------------------------------------------------
+markdown: kramdown
+permalink: pretty
+
+# Sass / CSS pipeline
+sass:
+  style: compressed
+
+# Exclude these from the build output
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+
+# Jekyll plugins (all whitelisted by GitHub Pages)
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap

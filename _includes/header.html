@@ -1,0 +1,32 @@
+{%- comment -%} Monogram = first letter of the first two words of the title {%- endcomment -%}
+{%- assign words = site.title | split: " " -%}
+{%- assign first = words[0] | slice: 0, 1 -%}
+{%- assign second = words[1] | slice: 0, 1 -%}
+{%- assign monogram = first | append: second | upcase -%}
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-brand" href="{{ '/' | relative_url }}">
+      <span class="site-brand__mark">{{ monogram }}</span>
+      <span class="site-brand__name">{{ site.title }}</span>
+    </a>
+
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false"
+            title="Switch between the professional and Minecraft themes">
+      <span class="theme-toggle__icon" aria-hidden="true">&#9935;</span>
+      <span class="theme-toggle__text">Minecraft</span>
+    </button>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
+    <label for="nav-toggle" class="nav-toggle__label" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="site-nav">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/#projects' | relative_url }}">Projects</a>
+      <a href="{{ '/resume/' | relative_url }}">Resume</a>
+      <a href="{{ '/#contact' | relative_url }}">Contact</a>
+    </nav>
+  </div>
+</header>

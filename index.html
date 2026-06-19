@@ -1,0 +1,162 @@
+---
+layout: default
+---
+
+{%- assign p = site.data.profile -%}
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__eyebrow">{{ p.role }}</p>
+      <h1 class="hero__title">{{ p.name }}</h1>
+      <p class="hero__lede">{{ p.headline }}</p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="{{ '/experience/' | relative_url }}">
+          View Experience {% include icon.html name="arrow" %}
+        </a>
+        <a class="btn btn--ghost" href="#projects">See Projects</a>
+      </div>
+
+      <div class="hero__social">
+        {%- for social in p.socials -%}
+          <a href="{{ social.url }}" class="social-link" aria-label="{{ social.name }}"
+             {% unless social.icon == 'email' %}target="_blank" rel="noopener noreferrer"{% endunless %}>
+            {% include icon.html name=social.icon %}
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="hero__portrait">
+      <img src="{{ '/assets/images/kevin.jpeg' | relative_url }}" alt="{{ p.name }}" />
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MINE (Minecraft theme only) ===================== -->
+<section class="mc-mine" id="mine">
+  <div class="container">
+    <div class="mc-mine__head">
+      <h2 class="mc-mine__title">&#9935; Mine for Intel</h2>
+      <p class="mc-mine__sub">
+        Grab your pickaxe and whack the ore blocks to dig up Kevin's stats.
+        <span class="mc-progress" aria-live="polite">
+          <span id="mc-mined">0</span> / <span id="mc-total">0</span> ores mined
+        </span>
+      </p>
+    </div>
+
+    <div class="mc-grid">
+      {%- for ore in site.data.ores -%}
+        <div class="mc-block" data-ore="{{ ore.type }}" data-needed="{{ ore.hardness }}"
+             tabindex="0" role="button" aria-label="Mine ore: {{ ore.title }}">
+          <div class="mc-block__face">
+            <span class="mc-block__ore"></span>
+            <span class="mc-block__cracks" aria-hidden="true"></span>
+          </div>
+          <div class="mc-reward" hidden>
+            <div class="mc-reward__item" aria-hidden="true">{{ ore.icon }}</div>
+            <h3 class="mc-reward__title">{{ ore.title }}</h3>
+            <div class="mc-reward__body">{{ ore.body }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="stats">
+  <div class="container stats__grid">
+    {%- for stat in p.stats -%}
+      <div class="stat">
+        <span class="stat__value">{{ stat.value }}</span>
+        <span class="stat__label">{{ stat.label }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section__head">
+      <span class="section__kicker">Profile</span>
+      <h2 class="section__title">A bit about me</h2>
+    </div>
+    <div class="about">
+      <p class="about__body">{{ p.about }}</p>
+      <div class="about__expertise">
+        <h3 class="about__subhead">Areas of Expertise</h3>
+        <ul class="taglist">
+          {%- for item in p.expertise -%}
+            <li class="tag">{{ item }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section class="section section--alt" id="projects">
+  <div class="container">
+    <div class="section__head">
+      <span class="section__kicker">Portfolio</span>
+      <h2 class="section__title">Selected projects</h2>
+    </div>
+
+    <div class="projects">
+      {%- for project in site.data.projects -%}
+        {%- if project.link and project.link != "#" -%}
+          <a class="project" href="{{ project.link }}" target="_blank" rel="noopener noreferrer">
+        {%- else -%}
+          <article class="project">
+        {%- endif -%}
+            <div class="project__top">
+              <span class="project__category">{{ project.category }}</span>
+              <span class="project__year">{{ project.year }}</span>
+            </div>
+            <h3 class="project__title">{{ project.title }}</h3>
+            <p class="project__summary">{{ project.summary }}</p>
+            <ul class="project__tags">
+              {%- for tag in project.tags -%}
+                <li>{{ tag }}</li>
+              {%- endfor -%}
+            </ul>
+        {%- if project.link and project.link != "#" -%}
+          </a>
+        {%- else -%}
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section contact" id="contact">
+  <div class="container contact__inner">
+    <span class="section__kicker">Contact</span>
+    <h2 class="section__title">Get in touch</h2>
+    <p class="contact__lede">
+      I'm always happy to talk finance, analytics, or a good problem worth
+      modeling. Email is the quickest way to reach me.
+    </p>
+    <a class="btn btn--primary" href="mailto:{{ site.email }}">
+      {% include icon.html name="email" %} {{ site.email }}
+    </a>
+
+    <div class="contact__social">
+      {%- for social in p.socials -%}
+        <a href="{{ social.url }}" class="social-link social-link--lg" aria-label="{{ social.name }}"
+           {% unless social.icon == 'email' %}target="_blank" rel="noopener noreferrer"{% endunless %}>
+          {% include icon.html name=social.icon %}
+          <span>{{ social.name }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

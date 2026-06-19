@@ -1,0 +1,114 @@
+---
+layout: default
+title: Resume
+permalink: /resume/
+---
+
+{%- assign r = site.data.resume -%}
+{%- assign p = site.data.profile -%}
+
+<a class="back-btn" href="{{ '/' | relative_url }}" aria-label="Back to home">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+  Back
+</a>
+
+<section class="resume">
+  <div class="container container--narrow">
+
+    <!-- Header -->
+    <header class="resume__header">
+      <div>
+        <h1 class="resume__name">{{ p.name }}</h1>
+        <p class="resume__meta">
+          <span>{% include icon.html name="location" %} {{ p.location }}</span>
+          {%- if r.phone -%}
+            <span>{{ r.phone }}</span>
+          {%- endif -%}
+          <span><a href="mailto:{{ site.email }}">{{ site.email }}</a></span>
+          {%- if r.linkedin_url -%}
+            <span><a href="{{ r.linkedin_url }}" target="_blank" rel="noopener noreferrer">{{ r.linkedin_text | default: r.linkedin_url }}</a></span>
+          {%- endif -%}
+        </p>
+      </div>
+      {%- if r.pdf and r.pdf != "" -%}
+        <a class="btn btn--primary" href="{{ r.pdf | relative_url }}" download>
+          {% include icon.html name="download" %} Download PDF
+        </a>
+      {%- endif -%}
+    </header>
+
+    <!-- Education -->
+    <div class="resume__block">
+      <h2 class="resume__heading">Education</h2>
+      {%- for ed in r.education -%}
+        <div class="resume-item">
+          <div class="resume-item__head">
+            <h3 class="resume-item__role">{{ ed.degree }}</h3>
+            <span class="resume-item__dates">{{ ed.year }}</span>
+          </div>
+          <p class="resume-item__org">{{ ed.school }}{%- if ed.location -%} &middot; {{ ed.location }}{%- endif -%}</p>
+          {%- if ed.courses -%}
+            <ul class="resume-item__points">
+              <li><strong>Key Courses:</strong> {{ ed.courses }}</li>
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Experience -->
+    <div class="resume__block">
+      <h2 class="resume__heading">Experience</h2>
+      {%- for job in r.experience -%}
+        <div class="resume-item">
+          <div class="resume-item__head">
+            <h3 class="resume-item__role">{{ job.role }}</h3>
+            <span class="resume-item__dates">{{ job.start }} &ndash; {{ job.end }}</span>
+          </div>
+          <p class="resume-item__org">{{ job.company }} &middot; {{ job.location }}</p>
+          <ul class="resume-item__points">
+            {%- for point in job.points -%}
+              <li>{{ point }}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Extracurriculars -->
+    {%- if r.extracurriculars -%}
+    <div class="resume__block">
+      <h2 class="resume__heading">Extracurriculars</h2>
+      {%- for ec in r.extracurriculars -%}
+        <div class="resume-item">
+          <div class="resume-item__head">
+            <h3 class="resume-item__role">{{ ec.role }}</h3>
+            <span class="resume-item__dates">{{ ec.start }} &ndash; {{ ec.end }}</span>
+          </div>
+          <p class="resume-item__org">{{ ec.org }} &middot; {{ ec.location }}</p>
+          {%- if ec.points -%}
+            <ul class="resume-item__points">
+              {%- for point in ec.points -%}
+                <li>{{ point }}</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    <!-- Additional Information -->
+    {%- if r.additional -%}
+    <div class="resume__block">
+      <h2 class="resume__heading">Additional Information</h2>
+      {%- for item in r.additional -%}
+        <p class="resume__kv"><strong>{{ item.label }}:</strong> {{ item.value }}</p>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script src="{{ '/assets/js/resume.js' | relative_url }}" defer></script>

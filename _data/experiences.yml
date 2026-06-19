@@ -1,0 +1,100 @@
+# ---------------------------------------------------------------------------
+# Experience panels — drives the /experience/ page.
+# Each entry is fully independent: edit one without touching the others.
+#
+# PLACEHOLDERS to swap out later:
+#   - logo: drop a real logo file in /assets/images/logos/ and set `logo:`
+#     to its path. While empty, the monogram in `logo_text` is shown instead.
+#   - blurb: replace the "Placeholder —" sentence with a real summary.
+#   - skills: tweak the tag list to taste.
+#   - image: each panel shows a sized photo placeholder; add a real photo via
+#     the `image:` field (path under /assets/images/) when you have one.
+# ---------------------------------------------------------------------------
+
+- id: seaspan
+  company: Seaspan
+  logo_text: SE
+  logo: "/assets/images/logos/seaspan.png"            # e.g. /assets/images/logos/seaspan.svg
+  role: "FP&A Analyst"
+  dates: "May 2026 – Present"
+  location: "Vancouver, Canada"
+  blurb: >-
+    Placeholder — a short summary of my FP&A work supporting long-term
+    forecasting, budgeting, and executive reporting. Replace with real copy.
+  image: ""           # e.g. /assets/images/experience/seaspan.jpg
+  points:
+    - "Ran scenario and sensitivity analysis on a 2027–2040 long-term forecast model (inflation, project-win, and best/worst-case scenarios) to support financial reporting and value contract opportunities."
+    - "Conducted month-end budget-to-actual variance analysis across a consolidated income statement and balance sheet spanning 30+ departments for management and Board reporting."
+    - "Developed 5 scenario-analysis slides for the CFO Townhall, translating long-term forecast output into executive-ready visuals for a 120+ person finance audience."
+  skills:
+    - Excel
+    - SAP
+    - Power BI
+    - Variance Analysis
+    - Forecasting
+
+- id: bchydro
+  company: BC Hydro
+  logo_text: BC
+  logo: "/assets/images/logos/bchydro.png"
+  role: "Business Analyst"
+  dates: "May 2025 – Dec 2025"
+  location: "Vancouver, Canada"
+  blurb: >-
+    Placeholder — a short summary of my analytics and process-improvement
+    work on forecasting models and the call-centre data pipeline.
+  image: ""
+  points:
+    - "Built financial forecasting models incorporating growth assumptions, cost drivers, and scenario analysis to project expenses exceeding $10M YTD."
+    - "Proposed a solution to recover and process 50% more lost call-centre data, improving reporting reliability and saving over $50,000 annually."
+    - "Identified and fixed IVR routing inefficiencies, improving placement accuracy from a 30% to 25% error rate across a 4,000-call sample."
+  skills:
+    - Excel
+    - SQL
+    - Power BI
+    - Process Improvement
+    - Data Analysis
+
+- id: joshuatree
+  company: Joshua Tree Health
+  logo_text: JT
+  logo: "/assets/images/logos/joshuatree.png"
+  logo_full: true     # logo fills the chip edge-to-edge (no white padding)
+  role: "Analyst, Private Equity"
+  dates: "Oct 2024 – May 2025"
+  location: "Vancouver, Canada"
+  blurb: >-
+    Placeholder — a short summary of my private-equity screening and
+    valuation work across U.S. healthcare targets.
+  image: ""
+  points:
+    - "Conducted market research and screening on U.S. healthcare firms under $1M EBITDA, assessing earnings, working capital, and balance-sheet risk."
+    - "Analysed select niches within mental-health care by evaluating total market revenue, growth trends, and demographic factors."
+    - "Evaluated 15+ seed-stage companies using comparable-company analysis and valuation metrics to assess scalability and revenue sustainability."
+  skills:
+    - Excel
+    - Capital IQ
+    - PitchBook
+    - Valuation
+    - Market Research
+
+- id: robotics
+  company: UBC Open Robotics
+  logo_text: OR
+  logo: "/assets/images/logos/robotics.png"
+  role: "Finance Executive"
+  dates: "Mar 2024 – May 2025"
+  location: "Vancouver, Canada"
+  blurb: >-
+    Placeholder — a short summary of my finance and sponsorship work
+    managing the club's budget and outreach.
+  image: ""
+  points:
+    - "Created the 2024 Sponsorship Package outlining the club's values and objectives for outreach."
+    - "Managed a $10,000 per-semester budget, tracking spend, identifying variances, and aligning spending with strategic priorities."
+    - "Coordinated with members, project leads, and administrators to keep funding and spending in sync."
+  skills:
+    - Excel
+    - Budgeting
+    - Sponsorship
+    - Stakeholder Management

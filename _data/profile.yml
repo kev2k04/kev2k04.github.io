@@ -1,0 +1,59 @@
+# ---------------------------------------------------------------------------
+# Your profile. This drives the hero, about section, and contact area.
+# ---------------------------------------------------------------------------
+
+name: Kevin Liu
+role: Student at the University of British Columbia
+location: Vancouver, BC
+headline: >-
+  Hi my name is Kevin, and welcome to my website!
+
+# A short professional bio shown in the "About" section.
+about: >-
+  I'm a Bachelor of Commerce student at the UBC Sauder School of Business with
+  hands-on experience spanning financial planning &amp; analysis, business
+  analytics, and private equity. I've built financial models and turned data
+  into decisions at organizations ranging from Seaspan and BC Hydro to an
+  early-stage search fund, pairing rigorous quantitative analysis with a
+  genuine curiosity for how businesses create value. I'm always looking for
+  opportunities to apply finance and analytics to real-world problems.
+
+# Key figures shown as "stats" on the landing page.
+stats:
+  - value: 4th Year
+    label: University Student
+  - value: Dec 2027
+    label: Graduation Date
+  - value: Seaspan
+    label: Current Company
+  - value: "FP&amp;A"
+    label: Current Role
+
+# Areas of expertise, rendered as a tag list.
+expertise:
+  - Financial Modeling
+  - FP&amp;A
+  - Financial Analysis
+  - Statistical Data Analysis
+  - Business Analytics
+  - Valuation
+  - Private Equity Research
+  - Excel
+
+# ---------------------------------------------------------------------------
+# Social & professional links. Remove any you don't use; the icon is chosen
+# by the "icon" field (see _includes/icon.html for available icons).
+# ---------------------------------------------------------------------------
+socials:
+  - name: LinkedIn
+    icon: linkedin
+    url: https://www.linkedin.com/in/kev2k04/
+  - name: Email
+    icon: email
+    url: mailto:Kev2k04@gmail.com
+  - name: GitHub
+    icon: github
+    url: https://github.com/your-handle
+  - name: YouTube
+    icon: youtube
+    url: https://www.youtube.com/@kevxn0439

@@ -1,0 +1,57 @@
+# ---------------------------------------------------------------------------
+# Projects showcase. Add, remove, or reorder entries freely.
+# Each project renders as a card. "tags" appear as small labels; "link" is
+# optional (omit it and the card simply won't be clickable).
+# ---------------------------------------------------------------------------
+
+- title: "Equity Valuation: Semiconductor Sector"
+  category: Equity Research
+  year: 2025
+  summary: >-
+    A bottom-up DCF and comparable-company analysis of five leading semiconductor
+    firms, identifying a 22% relative mispricing and a clear long thesis backed by
+    sensitivity and scenario modeling.
+  tags:
+    - DCF
+    - Comparable Analysis
+    - Python
+  link: "#"
+
+- title: Multi-Asset Portfolio Optimizer
+  category: Quantitative Strategy
+  year: 2024
+  summary: >-
+    Built a mean-variance and Black-Litterman optimization engine in Python to
+    construct efficient frontiers across equities, fixed income, and commodities,
+    with live risk dashboards.
+  tags:
+    - Portfolio Theory
+    - Python
+    - Risk Analytics
+  link: "#"
+
+- title: "Credit Risk Model: Corporate Bonds"
+  category: Fixed Income
+  year: 2024
+  summary: >-
+    Developed a probability-of-default model using logistic regression on
+    issuer fundamentals and macro factors, improving early-warning accuracy
+    by 14% over the prior framework.
+  tags:
+    - Credit Risk
+    - SQL
+    - Statistics
+  link: "#"
+
+- title: M&A Accretion / Dilution Analysis
+  category: Corporate Finance
+  year: 2023
+  summary: >-
+    A full merger model evaluating a $480M acquisition, including synergy
+    assumptions, financing structure, and pro-forma EPS impact under multiple
+    deal scenarios.
+  tags:
+    - M&A
+    - LBO
+    - Excel
+  link: "#"

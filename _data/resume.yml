@@ -1,0 +1,77 @@
+# ---------------------------------------------------------------------------
+# Resume content. This drives the /resume/ page.
+# ---------------------------------------------------------------------------
+
+pdf: "/assets/Kevin-Liu-Resume.pdf"
+
+phone: "(604) 369-0323"
+linkedin_url: "https://www.linkedin.com/in/kev2k04/"
+linkedin_text: "linkedin.com/in/kev2k04"
+
+experience:
+  - role: "FP&A Analyst"
+    company: Seaspan ULC
+    location: Vancouver, Canada
+    start: "May 2026"
+    end: Present
+    points:
+      - "Ran scenario and sensitivity analysis on a 2027–2040 long-term forecast model (inflation, project-win, and best/worst-case scenario) to support financial reporting and value contract opportunities, while identifying errors and refining inputs."
+      - "Translated departmental direct/indirect cost-split estimates into budgeted cost allocations, and validated results through monthly OH&GA variance analysis with driver-based commentary."
+      - "Conducted month-end budget-to-actual variance analysis and validated financials across a consolidated income statement and balance sheet spanning 30+ departments for management and Board reporting."
+      - "Developed 5 scenario-analysis slides for CFO Townhall, analyzing revenue, EBT, and labour drivers (production and salary hours) and translating long-term forecast output into executive-ready visuals for a 120+ person finance audience."
+      - "Executed rolling reforecasts by pulling, cleaning, and validating data (labor expense, headcount, hours) across multiple departments, comparing actuals against budget and collaborating with budget managers to produce updated forecast files."
+
+  - role: Business Analyst
+    company: BC Hydro
+    location: Vancouver, Canada
+    start: "May 2025"
+    end: "Dec 2025"
+    points:
+      - "Built financial forecasting models incorporating growth assumptions, cost drivers, and scenario analysis to project expenses exceeding $10 million YTD, supporting planning, reporting, and assisting in high-level decision-making."
+      - "Proposed a solution to recover and process 50% more lost data from the call center, improving data quality and reporting reliability, and enhancing agent efficiency by 3%, leading to annual savings of over $50,000 by reducing handling time."
+      - "Identified and fixed inefficiencies within the Interactive Voice Response (IVR) system, where 50% of callers were potentially misrouted to the general queue, adding an average of 5 minutes to each interaction's handle time."
+      - "By improving utterance recognition, the IVR system increased placement accuracy from a 30% error rate to 25% across a sample of 4,000 calls, with the potential to save over 150,000 minutes annually when scaled."
+
+  - role: "Analyst, Private Equity"
+    company: Joshua Tree Health
+    location: Vancouver, Canada
+    start: "Oct 2024"
+    end: "May 2025"
+    points:
+      - "Conducted market research and screening on U.S. healthcare firms under $1 million USD in EBITDA, assessing financial health and investment opportunities by evaluating earnings, working capital, and balance sheet risk."
+      - "Conducted an in-depth market analysis of select niches within the mental health care industry by evaluating total market revenue, growth trends, and demographic factors to support strategic decision making."
+      - "Evaluated 15+ seed stage companies with limited or early revenue (under $500,000 ARR) using comparable company analysis, market benchmarks, and valuation metrics to assess growth drivers, scalability, and revenue sustainability."
+
+extracurriculars:
+  - role: Finance Executive
+    org: UBC Open Robotics Club
+    location: Vancouver, Canada
+    start: "Mar 2024"
+    end: "May 2025"
+    points:
+      - "Created the 2024 Sponsorship Package outlining the values and objectives of the Open Robotics Club for outreach."
+      - "Managed a $10,000 per semester budget, tracking spendings, identifying variances, and coordinating with members, project leads, and administrators to align spending with strategic priorities and funding availability."
+
+  - role: "2nd Place"
+    org: "COMM 371 Investing Competition"
+    location: Vancouver, Canada
+    start: "Sep 2024"
+    end: "Jan 2025"
+    points:
+      - "Participated and competed in a Wall Street Survivor competition against all students taking Investment Theory (approximately 300 students in 50 groups), finishing in 2nd place with a 50% portfolio return."
+      - "Operated under strict investment constraints, including mandatory portfolio allocations to fixed income securities, options trading, and derivatives, and restricted to predefined asset allocation ratios."
+
+education:
+  - degree: "Bachelor of Commerce, Major in Finance"
+    school: "The University of British Columbia, Sauder School of Business"
+    location: Vancouver, Canada
+    year: "Class of 2027"
+    courses: "Corporate Finance, Investment Theory, Investment Policy, Financial Institutions I, Managerial Economics & Accounting, Business Ethics & Communications, and Behavioural Finance."
+
+additional:
+  - label: "Technical & Tools"
+    value: "Excel (Advanced), SAP, Power BI, Tableau, PowerPoint, R Studio, Capital IQ, PitchBook, Bloomberg."
+  - label: Skills
+    value: "FP&A, Financial Modeling, Scenario & Sensitivity Analysis, Variance Analysis, Cash Flow Forecasting, Cost Allocation (Direct/Indirect, OH&GA), Financial Statement Analysis, DCF Valuation, NPV/IRR, WACC & Cost of Capital, Comparable Company Analysis, Precedent Transactions."
+  - label: Interests
+    value: "Music Production, Content Creation, Personal Fitness, Soccer, Baseball, Video Games, and Cooking."
