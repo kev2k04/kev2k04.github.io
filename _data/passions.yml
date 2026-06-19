@@ -63,33 +63,52 @@
       position: "TODO(Kevin): event(s)"
       memory: "TODO(Kevin): a PR, medal, or memory."
 
+# Music production panel — rendered by _includes/passions/music.html.
 - id: music
   kind: panel
   title: Music
   icon: music
-  tagline: Always something playing in the background.
+  tagline: Producing tracks, one session at a time.
   accent: "168, 85, 247"      # violet
-  # TODO(Kevin): write a few real lines about your music taste / playing.
-  blurb: >-
-    TODO(Kevin): A short intro to what music means to you — favourite genres,
-    artists on repeat, whether you play an instrument, go to shows, or just
-    curate playlists for every mood.
-  highlights:
-    - "TODO(Kevin): Favourite genres / artists"
-    - "TODO(Kevin): Instruments you play (if any)"
-    - "TODO(Kevin): A memorable concert or album"
+  intro: >-
+    TODO(Kevin): A short intro to your music production — when you started,
+    what pulls you to it, and the kind of sound you're chasing.
+  daw: "TODO(Kevin): DAW — e.g. FL Studio / Ableton Live"
+  gear: "TODO(Kevin): key gear — MIDI keyboard, interface, monitors"
+  genres: "TODO(Kevin): genres — e.g. house, hip-hop, lo-fi"
+  embed_title: "Featured track"
+  # Paste an embed URL (SoundCloud / Spotify / YouTube "embed" iframe src) to
+  # show a live player. Leave blank to keep the styled waveform placeholder.
+  embed: ""
+  current: >-
+    TODO(Kevin): What you're working on right now — a track, an EP, a remix,
+    or a sound you're trying to nail.
 
+# Gaming panel (League of Legends) — rendered by _includes/passions/gaming.html.
 - id: gaming
   kind: panel
   title: Gaming
   icon: gamepad
-  tagline: Strategy, competition, and the occasional all-nighter.
+  tagline: Climbing the ladder in League of Legends.
   accent: "52, 211, 153"      # emerald
-  blurb: >-
-    TODO(Kevin): What you love about gaming — go-to titles, genres, whether
-    you play competitively or casually, favourite platforms, and any
-    communities you're part of.
-  highlights:
-    - "TODO(Kevin): Go-to games / genres"
-    - "TODO(Kevin): Platform of choice"
-    - "TODO(Kevin): Competitive rank or proudest moment"
+  intro: >-
+    TODO(Kevin): A short intro to your gaming — mainly League of Legends, how
+    competitively you play, and what keeps you queueing up.
+  ign: "TODO(Kevin): in-game name"
+  peak_rank: "TODO(Kevin): e.g. Diamond II"
+  role: "TODO(Kevin): e.g. Mid"
+  main_champ: "TODO(Kevin): e.g. Ahri"
+  # Paste your op.gg (or other tracker) profile URL. Leave blank to show a hint.
+  opgg: ""
+  champ_note: >-
+    TODO(Kevin): A line about your main champ or a favourite game — a clutch
+    play, a montage moment, or why you one-trick it.
+  # Optional content / community links. Fill a `url` to turn it into a real
+  # link; leave blank and it shows as a TODO chip you can wire up later.
+  links:
+    - name: "YouTube"
+      url: ""
+    - name: "TikTok"
+      url: ""
+    - name: "Discord"
+      url: ""

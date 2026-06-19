@@ -1,0 +1,49 @@
+{%- comment -%}
+  Gaming panel body (League of Legends). Expects include.p with:
+  intro, ign, peak_rank, role, main_champ, opgg, champ_note, links[].
+{%- endcomment -%}
+{%- assign p = include.p -%}
+<p class="pass-panel__blurb">{{ p.intro }}</p>
+
+<div class="gg-id">
+  <div class="gg-id__cell">
+    <span class="gg-id__label">IGN</span>
+    <span class="gg-id__value">{{ p.ign }}</span>
+  </div>
+  <div class="gg-id__cell gg-id__cell--rank">
+    <span class="gg-id__label">Peak rank</span>
+    <span class="gg-id__value">{{ p.peak_rank }}</span>
+  </div>
+  <div class="gg-id__cell">
+    <span class="gg-id__label">Main role</span>
+    <span class="gg-id__value">{{ p.role }}</span>
+  </div>
+  <div class="gg-id__cell">
+    <span class="gg-id__label">Main champ</span>
+    <span class="gg-id__value">{{ p.main_champ }}</span>
+  </div>
+</div>
+
+{%- if p.opgg and p.opgg != '' -%}
+<a class="gg-link" href="{{ p.opgg }}" target="_blank" rel="noopener noreferrer">
+  View full profile {% include icon.html name="arrow" %}
+</a>
+{%- else -%}
+<p class="gg-hint">TODO(Kevin): paste your op.gg profile URL into <strong>opgg:</strong> in _data/passions.yml to link your live profile.</p>
+{%- endif -%}
+
+<h3 class="pass-panel__subhead">Main champ</h3>
+<p class="pass-note">{{ p.champ_note }}</p>
+
+{%- if p.links and p.links != empty -%}
+<h3 class="pass-panel__subhead">Content &amp; communities</h3>
+<ul class="pass-chips">
+  {%- for l in p.links -%}
+    {%- if l.url and l.url != '' -%}
+      <li><a class="pass-chip pass-chip--accent" href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.name }}</a></li>
+    {%- else -%}
+      <li><span class="pass-chip pass-chip--todo">{{ l.name }} — TODO(Kevin)</span></li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{%- endif -%}

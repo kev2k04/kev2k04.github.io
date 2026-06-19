@@ -1,0 +1,34 @@
+{%- comment -%}
+  Music production panel body. Expects include.p with:
+  intro, daw, gear, genres, embed (iframe src or ""), embed_title, current.
+{%- endcomment -%}
+{%- assign p = include.p -%}
+<p class="pass-panel__blurb">{{ p.intro }}</p>
+
+<h3 class="pass-panel__subhead">Studio</h3>
+<ul class="pass-chips">
+  {%- if p.daw and p.daw != '' -%}<li class="pass-chip pass-chip--accent">{{ p.daw }}</li>{%- endif -%}
+  {%- if p.gear and p.gear != '' -%}<li class="pass-chip">{{ p.gear }}</li>{%- endif -%}
+  {%- if p.genres and p.genres != '' -%}<li class="pass-chip">{{ p.genres }}</li>{%- endif -%}
+</ul>
+
+<h3 class="pass-panel__subhead">{{ p.embed_title | default: 'Featured track' }}</h3>
+{%- if p.embed and p.embed != '' -%}
+<div class="music-embed">
+  <iframe src="{{ p.embed }}" loading="lazy" title="{{ p.embed_title | default: 'Featured track' }}"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+</div>
+{%- else -%}
+<div class="music-embed music-embed--placeholder" role="img" aria-label="Embedded player placeholder">
+  <div class="music-wave" aria-hidden="true">
+    {%- for i in (1..40) -%}<span style="--i: {{ i }}"></span>{%- endfor -%}
+  </div>
+  <p class="music-embed__msg">
+    TODO(Kevin): paste a SoundCloud / Spotify / YouTube embed URL into
+    <strong>embed:</strong> in _data/passions.yml to drop in a live player.
+  </p>
+</div>
+{%- endif -%}
+
+<h3 class="pass-panel__subhead">Currently working on</h3>
+<p class="pass-note">{{ p.current }}</p>

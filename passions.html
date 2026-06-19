@@ -98,6 +98,8 @@ permalink: /passions/
           {%- endcomment -%}
           {%- case p.id -%}
             {%- when 'sports' -%}{% include passions/sports.html p=p %}
+            {%- when 'music' -%}{% include passions/music.html p=p %}
+            {%- when 'gaming' -%}{% include passions/gaming.html p=p %}
             {%- else -%}{% include passions/generic.html p=p %}
           {%- endcase -%}
         </div>
