@@ -87,3 +87,46 @@ GitHub Pages can't run functions. **Recommended:** keep the site on GitHub Pages
 - **Mobile:** screenshotted Passions and Basketball at 390px — grids collapse to one column cleanly; ran the bounding-box overflow probe → no horizontal overflow.
 - **Header crowding fix:** adding "Passions" (5th link) + the light/dark switch overflowed the bar in the 680–860px range (the Minecraft pill overlapped the nav). Split the responsive rules: the **nav now collapses to the hamburger at ≤860px** while the hero/résumé tweaks stay at ≤680px. Mirrored the breakpoint in `minecraft.scss` so the wood-themed dropdown matches. Re-verified at 760px — clean.
 - **A11y:** new interactive elements are native `<button>`/`<a>` with `aria-label`s; the mode-toggle exposes `aria-pressed` + a state-aware label; panels are `role="dialog" aria-modal`; Esc-to-close + focus-return inherited from the FLIP pattern; the stats status line is `aria-live="polite"`; all animations (mode switch, shimmer, pulse, FLIP) respect `prefers-reduced-motion`; image placeholders carry descriptive `aria-label`/`role="img"`.
+
+---
+
+## 2026-06-19 — Passions rework (Basketball hero · new Sports · Music + Gaming build-out)
+
+Focused, incremental session on the Passions area. Each milestone is its own
+commit; everything verified locally with `jekyll serve` + headless-Chrome
+screenshots in **both** themes. **The basketball page was not touched** — its
+live-stats scraper, `basketball-stats.json` fallback, serverless `/api/*`
+routes, YouTube embed, and env vars are all unchanged; I re-confirmed after the
+work that its JS still resolves to the correct pre-season state.
+
+### Task 1 — Rename + reorder the Passions cards
+- The live basketball card (was **"Sports"**) is **renamed to "Basketball Mens League"**, still the featured hero and still wired to `/basketball/` (navigation + live data unchanged). Its badge is tightened to **"Live stats"**, keeping the pulsing live dot.
+- **Lineup is now exactly:** 1) Basketball Mens League, 2) Sports (new), 3) Music, 4) Gaming.
+- **Gym/Fitness card: removed.** I *deleted* its entry from `_data/passions.yml` (it had no separate page/file — it was a generic panel, so nothing else to leave behind). The `dumbbell` icon is left in `_includes/icon.html` (harmless, reusable).
+
+### Task 2 — New "Sports" multi-sport history panel
+- New **Sports** card (position 2) opens with the **same zoom-from-origin + dim/blur** interaction as the others (`assets/js/passions.js` untouched).
+- I refactored the panel overlay in `passions.html` so each panel's body comes from `_includes/passions/<id>.html`, with `_includes/passions/generic.html` as the fallback. New athletic/sky-blue theme, distinct from the orange basketball page.
+- **Easy to edit:** add/remove/rename sports by editing the `sports:` list under the `sports` entry in `_data/passions.yml` — no markup changes. Scaffolded 4 examples (Soccer / Volleyball / Badminton / Track & Field).
+- Added a `trophy` icon to `_includes/icon.html`.
+
+### Task 3 — Music + Gaming panels
+- Both upgraded from generic placeholders to bespoke panels (still lightweight), opened with the same zoom interaction.
+- **Music** (`_includes/passions/music.html`): intro, "Studio" chips (DAW/gear/genres), a **featured-track block** that renders an `<iframe>` when `embed:` is set (else an animated, reduced-motion-aware waveform placeholder), and a "Currently working on" note. Violet theme.
+- **Gaming** (`_includes/passions/gaming.html`): League-of-Legends rank/identity grid (IGN / peak rank / main role / main champ), an op.gg link when `opgg:` is set (else a hint), a "Main champ" note, and content/community link chips. Emerald theme.
+
+### New / changed files
+- **Changed:** `_data/passions.yml`, `passions.html`, `_includes/icon.html`, `assets/css/main.scss`.
+- **New:** `_includes/passions/generic.html`, `_includes/passions/sports.html`, `_includes/passions/music.html`, `_includes/passions/gaming.html`.
+- **No new routes** — Sports/Music/Gaming are in-page panels on `/passions/` (not separate URLs), matching the existing pattern.
+
+### 🔧 TODO(Kevin) — what to fill in (search the repo for `TODO(Kevin)`)
+All in `_data/passions.yml` unless noted:
+- **Sports:** the `intro`, and for each sport the real `name` / `years` / `level` / `position` / `memory` (optional `image:` for a photo). Add or delete list items freely.
+- **Music:** `intro`, `daw`, `gear`, `genres`, the `current` line, and an `embed:` URL (SoundCloud/Spotify/YouTube iframe src) to turn the waveform placeholder into a live player.
+- **Gaming:** `intro`, `ign`, `peak_rank`, `role`, `main_champ`, `champ_note`, your `opgg:` profile URL, and the `links[].url`s (YouTube/TikTok/Discord) — empty ones show as TODO chips.
+
+### Notes
+- Also did some earlier same-session cleanup (separate commits): removed the empty Projects feature, added a "View Passions" hero button, made the nav **Experience-first**, and reused the resume's scroll-fade effect on the Experience back button.
+- Harmless local-only stale file: `_site/assets/css/style.css` (leftover from an old `style.scss` → `main.scss` rename). Nothing links it and a fresh GitHub Pages build won't produce it. The live stylesheet is `assets/css/main.css`.
+- Still **nothing pushed** — all commits are local on `main`. Live site is unchanged until you push.
