@@ -92,7 +92,50 @@
         - title: "Stay"
           collab: "Lyrics by Alex"
           sample: "Samples Imogen Heap"
-          file: ""        # e.g. /assets/audio/stay.mp3
+          file: /assets/audio/stay.mp3   # full song (original)
+          lyrics: |
+            baby stay
+            i'm really missing your face
+            i know im far away
+            but please just hear me say
+
+            i'm sorry that
+            it had to be this way
+            but baby i love you
+            so please don't go away
+
+            girl its been months ive seen you and i really hate this
+            it hurts me everyday i wish that i was heartless
+            we had each other now we live in different places
+            i really wanna quit this life i'm out here chasin'
+
+            i don't wanna sleep tonight
+            with that look in your eyes
+            having you in my arms
+            makes it feel like time stopped tickin' by
+
+            i really hate when we fight
+            just wanna told you tight
+            the smell of your per-fume makes it harder to say goodbye
+
+            baby i
+            i'm sorry that i lied
+            i know i made you cry from times for me
+
+            i know i'm out of time
+            to make everything right
+            but please just give me one more chance
+            'fore you leave
+
+            baby stay
+            i'm really missing your face
+            i know im far away
+            but please just hear me say
+
+            i'm sorry that
+            it had to be this way
+            but baby i love you
+            so please don't go away
     - name: "Electronic Dance Music"
       tracks:
         - title: "Neverless"

@@ -35,6 +35,12 @@
     <div>
       <h4 class="genre__name">{{ sec.name }}</h4>
     </div>
+    {%- for t in sec.tracks -%}{%- if t.lyrics and t.lyrics != '' -%}
+    <button type="button" class="lyrics-btn" data-lyrics-open="{{ t.title | slugify }}" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="17" x2="18" y2="17"/></svg>
+      Lyrics
+    </button>
+    {%- endif -%}{%- endfor -%}
   </div>
   <div class="genre__tracks">
     {%- for t in sec.tracks -%}{% include passions/track.html t=t %}{%- endfor -%}
@@ -79,3 +85,27 @@
   </figure>
   {%- endfor -%}
 </div>
+
+{%- comment -%}
+  Lyrics popups. Rendered here but relocated to <body> by lyrics.js so the
+  fixed, full-screen overlay isn't trapped inside the transformed panel.
+{%- endcomment -%}
+{%- for sec in p.sections -%}{%- for t in sec.tracks -%}{%- if t.lyrics and t.lyrics != '' -%}
+<div class="lyrics-overlay" id="lyrics-{{ t.title | slugify }}" data-lyrics-overlay hidden>
+  <div class="lyrics-scrim" data-lyrics-close></div>
+  <div class="lyrics-modal" role="dialog" aria-modal="true" aria-label="Lyrics for {{ t.title }}">
+    <div class="lyrics-modal__head">
+      <button type="button" class="lyrics-back" data-lyrics-close>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        Back
+      </button>
+      <span class="lyrics-modal__title">{{ t.title }}</span>
+    </div>
+    <div class="lyrics-modal__scroll" data-lyrics-scroll>
+      <div class="lyrics-modal__inner" data-lyrics-inner>
+        <div class="lyrics-text">{{ t.lyrics | strip | newline_to_br }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}{%- endfor -%}{%- endfor -%}
