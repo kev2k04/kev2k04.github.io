@@ -34,6 +34,12 @@
       <a href="{{ '/experience/' | relative_url }}">Experience</a>
       <a href="{{ '/passions/' | relative_url }}">Passions</a>
       <a href="{{ '/#contact' | relative_url }}">Contact</a>
+      {%- comment -%}
+        Forward-compat slot for the future "Ask Kevin" agent page. When the
+        /ask/ route exists, uncomment the link below — it inherits all nav
+        styling (active state, mobile collapse) with no extra work.
+        <a href="{{ '/ask/' | relative_url }}">Ask Kevin</a>
+      {%- endcomment -%}
     </nav>
   </div>
 </header>

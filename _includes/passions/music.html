@@ -63,12 +63,16 @@
 <div class="albums">
   {%- for a in p.albums -%}
   <figure class="album">
+    {%- if a.art and a.art != '' -%}
+    <img class="album__art" src="{{ a.art | relative_url }}" alt="{{ a.title }} album cover by {{ a.artist }}" loading="lazy" />
+    {%- else -%}
     <div class="album__art" role="img" aria-label="Album artwork placeholder for {{ a.title }}">
       <span class="album__art-label">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
         TODO(Kevin): album art
       </span>
     </div>
+    {%- endif -%}
     <figcaption class="album__caption">
       <span class="album__title">{{ a.title }}</span>
       <span class="album__artist">{{ a.artist }}</span>

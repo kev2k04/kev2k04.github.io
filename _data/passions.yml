@@ -1,9 +1,9 @@
 # ---------------------------------------------------------------------------
 # Passions & Interests cards. Render order below = display order:
 #   1) Basketball Mens League — kind: link  -> /basketball/ (live data page)
-#   2) Sports                 — kind: panel (multi-sport history; see _includes/passions/sports.html)
-#   3) Music                  — kind: panel (music production)
-#   4) Gaming                 — kind: panel (League of Legends)
+#   2) Music                  — kind: panel (music production)
+#   3) Gaming                 — kind: panel (League of Legends)
+#   4) Sports                 — kind: panel (multi-sport history; see _includes/passions/sports.html)
 #
 #   - "kind: panel" cards open an in-page zoom panel. Panels with a bespoke
 #     layout (sports/music/gaming) render via _includes/passions/<id>.html;
@@ -26,42 +26,6 @@
   cta: Step onto the court
   accent: "249, 115, 22"      # basketball orange
   href: /basketball/
-
-# Multi-sport history. Opens the zoom panel; each list item below renders as
-# one stat-line section via _includes/passions/sports.html. Add / remove /
-# rename sports by editing the `sports:` list — order here = display order.
-- id: sports
-  kind: panel
-  title: Sports
-  icon: trophy
-  tagline: A lifetime of teams, positions, and box scores.
-  accent: "56, 189, 248"      # sky blue — distinct from basketball orange
-  intro: >-
-    TODO(Kevin): A line or two about growing up playing sports — what they
-    taught you, the teams that meant the most, and how competing shaped you.
-  sports:
-    # Each section: name + years/level + position/role + a standout memory.
-    # Optional: add `image: /assets/images/<file>` to show a photo.
-    - name: "Soccer"                 # TODO(Kevin): your real sport
-      years: "TODO(Kevin): 2016–2020"
-      level: "TODO(Kevin): High school varsity"
-      position: "TODO(Kevin): Centre-back"
-      memory: "TODO(Kevin): A standout memory, achievement, or stat — a line or two."
-    - name: "Volleyball"             # TODO(Kevin)
-      years: "TODO(Kevin): years played"
-      level: "TODO(Kevin): club / school / intramural"
-      position: "TODO(Kevin): position / role"
-      memory: "TODO(Kevin): a standout memory or result."
-    - name: "Badminton"             # TODO(Kevin)
-      years: "TODO(Kevin): years played"
-      level: "TODO(Kevin): level"
-      position: "TODO(Kevin): singles / doubles"
-      memory: "TODO(Kevin): a standout memory or result."
-    - name: "Track & Field"          # TODO(Kevin)
-      years: "TODO(Kevin): years played"
-      level: "TODO(Kevin): level"
-      position: "TODO(Kevin): event(s)"
-      memory: "TODO(Kevin): a PR, medal, or memory."
 
 # Music production panel — rendered by _includes/passions/music.html.
 - id: music
@@ -163,17 +127,20 @@
           file: /assets/audio/neverless-cinematic.mp3   # 1:00 preview (0:00–1:00, 2s fades)
         - title: "Exodia"
           file: /assets/audio/exodia.mp3   # 35s preview (0:00–0:35, 2s fades)
-  # Favourite albums — square artwork placeholders. Add `art:` later if you
-  # want to wire real images (currently a TODO upload placeholder each).
+  # Favourite albums — square artwork. `art:` points at a square cover image.
   albums:
     - title: "Hypochondriac"
       artist: "Brakence"
+      art: /assets/images/passions/hypochondriac.jpg
     - title: "Unmusique"
       artist: "Lucy Bedroque"
+      art: /assets/images/passions/unmusique.jpeg
     - title: "Bloodluxe"
       artist: "Slayr"
+      art: /assets/images/passions/bloodluxe.jpeg
     - title: "Boy"
       artist: "2hollis"
+      art: /assets/images/passions/boy.jpg
 
 # Gaming panel (League of Legends) — rendered by _includes/passions/gaming.html.
 - id: gaming
@@ -181,7 +148,7 @@
   title: Gaming
   icon: gamepad
   tagline: Climbing the ladder in League of Legends.
-  accent: "52, 211, 153"      # emerald
+  accent: "244, 63, 94"       # rose red
   intro: >-
     TODO(Kevin): A short intro to your gaming — mainly League of Legends, how
     competitively you play, and what keeps you queueing up.
@@ -203,3 +170,39 @@
       url: ""
     - name: "Discord"
       url: ""
+
+# Multi-sport history. Opens the zoom panel; each list item below renders as
+# one stat-line section via _includes/passions/sports.html. Add / remove /
+# rename sports by editing the `sports:` list — order here = display order.
+- id: sports
+  kind: panel
+  title: Sports
+  icon: trophy
+  tagline: A lifetime of teams, positions, and box scores.
+  accent: "45, 212, 191"      # teal — distinct from the page's azure accent
+  intro: >-
+    TODO(Kevin): A line or two about growing up playing sports — what they
+    taught you, the teams that meant the most, and how competing shaped you.
+  sports:
+    # Each section: name + years/level + position/role + a standout memory.
+    # Optional: add `image: /assets/images/<file>` to show a photo.
+    - name: "Soccer"                 # TODO(Kevin): your real sport
+      years: "TODO(Kevin): 2016–2020"
+      level: "TODO(Kevin): High school varsity"
+      position: "TODO(Kevin): Centre-back"
+      memory: "TODO(Kevin): A standout memory, achievement, or stat — a line or two."
+    - name: "Volleyball"             # TODO(Kevin)
+      years: "TODO(Kevin): years played"
+      level: "TODO(Kevin): club / school / intramural"
+      position: "TODO(Kevin): position / role"
+      memory: "TODO(Kevin): a standout memory or result."
+    - name: "Badminton"             # TODO(Kevin)
+      years: "TODO(Kevin): years played"
+      level: "TODO(Kevin): level"
+      position: "TODO(Kevin): singles / doubles"
+      memory: "TODO(Kevin): a standout memory or result."
+    - name: "Track & Field"          # TODO(Kevin)
+      years: "TODO(Kevin): years played"
+      level: "TODO(Kevin): level"
+      position: "TODO(Kevin): event(s)"
+      memory: "TODO(Kevin): a PR, medal, or memory."
