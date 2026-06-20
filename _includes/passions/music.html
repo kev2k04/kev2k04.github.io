@@ -46,13 +46,20 @@
           {%- if t.sample and t.sample != '' -%}<span class="track__credit track__credit--sample">{{ t.sample }}</span>{%- endif -%}
         </div>
         {%- if t.file and t.file != '' -%}
-        <audio class="track__audio" controls preload="none">
-          <source src="{{ t.file | relative_url }}" type="audio/mpeg">
-          Your browser doesn't support inline audio — <a href="{{ t.file | relative_url }}">download the track</a>.
-        </audio>
+        <div class="aplayer" data-aplayer>
+          <audio preload="metadata">
+            <source src="{{ t.file | relative_url }}" type="audio/mpeg">
+          </audio>
+          <button type="button" class="aplayer__btn play-orb" aria-label="Play {{ t.title }}">
+            <svg class="aplayer__icon aplayer__icon--play" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="aplayer__icon aplayer__icon--pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+          </button>
+          <div class="aplayer__bar"><div class="aplayer__progress"></div></div>
+          <span class="aplayer__time">0:00</span>
+        </div>
         {%- else -%}
         <div class="track__player" role="img" aria-label="Audio placeholder for {{ t.title }}">
-          <span class="track__play" aria-hidden="true">
+          <span class="track__play play-orb" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           </span>
           <span class="track__wave" aria-hidden="true">

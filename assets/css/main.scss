@@ -1374,26 +1374,113 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
 
 /* Faux player: play button + waveform bars (real <audio> replaces it once a
    track `file:` is set). */
-.track__player {
-  display: flex; align-items: center; gap: 0.6rem;
-  padding: 0.5rem 0.6rem;
-  border: 1px solid rgba(var(--card-accent), 0.25);
-  border-radius: 9px;
-  background: rgba(var(--card-accent), 0.06);
-}
-.track__play {
+/* The gradient "play orb" — violet melting into deep indigo, with a glossy
+   top-left highlight and a soft accent glow. Shared by the live player and the
+   placeholder buttons so every track has the same beautiful control. */
+.play-orb {
   flex: none;
-  width: 30px; height: 30px;
-  display: grid; place-items: center;
+  display: grid;
+  place-items: center;
+  border: none;
   border-radius: 50%;
   color: #fff;
-  background: rgb(var(--card-accent));
+  background:
+    radial-gradient(125% 125% at 30% 22%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 46%),
+    linear-gradient(150deg, rgb(var(--card-accent)) 0%, #5b3fb3 46%, #221a4d 100%);
+  box-shadow:
+    0 8px 20px -8px rgba(var(--card-accent), 0.75),
+    0 2px 6px -2px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.35);
 }
-.track__play svg { margin-left: 1px; }
+.play-orb svg { position: relative; }
+
+/* Placeholder (no MP3 yet): orb + waveform bars */
+.track__player {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid rgba(var(--card-accent), 0.25);
+  border-radius: 11px;
+  background: rgba(var(--card-accent), 0.06);
+}
+.track__play { width: 34px; height: 34px; }
+.track__play svg { margin-left: 2px; }
 .track__wave { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; height: 30px; }
 .track__wave span { flex: 1 1 0; min-width: 2px; border-radius: 1px; background: rgb(var(--card-accent)); opacity: 0.5; }
 .track__todo { margin: 0.35rem 0 0; font-size: 0.7rem; line-height: 1.4; color: var(--muted); }
-.track__audio { width: 100%; height: 40px; border-radius: 8px; }
+
+/* Live custom player: orb + seekable progress + time */
+.aplayer {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(var(--card-accent), 0.28);
+  border-radius: 12px;
+  background:
+    linear-gradient(120deg, rgba(var(--card-accent), 0.1), rgba(var(--card-accent), 0.03));
+}
+.aplayer__btn {
+  width: 44px; height: 44px;
+  cursor: pointer;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.aplayer__btn:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow:
+    0 13px 26px -8px rgba(var(--card-accent), 0.9),
+    0 2px 6px -2px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.35);
+}
+.aplayer__btn:active { transform: translateY(0) scale(0.97); }
+.aplayer__btn:focus-visible { outline: 2px solid rgb(var(--card-accent)); outline-offset: 3px; }
+.aplayer__icon--play { margin-left: 2px; }
+.aplayer__icon--pause { display: none; }
+.aplayer.is-playing .aplayer__icon--play { display: none; }
+.aplayer.is-playing .aplayer__icon--pause { display: block; }
+
+.aplayer__bar {
+  flex: 1 1 auto;
+  position: relative;
+  height: 6px;
+  border-radius: 100px;
+  background: rgba(var(--card-accent), 0.2);
+  cursor: pointer;
+  overflow: hidden;
+}
+.aplayer__progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #5b3fb3, rgb(var(--card-accent)), #c4b5fd);
+}
+.aplayer__time {
+  flex: none;
+  min-width: 3ch;
+  text-align: right;
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* Gentle glowing pulse while a track plays. */
+.aplayer.is-playing .aplayer__btn { animation: orb-pulse 2.4s ease-in-out infinite; }
+@keyframes orb-pulse {
+  0%, 100% {
+    box-shadow:
+      0 8px 20px -8px rgba(var(--card-accent), 0.75),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -2px 6px rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 11px 28px -6px rgba(var(--card-accent), 1),
+      0 0 0 5px rgba(var(--card-accent), 0.13),
+      inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(0, 0, 0, 0.35);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aplayer.is-playing .aplayer__btn { animation: none; }
+}
 
 /* Favourite Albums — square artwork placeholders */
 .albums {
