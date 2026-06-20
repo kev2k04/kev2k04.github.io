@@ -1267,21 +1267,19 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
 /* ---- Music panel: Home Studio photo, one card per style with waveform
    track placeholders, and a Favourite Albums grid. ---- */
 
-/* Home Studio — single wide (16:9) photo placeholder */
+/* Home Studio — single wide (16:9) photo */
 .studio-photo {
   aspect-ratio: 16 / 9;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 1rem;
+  overflow: hidden;
   margin-bottom: 0.3rem;
-  color: var(--muted);
-  border: 1.5px dashed rgba(var(--card-accent), 0.4);
   border-radius: 12px;
-  background:
-    repeating-linear-gradient(-45deg,
-      rgba(var(--card-accent), 0.05) 0, rgba(var(--card-accent), 0.05) 10px,
-      transparent 10px, transparent 20px);
+}
+.studio-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 .studio-photo__label {
   display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem;
@@ -1329,7 +1327,10 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   border-color: rgba(var(--card-accent), 0.45);
   background: linear-gradient(125deg, rgba(var(--card-accent), 0.15), rgba(var(--card-accent), 0.04));
 }
-.genre--featured .genre__head { margin-bottom: 0.3rem; }
+.genre--featured .genre__head { margin-bottom: 0.3rem; gap: 0.8rem; }
+/* Title fills the row (pushing the Lyrics button right) and wraps instead of
+   shoving the button off the edge on narrow screens. */
+.genre--featured .genre__head > div { flex: 1 1 auto; min-width: 0; }
 .genre--featured .genre__name { font-size: clamp(1.35rem, 2.4vw, 1.6rem); }
 .genre__badge--star { color: rgb(var(--card-accent)); }
 
@@ -1542,8 +1543,8 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
 
 /* ---- Lyrics: button on the featured card + centered pop-up sheet ---- */
 .lyrics-btn {
-  margin-left: auto;
-  align-self: flex-start;
+  flex: none;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
