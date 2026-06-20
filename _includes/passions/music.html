@@ -1,12 +1,21 @@
 {%- comment -%}
   Music production panel body. Expects include.p with:
-  intro, daw, gear, current, and `sections` (each: name, optional label,
-  optional blurb, and `tracks` — each track has a title + `file` mp3 path).
-  A track with a non-empty `file` renders a native <audio> player; otherwise
-  it shows an upload placeholder.
+  intro, daw, gear, `sections` (each: name, optional label, optional blurb,
+  and `tracks`), and `albums`.
+  Each track has a title, an optional `inspired` credit OR `collab`/`sample`
+  credits, and a `file` mp3 path. A non-empty `file` renders a native <audio>
+  player; otherwise a waveform placeholder shows with a TODO note.
 {%- endcomment -%}
 {%- assign p = include.p -%}
 <p class="pass-panel__blurb">{{ p.intro }}</p>
+
+<h3 class="pass-panel__subhead">Home Studio</h3>
+<div class="studio-photo" role="img" aria-label="Home studio photo placeholder">
+  <span class="studio-photo__label">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+    TODO(Kevin): upload home studio photo here
+  </span>
+</div>
 
 <h3 class="pass-panel__subhead">Studio</h3>
 <ul class="pass-chips">
@@ -14,7 +23,7 @@
   {%- if p.gear and p.gear != '' -%}<li class="pass-chip">{{ p.gear }}</li>{%- endif -%}
 </ul>
 
-<h3 class="pass-panel__subhead">My sound</h3>
+<h3 class="pass-panel__subhead">Tracks I've Produced</h3>
 <div class="music-genres">
   {%- for sec in p.sections -%}
   <section class="genre">
@@ -30,24 +39,27 @@
     <div class="genre__tracks">
       {%- for t in sec.tracks -%}
       <div class="track">
-        <span class="track__title">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-          {{ t.title }}
-        </span>
+        <div class="track__info">
+          <span class="track__title">{{ t.title }}</span>
+          {%- if t.inspired and t.inspired != '' -%}<span class="track__credit">{{ t.inspired }}</span>{%- endif -%}
+          {%- if t.collab and t.collab != '' -%}<span class="track__credit track__credit--collab">{{ t.collab }}</span>{%- endif -%}
+          {%- if t.sample and t.sample != '' -%}<span class="track__credit track__credit--sample">{{ t.sample }}</span>{%- endif -%}
+        </div>
         {%- if t.file and t.file != '' -%}
         <audio class="track__audio" controls preload="none">
           <source src="{{ t.file | relative_url }}" type="audio/mpeg">
           Your browser doesn't support inline audio — <a href="{{ t.file | relative_url }}">download the track</a>.
         </audio>
         {%- else -%}
-        <div class="track__ph" role="img" aria-label="MP3 upload placeholder for {{ sec.name }}">
-          <span class="track__ph-btn" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <div class="track__player" role="img" aria-label="Audio placeholder for {{ t.title }}">
+          <span class="track__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           </span>
-          <span class="track__ph-text">
-            TODO(Kevin): drop your {{ sec.name }} MP3 in <strong>assets/audio/</strong> and set <strong>file:</strong> in _data/passions.yml
+          <span class="track__wave" aria-hidden="true">
+            {%- for i in (1..44) -%}<span style="height: {% cycle 'wf': '38%','64%','52%','86%','30%','58%','78%','44%','70%','34%','82%','48%','62%','40%' %}"></span>{%- endfor -%}
           </span>
         </div>
+        <p class="track__todo">TODO(Kevin): swap in the real MP3 — drop it in assets/audio/ and set file: in _data/passions.yml</p>
         {%- endif -%}
       </div>
       {%- endfor -%}
@@ -56,5 +68,20 @@
   {%- endfor -%}
 </div>
 
-<h3 class="pass-panel__subhead">Currently working on</h3>
-<p class="pass-note">{{ p.current }}</p>
+<h3 class="pass-panel__subhead">Favourite Albums</h3>
+<div class="albums">
+  {%- for a in p.albums -%}
+  <figure class="album">
+    <div class="album__art" role="img" aria-label="Album artwork placeholder for {{ a.title }}">
+      <span class="album__art-label">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        TODO(Kevin): album art
+      </span>
+    </div>
+    <figcaption class="album__caption">
+      <span class="album__title">{{ a.title }}</span>
+      <span class="album__artist">{{ a.artist }}</span>
+    </figcaption>
+  </figure>
+  {%- endfor -%}
+</div>

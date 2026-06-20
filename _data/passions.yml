@@ -71,34 +71,56 @@
   tagline: Producing tracks, one session at a time.
   accent: "168, 85, 247"      # violet
   intro: >-
-    TODO(Kevin): A short intro to your music production — when you started,
-    what pulls you to it, and the kind of sound you're chasing.
+    I've always had a love for music, as I felt like it was a form of
+    communication of feelings that could transcend language. However, I had to
+    pay my dues of being an Asian kid, as with strict Asian parents growing up,
+    I was forced to play the piano. After finishing RCM 10, I met one of my best
+    friends to date, Alex, who introduced me to the DAW I use, Fruity Loops
+    (FL Studio). My music taste has changed over time, from hip-hop, to
+    digital-pop, to Electronic Dance Music, and so has my production style.
   daw: "TODO(Kevin): DAW — e.g. FL Studio / Ableton Live"
   gear: "TODO(Kevin): key gear — MIDI keyboard, interface, monitors"
-  # The three styles I produce. Each section gets an inline MP3 player.
-  # To add a track: drop the .mp3 into `assets/audio/` and set its `file:`
-  # to e.g. /assets/audio/my-track.mp3 — leave `file:` blank for an upload
-  # placeholder. You can list more than one track per section.
+  # Styles I produce. Each track has a title, a credit line (inspired-by, or
+  # collab/sample), and an MP3. To play a track: drop the .mp3 into
+  # `assets/audio/` and set its `file:` (e.g. /assets/audio/neverless.mp3);
+  # leave `file:` blank for a waveform upload placeholder.
   sections:
-    - name: "Pop"
-      blurb: "TODO(Kevin): a line about your pop sound / influences."
+    - name: "Hip-Hop"
+      blurb: "TODO(Kevin): a line about your hip-hop sound / influences."
       tracks:
-        - title: "TODO(Kevin): Pop track title"
-          file: ""        # e.g. /assets/audio/pop.mp3
-    - name: "EDM"
-      label: "Electronic Dance Music"
+        - title: "Stay"
+          collab: "Lyrics by Alex"
+          sample: "Samples Imogen Heap"
+          file: ""        # e.g. /assets/audio/stay.mp3
+    - name: "Electronic Dance Music"
       blurb: "TODO(Kevin): a line about your EDM — subgenres, energy, sets."
       tracks:
-        - title: "TODO(Kevin): EDM track title"
-          file: ""        # e.g. /assets/audio/edm.mp3
-    - name: "Experimental Rap"
-      blurb: "TODO(Kevin): a line about your experimental rap direction."
+        - title: "Neverless"
+          inspired: "Inspired by Tonser, 2hollis, and Nate Sib"
+          file: ""        # e.g. /assets/audio/neverless.mp3
+        - title: "Flashing Lights"
+          inspired: "Inspired by Tonser, 2hollis, and Nate Sib"
+          file: ""        # e.g. /assets/audio/flashing-lights.mp3
+    - name: "Experimental Hip-Hop"
+      blurb: "TODO(Kevin): a line about your experimental hip-hop direction."
       tracks:
-        - title: "TODO(Kevin): Experimental rap track title"
-          file: ""        # e.g. /assets/audio/experimental-rap.mp3
-  current: >-
-    TODO(Kevin): What you're working on right now — a track, an EP, a remix,
-    or a sound you're trying to nail.
+        - title: "Exotic"
+          inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
+          file: ""        # e.g. /assets/audio/exotic.mp3
+        - title: "Pink Noise"
+          inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
+          file: ""        # e.g. /assets/audio/pink-noise.mp3
+  # Favourite albums — square artwork placeholders. Add `art:` later if you
+  # want to wire real images (currently a TODO upload placeholder each).
+  albums:
+    - title: "Hypochondriac"
+      artist: "Brakence"
+    - title: "Unmusique"
+      artist: "Lucy Bedroque"
+    - title: "Bloodluxe"
+      artist: "Slayr"
+    - title: "Boy"
+      artist: "2hollis"
 
 # Gaming panel (League of Legends) — rendered by _includes/passions/gaming.html.
 - id: gaming

@@ -1264,8 +1264,31 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   border-radius: 0 8px 8px 0;
 }
 
-/* ---- Music panel: one card per style (Pop / EDM / Experimental Rap),
-   each with an inline MP3 player or an upload placeholder. ---- */
+/* ---- Music panel: Home Studio photo, one card per style with waveform
+   track placeholders, and a Favourite Albums grid. ---- */
+
+/* Home Studio — single wide (16:9) photo placeholder */
+.studio-photo {
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 0.3rem;
+  color: var(--muted);
+  border: 1.5px dashed rgba(var(--card-accent), 0.4);
+  border-radius: 12px;
+  background:
+    repeating-linear-gradient(-45deg,
+      rgba(var(--card-accent), 0.05) 0, rgba(var(--card-accent), 0.05) 10px,
+      transparent 10px, transparent 20px);
+}
+.studio-photo__label {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  font-size: 0.86rem; letter-spacing: 0.01em;
+}
+
+/* Style cards */
 .music-genres {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1298,36 +1321,66 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
 .genre__label { font-size: 0.74rem; color: var(--muted); }
 .genre__blurb { margin: 0; color: var(--ink-soft); font-size: 0.9rem; line-height: 1.55; }
 
-/* Tracks pinned to the bottom so players line up across the cards. */
-.genre__tracks { margin-top: auto; display: flex; flex-direction: column; gap: 0.7rem; }
-.track__title {
-  display: flex; align-items: center; gap: 0.4rem;
-  font-size: 0.85rem; font-weight: 600;
-  color: var(--ink-soft);
-  margin-bottom: 0.45rem;
+.genre__tracks { margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.95rem; }
+.track__info { display: flex; flex-direction: column; gap: 0.1rem; margin-bottom: 0.45rem; }
+.track__title { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+.track__credit { font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+.track__credit--collab,
+.track__credit--sample { color: rgb(var(--card-accent)); font-weight: 500; }
+
+/* Faux player: play button + waveform bars (real <audio> replaces it once a
+   track `file:` is set). */
+.track__player {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid rgba(var(--card-accent), 0.25);
+  border-radius: 9px;
+  background: rgba(var(--card-accent), 0.06);
 }
-.track__title svg { color: rgb(var(--card-accent)); flex: none; }
+.track__play {
+  flex: none;
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: rgb(var(--card-accent));
+}
+.track__play svg { margin-left: 1px; }
+.track__wave { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 2px; height: 30px; }
+.track__wave span { flex: 1 1 0; min-width: 2px; border-radius: 1px; background: rgb(var(--card-accent)); opacity: 0.5; }
+.track__todo { margin: 0.35rem 0 0; font-size: 0.7rem; line-height: 1.4; color: var(--muted); }
 .track__audio { width: 100%; height: 40px; border-radius: 8px; }
-.track__ph {
-  display: flex; align-items: center; gap: 0.7rem;
-  padding: 0.65rem 0.8rem;
+
+/* Favourite Albums — square artwork placeholders */
+.albums {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.album { margin: 0; }
+.album__art {
+  aspect-ratio: 1 / 1;
+  display: grid; place-items: center;
+  text-align: center;
+  padding: 0.6rem;
+  color: var(--muted);
   border: 1.5px dashed rgba(var(--card-accent), 0.4);
-  border-radius: 8px;
+  border-radius: 10px;
   background:
     repeating-linear-gradient(-45deg,
       rgba(var(--card-accent), 0.05) 0, rgba(var(--card-accent), 0.05) 10px,
       transparent 10px, transparent 20px);
 }
-.track__ph-btn {
-  flex: none;
-  width: 34px; height: 34px;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  color: rgb(var(--card-accent));
-  background: rgba(var(--card-accent), 0.14);
-  border: 1px solid rgba(var(--card-accent), 0.3);
+.album__art-label {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.35rem;
+  font-size: 0.68rem; line-height: 1.35;
 }
-.track__ph-text { font-size: 0.77rem; line-height: 1.45; color: var(--muted); }
+.album__caption { display: flex; flex-direction: column; margin-top: 0.5rem; }
+.album__title { font-weight: 600; font-size: 0.85rem; color: var(--ink); }
+.album__artist { font-size: 0.78rem; color: var(--muted); }
+@media (max-width: 560px) {
+  .albums { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* ---- Gaming panel: rank/identity grid + profile link ---- */
 .gg-id {
