@@ -1329,36 +1329,40 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   align-self: flex-start;
   font-weight: 700;
   font-size: 0.9rem;
-  /* Iridescent purple sweep: a wide, bright band of violet → pink → white →
-     light-violet glides across an --ink base. Tiles (default repeat) so the
-     text is always fully painted; --ink at both ends hides the seam. The
-     accent drop-shadow gives it a soft glow. */
+  /* The letters are always filled solid with --ink (a clipped background-color),
+     and a single iridescent glint of violet → pink → white sweeps across, then
+     rests. The accent glow pulses only while the glint is passing. */
+  color: transparent;
+  background-color: var(--ink);
   background-image: linear-gradient(
     100deg,
-    var(--ink) 0%, var(--ink) 28%,
-    rgb(var(--card-accent)) 38%,
-    #e9d5ff 45%,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(var(--card-accent)) 32%,
+    #f5d0fe 44%,
     #ffffff 50%,
-    #f5d0fe 55%,
-    rgb(var(--card-accent)) 62%,
-    var(--ink) 72%, var(--ink) 100%
+    #f5d0fe 56%,
+    rgb(var(--card-accent)) 68%,
+    rgba(255, 255, 255, 0) 100%
   );
-  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  background-size: 55% 100%;
+  background-position: -120% 0;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
-  filter: drop-shadow(0 0 5px rgba(var(--card-accent), 0.5));
-  animation: track-shimmer 2.4s linear infinite;
+  animation: track-shimmer 5.5s ease-in-out infinite;
 }
 @keyframes track-shimmer {
-  from { background-position: 200% 0; }
-  to   { background-position: 0% 0; }
+  0%   { background-position: -120% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
+  7%   { filter: drop-shadow(0 0 7px rgba(var(--card-accent), 0.6)); }
+  20%  { background-position: 220% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
+  100% { background-position: 220% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .track__title {
     animation: none;
     background-image: none;
+    background-color: transparent;
     -webkit-text-fill-color: var(--ink);
     color: var(--ink);
     filter: none;
