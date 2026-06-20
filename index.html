@@ -5,36 +5,96 @@ layout: default
 {%- assign p = site.data.profile -%}
 
 <!-- ===================== HERO ===================== -->
-<section class="hero">
+{%- comment -%}
+  LAYOUT CHOICE — "flows into the next section" over a locked full-viewport hero.
+  A 100vh centred hero is the template default (trivial to build, generic). A hero
+  sized to its content that deliberately FLOWS — an asymmetric masthead grid, an
+  identity "spec sheet", and the stats band peeking below a scroll cue — is harder
+  to tune by hand and reads more editorial/premium, while improving usability: it
+  invites the scroll instead of walling off a screen. Type wins; the background is
+  a masked hairline blueprint grid, never a glow.
+
+  Identity facets are inlined here for review; they can move to profile.yml later.
+{%- endcomment -%}
+<section class="hero" id="top">
+  <div class="hero__bg" aria-hidden="true"></div>
+
   <div class="container hero__inner">
-    <div class="hero__text">
-      <p class="hero__eyebrow">{{ p.role }}</p>
-      <h1 class="hero__title">{{ p.name }}</h1>
+    <header class="hero__lead">
+      <p class="hero__eyebrow">
+        <span class="hero__pin">{{ p.location }}</span>
+        <span class="hero__dot" aria-hidden="true"></span>
+        <span>{{ p.role }}</span>
+      </p>
+
+      <h1 class="hero__title" aria-label="{{ p.name }}">
+        {%- assign nameparts = p.name | split: " " -%}
+        {%- for part in nameparts -%}
+        <span class="hero__line"><span class="hero__line-in">{{ part }}</span></span>
+        {%- endfor -%}
+      </h1>
+
       <p class="hero__lede">{{ p.headline }}</p>
 
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="{{ '/experience/' | relative_url }}">
-          View Experience {% include icon.html name="arrow" %}
-        </a>
-        <a class="btn btn--ghost" href="{{ '/passions/' | relative_url }}">
-          View Passions {% include icon.html name="arrow" %}
-        </a>
-      </div>
-
-      <div class="hero__social">
-        {%- for social in p.socials -%}
-          <a href="{{ social.url }}" class="social-link" aria-label="{{ social.name }}"
-             {% unless social.icon == 'email' %}target="_blank" rel="noopener noreferrer"{% endunless %}>
-            {% include icon.html name=social.icon %}
+      <div class="hero__cta">
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="{{ '/experience/' | relative_url }}">
+            View Experience {% include icon.html name="arrow" %}
           </a>
-        {%- endfor -%}
-      </div>
-    </div>
+          <a class="btn btn--ghost" href="{{ '/passions/' | relative_url }}">
+            View Passions {% include icon.html name="arrow" %}
+          </a>
+        </div>
 
-    <div class="hero__portrait">
-      <img src="{{ '/assets/images/kevin.jpeg' | relative_url }}" alt="{{ p.name }}" />
-    </div>
+        <div class="hero__social">
+          {%- for social in p.socials -%}
+            <a href="{{ social.url }}" class="social-link" aria-label="{{ social.name }}"
+               {% unless social.icon == 'email' %}target="_blank" rel="noopener noreferrer"{% endunless %}>
+              {% include icon.html name=social.icon %}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </header>
+
+    <aside class="hero__aside">
+      <figure class="hero__portrait">
+        <img src="{{ '/assets/images/kevin.jpeg' | relative_url }}" alt="{{ p.name }}" />
+        <figcaption class="hero__portrait-cap">
+          <span>Kevin&nbsp;Liu</span><span>Vancouver</span>
+        </figcaption>
+      </figure>
+    </aside>
+
+    {%- comment -%} Signature: an identity "spec sheet" — the four sides at a glance. {%- endcomment -%}
+    <ul class="hero__facets" aria-label="What I do">
+      <li class="hero__facet">
+        <span class="facet__no">01</span>
+        <span class="facet__k">Finance</span>
+        <span class="facet__v">FP&amp;A · Seaspan</span>
+      </li>
+      <li class="hero__facet">
+        <span class="facet__no">02</span>
+        <span class="facet__k">Build</span>
+        <span class="facet__v">Tools &amp; this site</span>
+      </li>
+      <li class="hero__facet">
+        <span class="facet__no">03</span>
+        <span class="facet__k">Sound</span>
+        <span class="facet__v">Producing tracks</span>
+      </li>
+      <li class="hero__facet">
+        <span class="facet__no">04</span>
+        <span class="facet__k">Game</span>
+        <span class="facet__v">League · Masters</span>
+      </li>
+    </ul>
   </div>
+
+  <a class="hero__scroll" href="#about" aria-label="Scroll to about">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="6 13 12 19 18 13"/></svg>
+  </a>
 </section>
 
 <!-- ===================== STATS ===================== -->

@@ -402,7 +402,7 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 .hero {
   position: relative;
   background: var(--bg);
-  padding: 7.5rem 0 4.5rem;
+  padding: clamp(5rem, 11vh, 8.5rem) 0 clamp(3.2rem, 7vh, 5rem);
   overflow: hidden;
 }
 .hero::after {
@@ -412,68 +412,93 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   height: 1px;
   background: var(--line);
 }
-/* Asymmetric editorial split: copy carries the column, portrait anchors the
-   right edge inside a hairline frame. */
-.hero__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(220px, 28vw, 320px);
-  align-items: center;
-  gap: clamp(2.5rem, 6vw, 5.5rem);
-}
-.hero__text { min-width: 0; }
 
+/* Ambient blueprint grid: hairlines on the page tokens, masked so it dissolves
+   long before it reaches the text. Static (no motion) — type always wins. */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 66px 66px;
+  -webkit-mask-image: radial-gradient(118% 82% at 20% 6%, #000 0%, rgba(0,0,0,0.45) 44%, transparent 72%);
+          mask-image: radial-gradient(118% 82% at 20% 6%, #000 0%, rgba(0,0,0,0.45) 44%, transparent 72%);
+}
+
+/* Masthead grid: name + portrait on top, full-width spec sheet beneath — it
+   bleeds toward the next section so the page flows rather than walling off. */
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(206px, 23vw, 286px);
+  grid-template-areas:
+    "lead  aside"
+    "spec  spec";
+  column-gap: clamp(2rem, 5vw, 4.5rem);
+  row-gap: clamp(2.6rem, 5vw, 3.8rem);
+  align-items: end;
+}
+.hero__lead  { grid-area: lead; min-width: 0; }
+.hero__aside { grid-area: aside; }
+
+/* Eyebrow — a mono status line: place + role */
 .hero__eyebrow {
-  display: block;
-  max-width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
   font-family: var(--font-mono);
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.74rem;
+  letter-spacing: 0.13em;
+  font-size: 0.72rem;
   font-weight: 500;
-  line-height: 1.5;
   color: var(--muted);
-  margin-bottom: 1.6rem;
+  margin: 0 0 1.5rem;
 }
-.hero__eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 26px; height: 1px;
-  vertical-align: middle;
-  margin-right: 0.7rem;
-  background: var(--line-strong);
-}
+.hero__pin { color: var(--ink-soft); }
+.hero__dot { width: 4px; height: 4px; border-radius: 50%; background: var(--line-strong); }
+
+/* Name — editorial masthead, revealed one line at a time */
 .hero__title {
-  color: var(--ink);
-  font-size: clamp(3rem, 7.5vw, 5.5rem);
+  margin: 0 0 1.5rem;
+  font-size: clamp(3.6rem, 11vw, 8rem);
   font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
-  margin: 0 0 1.3rem;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  color: var(--ink);
 }
+.hero__line { display: block; overflow: hidden; }
+.hero__line-in { display: block; }
+
 .hero__lede {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.22rem);
   line-height: 1.55;
   color: var(--ink-soft);
-  max-width: 480px;
-  margin-bottom: 2.2rem;
+  max-width: 42ch;
+  margin: 0 0 2rem;
 }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.4rem; }
-.hero__social { display: flex; gap: 0.7rem; }
+.hero__cta { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.5rem; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.hero__social { display: flex; gap: 0.55rem; }
 
+/* Portrait — hairline frame + mono "filing" caption */
 .hero__portrait {
-  flex: 0 0 auto;
   position: relative;
+  margin: 0;
   width: 100%;
 }
-/* Hairline frame offset to the lower-right -- a quiet edge-highlight signature */
 .hero__portrait::before {
   content: "";
   position: absolute;
-  inset: 16px -16px -16px 16px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
+  inset: 14px -14px calc(100% - 14px) -14px;  /* a hairline corner bracket, top-left */
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line-strong);
   z-index: 0;
 }
 .hero__portrait img {
@@ -485,6 +510,87 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   border-radius: var(--radius);
   border: 1px solid var(--line);
 }
+.hero__portrait-cap {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* SIGNATURE — identity spec sheet: the four sides as a mono readout row */
+.hero__facets {
+  grid-area: spec;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line-strong);
+}
+.hero__facet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.3rem 1.3rem 0;
+  border-left: 1px solid var(--line);
+}
+.hero__facet:first-child { border-left: 0; padding-left: 0; }
+/* A precise accent tick draws across the top rule on hover — the one micro-flourish */
+.hero__facet::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  height: 2px; width: 0;
+  background: var(--accent);
+  transition: width 0.32s var(--ease);
+}
+.hero__facet:first-child::before { left: 0; }
+.hero__facet:hover::before { width: 100%; }
+.facet__no {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  opacity: 0.7;
+}
+.facet__k {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.facet__v {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* Scroll cue — static (no loop); nudges on hover */
+.hero__scroll {
+  position: absolute;
+  right: 1.6rem;
+  bottom: 1.1rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero__scroll:hover { color: var(--ink); }
+.hero__scroll svg { transition: transform 0.2s var(--ease); }
+.hero__scroll:hover svg { transform: translateY(3px); }
 
 .social-link {
   display: inline-grid;
@@ -1382,37 +1488,40 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   align-self: flex-start;
   font-weight: 700;
   font-size: 0.9rem;
-  /* The letters are always filled solid with --ink (a clipped background-color),
-     and a single iridescent glint of violet → pink → white sweeps across, then
-     rests. The accent glow pulses only while the glint is passing. */
+  /* The letters are always filled solid with --ink (a clipped background-color).
+     A prismatic glint sweeps across: a bright white core flanked by cool-blue and
+     warm-pink chromatic fringes inside the violet accent — reads as one flowing
+     holographic light rather than a couple of flat bars. */
   color: transparent;
   background-color: var(--ink);
   background-image: linear-gradient(
     100deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgb(var(--card-accent)) 32%,
-    #f5d0fe 44%,
-    #ffffff 50%,
-    #f5d0fe 56%,
-    rgb(var(--card-accent)) 68%,
-    rgba(255, 255, 255, 0) 100%
+    rgba(255, 255, 255, 0)         30%,
+    rgba(var(--card-accent), 0.45) 36%,
+    #7cc4ff                        42%,   /* cool blue fringe */
+    #e8d4ff                        47%,
+    #ffffff                        50%,   /* bright core */
+    #ffd0ef                        53%,
+    #f5b8ff                        58%,   /* warm pink fringe */
+    rgba(var(--card-accent), 0.45) 64%,
+    rgba(255, 255, 255, 0)         70%
   );
   background-repeat: no-repeat;
-  background-size: 55% 100%;
+  background-size: 62% 100%;
   background-position: -120% 0;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: track-shimmer 5.5s linear infinite;
+  animation: track-shimmer 7s linear infinite;
 }
 @keyframes track-shimmer {
-  /* The glint draws slowly, then yanks across — exponential ease-in (easeInExpo)
-     over the whole sweep, like dramatically pulling a sword. */
+  /* The glint barely creeps for a long, drawn-out draw, then yanks across in a
+     snap — a flatter-than-expo ease-in over the whole sweep (pulling a sword). */
   0%   { background-position: -120% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0));
-         animation-timing-function: cubic-bezier(0.95, 0.05, 0.795, 0.035); }
+         animation-timing-function: cubic-bezier(0.85, 0, 0.95, 0.05); }
   /* Glow blooms only at the fast finish, then snaps off. */
-  26%  { background-position: 220% 0; filter: drop-shadow(0 0 10px rgba(var(--card-accent), 0.75)); }
-  32%  { background-position: 220% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
+  48%  { background-position: 220% 0; filter: drop-shadow(0 0 11px rgba(var(--card-accent), 0.78)); }
+  54%  { background-position: 220% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
   100% { background-position: 220% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2004,18 +2113,35 @@ html[data-mode="light"] .bball-stats[data-state="live"] .bball-stat__value { col
 .site-footer__copy { font-size: 0.82rem; color: var(--footer-soft); margin: 0; }
 
 /* =========================================================================
-   Motion: a gentle entrance for the hero (respects reduced-motion)
+   Hero entrance — staggered, fires ONCE on load and stays (no scroll re-trigger,
+   no looping). `both` holds the from-state through each delay so nothing flashes.
    ========================================================================= */
 @media (prefers-reduced-motion: no-preference) {
-  .hero__eyebrow, .hero__title, .hero__lede, .hero__actions, .hero__social {
-    animation: rise 0.7s var(--ease) both;
-  }
-  .hero__title   { animation-delay: 0.05s; }
-  .hero__lede    { animation-delay: 0.12s; }
-  .hero__actions { animation-delay: 0.18s; }
-  .hero__social  { animation-delay: 0.24s; }
-  .hero__portrait { animation: fade 0.9s var(--ease) 0.1s both; }
+  /* Name reveals one line at a time, sliding up out of its own clip mask. */
+  .hero__line-in { animation: hero-line-in 0.85s var(--ease) both; }
+  .hero__line:nth-child(1) .hero__line-in { animation-delay: 0.12s; }
+  .hero__line:nth-child(2) .hero__line-in { animation-delay: 0.22s; }
+  .hero__line:nth-child(3) .hero__line-in { animation-delay: 0.32s; }
 
+  /* Supporting copy rises in after the name. */
+  .hero__eyebrow { animation: rise 0.7s var(--ease) 0.04s both; }
+  .hero__lede    { animation: rise 0.7s var(--ease) 0.44s both; }
+  .hero__cta     { animation: rise 0.7s var(--ease) 0.54s both; }
+  .hero__portrait{ animation: fade 0.95s var(--ease) 0.2s both; }
+
+  /* Spec sheet snaps in last, facet by facet — the personality landing. */
+  .hero__facet { animation: rise 0.6s var(--ease) both; }
+  .hero__facet:nth-child(1) { animation-delay: 0.62s; }
+  .hero__facet:nth-child(2) { animation-delay: 0.70s; }
+  .hero__facet:nth-child(3) { animation-delay: 0.78s; }
+  .hero__facet:nth-child(4) { animation-delay: 0.86s; }
+
+  .hero__scroll { animation: rise 0.7s var(--ease) 1s both; }
+
+  @keyframes hero-line-in {
+    from { transform: translateY(105%); }
+    to   { transform: translateY(0); }
+  }
   @keyframes rise {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -2092,8 +2218,27 @@ html[data-mode="light"] .bball-stats[data-state="live"] .bball-stat__value { col
 
 @media (max-width: 680px) {
   .resume__header { align-items: center; text-align: center; }
-  .hero { padding: 5rem 0 3.5rem; }
-  .hero__inner { grid-template-columns: 1fr; gap: 2.6rem; }
-  .hero__portrait { order: -1; width: clamp(170px, 52vw, 230px); }
   .resume-item__head { flex-direction: column; gap: 0.15rem; }
+
+  /* Hero, rebuilt for phones: a small filed portrait, the big name, copy, then
+     the spec sheet as a 2x2 — composed for the width, not a shrunk desktop. */
+  .hero { padding: 4rem 0 3rem; }
+  .hero__inner {
+    grid-template-columns: 1fr;
+    grid-template-areas: "aside" "lead" "spec";
+    row-gap: 2.1rem;
+    align-items: start;
+  }
+  .hero__aside { width: 132px; }
+  .hero__portrait-cap { font-size: 0.58rem; }
+  .hero__lede { font-size: 1.05rem; }
+
+  .hero__facets { grid-template-columns: 1fr 1fr; }
+  .hero__facet { padding: 1.05rem 1.1rem 0; }
+  .hero__facet:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .hero__facet:nth-child(n+3) { border-top: 1px solid var(--line); padding-top: 1.05rem; }
+  /* keep the hover tick aligned to each cell's own top edge in the 2x2 */
+  .hero__facet:nth-child(n+3)::before { top: -1px; }
+
+  .hero__scroll { display: none; }   /* redundant on a short mobile hero */
 }
