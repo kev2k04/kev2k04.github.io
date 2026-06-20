@@ -106,7 +106,7 @@
           file: ""        # e.g. /assets/audio/exotic.mp3
         - title: "Catseye"
           inspired: "Inspired by Lucy Bedroque"
-          file: ""        # e.g. /assets/audio/catseye.mp3
+          file: /assets/audio/catseye.mp3   # 30s preview (1:10–1:40, 2s fades)
   # Favourite albums — square artwork placeholders. Add `art:` later if you
   # want to wire real images (currently a TODO upload placeholder each).
   albums:
