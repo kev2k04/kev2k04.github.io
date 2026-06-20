@@ -1464,16 +1464,26 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   color: var(--muted);
 }
 
-/* While playing: the orb grows and presses inward — a darker, recessed face
-   with a strong inner top shadow so it reads as a literally pushed-in button. */
-.aplayer.is-playing .aplayer__btn,
-.aplayer.is-playing .aplayer__btn:hover {
+/* While playing: the orb grows and presses inward — a lighter purple but
+   recessed face with a strong inner top shadow so it reads as a pushed-in
+   button. */
+.aplayer.is-playing .aplayer__btn {
   transform: scale(1.18);
-  background: linear-gradient(150deg, #463484 0%, #2a2059 55%, #181135 100%);
+  background: linear-gradient(150deg, #6b4fc4 0%, #4a3596 55%, #2c2168 100%);
   box-shadow:
-    inset 0 3px 8px rgba(0, 0, 0, 0.6),
-    inset 0 -2px 2px rgba(255, 255, 255, 0.12),
+    inset 0 3px 8px rgba(0, 0, 0, 0.55),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.14),
     0 1px 2px rgba(0, 0, 0, 0.3);
+}
+/* The pause button still reacts to hover: grows a touch more, brightens, and
+   picks up a soft accent glow while keeping the pressed-in face. */
+.aplayer.is-playing .aplayer__btn:hover {
+  transform: scale(1.24);
+  background: linear-gradient(150deg, #7d62da 0%, #563ead 55%, #36287e 100%);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.5),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.18),
+    0 5px 14px -5px rgba(var(--card-accent), 0.55);
 }
 
 /* Favourite Albums — square artwork placeholders */
