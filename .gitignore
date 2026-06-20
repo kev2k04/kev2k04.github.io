@@ -31,6 +31,7 @@ assets/audio/*.mp3
 !assets/audio/neverless-cinematic.mp3
 !assets/audio/exodia.mp3
 !assets/audio/stay.mp3
+!assets/audio/worlds-away.mp3
 
 # OS / editor cruft
 .DS_Store

@@ -144,6 +144,9 @@
         - title: "Pink Noise"
           inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
           file: /assets/audio/pink-noise.mp3   # 30s preview (1:21–1:51, 2s fades)
+        - title: "Worlds Away"
+          inspired: "Inspired by Dabin"
+          file: /assets/audio/worlds-away.mp3   # 1:00 preview (2:17–3:17, 2s fades)
     - name: "Experimental Hip-Hop"
       tracks:
         - title: "Exotic"
