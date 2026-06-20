@@ -1385,8 +1385,8 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   border-radius: 50%;
   color: #fff;
   background:
-    radial-gradient(125% 125% at 30% 22%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 46%),
-    linear-gradient(150deg, rgb(var(--card-accent)) 0%, #5b3fb3 46%, #221a4d 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 46%),
+    linear-gradient(180deg, #b07cf7 0%, #8c4af0 52%, #6f33dc 100%);
   box-shadow:
     0 8px 20px -8px rgba(var(--card-accent), 0.75),
     0 2px 6px -2px rgba(0, 0, 0, 0.45),
@@ -1469,7 +1469,7 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
    button. */
 .aplayer.is-playing .aplayer__btn {
   transform: scale(1.18);
-  background: linear-gradient(150deg, #6b4fc4 0%, #4a3596 55%, #2c2168 100%);
+  background: linear-gradient(180deg, #8a52ea 0%, #6e35d6 60%, #5727bd 100%);
   box-shadow:
     inset 0 3px 8px rgba(0, 0, 0, 0.55),
     inset 0 -2px 2px rgba(255, 255, 255, 0.14),
@@ -1490,7 +1490,7 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
    picks up a soft accent glow while keeping the pressed-in face. */
 .aplayer.is-playing .aplayer__btn:hover {
   transform: scale(1.24);
-  background: linear-gradient(150deg, #7d62da 0%, #563ead 55%, #36287e 100%);
+  background: linear-gradient(180deg, #9a66f0 0%, #7e46e4 60%, #6834d2 100%);
   box-shadow:
     inset 0 3px 8px rgba(0, 0, 0, 0.5),
     inset 0 -2px 2px rgba(255, 255, 255, 0.18),
