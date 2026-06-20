@@ -98,7 +98,7 @@
           file: ""        # e.g. /assets/audio/neverless.mp3
         - title: "Pink Noise"
           inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
-          file: ""        # e.g. /assets/audio/pink-noise.mp3
+          file: /assets/audio/pink-noise.mp3   # 30s preview (1:21–1:51, 2s fades)
     - name: "Experimental Hip-Hop"
       tracks:
         - title: "Exotic"
