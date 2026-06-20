@@ -20,6 +20,15 @@ node_modules/
 .vercel/
 .netlify/
 
+# Audio: only the trimmed preview clips ship. Full-song masters dropped into
+# assets/audio/ (any other name) stay local and are never published.
+assets/audio/*.mp3
+!assets/audio/pink-noise.mp3
+!assets/audio/catseye.mp3
+!assets/audio/neverless.mp3
+!assets/audio/exotic.mp3
+!assets/audio/flashing-lights.mp3
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
