@@ -182,6 +182,26 @@ img { max-width: 100%; display: block; }
   border-radius: 2px;
 }
 
+/* =========================================================================
+   Scrollbars -- themed to the surface in both modes. A slim, near-invisible
+   track with a hairline thumb that brightens to muted grey on hover.
+   Applies to the page and every scroll area (zoom panels, lyrics sheet).
+   ========================================================================= */
+html { scrollbar-color: var(--muted) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border: 3px solid transparent;       /* inset the thumb so it reads as slim */
+  background-clip: padding-box;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-soft);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-corner { background: transparent; }
+
 .container {
   width: 100%;
   max-width: var(--maxw);
@@ -1383,12 +1403,16 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: track-shimmer 5.5s ease-in-out infinite;
+  animation: track-shimmer 5.5s linear infinite;
 }
 @keyframes track-shimmer {
-  0%   { background-position: -120% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
-  7%   { filter: drop-shadow(0 0 7px rgba(var(--card-accent), 0.6)); }
-  20%  { background-position: 220% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
+  /* The glint draws slowly, then yanks across — exponential ease-in (easeInExpo)
+     over the whole sweep, like dramatically pulling a sword. */
+  0%   { background-position: -120% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0));
+         animation-timing-function: cubic-bezier(0.95, 0.05, 0.795, 0.035); }
+  /* Glow blooms only at the fast finish, then snaps off. */
+  26%  { background-position: 220% 0; filter: drop-shadow(0 0 10px rgba(var(--card-accent), 0.75)); }
+  32%  { background-position: 220% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
   100% { background-position: 220% 0; filter: drop-shadow(0 0 0 rgba(var(--card-accent), 0)); }
 }
 @media (prefers-reduced-motion: reduce) {
