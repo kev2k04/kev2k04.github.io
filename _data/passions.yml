@@ -86,14 +86,12 @@
   # leave `file:` blank for a waveform upload placeholder.
   sections:
     - name: "Hip-Hop"
-      blurb: "TODO(Kevin): a line about your hip-hop sound / influences."
       tracks:
         - title: "Stay"
           collab: "Lyrics by Alex"
           sample: "Samples Imogen Heap"
           file: ""        # e.g. /assets/audio/stay.mp3
     - name: "Electronic Dance Music"
-      blurb: "TODO(Kevin): a line about your EDM — subgenres, energy, sets."
       tracks:
         - title: "Neverless"
           inspired: "Inspired by Tonser, 2hollis, and Nate Sib"
@@ -102,7 +100,6 @@
           inspired: "Inspired by Tonser, 2hollis, and Nate Sib"
           file: ""        # e.g. /assets/audio/flashing-lights.mp3
     - name: "Experimental Hip-Hop"
-      blurb: "TODO(Kevin): a line about your experimental hip-hop direction."
       tracks:
         - title: "Exotic"
           inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
