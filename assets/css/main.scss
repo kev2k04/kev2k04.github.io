@@ -1329,22 +1329,27 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   align-self: flex-start;
   font-weight: 700;
   font-size: 0.9rem;
-  /* Gradient tiles (default repeat) so the text is always fully painted;
-     starts and ends on --ink so the repeat seam is invisible. */
+  /* Iridescent purple sweep: a wide, bright band of violet → pink → white →
+     light-violet glides across an --ink base. Tiles (default repeat) so the
+     text is always fully painted; --ink at both ends hides the seam. The
+     accent drop-shadow gives it a soft glow. */
   background-image: linear-gradient(
     100deg,
-    var(--ink) 0%, var(--ink) 42%,
-    rgb(var(--card-accent)) 47%,
+    var(--ink) 0%, var(--ink) 28%,
+    rgb(var(--card-accent)) 38%,
+    #e9d5ff 45%,
     #ffffff 50%,
-    rgb(var(--card-accent)) 53%,
-    var(--ink) 58%, var(--ink) 100%
+    #f5d0fe 55%,
+    rgb(var(--card-accent)) 62%,
+    var(--ink) 72%, var(--ink) 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: track-shimmer 4.5s linear infinite;
+  filter: drop-shadow(0 0 5px rgba(var(--card-accent), 0.5));
+  animation: track-shimmer 2.4s linear infinite;
 }
 @keyframes track-shimmer {
   from { background-position: 200% 0; }
@@ -1356,6 +1361,7 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
     background-image: none;
     -webkit-text-fill-color: var(--ink);
     color: var(--ink);
+    filter: none;
   }
 }
 .track__credit { font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
