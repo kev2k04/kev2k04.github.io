@@ -96,17 +96,17 @@
         - title: "Neverless"
           inspired: "Inspired by Tonser, 2hollis, and Nate Sib"
           file: ""        # e.g. /assets/audio/neverless.mp3
-        - title: "Flashing Lights"
-          inspired: "Inspired by Tonser, 2hollis, and Nate Sib"
-          file: ""        # e.g. /assets/audio/flashing-lights.mp3
+        - title: "Pink Noise"
+          inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
+          file: ""        # e.g. /assets/audio/pink-noise.mp3
     - name: "Experimental Hip-Hop"
       tracks:
         - title: "Exotic"
           inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
           file: ""        # e.g. /assets/audio/exotic.mp3
-        - title: "Pink Noise"
-          inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
-          file: ""        # e.g. /assets/audio/pink-noise.mp3
+        - title: "Catseye"
+          inspired: "Inspired by Lucy Bedroque"
+          file: ""        # e.g. /assets/audio/catseye.mp3
   # Favourite albums — square artwork placeholders. Add `art:` later if you
   # want to wire real images (currently a TODO upload placeholder each).
   albums:
