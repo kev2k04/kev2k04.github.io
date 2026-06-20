@@ -24,55 +24,42 @@
 </ul>
 
 <h3 class="pass-panel__subhead">Tracks I've Produced</h3>
+
+{%- comment -%} Featured section (full-width hero) — the songs I've written. {%- endcomment -%}
+{%- for sec in p.sections -%}{%- if sec.featured -%}
+<section class="genre genre--featured">
+  <div class="genre__head">
+    <span class="genre__badge genre__badge--star" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77 5.82 21l1.18-6.88-5-4.87 7.1-1.01L12 2z"/></svg>
+    </span>
+    <div>
+      <h4 class="genre__name">{{ sec.name }}</h4>
+    </div>
+  </div>
+  <div class="genre__tracks">
+    {%- for t in sec.tracks -%}{% include passions/track.html t=t %}{%- endfor -%}
+  </div>
+</section>
+{%- endif -%}{%- endfor -%}
+
+{%- comment -%} The remaining genres, in a grid underneath. {%- endcomment -%}
 <div class="music-genres">
-  {%- for sec in p.sections -%}
+  {%- assign gi = 0 -%}
+  {%- for sec in p.sections -%}{%- unless sec.featured -%}
+  {%- assign gi = gi | plus: 1 -%}
   <section class="genre">
     <div class="genre__head">
-      <span class="genre__badge" aria-hidden="true">{{ forloop.index }}</span>
+      <span class="genre__badge" aria-hidden="true">{{ gi }}</span>
       <div>
         <h4 class="genre__name">{{ sec.name }}</h4>
         {%- if sec.label and sec.label != '' -%}<span class="genre__label">{{ sec.label }}</span>{%- endif -%}
       </div>
     </div>
-    {%- if sec.blurb and sec.blurb != '' -%}<p class="genre__blurb">{{ sec.blurb }}</p>{%- endif -%}
-
     <div class="genre__tracks">
-      {%- for t in sec.tracks -%}
-      <div class="track">
-        <div class="track__info">
-          <span class="track__title">{{ t.title }}</span>
-          {%- if t.inspired and t.inspired != '' -%}<span class="track__credit">{{ t.inspired }}</span>{%- endif -%}
-          {%- if t.collab and t.collab != '' -%}<span class="track__credit track__credit--collab">{{ t.collab }}</span>{%- endif -%}
-          {%- if t.sample and t.sample != '' -%}<span class="track__credit track__credit--sample">{{ t.sample }}</span>{%- endif -%}
-        </div>
-        {%- if t.file and t.file != '' -%}
-        <div class="aplayer" data-aplayer>
-          <audio preload="metadata">
-            <source src="{{ t.file | relative_url }}" type="audio/mpeg">
-          </audio>
-          <button type="button" class="aplayer__btn play-orb" aria-label="Play {{ t.title }}">
-            <svg class="aplayer__icon aplayer__icon--play" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            <svg class="aplayer__icon aplayer__icon--pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-          </button>
-          <div class="aplayer__bar"><div class="aplayer__progress"></div></div>
-          <span class="aplayer__time">0:00</span>
-        </div>
-        {%- else -%}
-        <div class="track__player" role="img" aria-label="Audio placeholder for {{ t.title }}">
-          <span class="track__play play-orb" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          </span>
-          <span class="track__wave" aria-hidden="true">
-            {%- for i in (1..44) -%}<span style="height: {% cycle 'wf': '38%','64%','52%','86%','30%','58%','78%','44%','70%','34%','82%','48%','62%','40%' %}"></span>{%- endfor -%}
-          </span>
-        </div>
-        <p class="track__todo">TODO(Kevin): swap in the real MP3 — drop it in assets/audio/ and set file: in _data/passions.yml</p>
-        {%- endif -%}
-      </div>
-      {%- endfor -%}
+      {%- for t in sec.tracks -%}{% include passions/track.html t=t %}{%- endfor -%}
     </div>
   </section>
-  {%- endfor -%}
+  {%- endunless -%}{%- endfor -%}
 </div>
 
 <h3 class="pass-panel__subhead">Favourite Albums</h3>

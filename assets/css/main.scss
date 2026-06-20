@@ -1321,6 +1321,18 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
 .genre__label { font-size: 0.74rem; color: var(--muted); }
 .genre__blurb { margin: 0; color: var(--ink-soft); font-size: 0.9rem; line-height: 1.55; }
 
+/* Featured "main attraction" — full-width hero card above the genre grid,
+   matching the Home Studio width, with a warmer accent wash. */
+.genre--featured {
+  margin-bottom: 1rem;
+  padding: 1.5rem 1.6rem;
+  border-color: rgba(var(--card-accent), 0.45);
+  background: linear-gradient(125deg, rgba(var(--card-accent), 0.15), rgba(var(--card-accent), 0.04));
+}
+.genre--featured .genre__head { margin-bottom: 0.3rem; }
+.genre--featured .genre__name { font-size: clamp(1.35rem, 2.4vw, 1.6rem); }
+.genre__badge--star { color: rgb(var(--card-accent)); }
+
 .genre__tracks { margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.95rem; }
 .track__info { display: flex; flex-direction: column; gap: 0.1rem; margin-bottom: 0.45rem; }
 /* Song titles get a slow, shiny shimmer sweeping across while idle. The base

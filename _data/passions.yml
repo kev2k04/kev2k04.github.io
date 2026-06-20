@@ -85,7 +85,9 @@
   # `assets/audio/` and set its `file:` (e.g. /assets/audio/neverless.mp3);
   # leave `file:` blank for a waveform upload placeholder.
   sections:
-    - name: "Hip-Hop"
+    # Featured (full-width hero) — original songs I've written.
+    - name: "Self-Produced Songs"
+      featured: true
       tracks:
         - title: "Stay"
           collab: "Lyrics by Alex"
