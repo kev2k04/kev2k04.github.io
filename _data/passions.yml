@@ -95,7 +95,7 @@
       tracks:
         - title: "Neverless"
           inspired: "Inspired by Tonser, 2hollis, and Nate Sib"
-          file: ""        # e.g. /assets/audio/neverless.mp3
+          file: /assets/audio/neverless.mp3   # 30s preview (0:57–1:27, 2s fades)
         - title: "Pink Noise"
           inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
           file: /assets/audio/pink-noise.mp3   # 30s preview (1:21–1:51, 2s fades)
@@ -103,10 +103,14 @@
       tracks:
         - title: "Exotic"
           inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
-          file: ""        # e.g. /assets/audio/exotic.mp3
+          file: /assets/audio/exotic.mp3   # 30s preview (0:00–0:30, 2s fades)
         - title: "Catseye"
           inspired: "Inspired by Lucy Bedroque"
           file: /assets/audio/catseye.mp3   # 30s preview (1:10–1:40, 2s fades)
+    - name: "Cinematic Soundtracks"
+      tracks:
+        - title: "Flashing Lights"
+          file: /assets/audio/flashing-lights.mp3   # preview 1:35–end (2s fades)
   # Favourite albums — square artwork placeholders. Add `art:` later if you
   # want to wire real images (currently a TODO upload placeholder each).
   albums:
