@@ -110,7 +110,11 @@
     - name: "Cinematic Soundtracks"
       tracks:
         - title: "Flashing Lights"
-          file: /assets/audio/flashing-lights.mp3   # preview 1:35–end (2s fades)
+          file: /assets/audio/flashing-lights.mp3   # 1:00 preview (1:36.5–2:36.5, 2s fades)
+        - title: "Neverless"
+          file: /assets/audio/neverless-cinematic.mp3   # 1:00 preview (0:00–1:00, 2s fades)
+        - title: "Exodia"
+          file: /assets/audio/exodia.mp3   # 35s preview (0:00–0:35, 2s fades)
   # Favourite albums — square artwork placeholders. Add `art:` later if you
   # want to wire real images (currently a TODO upload placeholder each).
   albums:

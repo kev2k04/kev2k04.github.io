@@ -28,6 +28,8 @@ assets/audio/*.mp3
 !assets/audio/neverless.mp3
 !assets/audio/exotic.mp3
 !assets/audio/flashing-lights.mp3
+!assets/audio/neverless-cinematic.mp3
+!assets/audio/exodia.mp3
 
 # OS / editor cruft
 .DS_Store
