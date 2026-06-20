@@ -1419,9 +1419,10 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
     linear-gradient(120deg, rgba(var(--card-accent), 0.1), rgba(var(--card-accent), 0.03));
 }
 .aplayer__btn {
-  width: 44px; height: 44px;
+  /* Smaller and raised while idle; grows + presses in while playing. */
+  width: 38px; height: 38px;
   cursor: pointer;
-  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), background 0.22s var(--ease);
 }
 .aplayer__btn:hover {
   transform: translateY(-1px) scale(1.05);
@@ -1431,7 +1432,7 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
     inset 0 1px 1px rgba(255, 255, 255, 0.45),
     inset 0 -2px 6px rgba(0, 0, 0, 0.35);
 }
-.aplayer__btn:active { transform: translateY(0) scale(0.97); }
+.aplayer__btn:active { transform: scale(0.96); }
 .aplayer__btn:focus-visible { outline: 2px solid rgb(var(--card-accent)); outline-offset: 3px; }
 .aplayer__icon--play { margin-left: 2px; }
 .aplayer__icon--pause { display: none; }
@@ -1463,23 +1464,16 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   color: var(--muted);
 }
 
-/* Gentle glowing pulse while a track plays. */
-.aplayer.is-playing .aplayer__btn { animation: orb-pulse 2.4s ease-in-out infinite; }
-@keyframes orb-pulse {
-  0%, 100% {
-    box-shadow:
-      0 8px 20px -8px rgba(var(--card-accent), 0.75),
-      inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -2px 6px rgba(0, 0, 0, 0.35);
-  }
-  50% {
-    box-shadow:
-      0 11px 28px -6px rgba(var(--card-accent), 1),
-      0 0 0 5px rgba(var(--card-accent), 0.13),
-      inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(0, 0, 0, 0.35);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .aplayer.is-playing .aplayer__btn { animation: none; }
+/* While playing: the orb grows and presses inward — a darker, recessed face
+   with a strong inner top shadow so it reads as a literally pushed-in button. */
+.aplayer.is-playing .aplayer__btn,
+.aplayer.is-playing .aplayer__btn:hover {
+  transform: scale(1.18);
+  background: linear-gradient(150deg, #463484 0%, #2a2059 55%, #181135 100%);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.6),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Favourite Albums — square artwork placeholders */
