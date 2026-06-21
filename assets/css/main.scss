@@ -1076,8 +1076,10 @@ html[data-mode="light"] #about::after {
     radial-gradient(closest-side at 50% 50%, rgba(208, 54, 70, 0.34), transparent 72%),
     radial-gradient(closest-side at 50% 50%, rgba(255, 96, 96, 0.22), transparent 66%);
   background-size: 130% 130%, 150% 150%, 95% 95%;
-  opacity: 0.92;
-  animation: seaspan-slosh 4.6s ease-in-out infinite;
+  /* Same ~3s beat as the surface + border so the whole interior phases in and
+     out together — the red floods in as the border swells, then drains as it
+     shrinks. The irregular paths keep it churning while it breathes. */
+  animation: seaspan-slosh 3s ease-in-out infinite;
 }
 /* Surface layer — brighter, smaller ripples on the brisk beat, plus the
    expanding red border ring. Out of phase with the deep layer, so where they
@@ -1090,18 +1092,21 @@ html[data-mode="light"] #about::after {
   animation: seaspan-tide 3s ease-in-out infinite;
 }
 @keyframes seaspan-slosh {
-  0%   { background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 130% 130%, 150% 150%, 90% 90%; }
-  25%  { background-position: 72% 12%, 28% 86%, 22% 62%; background-size: 152% 152%, 126% 126%, 122% 122%; }
-  50%  { background-position: 88% 72%, 14% 30%, 78% 40%; background-size: 118% 118%, 168% 168%, 80% 80%; }
-  75%  { background-position: 38% 90%, 62% 16%, 30% 76%; background-size: 162% 162%, 122% 122%, 112% 112%; }
-  100% { background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 130% 130%, 150% 150%, 90% 90%; }
+  /* opacity breathes 0.4 → 1 → 0.4 in lockstep with the border swell; positions
+     and sizes churn through five irregular stops so it reads as water, not a
+     simple fade. */
+  0%   { opacity: 0.2;  background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 130% 130%, 150% 150%, 90% 90%; }
+  25%  { opacity: 0.62; background-position: 72% 12%, 28% 86%, 22% 62%; background-size: 152% 152%, 126% 126%, 122% 122%; }
+  50%  { opacity: 1;    background-position: 88% 72%, 14% 30%, 78% 40%; background-size: 118% 118%, 168% 168%, 80% 80%; }
+  75%  { opacity: 0.62; background-position: 38% 90%, 62% 16%, 30% 76%; background-size: 162% 162%, 122% 122%, 112% 112%; }
+  100% { opacity: 0.2;  background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 130% 130%, 150% 150%, 90% 90%; }
 }
 @keyframes seaspan-tide {
   /* opacity = the swell; the inset ring is the red border — it brightens AND
      thickens (4px → 12px → 4px) on the beat so the edge visibly expands; the two
      ripples grow + drift across so the bright surface keeps moving. */
   0% {
-    opacity: 0.5;
+    opacity: 0.32;
     background-position: 30% 36%, 74% 68%;
     background-size: 78% 78%, 100% 100%;
     box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 4px rgba(235, 78, 78, 0.55);
@@ -1113,7 +1118,7 @@ html[data-mode="light"] #about::after {
     box-shadow: inset 0 0 60px rgba(235, 70, 70, 0.62), inset 0 0 0 12px rgba(255, 100, 100, 1);
   }
   100% {
-    opacity: 0.5;
+    opacity: 0.32;
     background-position: 30% 36%, 74% 68%;
     background-size: 78% 78%, 100% 100%;
     box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 4px rgba(235, 78, 78, 0.55);
@@ -2164,11 +2169,13 @@ img.album__art {
 }
 .video-btn--ghost { color: rgba(244, 246, 251, 0.9); background: transparent; border: 1px solid rgba(255, 255, 255, 0.26); }
 .video-btn--ghost:hover { background: rgba(255, 255, 255, 0.09); }
+/* Proceed/play button — warm amber (the site's caution colour, shared with the
+   flash-warning icon) so it stands apart from the violet music accent. */
 .video-btn--go {
-  color: #15110b; background: rgb(var(--card-accent)); border: none;
-  box-shadow: 0 12px 26px -10px rgba(var(--card-accent), 0.8);
+  color: #1c1405; background: #f4b740; border: none;
+  box-shadow: 0 12px 26px -10px rgba(244, 183, 64, 0.7);
 }
-.video-btn--go:hover { transform: translateY(-1px) scale(1.03); }
+.video-btn--go:hover { transform: translateY(-1px) scale(1.03); background: #ffc757; }
 .video-btn:active { transform: scale(0.96); }
 
 /* Video stage */
