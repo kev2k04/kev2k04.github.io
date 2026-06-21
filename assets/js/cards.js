@@ -48,4 +48,12 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
     });
   });
+
+  // Music links with no real URL yet (placeholder "#") shouldn't jump to top.
+  Array.prototype.forEach.call(document.querySelectorAll('.facet__music'), function (m) {
+    m.addEventListener('click', function (e) {
+      var href = m.getAttribute('href');
+      if (!href || href === '#') e.preventDefault();
+    });
+  });
 })();

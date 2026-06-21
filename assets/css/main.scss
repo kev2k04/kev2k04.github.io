@@ -579,19 +579,29 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   gap: 0.55rem;
   padding: 1.4rem 1.3rem 1.15rem;
   border-left: 1px solid var(--line);
+  border-radius: 8px;
   color: inherit;
   text-decoration: none;
-  cursor: default;                 /* discoverable, not advertised */
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.15s ease, border-color 0.22s ease;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 .hero__facet:first-child { border-left: 0; padding-left: 0; }
 .hero__facet:focus-visible { outline: 1px solid var(--ink-soft); outline-offset: 4px; }
-/* Click: brief compress (80ms in); release rides the base 150ms transition. */
-.hero__facet.is-press { transform: scale(0.98); transition: transform 0.08s ease; }
-/* Neighbouring dividers soften ("thin") when an adjacent card is hovered. */
-.hero__facet:hover { border-left-color: rgba(255, 255, 255, 0.06); }
-.hero__facet:hover + .hero__facet { border-left-color: rgba(255, 255, 255, 0.06); }
+/* Click: a brief physical compress. */
+.hero__facet.is-press { transform: translateY(-2px) scale(0.975); transition: transform 0.08s ease; }
+/* Hover/focus: clearly light up — lift, soft fill, a lit edge + glow, brighter
+   title and the arrow — so it reads as obviously clickable. */
+.hero__facet:hover,
+.hero__facet:focus-visible {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.065);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 16px 34px -18px rgba(0, 0, 0, 0.8);
+}
+.hero__facet:hover .facet__k,
+.hero__facet:focus-visible .facet__k { color: #fff; }
+.hero__facet:hover .facet__no,
+.hero__facet:focus-visible .facet__no { color: var(--ink-soft); }
 
 /* The mono number quietly trades for an arrow on hover — the single reveal. */
 .facet__no {
