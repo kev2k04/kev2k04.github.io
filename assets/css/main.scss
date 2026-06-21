@@ -1075,11 +1075,11 @@ html[data-mode="light"] #about::after {
     radial-gradient(closest-side at 50% 50%, rgba(235, 72, 72, 0.40), transparent 70%),
     radial-gradient(closest-side at 50% 50%, rgba(208, 54, 70, 0.34), transparent 72%),
     radial-gradient(closest-side at 50% 50%, rgba(255, 96, 96, 0.22), transparent 66%);
-  background-size: 130% 130%, 150% 150%, 95% 95%;
-  /* Same ~3s beat as the surface + border so the whole interior phases in and
-     out together — the red floods in as the border swells, then drains as it
-     shrinks. The irregular paths keep it churning while it breathes. */
-  animation: seaspan-slosh 3s ease-in-out infinite;
+  background-size: 158% 158%, 180% 180%, 118% 118%;
+  /* Same ~4.2s beat as the surface + border so the whole interior phases in and
+     out together — the red floods in as the border swells, holds full, then
+     drains as it shrinks. The irregular paths keep it churning while it breathes. */
+  animation: seaspan-slosh 4.2s ease-in-out infinite;
 }
 /* Surface layer — brighter, smaller ripples on the brisk beat, plus the
    expanding red border ring. Out of phase with the deep layer, so where they
@@ -1088,40 +1088,48 @@ html[data-mode="light"] #about::after {
   background-image:
     radial-gradient(closest-side at 50% 50%, rgba(255, 108, 108, 0.34), transparent 64%),
     radial-gradient(closest-side at 50% 50%, rgba(245, 84, 84, 0.26), transparent 68%);
-  background-size: 85% 85%, 110% 110%;
-  animation: seaspan-tide 3s ease-in-out infinite;
+  background-size: 115% 115%, 140% 140%;
+  animation: seaspan-tide 4.2s ease-in-out infinite;
 }
 @keyframes seaspan-slosh {
   /* opacity breathes 0.4 → 1 → 0.4 in lockstep with the border swell; positions
      and sizes churn through five irregular stops so it reads as water, not a
      simple fade. */
-  0%   { opacity: 0.2;  background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 130% 130%, 150% 150%, 90% 90%; }
-  25%  { opacity: 0.62; background-position: 72% 12%, 28% 86%, 22% 62%; background-size: 152% 152%, 126% 126%, 122% 122%; }
-  50%  { opacity: 1;    background-position: 88% 72%, 14% 30%, 78% 40%; background-size: 118% 118%, 168% 168%, 80% 80%; }
-  75%  { opacity: 0.62; background-position: 38% 90%, 62% 16%, 30% 76%; background-size: 162% 162%, 122% 122%, 112% 112%; }
-  100% { opacity: 0.2;  background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 130% 130%, 150% 150%, 90% 90%; }
+  0%   { opacity: 0.2;  background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 158% 158%, 180% 180%, 112% 112%; }
+  22%  { opacity: 0.62; background-position: 72% 12%, 28% 86%, 22% 62%; background-size: 182% 182%, 152% 152%, 148% 148%; }
+  /* flood to full, then hold full red (44%–58%) while the water keeps drifting */
+  44%  { opacity: 1;    background-position: 88% 72%, 14% 30%, 78% 40%; background-size: 144% 144%, 200% 200%, 100% 100%; }
+  58%  { opacity: 1;    background-position: 80% 64%, 20% 36%, 72% 46%; background-size: 150% 150%, 196% 196%, 104% 104%; }
+  78%  { opacity: 0.62; background-position: 38% 90%, 62% 16%, 30% 76%; background-size: 194% 194%, 148% 148%, 138% 138%; }
+  100% { opacity: 0.2;  background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 158% 158%, 180% 180%, 112% 112%; }
 }
 @keyframes seaspan-tide {
   /* opacity = the swell; the inset ring is the red border — it brightens AND
-     thickens (4px → 12px → 4px) on the beat so the edge visibly expands; the two
-     ripples grow + drift across so the bright surface keeps moving. */
+     thickens gently (2px → 4px → 2px); it floods to full then HOLDS fully red
+     across 44%–58% before easing back down. */
   0% {
     opacity: 0.32;
     background-position: 30% 36%, 74% 68%;
-    background-size: 78% 78%, 100% 100%;
-    box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 4px rgba(235, 78, 78, 0.55);
+    background-size: 105% 105%, 128% 128%;
+    box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 2px rgba(235, 78, 78, 0.5);
   }
-  50% {
+  44% {
     opacity: 1;
     background-position: 66% 60%, 30% 38%;
-    background-size: 112% 112%, 140% 140%;
-    box-shadow: inset 0 0 60px rgba(235, 70, 70, 0.62), inset 0 0 0 12px rgba(255, 100, 100, 1);
+    background-size: 150% 150%, 180% 180%;
+    box-shadow: inset 0 0 40px rgba(235, 70, 70, 0.55), inset 0 0 0 4px rgba(255, 100, 100, 1);
+  }
+  58% {
+    opacity: 1;
+    background-position: 62% 56%, 34% 42%;
+    background-size: 152% 152%, 182% 182%;
+    box-shadow: inset 0 0 40px rgba(235, 70, 70, 0.55), inset 0 0 0 4px rgba(255, 100, 100, 1);
   }
   100% {
     opacity: 0.32;
     background-position: 30% 36%, 74% 68%;
-    background-size: 78% 78%, 100% 100%;
-    box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 4px rgba(235, 78, 78, 0.55);
+    background-size: 105% 105%, 128% 128%;
+    box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 2px rgba(235, 78, 78, 0.5);
   }
 }
 /* Hover: freeze the water mid-churn at full strength and warm the edge so the
@@ -1136,7 +1144,7 @@ html[data-mode="light"] #about::after {
     animation: none;
     opacity: 0.7;
     background-position: 30% 36%, 74% 68%;
-    box-shadow: inset 0 0 34px rgba(229, 72, 72, 0.45), inset 0 0 0 8px rgba(245, 84, 84, 0.7);
+    box-shadow: inset 0 0 30px rgba(229, 72, 72, 0.45), inset 0 0 0 3px rgba(245, 84, 84, 0.7);
   }
 }
 
