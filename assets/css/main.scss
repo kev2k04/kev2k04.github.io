@@ -401,7 +401,15 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
    ========================================================================= */
 .hero {
   position: relative;
-  background: var(--bg);
+  /* The hero is a sunset photo banner — force a dark context so the type reads
+     in BOTH light and dark mode (these token overrides cascade to all hero
+     descendants; the rest of the page keeps its theme colors). */
+  --ink: #f6f8fc;
+  --ink-soft: rgba(246, 248, 252, 0.86);
+  --muted: rgba(246, 248, 252, 0.64);
+  --line: rgba(255, 255, 255, 0.16);
+  --line-strong: rgba(255, 255, 255, 0.38);
+  background: #0a0c10;
   padding: clamp(5rem, 11vh, 8.5rem) 0 clamp(3.2rem, 7vh, 5rem);
   overflow: hidden;
 }
@@ -415,17 +423,25 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 
 /* Ambient blueprint grid: hairlines on the page tokens, masked so it dissolves
    long before it reaches the text. Static (no motion) — type always wins. */
+/* Sunset photo behind the masthead: a dark gradient frames the edges so it
+   fades in/out at the borders, and the bottom fades fully to the dark base so
+   the photo ends cleanly before the stats band. */
 .hero__bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 66px 66px;
-  -webkit-mask-image: radial-gradient(118% 82% at 20% 6%, #000 0%, rgba(0,0,0,0.45) 44%, transparent 72%);
-          mask-image: radial-gradient(118% 82% at 20% 6%, #000 0%, rgba(0,0,0,0.45) 44%, transparent 72%);
+    linear-gradient(to bottom,
+      rgba(10, 12, 16, 0.74) 0%, rgba(10, 12, 16, 0.28) 24%,
+      rgba(10, 12, 16, 0.40) 58%, rgba(10, 12, 16, 0.99) 100%),
+    linear-gradient(to right,
+      rgba(10, 12, 16, 0.80) 0%, rgba(10, 12, 16, 0.10) 34%,
+      rgba(10, 12, 16, 0.10) 60%, rgba(10, 12, 16, 0.66) 100%),
+    url('/assets/images/website-design/sunset.jpg');
+  background-position: center, center, center 44%;
+  background-size: cover, cover, cover;
+  background-repeat: no-repeat;
 }
 
 /* Masthead grid: name + portrait on top, full-width spec sheet beneath — it
@@ -665,6 +681,38 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 600;
   letter-spacing: -0.02em;
+}
+
+/* About — aurora photo background. Kept readable in both themes via a low
+   image opacity plus a theme-coloured scrim (::after). Noticeable, not noise. */
+#about {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+#about > .container { position: relative; z-index: 1; }
+#about::before {            /* the aurora photo (favour the colourful sky) */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('/assets/images/website-design/aurora.jpg') center 30% / cover no-repeat;
+  opacity: 0.5;
+}
+#about::after {             /* theme-coloured readability scrim + edge fade */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(to bottom, var(--bg) 0%, transparent 16%, transparent 84%, var(--bg) 100%),
+    linear-gradient(rgba(14, 17, 22, 0.48), rgba(14, 17, 22, 0.48));
+}
+html[data-mode="light"] #about::before { opacity: 0.45; }
+html[data-mode="light"] #about::after {
+  background:
+    linear-gradient(to bottom, var(--bg) 0%, transparent 16%, transparent 84%, var(--bg) 100%),
+    linear-gradient(rgba(245, 248, 253, 0.52), rgba(245, 248, 253, 0.52));
 }
 
 /* About */
@@ -1700,6 +1748,39 @@ img.album__art {
 .album__caption { display: flex; flex-direction: column; margin-top: 0.5rem; }
 .album__title { font-weight: 600; font-size: 0.85rem; color: var(--ink); }
 .album__artist { font-size: 0.78rem; color: var(--muted); }
+
+/* Album with a video: a "View" button + scrim reveal on hover/focus. */
+.album__media { position: relative; border-radius: 10px; }
+.album--video .album__media::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 58%);
+  opacity: 0;
+  transition: opacity 0.25s var(--ease);
+  pointer-events: none;
+}
+.album--video:hover .album__media::after,
+.album--video:focus-within .album__media::after { opacity: 1; }
+.album__view {
+  position: absolute;
+  left: 50%; bottom: 0.6rem;
+  transform: translate(-50%, 0.5rem);
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.4rem 0.95rem;
+  font: inherit; font-size: 0.8rem; font-weight: 700;
+  color: #fff;
+  background: rgba(var(--card-accent), 0.95);
+  border: none; border-radius: 100px;
+  cursor: pointer;
+  opacity: 0; pointer-events: none;
+  box-shadow: 0 10px 22px -8px rgba(0, 0, 0, 0.7);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), background 0.18s var(--ease);
+}
+.album--video:hover .album__view,
+.album--video:focus-within .album__view { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.album__view:hover { background: rgb(var(--card-accent)); }
+.album__view svg { margin-left: -1px; }
 @media (max-width: 560px) {
   .albums { grid-template-columns: repeat(2, 1fr); }
 }
@@ -1814,6 +1895,126 @@ img.album__art {
   font-size: 1.02rem;
   line-height: 1.95;
   letter-spacing: 0.005em;
+}
+
+/* ---- Video popup: flash-warning gate -> square video on blurred album-art stage ---- */
+.video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+.video-overlay[hidden] { display: none; }
+.video-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+.video-overlay.is-active .video-scrim { opacity: 1; }
+
+.video-modal {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0c0e14;
+  color: #f4f6fb;
+  box-shadow: 0 45px 100px -30px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transform: translateY(26px) scale(0.92);
+  transition: opacity 0.35s var(--ease), transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+.video-overlay.is-active .video-modal { opacity: 1; transform: translateY(0) scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .video-modal { transition: opacity 0.2s var(--ease); transform: none; }
+  .video-overlay.is-active .video-modal { transform: none; }
+}
+/* Blurred album-art backdrop so it never looks like a bare video file. */
+.video-modal__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--album-art);
+  background-size: cover;
+  background-position: center;
+  filter: blur(34px) saturate(1.25) brightness(0.42);
+  transform: scale(1.3);
+}
+.video-warn, .video-stage { position: relative; z-index: 1; }
+
+/* Flash warning gate */
+.video-warn { padding: 2.1rem 1.9rem 1.8rem; text-align: center; }
+.video-warn__icon {
+  display: inline-grid; place-items: center;
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  color: #ffce3a;
+  background: rgba(255, 206, 58, 0.14);
+  border: 1px solid rgba(255, 206, 58, 0.42);
+  animation: video-warn-pulse 1.8s ease-in-out infinite;
+}
+@keyframes video-warn-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 206, 58, 0.45); }
+  60% { box-shadow: 0 0 0 13px rgba(255, 206, 58, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .video-warn__icon { animation: none; } }
+.video-warn__title { font-family: var(--font-head); font-size: 1.3rem; margin: 0 0 0.6rem; color: #fff; }
+.video-warn__text {
+  font-size: 0.95rem; line-height: 1.6;
+  color: rgba(244, 246, 251, 0.82);
+  max-width: 44ch; margin: 0 auto 1.5rem;
+}
+.video-warn__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.7rem; }
+.video-btn {
+  padding: 0.62rem 1.25rem;
+  font: inherit; font-size: 0.9rem; font-weight: 600;
+  border-radius: 100px; cursor: pointer;
+  transition: transform 0.16s var(--ease), background 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.video-btn--ghost { color: rgba(244, 246, 251, 0.9); background: transparent; border: 1px solid rgba(255, 255, 255, 0.26); }
+.video-btn--ghost:hover { background: rgba(255, 255, 255, 0.09); }
+.video-btn--go {
+  color: #15110b; background: rgb(var(--card-accent)); border: none;
+  box-shadow: 0 12px 26px -10px rgba(var(--card-accent), 0.8);
+}
+.video-btn--go:hover { transform: translateY(-1px) scale(1.03); }
+.video-btn:active { transform: scale(0.96); }
+
+/* Video stage */
+.video-stage { padding: 1rem 1rem 1.3rem; animation: video-stage-in 0.42s var(--ease) both; }
+@keyframes video-stage-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .video-stage { animation: none; } }
+.video-back {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  margin: 0 0 0.85rem; padding: 0;
+  background: none; border: none; cursor: pointer; font: inherit;
+  font-size: 0.88rem; font-weight: 600; color: rgba(244, 246, 251, 0.82);
+  transition: color 0.18s var(--ease);
+}
+.video-back:hover { color: #fff; }
+.video-frame {
+  aspect-ratio: 1 / 1;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 22px 55px -16px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.video-el { display: block; width: 100%; height: 100%; object-fit: cover; }
+.video-cap {
+  text-align: center; margin: 0.9rem 0 0;
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(244, 246, 251, 0.62);
 }
 
 /* ---- Gaming panel: rank/identity grid + profile link ---- */

@@ -141,6 +141,7 @@
     - title: "Boy"
       artist: "2hollis"
       art: /assets/images/passions/boy.jpg
+      video: /assets/images/website-design/2hollis-god.mp4   # hover "View" -> flash-warning -> square video
 
 # Gaming panel (League of Legends) — rendered by _includes/passions/gaming.html.
 - id: gaming

@@ -33,6 +33,11 @@ assets/audio/*.mp3
 !assets/audio/stay.mp3
 !assets/audio/worlds-away.mp3
 
+# Original photo drop (heic/mov, large) — only the converted web assets in
+# assets/images/website-design/ ship.
+assets/images/website design photos/
+*.heic
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
