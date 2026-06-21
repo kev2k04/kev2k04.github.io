@@ -12,28 +12,28 @@
    Schibsted Grotesk (display) + Inter (body) + JetBrains Mono (data/labels).
    ========================================================================= */
 :root {
-  --bg:         #0a0a0b;   /* page background (near-black)     */
-  --bg-alt:     #111113;   /* alternating sections             */
-  --surface:    #161618;   /* cards / lifted panels            */
-  --surface-2:  #1f1f22;   /* hovered / nested surfaces        */
-  --header-bg:  #0a0a0b;
-  --footer-bg:  #060607;
+  --bg:         #0b1020;   /* page background (dark navy)       */
+  --bg-alt:     #0f1426;   /* alternating sections             */
+  --surface:    #141a30;   /* cards / lifted panels            */
+  --surface-2:  #1c2440;   /* hovered / nested surfaces        */
+  --header-bg:  #0b1020;
+  --footer-bg:  #080c1a;
 
-  --ink:        #f5f5f7;   /* headings / primary text          */
-  --ink-soft:   #c2c2c7;   /* body copy                        */
-  --muted:      #86868b;   /* secondary text / labels          */
+  --ink:        #f3f5fa;   /* headings / primary text          */
+  --ink-soft:   #c4c8d4;   /* body copy                        */
+  --muted:      #8389a0;   /* secondary text / labels          */
 
   /* Near-monochrome accent = warm white. Reused via --accent so existing
      components keep working; hierarchy now comes from weight/size, not hue. */
-  --accent:        #f5f5f7;   /* warm white                    */
+  --accent:        #f3f5fa;   /* cool white                    */
   --accent-soft:   #ffffff;   /* pure white, for hover         */
-  --accent-deep:   #0a0a0b;   /* near-black text on the accent */
+  --accent-deep:   #0b1020;   /* dark navy text on the accent  */
 
-  --accent-rgb: 245, 245, 247;
-  --ink-rgb:    245, 245, 247;
+  --accent-rgb: 243, 245, 250;
+  --ink-rgb:    243, 245, 250;
 
-  --line:        rgba(245, 245, 247, 0.09);
-  --line-strong: rgba(245, 245, 247, 0.18);
+  --line:        rgba(226, 232, 245, 0.10);
+  --line-strong: rgba(226, 232, 245, 0.19);
 
   --font-head: "Schibsted Grotesk", "Inter", -apple-system, BlinkMacSystemFont,
                "Segoe UI", Arial, sans-serif;
@@ -72,11 +72,11 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* Surfaces that dim the page behind a zoom panel (kept dark in both modes). */
-  --scrim: rgba(5, 5, 6, 0.62);
+  --scrim: rgba(6, 9, 18, 0.64);
   /* Header nav links + footer fine print read against their own backgrounds. */
-  --nav-link:   rgba(245, 245, 247, 0.66);
-  --footer-soft: rgba(245, 245, 247, 0.42);
-  --footer-chip: rgba(245, 245, 247, 0.05);
+  --nav-link:   rgba(226, 232, 245, 0.66);
+  --footer-soft: rgba(226, 232, 245, 0.42);
+  --footer-chip: rgba(226, 232, 245, 0.05);
 }
 
 /* =========================================================================
@@ -409,9 +409,9 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   --muted: rgba(246, 248, 252, 0.64);
   --line: rgba(255, 255, 255, 0.16);
   --line-strong: rgba(255, 255, 255, 0.38);
-  --accent: #f5f5f7;
-  --accent-rgb: 245, 245, 247;
-  background: #0a0c10;
+  --accent: #f3f5fa;
+  --accent-rgb: 243, 245, 250;
+  background: #090d1c;
   padding: clamp(5rem, 11vh, 8.5rem) 0 clamp(3.2rem, 7vh, 5rem);
   overflow: hidden;
 }
@@ -435,11 +435,11 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   pointer-events: none;
   background-image:
     linear-gradient(to bottom,
-      rgba(10, 12, 16, 0.74) 0%, rgba(10, 12, 16, 0.28) 24%,
-      rgba(10, 12, 16, 0.40) 58%, rgba(10, 12, 16, 0.99) 100%),
+      rgba(9, 13, 28, 0.74) 0%, rgba(9, 13, 28, 0.28) 24%,
+      rgba(9, 13, 28, 0.40) 58%, rgba(9, 13, 28, 0.99) 100%),
     linear-gradient(to right,
-      rgba(10, 12, 16, 0.80) 0%, rgba(10, 12, 16, 0.10) 34%,
-      rgba(10, 12, 16, 0.10) 60%, rgba(10, 12, 16, 0.66) 100%),
+      rgba(9, 13, 28, 0.80) 0%, rgba(9, 13, 28, 0.10) 34%,
+      rgba(9, 13, 28, 0.10) 60%, rgba(9, 13, 28, 0.66) 100%),
     url('/assets/images/website-design/sunset.jpg');
   background-position: center, center, center 44%;
   background-size: cover, cover, cover;
@@ -545,8 +545,10 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
+  /* An oversized lower-right corner answers the sharp top-left bracket — a small
+     asymmetry that keeps the frame from reading as a default rounded rectangle. */
+  border-radius: 4px 4px 22px 4px;
+  border: 1px solid var(--line-strong);
 }
 .hero__portrait-cap {
   display: flex;
@@ -584,7 +586,7 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   text-decoration: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.24s var(--ease), background 0.24s var(--ease), box-shadow 0.24s var(--ease);
 }
 .hero__facet:first-child { border-left: 0; padding-left: 0; }
 .hero__facet:focus-visible { outline: 1px solid var(--ink-soft); outline-offset: 4px; }
@@ -785,7 +787,7 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   z-index: 0;
   background:
     linear-gradient(to bottom, var(--bg) 0%, transparent 16%, transparent 84%, var(--bg) 100%),
-    linear-gradient(rgba(14, 17, 22, 0.48), rgba(14, 17, 22, 0.48));
+    linear-gradient(rgba(10, 14, 28, 0.52), rgba(10, 14, 28, 0.52));
 }
 html[data-mode="light"] #about::before { opacity: 0.45; }
 html[data-mode="light"] #about::after {
@@ -1021,15 +1023,15 @@ html[data-mode="light"] #about::after {
   color: inherit;
   font: inherit;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
-              border-color 0.2s var(--ease), background 0.2s var(--ease);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), var(--shadow-sm);
+  transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease),
+              border-color 0.24s var(--ease), background 0.24s var(--ease);
 }
 .exp-card:hover {
   transform: translateY(-4px);
   border-color: var(--line-strong);
   background: var(--surface-2);
-  box-shadow: var(--shadow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), var(--shadow);
 }
 /* Deep-link highlight pulse (from the homepage "Current Position" card). */
 .exp-card.is-flag { animation: exp-flag 2.8s var(--ease) both; }
@@ -1042,6 +1044,43 @@ html[data-mode="light"] #about::after {
 @media (prefers-reduced-motion: reduce) {
   .exp-card.is-flag { animation: none; border-color: rgba(var(--accent-rgb), 0.65); }
 }
+
+/* ---- Current position (Seaspan): a living "water" card ----
+   A soft red tide drifts diagonally across the surface and breathes in and out
+   so the current role quietly reads as live. Kept low-contrast — present, not
+   loud. The card content sits above the wash; the red border-tint and a faint
+   ripple sheen finish the effect. */
+#exp-card-seaspan {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(225, 74, 74, 0.42);
+}
+#exp-card-seaspan > * { position: relative; z-index: 1; }
+#exp-card-seaspan::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(140% 110% at 22% 26%, rgba(229, 72, 72, 0.26), transparent 58%),
+    radial-gradient(150% 120% at 80% 78%, rgba(214, 58, 64, 0.20), transparent 60%);
+  background-size: 220% 220%, 200% 200%;
+  background-repeat: no-repeat;
+  animation: seaspan-tide 8.5s ease-in-out infinite;
+}
+@keyframes seaspan-tide {
+  0%,
+  100% { background-position: 0% 50%, 100% 50%; opacity: 0.5; }
+  50%  { background-position: 100% 45%, 0% 55%; opacity: 1; }
+}
+/* The Seaspan card keeps a gentle red edge on hover instead of the neutral one. */
+#exp-card-seaspan:hover { border-color: rgba(229, 72, 72, 0.6); }
+@media (prefers-reduced-motion: reduce) {
+  #exp-card-seaspan::after { animation: none; opacity: 0.6; }
+}
+
 .exp-card__logo { width: 50px; height: 50px; font-size: 1.05rem; }
 .exp-card__name { font-family: var(--font-head); font-weight: 600; font-size: 1.18rem; color: var(--ink); letter-spacing: -0.01em; }
 .exp-card__role { font-size: 0.86rem; color: var(--muted); margin-top: -0.4rem; }
@@ -1192,9 +1231,9 @@ body.exp-lock { overflow: hidden; }
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease),
-              border-color 0.22s var(--ease), background 0.22s var(--ease);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), var(--shadow-sm);
+  transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease),
+              border-color 0.24s var(--ease), background 0.24s var(--ease);
 }
 /* A crisp accent spine down the left edge -- the per-passion colour moment,
    brightening on hover instead of a soft gradient bloom. */
@@ -1213,7 +1252,7 @@ body.exp-lock { overflow: hidden; }
   transform: translateY(-5px);
   border-color: rgba(var(--card-accent), 0.6);
   background: var(--surface-2);
-  box-shadow: var(--shadow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), var(--shadow);
 }
 .pass-card:hover::before,
 .pass-card:focus-visible::before { opacity: 1; }
@@ -2014,7 +2053,7 @@ img.album__art {
   width: min(560px, 100%);
   border-radius: 18px;
   overflow: hidden;
-  background: #0c0e14;
+  background: #0b1020;
   color: #f4f6fb;
   box-shadow: 0 45px 100px -30px rgba(0, 0, 0, 0.9);
   opacity: 0;
@@ -2159,8 +2198,8 @@ img.album__art {
   --bb-orange:      #f97316;
   --bb-orange-soft: #fb923c;
   --bb-orange-deep: #c2410c;
-  --bb-court:       #181410;   /* hardwood-charcoal court surface */
-  --bb-court-2:     #241a12;
+  --bb-court:       #0f1426;   /* deep navy-charcoal court surface */
+  --bb-court-2:     #18213c;
   --bb-line:        rgba(255, 255, 255, 0.16);
   padding: 0 0 5.5rem;
 }
@@ -2508,8 +2547,24 @@ html[data-mode="light"] .bball-stats[data-state="live"] .bball-stat__value { col
 }
 
 @media (max-width: 680px) {
+  /* Tighten the generous desktop rhythm so phones don't scroll through dead
+     space; sections still breathe, just at a phone-appropriate scale. */
+  .section { padding: 3.75rem 0; }
+  .exp, .pass, .resume { padding-top: 3.25rem; }
+
   .resume__header { align-items: center; text-align: center; }
   .resume-item__head { flex-direction: column; gap: 0.15rem; }
+  /* The download action floats top-right on desktop; on a phone that overlaps
+     the centred header, so drop it back into the flow under the contact line. */
+  .resume__header .btn {
+    position: static;
+    margin-top: 0.4rem;
+    align-self: center;
+  }
+  .resume__header .btn[style] {
+    opacity: 1 !important; transform: none !important;
+    visibility: visible !important; pointer-events: auto !important;
+  }
 
   /* Hero, rebuilt for phones: a small filed portrait, the big name, copy, then
      the spec sheet as a 2x2 — composed for the width, not a shrunk desktop. */
