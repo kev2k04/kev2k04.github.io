@@ -409,6 +409,8 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   --muted: rgba(246, 248, 252, 0.64);
   --line: rgba(255, 255, 255, 0.16);
   --line-strong: rgba(255, 255, 255, 0.38);
+  --accent: #f5f5f7;
+  --accent-rgb: 245, 245, 247;
   background: #0a0c10;
   padding: clamp(5rem, 11vh, 8.5rem) 0 clamp(3.2rem, 7vh, 5rem);
   overflow: hidden;
@@ -478,10 +480,40 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 .hero__pin { color: var(--ink-soft); }
 .hero__dot { width: 4px; height: 4px; border-radius: 50%; background: var(--line-strong); }
 
-/* Name — editorial masthead, revealed one line at a time */
+/* Greeting composition: "Hi, my name is" → big KEVIN LIU masthead → "and
+   welcome to my website!" — one sentence, the name as the giant centrepiece. */
 .hero__title {
   margin: 0 0 1.5rem;
-  font-size: clamp(3.6rem, 11vw, 8rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.hero__greet {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 2.3vw, 1.7rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink-soft);
+}
+.hero__greet--pre { margin: 0 0 0.35rem 0.06em; }
+.hero__greet--post { margin: 0.45rem 0 0 0.06em; }
+/* Decorative oversized first letter of the greeting */
+.hero__cap {
+  font-family: var(--font-head);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.7em;
+  line-height: 0;
+  color: #ff9e63;
+  margin-right: 0.02em;
+}
+/* The name — editorial masthead, revealed one line at a time */
+.hero__name {
+  display: block;
+  font-family: var(--font-head);
+  font-size: clamp(3.4rem, 10.5vw, 7.6rem);
   font-weight: 600;
   letter-spacing: -0.045em;
   line-height: 0.9;

@@ -27,14 +27,16 @@ layout: default
         <span>{{ p.role }}</span>
       </p>
 
-      <h1 class="hero__title" aria-label="{{ p.name }}">
-        {%- assign nameparts = p.name | split: " " -%}
-        {%- for part in nameparts -%}
-        <span class="hero__line"><span class="hero__line-in">{{ part }}</span></span>
-        {%- endfor -%}
+      <h1 class="hero__title">
+        <span class="hero__greet hero__greet--pre"><span class="hero__cap">H</span>i, my name is</span>
+        <span class="hero__name">
+          {%- assign nameparts = p.name | split: " " -%}
+          {%- for part in nameparts -%}
+          <span class="hero__line"><span class="hero__line-in">{{ part }}</span></span>
+          {%- endfor -%}
+        </span>
+        <span class="hero__greet hero__greet--post">and welcome to my website!</span>
       </h1>
-
-      <p class="hero__lede">{{ p.headline }}</p>
 
       <div class="hero__cta">
         <div class="hero__actions">
@@ -60,9 +62,6 @@ layout: default
     <aside class="hero__aside">
       <figure class="hero__portrait">
         <img src="{{ '/assets/images/kevin.jpeg' | relative_url }}" alt="{{ p.name }}" />
-        <figcaption class="hero__portrait-cap">
-          <span>Kevin&nbsp;Liu</span><span>Vancouver</span>
-        </figcaption>
       </figure>
     </aside>
 
