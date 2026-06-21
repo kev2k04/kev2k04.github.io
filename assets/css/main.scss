@@ -140,6 +140,35 @@ html[data-mode="light"] {
 }
 
 /* =========================================================================
+   Scroll reveal — content lifts + fades in as it scrolls into view, once per
+   page load (stays revealed afterwards; a fresh load or returning to the page
+   reveals it again). `reveal-enabled` is set on <html> before paint — only when
+   IntersectionObserver is supported and motion is allowed — so no-JS, old, and
+   reduced-motion visitors just see everything. We offset with the `translate`
+   property (not `transform`) so it never fights a card's hover lift.
+   reveal.js adds .is-revealed; the lower-specificity hidden rule yields to it.
+   ========================================================================= */
+html.reveal-enabled :where(
+  .stats .stat,
+  #about .section__head, .about__body, .about__expertise,
+  .contact__inner > *,
+  .exp__head, .exp-card,
+  .pass__head, .pass-card,
+  .resume__block,
+  .build .section__head, .build__body > p,
+  .bball-hero__inner > *, .bball-stat, .bball-status, .bball-about, .bball-reel
+) {
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity 0.7s var(--ease), translate 0.7s var(--ease);
+  will-change: opacity, translate;
+}
+html.reveal-enabled .is-revealed {
+  opacity: 1;
+  translate: none;
+}
+
+/* =========================================================================
    Base
    ========================================================================= */
 *, *::before, *::after { box-sizing: border-box; }
@@ -165,9 +194,13 @@ h1, h2, h3, h4 {
   letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0 0 0.5em;
+  /* Balanced wrapping keeps multi-line headings evenly weighted (no lone
+     trailing word) — a small, professional typographic refinement. */
+  text-wrap: balance;
 }
 
-p { margin: 0 0 1rem; }
+/* Body copy avoids orphans/short last lines where supported. */
+p { margin: 0 0 1rem; text-wrap: pretty; }
 
 a { color: var(--ink); text-decoration: none; transition: color 0.18s var(--ease); }
 a:hover { color: var(--accent); }
@@ -490,7 +523,6 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 }
 .hero__greet {
   font-family: var(--font-body);
-  font-style: italic;
   font-weight: 400;
   font-size: clamp(1.15rem, 2.3vw, 1.7rem);
   line-height: 1.2;
@@ -644,10 +676,10 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   line-height: 1.45;
   color: var(--muted);
 }
-/* Music — the one flourish: italic display type with an underline that draws in. */
+/* Music — the one flourish: a display-weight word with an underline that draws
+   in on hover. Kept upright (no faux-italic) so the type stays consistent. */
 .facet__music {
   font-family: var(--font-head);
-  font-style: italic;
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--ink-soft);
@@ -657,7 +689,7 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 0% 1px;
-  transition: background-size 0.25s ease, color 0.22s ease;
+  transition: background-size 0.25s var(--ease), color 0.22s var(--ease);
 }
 .facet__music:hover,
 .facet__music:focus-visible {
@@ -1159,7 +1191,9 @@ html[data-mode="light"] #about::after {
   z-index: 100;
   display: grid;
   place-items: center;
-  padding: 1.5rem;
+  /* Horizontal padding matches .container so the open panel lines up edge-to
+     -edge with the trigger cards it grows out of. */
+  padding: 1.5rem 1.6rem;
 }
 .exp-overlay[hidden] { display: none; }
 .exp-scrim {
@@ -1176,7 +1210,10 @@ html[data-mode="light"] #about::after {
 .exp-panel {
   position: relative;
   z-index: 1;
-  width: min(720px, 100%);
+  /* Span the page content width (mirrors the passions panel) rather than a
+     narrow 720px card, so the detail view fills the page, not the viewport. */
+  width: 100%;
+  max-width: calc(var(--maxw) - 3.2rem);
   max-height: 86vh;
   overflow-y: auto;
   background: var(--surface);
@@ -1190,7 +1227,7 @@ html[data-mode="light"] #about::after {
 .exp-panel[hidden] { display: none; }
 /* Inner content fades in once the box has zoomed up, masking FLIP distortion */
 .exp-panel__inner {
-  padding: 1.7rem 1.9rem 2.1rem;
+  padding: 2rem 2.4rem 2.4rem;
   opacity: 0;
   transition: opacity 0.28s var(--ease);
 }

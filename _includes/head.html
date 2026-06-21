@@ -12,6 +12,15 @@
           document.documentElement.setAttribute('data-mode', 'light');
         }
       } catch (e) {}
+      // Arm scroll-reveal before first paint (so its hidden state applies with
+      // no flash). Skipped without IntersectionObserver or when the visitor
+      // prefers reduced motion — then everything is simply shown.
+      try {
+        var mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if ('IntersectionObserver' in window && !mql.matches) {
+          document.documentElement.classList.add('reveal-enabled');
+        }
+      } catch (e) {}
     })();
   </script>
 
