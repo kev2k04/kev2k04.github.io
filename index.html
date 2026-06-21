@@ -21,12 +21,6 @@ layout: default
 
   <div class="container hero__inner">
     <header class="hero__lead">
-      <p class="hero__eyebrow">
-        <span class="hero__pin">{{ p.location }}</span>
-        <span class="hero__dot" aria-hidden="true"></span>
-        <span>{{ p.role }}</span>
-      </p>
-
       <h1 class="hero__title">
         <span class="hero__greet hero__greet--pre">Hi, my name is</span>
         <span class="hero__name">
@@ -62,6 +56,10 @@ layout: default
     <aside class="hero__aside">
       <figure class="hero__portrait">
         <img src="{{ '/assets/images/kevin.jpeg' | relative_url }}" alt="{{ p.name }}" />
+        <figcaption class="hero__portrait-cap">
+          <span class="hero__pin">{{ p.location }}</span>
+          <span>{{ p.role }}</span>
+        </figcaption>
       </figure>
     </aside>
 

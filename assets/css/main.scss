@@ -550,15 +550,17 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 }
 .hero__portrait-cap {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 0.75rem;
+  flex-direction: column;
+  gap: 0.28rem;
+  margin-top: 0.8rem;
   font-family: var(--font-mono);
   font-size: 0.64rem;
   letter-spacing: 0.1em;
+  line-height: 1.45;
   text-transform: uppercase;
   color: var(--muted);
 }
+.hero__portrait-cap .hero__pin { color: var(--ink-soft); }
 
 /* SIGNATURE — identity spec sheet: the four sides as a mono readout row */
 .hero__facets {
