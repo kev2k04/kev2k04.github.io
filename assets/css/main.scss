@@ -499,16 +499,6 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 }
 .hero__greet--pre { margin: 0 0 0.35rem 0.06em; }
 .hero__greet--post { margin: 0.45rem 0 0 0.06em; }
-/* Decorative oversized first letter of the greeting */
-.hero__cap {
-  font-family: var(--font-head);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.7em;
-  line-height: 0;
-  color: var(--ink);
-  margin-right: 0.02em;
-}
 /* The name — editorial masthead, revealed one line at a time */
 .hero__name {
   display: block;
