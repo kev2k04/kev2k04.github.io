@@ -1046,16 +1046,18 @@ html[data-mode="light"] #about::after {
 }
 
 /* ---- Current position (Seaspan): a living "water" card ----
-   A soft red tide drifts diagonally across the surface and breathes in and out
-   so the current role quietly reads as live. Kept low-contrast — present, not
-   loud. The card content sits above the wash; the red border-tint and a faint
-   ripple sheen finish the effect. */
+   The current role is the one we want clicked, so it churns like backlit water:
+   two stacked layers of soft red pools slosh on different, out-of-phase clocks —
+   growing, shrinking and wandering so the colour never sits still — while the red
+   border swells brighter and THICKER on the beat to pull the eye. Card content
+   sits above the water; reduced-motion gets a calm static version. */
 #exp-card-seaspan {
   position: relative;
   overflow: hidden;
-  border-color: rgba(225, 74, 74, 0.42);
+  border-color: rgba(229, 72, 72, 0.55);
 }
 #exp-card-seaspan > * { position: relative; z-index: 1; }
+#exp-card-seaspan::before,
 #exp-card-seaspan::after {
   content: "";
   position: absolute;
@@ -1063,22 +1065,74 @@ html[data-mode="light"] #about::after {
   z-index: 0;
   pointer-events: none;
   border-radius: inherit;
-  background:
-    radial-gradient(140% 110% at 22% 26%, rgba(229, 72, 72, 0.26), transparent 58%),
-    radial-gradient(150% 120% at 80% 78%, rgba(214, 58, 64, 0.20), transparent 60%);
-  background-size: 220% 220%, 200% 200%;
   background-repeat: no-repeat;
-  animation: seaspan-tide 8.5s ease-in-out infinite;
+}
+/* Deep layer — the body of water sloshing on a slower, offset clock. Three
+   pools drift on irregular paths and breathe in size so they read as swell,
+   not a tidy orbit. */
+#exp-card-seaspan::before {
+  background-image:
+    radial-gradient(closest-side at 50% 50%, rgba(235, 72, 72, 0.40), transparent 70%),
+    radial-gradient(closest-side at 50% 50%, rgba(208, 54, 70, 0.34), transparent 72%),
+    radial-gradient(closest-side at 50% 50%, rgba(255, 96, 96, 0.22), transparent 66%);
+  background-size: 130% 130%, 150% 150%, 95% 95%;
+  opacity: 0.92;
+  animation: seaspan-slosh 4.6s ease-in-out infinite;
+}
+/* Surface layer — brighter, smaller ripples on the brisk beat, plus the
+   expanding red border ring. Out of phase with the deep layer, so where they
+   cross the red flares like a caustic and the whole surface looks choppy. */
+#exp-card-seaspan::after {
+  background-image:
+    radial-gradient(closest-side at 50% 50%, rgba(255, 108, 108, 0.34), transparent 64%),
+    radial-gradient(closest-side at 50% 50%, rgba(245, 84, 84, 0.26), transparent 68%);
+  background-size: 85% 85%, 110% 110%;
+  animation: seaspan-tide 3s ease-in-out infinite;
+}
+@keyframes seaspan-slosh {
+  0%   { background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 130% 130%, 150% 150%, 90% 90%; }
+  25%  { background-position: 72% 12%, 28% 86%, 22% 62%; background-size: 152% 152%, 126% 126%, 122% 122%; }
+  50%  { background-position: 88% 72%, 14% 30%, 78% 40%; background-size: 118% 118%, 168% 168%, 80% 80%; }
+  75%  { background-position: 38% 90%, 62% 16%, 30% 76%; background-size: 162% 162%, 122% 122%, 112% 112%; }
+  100% { background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 130% 130%, 150% 150%, 90% 90%; }
 }
 @keyframes seaspan-tide {
-  0%,
-  100% { background-position: 0% 50%, 100% 50%; opacity: 0.5; }
-  50%  { background-position: 100% 45%, 0% 55%; opacity: 1; }
+  /* opacity = the swell; the inset ring is the red border — it brightens AND
+     thickens (4px → 12px → 4px) on the beat so the edge visibly expands; the two
+     ripples grow + drift across so the bright surface keeps moving. */
+  0% {
+    opacity: 0.5;
+    background-position: 30% 36%, 74% 68%;
+    background-size: 78% 78%, 100% 100%;
+    box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 4px rgba(235, 78, 78, 0.55);
+  }
+  50% {
+    opacity: 1;
+    background-position: 66% 60%, 30% 38%;
+    background-size: 112% 112%, 140% 140%;
+    box-shadow: inset 0 0 60px rgba(235, 70, 70, 0.62), inset 0 0 0 12px rgba(255, 100, 100, 1);
+  }
+  100% {
+    opacity: 0.5;
+    background-position: 30% 36%, 74% 68%;
+    background-size: 78% 78%, 100% 100%;
+    box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 4px rgba(235, 78, 78, 0.55);
+  }
 }
-/* The Seaspan card keeps a gentle red edge on hover instead of the neutral one. */
-#exp-card-seaspan:hover { border-color: rgba(229, 72, 72, 0.6); }
+/* Hover: freeze the water mid-churn at full strength and warm the edge so the
+   click feels rewarded. */
+#exp-card-seaspan:hover { border-color: rgba(255, 100, 100, 0.9); }
+#exp-card-seaspan:hover::before,
+#exp-card-seaspan:hover::after { animation-play-state: paused; }
+#exp-card-seaspan:hover::after { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
-  #exp-card-seaspan::after { animation: none; opacity: 0.6; }
+  #exp-card-seaspan::before { animation: none; opacity: 0.85; }
+  #exp-card-seaspan::after {
+    animation: none;
+    opacity: 0.7;
+    background-position: 30% 36%, 74% 68%;
+    box-shadow: inset 0 0 34px rgba(229, 72, 72, 0.45), inset 0 0 0 8px rgba(245, 84, 84, 0.7);
+  }
 }
 
 .exp-card__logo { width: 50px; height: 50px; font-size: 1.05rem; }
