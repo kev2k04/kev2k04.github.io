@@ -562,10 +562,10 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 }
 .hero__portrait-cap .hero__pin { color: var(--ink-soft); }
 
-/* SIGNATURE — identity spec sheet: the four sides as a mono readout row */
+/* SIGNATURE — quietly interactive quick-links. Not obviously clickable at
+   rest; one restrained reveal on hover; a physical compress on click (cards.js). */
 .hero__facets {
   grid-area: spec;
-  list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
@@ -576,41 +576,86 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  padding: 1.3rem 1.3rem 0;
+  gap: 0.55rem;
+  padding: 1.4rem 1.3rem 1.15rem;
   border-left: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+  cursor: default;                 /* discoverable, not advertised */
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, border-color 0.22s ease;
 }
 .hero__facet:first-child { border-left: 0; padding-left: 0; }
-/* A precise accent tick draws across the top rule on hover — the one micro-flourish */
-.hero__facet::before {
-  content: "";
-  position: absolute;
-  top: -1px; left: 0;
-  height: 2px; width: 0;
-  background: var(--accent);
-  transition: width 0.32s var(--ease);
-}
-.hero__facet:first-child::before { left: 0; }
-.hero__facet:hover::before { width: 100%; }
+.hero__facet:focus-visible { outline: 1px solid var(--ink-soft); outline-offset: 4px; }
+/* Click: brief compress (80ms in); release rides the base 150ms transition. */
+.hero__facet.is-press { transform: scale(0.98); transition: transform 0.08s ease; }
+/* Neighbouring dividers soften ("thin") when an adjacent card is hovered. */
+.hero__facet:hover { border-left-color: rgba(255, 255, 255, 0.06); }
+.hero__facet:hover + .hero__facet { border-left-color: rgba(255, 255, 255, 0.06); }
+
+/* The mono number quietly trades for an arrow on hover — the single reveal. */
 .facet__no {
+  position: relative;
+  align-self: flex-start;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   color: var(--muted);
-  opacity: 0.7;
 }
+.facet__num { display: inline-block; opacity: 0.7; transition: opacity 0.22s ease, transform 0.22s ease; }
+.facet__arrow {
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translate(-3px, -50%);
+  opacity: 0;
+  font-size: 0.86rem;
+  line-height: 1;
+  color: var(--ink-soft);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.hero__facet:hover .facet__num,
+.hero__facet:focus-visible .facet__num { opacity: 0; transform: translateX(5px); }
+.hero__facet:hover .facet__arrow,
+.hero__facet:focus-visible .facet__arrow { opacity: 1; transform: translate(0, -50%); }
+
 .facet__k {
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: 1.08rem;
-  letter-spacing: -0.01em;
+  font-size: 1.14rem;
+  letter-spacing: -0.012em;
   color: var(--ink);
 }
 .facet__v {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
-  line-height: 1.4;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
   color: var(--muted);
+}
+/* Music — the one flourish: italic display type with an underline that draws in. */
+.facet__music {
+  font-family: var(--font-head);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  cursor: pointer;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.25s ease, color 0.22s ease;
+}
+.facet__music:hover,
+.facet__music:focus-visible {
+  color: #efe4d4;
+  background-size: 100% 1px;
+  outline: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__facet, .facet__num, .facet__arrow, .facet__music { transition: none; }
+  .hero__facet.is-press { transform: none; }
 }
 
 /* Scroll cue — static (no loop); nudges on hover */
@@ -975,6 +1020,17 @@ html[data-mode="light"] #about::after {
   border-color: var(--line-strong);
   background: var(--surface-2);
   box-shadow: var(--shadow);
+}
+/* Deep-link highlight pulse (from the homepage "Current Position" card). */
+.exp-card.is-flag { animation: exp-flag 2.8s var(--ease) both; }
+@keyframes exp-flag {
+  0%   { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); border-color: var(--line); }
+  10%  { box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.5); border-color: rgba(var(--accent-rgb), 0.65); }
+  70%  { box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); border-color: var(--line); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exp-card.is-flag { animation: none; border-color: rgba(var(--accent-rgb), 0.65); }
 }
 .exp-card__logo { width: 50px; height: 50px; font-size: 1.05rem; }
 .exp-card__name { font-family: var(--font-head); font-weight: 600; font-size: 1.18rem; color: var(--ink); letter-spacing: -0.01em; }

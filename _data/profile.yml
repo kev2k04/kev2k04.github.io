@@ -8,6 +8,10 @@ location: Vancouver, BC
 headline: >-
   Hi my name is Kevin, and welcome to my website!
 
+# External music/tracks page linked from the "Music" word in the Passions card.
+# TODO(Kevin): set this to your SoundCloud / Spotify / tracks link.
+music_url: ""
+
 # A short professional bio shown in the "About" section.
 about: >-
   I'm a Bachelor of Commerce student at the UBC Sauder School of Business with
