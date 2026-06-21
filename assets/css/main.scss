@@ -506,7 +506,7 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   font-weight: 600;
   font-size: 1.7em;
   line-height: 0;
-  color: #ff9e63;
+  color: var(--ink);
   margin-right: 0.02em;
 }
 /* The name — editorial masthead, revealed one line at a time */
