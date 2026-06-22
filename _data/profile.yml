@@ -5,6 +5,8 @@
 name: Kevin Liu
 role: Student at the University of British Columbia
 location: Vancouver, BC
+# Shown under the headshot as "Graduating <grad_date>". Leave blank to hide.
+grad_date: December 2027
 headline: >-
   Hi my name is Kevin, and welcome to my website!
 
@@ -21,17 +23,6 @@ about: >-
   early-stage search fund, pairing rigorous quantitative analysis with a
   genuine curiosity for how businesses create value. I'm always looking for
   opportunities to apply finance and analytics to real-world problems.
-
-# Key figures shown as "stats" on the landing page.
-stats:
-  - value: 4th Year
-    label: University Student
-  - value: Dec 2027
-    label: Graduation Date
-  - value: Seaspan
-    label: Current Company
-  - value: "FP&amp;A"
-    label: Current Role
 
 # Areas of expertise, rendered as a tag list.
 expertise:

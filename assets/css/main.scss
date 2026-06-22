@@ -117,8 +117,8 @@ html[data-mode="light"] {
 
 /* Smooth, flash-free transition when flipping light/dark. */
 @media (prefers-reduced-motion: no-preference) {
-  body, .site-header, .site-footer, .stats, .section--alt, .hero,
-  .resume__header, .exp-card, .tag, .stat {
+  body, .site-header, .site-footer, .section--alt, .hero,
+  .resume__header, .exp-card, .tag {
     transition: background-color 0.4s var(--ease), color 0.4s var(--ease),
                 border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
@@ -149,7 +149,6 @@ html[data-mode="light"] {
    reveal.js adds .is-revealed; the lower-specificity hidden rule yields to it.
    ========================================================================= */
 html.reveal-enabled :where(
-  .stats .stat,
   #about .section__head, .about__body, .about__expertise,
   .contact__inner > *,
   .exp__head, .exp-card,
@@ -595,6 +594,15 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   color: var(--muted);
 }
 .hero__portrait-cap .hero__pin { color: var(--ink-soft); }
+/* Graduation line — sits a hair brighter with a hairline rule above it so it
+   reads as the headline fact under the portrait. */
+.hero__grad {
+  margin-top: 0.18rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-weight: 500;
+}
 
 /* SIGNATURE — quietly interactive quick-links. Not obviously clickable at
    rest; one restrained reveal on hover; a physical compress on click (cards.js). */
@@ -738,49 +746,6 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   border-color: var(--accent);
   transform: translateY(-3px);
   box-shadow: var(--glow-accent-sm);
-}
-
-/* =========================================================================
-   Stats band
-   ========================================================================= */
-.stats {
-  background: var(--bg-alt);
-  border-block: 1px solid var(--line);
-}
-.stats__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-.stat {
-  text-align: center;
-  padding: 2.4rem 1rem;
-  position: relative;
-}
-.stat + .stat::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 22%; bottom: 22%;
-  width: 1px;
-  background: var(--line);
-}
-.stat__value {
-  display: block;
-  font-family: var(--font-head);
-  font-weight: 600;
-  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
-  color: var(--ink);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-}
-.stat__label {
-  display: block;
-  margin-top: 0.7rem;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--muted);
 }
 
 /* =========================================================================
@@ -2594,12 +2559,6 @@ html[data-mode="light"] .bball-stats[data-state="live"] .bball-stat__value { col
 @media (max-width: 880px) {
   .about { grid-template-columns: 1fr; gap: 2.4rem; }
   .exp-grid { grid-template-columns: repeat(2, 1fr); }
-  .stats__grid { grid-template-columns: repeat(2, 1fr); }
-  .stat { padding: 2rem 0.75rem; }
-  .stat__value { font-size: clamp(1.5rem, 6vw, 2rem); }
-  .stat + .stat::before { display: none; }
-  .stat:nth-child(2)::before,
-  .stat:nth-child(4)::before { display: block; }
 }
 
 @media (max-width: 640px) {

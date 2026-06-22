@@ -13,7 +13,6 @@
 
   // Must stay in sync with the selector list in main.scss.
   var SELECTOR = [
-    '.stats .stat',
     '#about .section__head', '.about__body', '.about__expertise',
     '.contact__inner > *',
     '.exp__head', '.exp-card',

@@ -9,7 +9,7 @@ layout: default
   LAYOUT CHOICE — "flows into the next section" over a locked full-viewport hero.
   A 100vh centred hero is the template default (trivial to build, generic). A hero
   sized to its content that deliberately FLOWS — an asymmetric masthead grid, an
-  identity "spec sheet", and the stats band peeking below a scroll cue — is harder
+  identity "spec sheet", and a scroll cue — is harder
   to tune by hand and reads more editorial/premium, while improving usability: it
   invites the scroll instead of walling off a screen. Type wins; the background is
   a masked hairline blueprint grid, never a glow.
@@ -59,6 +59,9 @@ layout: default
         <figcaption class="hero__portrait-cap">
           <span class="hero__pin">{{ p.location }}</span>
           <span>{{ p.role }}</span>
+          {%- if p.grad_date and p.grad_date != '' -%}
+          <span class="hero__grad">Graduating {{ p.grad_date }}</span>
+          {%- endif -%}
         </figcaption>
       </figure>
     </aside>
@@ -99,18 +102,6 @@ layout: default
     <span>Scroll</span>
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="6 13 12 19 18 13"/></svg>
   </a>
-</section>
-
-<!-- ===================== STATS ===================== -->
-<section class="stats">
-  <div class="container stats__grid">
-    {%- for stat in p.stats -%}
-      <div class="stat">
-        <span class="stat__value">{{ stat.value }}</span>
-        <span class="stat__label">{{ stat.label }}</span>
-      </div>
-    {%- endfor -%}
-  </div>
 </section>
 
 <!-- ===================== ABOUT ===================== -->
