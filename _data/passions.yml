@@ -207,3 +207,12 @@
       level: "TODO(Kevin): level"
       position: "TODO(Kevin): event(s)"
       memory: "TODO(Kevin): a PR, medal, or memory."
+    # Personal Fitness — your ongoing gym journey. Fill in the placeholders.
+    - name: "Personal Fitness"
+      years: "TODO(Kevin): since 20XX"            # when you started training
+      level: "TODO(Kevin): split, e.g. PPL · 5x / week"
+      position: "TODO(Kevin): focus — strength / hypertrophy"
+      memory: >-
+        TODO(Kevin): Tell your gym story — how you got started, what keeps you
+        consistent week to week, the goals you're chasing now, and a milestone
+        or personal record (a big lift, a body recomp, a streak) you're proud of.

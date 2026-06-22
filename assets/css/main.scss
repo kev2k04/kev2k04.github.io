@@ -611,7 +611,9 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* minmax(0, 1fr) forces every column to the exact same width regardless of
+     its text length, so the four boxes always match. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: 1px solid var(--line-strong);
 }
 .hero__facet {
@@ -628,7 +630,9 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.24s var(--ease), background 0.24s var(--ease), box-shadow 0.24s var(--ease);
 }
-.hero__facet:first-child { border-left: 0; padding-left: 0; }
+/* Leftmost box drops only the divider line; padding stays so all four share the
+   identical internal layout. */
+.hero__facet:first-child { border-left: 0; }
 .hero__facet:focus-visible { outline: 1px solid var(--ink-soft); outline-offset: 4px; }
 /* Click: a brief physical compress. */
 .hero__facet.is-press { transform: translateY(-2px) scale(0.975); transition: transform 0.08s ease; }
@@ -645,30 +649,35 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 .hero__facet:hover .facet__no,
 .hero__facet:focus-visible .facet__no { color: var(--ink-soft); }
 
-/* The mono number quietly trades for an arrow on hover — the single reveal. */
+/* The mono number quietly trades for an arrow on hover — number and arrow share
+   one grid cell (no absolute positioning) so the swap is always pixel-aligned. */
 .facet__no {
-  position: relative;
   align-self: flex-start;
+  display: inline-grid;
+  place-items: center start;
+  min-height: 1.1em;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   color: var(--muted);
 }
-.facet__num { display: inline-block; opacity: 0.7; transition: opacity 0.22s ease, transform 0.22s ease; }
+.facet__num,
 .facet__arrow {
-  position: absolute;
-  left: 0; top: 50%;
-  transform: translate(-3px, -50%);
+  grid-area: 1 / 1;
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+}
+.facet__num { opacity: 0.8; }
+.facet__arrow {
+  display: inline-flex;
+  align-items: center;
   opacity: 0;
-  font-size: 0.86rem;
-  line-height: 1;
+  transform: translateX(-5px);
   color: var(--ink-soft);
-  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 .hero__facet:hover .facet__num,
-.hero__facet:focus-visible .facet__num { opacity: 0; transform: translateX(5px); }
+.hero__facet:focus-visible .facet__num { opacity: 0; transform: translateX(6px); }
 .hero__facet:hover .facet__arrow,
-.hero__facet:focus-visible .facet__arrow { opacity: 1; transform: translate(0, -50%); }
+.hero__facet:focus-visible .facet__arrow { opacity: 1; transform: translateX(0); }
 
 .facet__k {
   font-family: var(--font-head);
@@ -836,6 +845,110 @@ html[data-mode="light"] #about::after {
   transition: border-color 0.18s var(--ease), color 0.18s var(--ease);
 }
 .tag:hover { border-color: var(--accent); color: var(--ink); }
+
+/* ---- Interactive expertise tags: light up + grow on hover, popup on click ---- */
+.taglist--skills { gap: 0.6rem; }
+.taglist--skills li { display: inline-flex; }
+.tag--skill {
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s var(--ease), background 0.2s var(--ease),
+              border-color 0.2s var(--ease), color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.tag--skill:hover,
+.tag--skill:focus-visible {
+  transform: translateY(-2px) scale(1.06);
+  color: var(--ink);
+  background: var(--surface-2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 10px 22px -14px rgba(0, 0, 0, 0.7);
+  outline: none;
+}
+.tag--skill:active { transform: translateY(-1px) scale(1.02); }
+@media (prefers-reduced-motion: reduce) {
+  .tag--skill { transition: color 0.18s var(--ease), border-color 0.18s var(--ease), background 0.18s var(--ease); }
+  .tag--skill:hover, .tag--skill:focus-visible { transform: none; }
+}
+
+/* Skill popup — neutral (accent-white) sibling of the panel/lyrics modals. */
+.skill-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+.skill-overlay[hidden] { display: none; }
+.skill-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+.skill-overlay.is-active .skill-scrim { opacity: 1; }
+.skill-modal {
+  position: relative;
+  z-index: 1;
+  width: min(520px, 100%);
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 1.6rem 1.8rem 1.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(24px) scale(0.94);
+  transition: opacity 0.35s var(--ease), transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+.skill-overlay.is-active .skill-modal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .skill-modal { transition: opacity 0.2s var(--ease); transform: none; }
+  .skill-overlay.is-active .skill-modal { transform: none; }
+}
+.skill-modal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: color 0.18s var(--ease);
+}
+.skill-modal__back:hover { color: var(--accent); }
+.skill-modal__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.skill-modal__title { font-size: clamp(1.4rem, 3vw, 1.8rem); margin: 0 0 0.85rem; letter-spacing: -0.01em; }
+.skill-modal__media {
+  margin: 0 0 1rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.skill-modal__media[hidden] { display: none; }
+.skill-modal__media img { width: 100%; height: auto; display: block; }
+.skill-modal__blurb { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.7; margin: 0 0 1.3rem; }
+.skill-modal__link[hidden] { display: none; }
 
 /* =========================================================================
    Contact
@@ -1051,7 +1164,7 @@ html[data-mode="light"] #about::after {
 #exp-card-seaspan {
   position: relative;
   overflow: hidden;
-  border-color: rgba(229, 72, 72, 0.55);
+  border-color: rgba(229, 72, 72, 0.38);
 }
 #exp-card-seaspan > * { position: relative; z-index: 1; }
 #exp-card-seaspan::before,
@@ -1069,9 +1182,9 @@ html[data-mode="light"] #about::after {
    not a tidy orbit. */
 #exp-card-seaspan::before {
   background-image:
-    radial-gradient(closest-side at 50% 50%, rgba(235, 72, 72, 0.40), transparent 70%),
-    radial-gradient(closest-side at 50% 50%, rgba(208, 54, 70, 0.34), transparent 72%),
-    radial-gradient(closest-side at 50% 50%, rgba(255, 96, 96, 0.22), transparent 66%);
+    radial-gradient(closest-side at 50% 50%, rgba(235, 72, 72, 0.24), transparent 70%),
+    radial-gradient(closest-side at 50% 50%, rgba(208, 54, 70, 0.20), transparent 72%),
+    radial-gradient(closest-side at 50% 50%, rgba(255, 96, 96, 0.13), transparent 66%);
   background-size: 158% 158%, 180% 180%, 118% 118%;
   /* Same ~4.2s beat as the surface + border so the whole interior phases in and
      out together — the red floods in as the border swells, holds full, then
@@ -1083,8 +1196,8 @@ html[data-mode="light"] #about::after {
    cross the red flares like a caustic and the whole surface looks choppy. */
 #exp-card-seaspan::after {
   background-image:
-    radial-gradient(closest-side at 50% 50%, rgba(255, 108, 108, 0.34), transparent 64%),
-    radial-gradient(closest-side at 50% 50%, rgba(245, 84, 84, 0.26), transparent 68%);
+    radial-gradient(closest-side at 50% 50%, rgba(255, 108, 108, 0.20), transparent 64%),
+    radial-gradient(closest-side at 50% 50%, rgba(245, 84, 84, 0.15), transparent 68%);
   background-size: 115% 115%, 140% 140%;
   animation: seaspan-tide 4.2s ease-in-out infinite;
 }
@@ -1092,56 +1205,56 @@ html[data-mode="light"] #about::after {
   /* opacity breathes 0.4 → 1 → 0.4 in lockstep with the border swell; positions
      and sizes churn through five irregular stops so it reads as water, not a
      simple fade. */
-  0%   { opacity: 0.2;  background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 158% 158%, 180% 180%, 112% 112%; }
-  22%  { opacity: 0.62; background-position: 72% 12%, 28% 86%, 22% 62%; background-size: 182% 182%, 152% 152%, 148% 148%; }
-  /* flood to full, then hold full red (44%–58%) while the water keeps drifting */
-  44%  { opacity: 1;    background-position: 88% 72%, 14% 30%, 78% 40%; background-size: 144% 144%, 200% 200%, 100% 100%; }
-  58%  { opacity: 1;    background-position: 80% 64%, 20% 36%, 72% 46%; background-size: 150% 150%, 196% 196%, 104% 104%; }
-  78%  { opacity: 0.62; background-position: 38% 90%, 62% 16%, 30% 76%; background-size: 194% 194%, 148% 148%, 138% 138%; }
-  100% { opacity: 0.2;  background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 158% 158%, 180% 180%, 112% 112%; }
+  0%   { opacity: 0.12; background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 158% 158%, 180% 180%, 112% 112%; }
+  22%  { opacity: 0.34; background-position: 72% 12%, 28% 86%, 22% 62%; background-size: 182% 182%, 152% 152%, 148% 148%; }
+  /* swell to a gentle peak, hold (44%–58%) while the water keeps drifting */
+  44%  { opacity: 0.5;  background-position: 88% 72%, 14% 30%, 78% 40%; background-size: 144% 144%, 200% 200%, 100% 100%; }
+  58%  { opacity: 0.5;  background-position: 80% 64%, 20% 36%, 72% 46%; background-size: 150% 150%, 196% 196%, 104% 104%; }
+  78%  { opacity: 0.34; background-position: 38% 90%, 62% 16%, 30% 76%; background-size: 194% 194%, 148% 148%, 138% 138%; }
+  100% { opacity: 0.12; background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 158% 158%, 180% 180%, 112% 112%; }
 }
 @keyframes seaspan-tide {
   /* opacity = the swell; the inset ring is the red border — it brightens AND
      thickens gently (2px → 4px → 2px); it floods to full then HOLDS fully red
      across 44%–58% before easing back down. */
   0% {
-    opacity: 0.32;
+    opacity: 0.16;
     background-position: 30% 36%, 74% 68%;
     background-size: 105% 105%, 128% 128%;
-    box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 2px rgba(235, 78, 78, 0.5);
+    box-shadow: inset 0 0 8px rgba(229, 72, 72, 0.14), inset 0 0 0 1px rgba(229, 72, 72, 0.3);
   }
   44% {
-    opacity: 1;
+    opacity: 0.55;
     background-position: 66% 60%, 30% 38%;
     background-size: 150% 150%, 180% 180%;
-    box-shadow: inset 0 0 40px rgba(235, 70, 70, 0.55), inset 0 0 0 4px rgba(255, 100, 100, 1);
+    box-shadow: inset 0 0 22px rgba(235, 70, 70, 0.28), inset 0 0 0 2px rgba(245, 90, 90, 0.6);
   }
   58% {
-    opacity: 1;
+    opacity: 0.55;
     background-position: 62% 56%, 34% 42%;
     background-size: 152% 152%, 182% 182%;
-    box-shadow: inset 0 0 40px rgba(235, 70, 70, 0.55), inset 0 0 0 4px rgba(255, 100, 100, 1);
+    box-shadow: inset 0 0 22px rgba(235, 70, 70, 0.28), inset 0 0 0 2px rgba(245, 90, 90, 0.6);
   }
   100% {
-    opacity: 0.32;
+    opacity: 0.16;
     background-position: 30% 36%, 74% 68%;
     background-size: 105% 105%, 128% 128%;
-    box-shadow: inset 0 0 12px rgba(229, 72, 72, 0.28), inset 0 0 0 2px rgba(235, 78, 78, 0.5);
+    box-shadow: inset 0 0 8px rgba(229, 72, 72, 0.14), inset 0 0 0 1px rgba(229, 72, 72, 0.3);
   }
 }
 /* Hover: freeze the water mid-churn at full strength and warm the edge so the
    click feels rewarded. */
-#exp-card-seaspan:hover { border-color: rgba(255, 100, 100, 0.9); }
+#exp-card-seaspan:hover { border-color: rgba(245, 90, 90, 0.65); }
 #exp-card-seaspan:hover::before,
 #exp-card-seaspan:hover::after { animation-play-state: paused; }
-#exp-card-seaspan:hover::after { opacity: 1; }
+#exp-card-seaspan:hover::after { opacity: 0.6; }
 @media (prefers-reduced-motion: reduce) {
-  #exp-card-seaspan::before { animation: none; opacity: 0.85; }
+  #exp-card-seaspan::before { animation: none; opacity: 0.4; }
   #exp-card-seaspan::after {
     animation: none;
-    opacity: 0.7;
+    opacity: 0.4;
     background-position: 30% 36%, 74% 68%;
-    box-shadow: inset 0 0 30px rgba(229, 72, 72, 0.45), inset 0 0 0 3px rgba(245, 84, 84, 0.7);
+    box-shadow: inset 0 0 16px rgba(229, 72, 72, 0.22), inset 0 0 0 2px rgba(245, 84, 84, 0.45);
   }
 }
 

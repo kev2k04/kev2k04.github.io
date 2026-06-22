@@ -27,7 +27,9 @@
   <title>{% if page.title %}{{ page.title }} &middot; {{ site.title }}{% else %}{{ site.title }} &middot; {{ site.tagline | strip_html }}{% endif %}</title>
 
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
+  {%- comment -%} Favicon: a square crop of the aurora photo (me under the northern lights). {%- endcomment -%}
+  <link rel="icon" type="image/png" href="{{ '/assets/favicon.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
 
   {%- comment -%} Schibsted Grotesk (display) + Inter (body) + JetBrains Mono (data/labels). {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">

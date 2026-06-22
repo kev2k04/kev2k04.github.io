@@ -24,16 +24,53 @@ about: >-
   genuine curiosity for how businesses create value. I'm always looking for
   opportunities to apply finance and analytics to real-world problems.
 
-# Areas of expertise, rendered as a tag list.
+# Areas of expertise, rendered as interactive tags. Click a tag → popup.
+# Each item: `name` (required) + optional `blurb` (shown in the popup). To
+# showcase a real project later, add to any item:
+#   link: https://...          # adds a "View project" button
+#   link_label: View the model # custom button text (default: "View project")
+#   image: /assets/images/...  # screenshot shown at the top of the popup
 expertise:
-  - Financial Modeling
-  - FP&amp;A
-  - Financial Analysis
-  - Statistical Data Analysis
-  - Business Analytics
-  - Valuation
-  - Private Equity Research
-  - Excel
+  - name: Financial Modeling
+    blurb: >-
+      Built scenario and sensitivity analysis on a 2027–2040 long-term forecast
+      model to support financial reporting and value contract opportunities.
+  - name: FP&amp;A
+    blurb: >-
+      Ran month-end budget-to-actual variance analysis across a consolidated
+      income statement and balance sheet for management and Board reporting.
+  - name: Financial Analysis
+    blurb: >-
+      Turned raw financial data into decision-ready insight across forecasting,
+      budgeting, and executive reporting.
+  - name: Statistical Data Analysis
+    blurb: >-
+      Applied quantitative methods to translate large datasets into reliable,
+      actionable findings.
+  - name: Business Analytics
+    blurb: >-
+      Connected operational and financial data to surface the drivers behind
+      performance.
+  - name: Valuation
+    blurb: >-
+      Valued contract opportunities with scenario-driven, assumption-tested
+      models.
+  - name: Forecasting
+    blurb: >-
+      Modeled a 2027–2040 long-term forecast across inflation, project-win, and
+      best / worst-case scenarios.
+  - name: Variance Analysis
+    blurb: >-
+      Performed month-end budget-to-actual variance analysis spanning 30+
+      departments.
+  - name: Power BI
+    blurb: >-
+      Translated long-term forecast output into executive-ready visuals for a
+      120+ person finance audience.
+  - name: Excel
+    blurb: >-
+      Power user — dynamic models, scenario tooling, and clean, auditable
+      workbooks.
 
 # ---------------------------------------------------------------------------
 # Social & professional links. Remove any you don't use; the icon is chosen
@@ -48,7 +85,7 @@ socials:
     url: mailto:Kev2k04@gmail.com
   - name: GitHub
     icon: github
-    url: https://github.com/your-handle
+    url: https://github.com/Kev2k04
   - name: YouTube
     icon: youtube
     url: https://www.youtube.com/@kevxn0439
