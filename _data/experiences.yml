@@ -23,9 +23,7 @@
     FP&amp;A department. Here, I support forecasting, budgeting, and executive
     reporting initiatives as a primary responsibility along with any Ad Hoc
     projects I can get my hands on!
-  # TODO(Kevin): drop the Seaspan photo at /assets/images/seaspan.jpg, then set
-  # image below to "/assets/images/seaspan.jpg" to replace the placeholder.
-  image: ""
+  image: "/assets/images/seaspan.jpg"
   # Points can be a plain string OR an object. A `key: true` point becomes a
   # clickable, shining highlight; add `image:` to show a popup on hover.
   points:
