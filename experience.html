@@ -104,22 +104,18 @@ permalink: /experience/
         <h3 class="exp-panel__subhead">Highlights</h3>
         {%- comment -%}
           A point is either a plain string or an object { text, key, image }.
-          `key: true` makes it a shining, clickable highlight; `image:` shows a
-          popup on hover/focus. Every point gently grows on hover; only key
-          points read as interactive.
+          `key: true` makes it a shining highlight; `image:` makes it open a
+          centered photo lightbox on click. Every point gently grows on hover;
+          only key points read as interactive.
         {%- endcomment -%}
         <ul class="exp-panel__points">
           {%- for point in e.points -%}
             {%- assign ptext = point.text | default: point -%}
             {%- if point.key -%}
-            <li class="exp-point exp-point--key" tabindex="0"
-                aria-label="Highlight — click to see the photo">
+            <li class="exp-point exp-point--key" tabindex="0" role="button"
+                {% if point.image and point.image != '' %}data-hl-image="{{ point.image | relative_url }}" data-hl-alt="At the CFO Town Hall"{% endif %}
+                aria-haspopup="dialog" aria-label="Highlight — click to view the photo">
               <span class="exp-point__text">{{ ptext }}</span>
-              {%- if point.image and point.image != '' -%}
-              <span class="exp-point__pop" role="img" aria-label="CFO Town Hall photo">
-                <img src="{{ point.image | relative_url }}" alt="At the CFO Town Hall" loading="lazy">
-              </span>
-              {%- endif -%}
             </li>
             {%- else -%}
             <li class="exp-point"><span class="exp-point__text">{{ ptext }}</span></li>
@@ -139,6 +135,19 @@ permalink: /experience/
   </div>
 </section>
 
+<!-- Centered photo lightbox for KEY highlights (click anywhere off the image,
+     or press Esc, to close). Shared across all experience panels. -->
+<div class="hl-lightbox" id="hl-lightbox" hidden>
+  <div class="hl-lightbox__scrim" data-hl-close></div>
+  <figure class="hl-lightbox__fig">
+    <button type="button" class="hl-lightbox__close" data-hl-close aria-label="Close photo">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img data-hl-img alt="">
+  </figure>
+</div>
+
 <script src="{{ '/assets/js/experience.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/highlight-photo.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/scroll-fade.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/experience-deeplink.js' | relative_url }}" defer></script>

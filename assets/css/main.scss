@@ -1459,34 +1459,77 @@ html[data-mode="light"] #about::after {
 .exp-point--key:hover .exp-point__text,
 .exp-point--key:focus-visible .exp-point__text { color: var(--ink); }
 
-.exp-point__pop {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 0.6rem);
-  z-index: 5;
-  width: min(440px, 92%);
-  padding: 6px;
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  opacity: 0;
-  transform: translateY(6px) scale(0.98);
-  transform-origin: top left;
-  pointer-events: none;
-  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
-}
-.exp-point__pop img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) - 2px); }
-/* Click (focus) reveals the photo — not hover. */
-.exp-point--key:focus-within .exp-point__pop {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
 @media (prefers-reduced-motion: reduce) {
   .exp-point { transition: none; }
   .exp-point:hover { transform: none; }
   .exp-point--key .exp-point__text { animation: none; }
-  .exp-point__pop { transition: opacity 0.2s var(--ease); transform: none; }
+}
+
+/* Centered photo lightbox for key highlights — a full-screen scrim makes it
+   trivial to dismiss: click anywhere off the image, the ×, or press Esc. */
+.hl-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+.hl-lightbox[hidden] { display: none; }
+.hl-lightbox__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  cursor: zoom-out;
+}
+.hl-lightbox.is-active .hl-lightbox__scrim { opacity: 1; }
+.hl-lightbox__fig {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: min(900px, 100%);
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  transition: opacity 0.3s var(--ease), transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+.hl-lightbox.is-active .hl-lightbox__fig { opacity: 1; transform: none; }
+.hl-lightbox__fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: calc(var(--radius-lg) - 4px);
+}
+.hl-lightbox__close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--accent-deep);
+  background: var(--accent);
+  border: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s var(--ease);
+}
+.hl-lightbox__close:hover { transform: scale(1.08); }
+@media (prefers-reduced-motion: reduce) {
+  .hl-lightbox__fig { transition: opacity 0.2s var(--ease); transform: none; }
+  .hl-lightbox.is-active .hl-lightbox__fig { transform: none; }
 }
 
 body.exp-lock { overflow: hidden; }
