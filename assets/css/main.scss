@@ -1434,7 +1434,21 @@ html[data-mode="light"] #about::after {
 }
 .exp-panel__meta span { display: inline-flex; align-items: center; gap: 0.45rem; }
 
-.exp-panel__blurb { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.65; margin-bottom: 1.5rem; }
+.exp-panel__blurb {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  transform-origin: left center;
+  transition: transform 0.2s var(--ease), color 0.2s var(--ease);
+}
+/* The description gently enlarges on hover and settles back, like the other
+   interactive copy. */
+.exp-panel__blurb:hover { transform: scale(1.02); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .exp-panel__blurb { transition: none; }
+  .exp-panel__blurb:hover { transform: none; }
+}
 
 .exp-panel__media {
   border-radius: var(--radius-lg);
