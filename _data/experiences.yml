@@ -19,13 +19,30 @@
   dates: "May 2026 – Present"
   location: "Vancouver, Canada"
   blurb: >-
-    Placeholder — a short summary of my FP&A work supporting long-term
-    forecasting, budgeting, and executive reporting. Replace with real copy.
-  image: ""           # e.g. /assets/images/experience/seaspan.jpg
+    I'm currently working at Seaspan as a Financial Analyst Intern within the
+    FP&amp;A department. Here, I support forecasting, budgeting, and executive
+    reporting initiatives as a primary responsibility along with any Ad Hoc
+    projects I can get my hands on!
+  # TODO(Kevin): drop the Seaspan photo at /assets/images/seaspan.jpg, then set
+  # image below to "/assets/images/seaspan.jpg" to replace the placeholder.
+  image: ""
+  # Points can be a plain string OR an object. A `key: true` point becomes a
+  # clickable, shining highlight; add `image:` to show a popup on hover.
   points:
-    - "Ran scenario and sensitivity analysis on a 2027–2040 long-term forecast model (inflation, project-win, and best/worst-case scenarios) to support financial reporting and value contract opportunities."
-    - "Conducted month-end budget-to-actual variance analysis across a consolidated income statement and balance sheet spanning 30+ departments for management and Board reporting."
-    - "Developed 5 scenario-analysis slides for the CFO Townhall, translating long-term forecast output into executive-ready visuals for a 120+ person finance audience."
+    - key: true
+      image: "/assets/images/CFO Townhall.jpg"
+      text: >-
+        During my first month at Seaspan, I had the opportunity to work on a
+        long-term forecast model spanning 2027 to 2040. I ran scenario and
+        sensitivity analyses that considered factors such as inflation,
+        project-win assumptions, and best/worst-case outcomes. The work supported
+        financial reporting for a CFO Town Hall, where the results were presented
+        by Seaspan's CFO.
+    - text: >-
+        This project gave me early exposure to how long-range financial planning
+        supports executive decision-making, and helped me better understand the
+        role FP&amp;A plays in translating complex assumptions into clear business
+        insights.
   skills:
     - Excel
     - SAP

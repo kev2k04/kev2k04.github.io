@@ -85,34 +85,36 @@
    -black ink, the same near-monochrome restraint (ink becomes the accent).
    ========================================================================= */
 html[data-mode="light"] {
-  --bg:         #ffffff;   /* white paper                      */
-  --bg-alt:     #f5f5f7;   /* alternating sections             */
+  /* Soft off-white paper (not a harsh pure white) so it reads calm, not blinding,
+     and white cards lift off the page. */
+  --bg:         #eef1f7;   /* soft cool off-white page          */
+  --bg-alt:     #e6eaf2;   /* alternating sections             */
   --surface:    #ffffff;   /* cards / lifted panels            */
-  --surface-2:  #ededf0;   /* hovered / nested surfaces        */
-  --header-bg:  #ffffff;
-  --footer-bg:  #f5f5f7;
+  --surface-2:  #f3f5fa;   /* hovered / nested surfaces        */
+  --header-bg:  #f4f6fb;
+  --footer-bg:  #e6eaf2;
 
-  --ink:        #1d1d1f;   /* headings / primary text          */
-  --ink-soft:   #424245;   /* body copy                        */
-  --muted:      #6e6e73;   /* secondary text / labels          */
+  --ink:        #15171c;   /* headings / primary text          */
+  --ink-soft:   #383b42;   /* body copy                        */
+  --muted:      #5c606b;   /* secondary text / labels          */
 
-  --accent:        #1d1d1f;   /* near-black ink as the accent  */
+  --accent:        #15171c;   /* near-black ink as the accent  */
   --accent-soft:   #000000;   /* pure black, for hover         */
   --accent-deep:   #ffffff;   /* white text on the accent      */
 
-  --accent-rgb: 29, 29, 31;
-  --ink-rgb:    29, 29, 31;
+  --accent-rgb: 21, 23, 28;
+  --ink-rgb:    21, 23, 28;
 
-  --line:        rgba(0, 0, 0, 0.10);
-  --line-strong: rgba(0, 0, 0, 0.16);
+  --line:        rgba(15, 18, 30, 0.14);
+  --line-strong: rgba(15, 18, 30, 0.24);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.07);
-  --shadow:    0 24px 50px -30px rgba(0, 0, 0, 0.22);
+  --shadow-sm: 0 1px 2px rgba(20, 28, 50, 0.08);
+  --shadow:    0 24px 50px -30px rgba(20, 28, 50, 0.28);
 
-  --scrim: rgba(20, 20, 22, 0.40);
-  --nav-link:   rgba(0, 0, 0, 0.62);
-  --footer-soft: rgba(0, 0, 0, 0.45);
-  --footer-chip: rgba(0, 0, 0, 0.04);
+  --scrim: rgba(20, 22, 30, 0.40);
+  --nav-link:   rgba(15, 18, 30, 0.66);
+  --footer-soft: rgba(15, 18, 30, 0.5);
+  --footer-chip: rgba(15, 18, 30, 0.05);
 }
 
 /* Smooth, flash-free transition when flipping light/dark. */
@@ -476,7 +478,52 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   background-position: center, center, center 44%;
   background-size: cover, cover, cover;
   background-repeat: no-repeat;
+  transition: opacity 0.6s var(--ease);
 }
+
+/* Daytime companion shown in light mode: the sunset fades out and a brighter
+   daytime sky fades in. Placeholder = a daytime-sky gradient; drop a real photo
+   at /assets/images/website-design/hero-day.jpg and it layers on top of the
+   gradient automatically. A soft light wash keeps the dark light-mode type
+   readable over it. */
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to bottom,
+      rgba(232, 240, 250, 0.34) 0%, rgba(232, 240, 250, 0.10) 32%,
+      rgba(232, 240, 250, 0.30) 64%, rgba(232, 240, 250, 0.66) 100%),
+    url('/assets/images/website-design/hero-day.jpg'),
+    linear-gradient(165deg, #7fb0e0 0%, #b9d6f0 48%, #e9f2fa 78%, #f5e7d0 100%);
+  background-position: center, center 44%, center;
+  background-size: cover, cover, cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+html[data-mode="light"] .hero__bg { opacity: 0; }
+html[data-mode="light"] .hero__bg::after { opacity: 1; }
+
+/* Light mode flips the hero to dark ink so the masthead reads on the bright
+   daytime sky (dark mode keeps the white-on-sunset treatment from `.hero`). */
+html[data-mode="light"] .hero {
+  --ink: #131f33;
+  --ink-soft: rgba(19, 31, 51, 0.84);
+  --muted: rgba(19, 31, 51, 0.64);
+  --line: rgba(19, 31, 51, 0.16);
+  --line-strong: rgba(19, 31, 51, 0.34);
+  --accent: #131f33;
+  --accent-rgb: 19, 31, 51;
+  background: #cfe0f0;
+}
+html[data-mode="light"] .hero__facet:hover,
+html[data-mode="light"] .hero__facet:focus-visible {
+  background: rgba(19, 31, 51, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(19, 31, 51, 0.14), 0 16px 34px -18px rgba(19, 31, 51, 0.4);
+}
+html[data-mode="light"] .hero__facet:hover .facet__k,
+html[data-mode="light"] .hero__facet:focus-visible .facet__k { color: #0c1730; }
 
 /* Masthead grid: name + portrait on top, full-width spec sheet beneath — it
    bleeds toward the next section so the page flows rather than walling off. */
@@ -785,6 +832,7 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
   z-index: 0;
   background: url('/assets/images/website-design/aurora.jpg') center 30% / cover no-repeat;
   opacity: 0.5;
+  transition: opacity 0.6s var(--ease);
 }
 #about::after {             /* theme-coloured readability scrim + edge fade */
   content: "";
@@ -795,11 +843,19 @@ html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
     linear-gradient(to bottom, var(--bg) 0%, transparent 16%, transparent 84%, var(--bg) 100%),
     linear-gradient(rgba(10, 14, 28, 0.52), rgba(10, 14, 28, 0.52));
 }
-html[data-mode="light"] #about::before { opacity: 0.45; }
+/* Light mode: the aurora fades out and a daytime placeholder (set on the
+   section itself, behind ::before) shows through. Drop a real photo at
+   aurora-day.jpg to replace the gradient. The scrim keeps body copy readable. */
+html[data-mode="light"] #about {
+  background:
+    url('/assets/images/website-design/aurora-day.jpg') center 30% / cover no-repeat,
+    linear-gradient(165deg, #cde0f1 0%, #e7eef6 55%, #f4ece0 100%);
+}
+html[data-mode="light"] #about::before { opacity: 0; }
 html[data-mode="light"] #about::after {
   background:
-    linear-gradient(to bottom, var(--bg) 0%, transparent 16%, transparent 84%, var(--bg) 100%),
-    linear-gradient(rgba(245, 248, 253, 0.52), rgba(245, 248, 253, 0.52));
+    linear-gradient(to bottom, var(--bg) 0%, rgba(238, 241, 247, 0.34) 16%, rgba(238, 241, 247, 0.34) 84%, var(--bg) 100%),
+    linear-gradient(rgba(238, 241, 247, 0.58), rgba(238, 241, 247, 0.58));
 }
 
 /* About */
@@ -1376,8 +1432,63 @@ html[data-mode="light"] #about::after {
   margin: 1.6rem 0 0.9rem;
 }
 .exp-panel__points { margin: 0; padding-left: 1.15rem; }
-.exp-panel__points li { margin-bottom: 0.5rem; color: var(--ink-soft); line-height: 1.6; }
+.exp-panel__points li { margin-bottom: 0.7rem; color: var(--ink-soft); line-height: 1.6; }
 .exp-panel__points li::marker { color: var(--accent); }
+
+/* Each highlight gently grows on hover; only KEY points read as interactive. */
+.exp-point {
+  position: relative;
+  transition: transform 0.2s var(--ease), color 0.2s var(--ease);
+  transform-origin: left center;
+}
+.exp-point:not(.exp-point--key):hover { transform: scale(1.02); color: var(--ink); }
+
+/* Key point — clickable, shining (faux-bold glow on a loop, no reflow) to invite
+   the hover/click; reveals a photo popup on hover or keyboard focus. */
+.exp-point--key { cursor: pointer; outline: none; }
+.exp-point--key .exp-point__text {
+  border-bottom: 1px dotted rgba(var(--accent-rgb), 0.5);
+  animation: exp-shine 2.6s ease-in-out infinite;
+}
+@keyframes exp-shine {
+  0%, 100% { color: var(--ink-soft); text-shadow: none; }
+  50% {
+    color: var(--ink);
+    text-shadow: 0 0 0.5px currentColor, 0 0 10px rgba(var(--accent-rgb), 0.45);
+  }
+}
+.exp-point--key:hover .exp-point__text,
+.exp-point--key:focus-visible .exp-point__text { color: var(--ink); }
+
+.exp-point__pop {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.6rem);
+  z-index: 5;
+  width: min(440px, 92%);
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  transform-origin: top left;
+  pointer-events: none;
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+}
+.exp-point__pop img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) - 2px); }
+.exp-point--key:hover .exp-point__pop,
+.exp-point--key:focus-within .exp-point__pop {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .exp-point { transition: none; }
+  .exp-point:not(.exp-point--key):hover { transform: none; }
+  .exp-point--key .exp-point__text { animation: none; }
+  .exp-point__pop { transition: opacity 0.2s var(--ease); transform: none; }
+}
 
 body.exp-lock { overflow: hidden; }
 

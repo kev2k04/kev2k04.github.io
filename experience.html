@@ -19,8 +19,9 @@ permalink: /experience/
       <span class="section__kicker">Experience</span>
       <h1 class="exp__title">Where I've worked</h1>
       <p class="exp__lede">
-        A look at the teams I've worked with. Download my résumé, or open any
-        role to dig into the details.
+        A brief summary of the teams I've worked with, my experiences, and
+        accomplishments. Feel free to view and download my resume, or open any
+        role to dig into the details!
       </p>
       <div class="exp__actions">
         <a class="btn btn--primary" href="{{ '/resume/' | relative_url }}">
@@ -101,9 +102,28 @@ permalink: /experience/
         {%- endif -%}
 
         <h3 class="exp-panel__subhead">Highlights</h3>
+        {%- comment -%}
+          A point is either a plain string or an object { text, key, image }.
+          `key: true` makes it a shining, clickable highlight; `image:` shows a
+          popup on hover/focus. Every point gently grows on hover; only key
+          points read as interactive.
+        {%- endcomment -%}
         <ul class="exp-panel__points">
           {%- for point in e.points -%}
-            <li>{{ point }}</li>
+            {%- assign ptext = point.text | default: point -%}
+            {%- if point.key -%}
+            <li class="exp-point exp-point--key" tabindex="0"
+                aria-label="Highlight — hover or focus to see the photo">
+              <span class="exp-point__text">{{ ptext }}</span>
+              {%- if point.image and point.image != '' -%}
+              <span class="exp-point__pop" role="img" aria-label="CFO Town Hall photo">
+                <img src="{{ point.image | relative_url }}" alt="At the CFO Town Hall" loading="lazy">
+              </span>
+              {%- endif -%}
+            </li>
+            {%- else -%}
+            <li class="exp-point"><span class="exp-point__text">{{ ptext }}</span></li>
+            {%- endif -%}
           {%- endfor -%}
         </ul>
 

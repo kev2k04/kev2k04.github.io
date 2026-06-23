@@ -4,6 +4,7 @@
 #   2) Music                  — kind: panel (music production)
 #   3) Gaming                 — kind: panel (League of Legends)
 #   4) Sports                 — kind: panel (multi-sport history; see _includes/passions/sports.html)
+#   5) Personal Fitness       — kind: panel (gym journey; generic panel body)
 #
 #   - "kind: panel" cards open an in-page zoom panel. Panels with a bespoke
 #     layout (sports/music/gaming) render via _includes/passions/<id>.html;
@@ -207,12 +208,19 @@
       level: "TODO(Kevin): level"
       position: "TODO(Kevin): event(s)"
       memory: "TODO(Kevin): a PR, medal, or memory."
-    # Personal Fitness — your ongoing gym journey. Fill in the placeholders.
-    - name: "Personal Fitness"
-      years: "TODO(Kevin): since 20XX"            # when you started training
-      level: "TODO(Kevin): split, e.g. PPL · 5x / week"
-      position: "TODO(Kevin): focus — strength / hypertrophy"
-      memory: >-
-        TODO(Kevin): Tell your gym story — how you got started, what keeps you
-        consistent week to week, the goals you're chasing now, and a milestone
-        or personal record (a big lift, a body recomp, a streak) you're proud of.
+
+# Personal Fitness — its own card beneath Sports. Opens a panel (generic body:
+# blurb + photo placeholder + highlights). Fill in the placeholders.
+- id: fitness
+  kind: panel
+  title: Personal Fitness
+  icon: dumbbell
+  tagline: My ongoing journey in the gym.
+  accent: "34, 197, 94"       # green — health / fitness
+  blurb: >-
+    TODO(Kevin): Tell your gym story — how you got started, what keeps you
+    consistent week to week, and the goals you're chasing now.
+  highlights:
+    - "TODO(Kevin): Training split — e.g. Push / Pull / Legs, 5x a week."
+    - "TODO(Kevin): A milestone or personal record you're proud of (a big lift, a body recomp, a streak)."
+    - "TODO(Kevin): What fitness has taught you — discipline, consistency, stress relief."
