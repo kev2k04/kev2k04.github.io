@@ -15,13 +15,17 @@
   function update() {
     var doc = document.documentElement;
     var maxScroll = doc.scrollHeight - window.innerHeight;
-    var fadeEnd = FADE_FRACTION * maxScroll;
     var y = window.pageYOffset || doc.scrollTop || 0;
 
-    var opacity = fadeEnd > 0 ? 1 - Math.min(1, y / fadeEnd) : 1;
     var drift = 'translateY(' + (-PARALLAX * y).toFixed(1) + 'px)';
 
     els.forEach(function (el) {
+      // Each element may override the fade window via data-scroll-fade="<fraction>"
+      // (e.g. "0.32" keeps it visible later); a bare attribute uses the default.
+      var frac = parseFloat(el.getAttribute('data-scroll-fade')) || FADE_FRACTION;
+      var fadeEnd = frac * maxScroll;
+      var opacity = fadeEnd > 0 ? 1 - Math.min(1, y / fadeEnd) : 1;
+
       el.style.opacity = opacity.toFixed(3);
       // Lag the viewport: drift upward at a fraction of the scroll speed.
       el.style.transform = drift;

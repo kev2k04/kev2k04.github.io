@@ -31,7 +31,7 @@ permalink: /resume/
         </p>
       </div>
       {%- if r.pdf and r.pdf != "" -%}
-        <a class="btn btn--primary" href="{{ r.pdf | relative_url }}" download data-scroll-fade>
+        <a class="btn btn--primary" href="{{ r.pdf | relative_url }}" download data-scroll-fade="0.32">
           {% include icon.html name="download" %} Download PDF
         </a>
       {%- endif -%}
