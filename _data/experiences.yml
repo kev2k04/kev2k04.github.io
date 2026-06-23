@@ -41,6 +41,11 @@
         supports executive decision-making, and helped me better understand the
         role FP&amp;A plays in translating complex assumptions into clear business
         insights.
+    - text: >-
+        I currently own the monthly G&amp;A variance report, where I update data
+        sources within the Excel master file, examine the variance, provide
+        commentary, and then generate graphs to put in our financial reporting
+        PowerPoint for executive reporting.
   skills:
     - Excel
     - SAP
@@ -73,8 +78,7 @@
     where I worked along side the Customer Operations and Analytics team (now known
     as the Innovation and Sustainability team) to solve operational inefficiencies
     within our workflows, softwares, and departments.
-  image: "/assets/images/bc-hydro-elevator.jpg"
-  image_orientation: portrait
+  image: "/assets/images/bc-hydro-wallpaper.jpg"
   points:
     - "My largest project at BC Hydro focused on reducing the average handle time within the call centre, where costs were exceeding +$1M annually. I utilized software such as Excel, Power BI, Power Query, and DAX Studio to pull and consolidate datasets of over 600,000 rows, then delivered a proposal outlining initiatives around agent training, performance tracking, and system gap identification. This proposal looked to ultimately help reduce average handle time by 6 seconds per agent (or over $50,000 per year) at zero additional cost when fully integrated."
     - "My second project focused on fixing the Interactive Voice Response (IVR) system, where inaccurate call tagging left over 50% of call drivers unidentifiable in our database. By improving utterance recognition through Google Dialogflow, I reduced the misclassification rate from 30% to 25%. This 5-percentage-point improvement, when scaled across 600,000 annual calls, had the potential to save over 150,000 minutes in misdirected handle time annually."
