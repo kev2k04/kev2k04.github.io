@@ -47,28 +47,47 @@
     - Power BI
     - Variance Analysis
     - Forecasting
+  # Photo gallery — a "Photo Gallery" button in the panel switches to these tiles.
+  # Template for now: add `image:` (and an optional `caption:`) to each to fill it.
+  gallery:
+    - { caption: "Add a Seaspan photo" }
+    - { caption: "Add a Seaspan photo" }
+    - { caption: "Add a Seaspan photo" }
+    - { caption: "Add a Seaspan photo" }
+    - { caption: "Add a Seaspan photo" }
+    - { caption: "Add a Seaspan photo" }
 
 - id: bchydro
   company: BC Hydro
   logo_text: BC
   logo: "/assets/images/logos/bchydro.png"
-  role: "Business Analyst"
+  role: "Business Analyst Intern"
   dates: "May 2025 – Dec 2025"
   location: "Vancouver, Canada"
+  # The phrase wrapped in <button class="exp-inline-key"> shines and opens the
+  # desk photo on click (see highlight-photo.js / hl-lightbox).
   blurb: >-
-    Placeholder — a short summary of my analytics and process-improvement
-    work on forecasting models and the call-centre data pipeline.
-  image: ""
+    Last year, <button type="button" class="exp-inline-key"
+    data-hl-image="/assets/images/bc-hydro-desk.jpg" data-hl-alt="My BC Hydro desk"
+    aria-haspopup="dialog">I worked at BC Hydro as a business analyst intern</button>,
+    where I worked along side the Customer Operations and Analytics team (now known
+    as the Innovation and Sustainability team) to solve operational inefficiencies
+    within our workflows, softwares, and departments.
+  image: "/assets/images/bc-hydro-elevator.jpg"
+  image_orientation: portrait
   points:
-    - "Built financial forecasting models incorporating growth assumptions, cost drivers, and scenario analysis to project expenses exceeding $10M YTD."
-    - "Proposed a solution to recover and process 50% more lost call-centre data, improving reporting reliability and saving over $50,000 annually."
-    - "Identified and fixed IVR routing inefficiencies, improving placement accuracy from a 30% to 25% error rate across a 4,000-call sample."
+    - "My largest project at BC Hydro focused on reducing the average handle time within the call centre, where costs were exceeding +$1M annually. I utilized software such as Excel, Power BI, Power Query, and DAX Studio to pull and consolidate datasets of over 600,000 rows, then delivered a proposal outlining initiatives around agent training, performance tracking, and system gap identification. This proposal looked to ultimately help reduce average handle time by 6 seconds per agent (or over $50,000 per year) at zero additional cost when fully integrated."
+    - "My second project focused on fixing the Interactive Voice Response (IVR) system, where inaccurate call tagging left over 50% of call drivers unidentifiable in our database. By improving utterance recognition through Google Dialogflow, I reduced the misclassification rate from 30% to 25%. This 5-percentage-point improvement, when scaled across 600,000 annual calls, had the potential to save over 150,000 minutes in misdirected handle time annually."
+    - "Nearing the end of my time at BC Hydro, I helped build a financial forecasting model that incorporated various growth assumptions, cost drivers, and scenarios to project changes in Canada Post expenses under different rate and fee structures. With annual Canada Post expenses exceeding $10 million, the model supported financial planning, reporting, and executive level decision making."
+    - "One of the most impactful experiences for developing my software and analytical skills was supporting BC Hydro's Call for Power Energy Management Portfolio initiative, which enabled owners of multiple properties to consolidate their accounts and access preferred energy rates. To improve application quality and reporting accuracy, I reconciled data for 1,500+ external companies across two unstructured Excel trackers and submission databases, creating a reliable dataset for categorization, trend analysis, forecasting, and management reporting."
+    - 'The most enjoyable experience I had at BC Hydro was organizing a team building event as an intern. At the time, three separate teams had recently been merged into one, creating some ambiguity around roles and responsibilities. I led team exercises to identify which responsibilities belonged to each department, encouraged open communication among team members, and helped coordinate a team outing afterward. As part of the event, we participated in a guided <a class="exp-link" href="https://chinatowngirl.ca" target="_blank" rel="noopener noreferrer">history tour of Vancouver''s Chinatown led by Judy Maxwell</a>, where we learned about the history and cultural significance of the neighborhood.'
   skills:
     - Excel
-    - SQL
     - Power BI
-    - Process Improvement
-    - Data Analysis
+    - Power Query
+    - DAX Studio
+    - Google Dialogflow
+    - Forecasting
 
 - id: joshuatree
   company: Joshua Tree Health

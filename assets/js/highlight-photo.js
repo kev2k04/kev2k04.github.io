@@ -34,7 +34,7 @@
     else { clearTimeout(closeTimer); closeTimer = setTimeout(finish, 260); }
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll('.exp-point--key[data-hl-image]'), function (el) {
+  Array.prototype.forEach.call(document.querySelectorAll('[data-hl-image]'), function (el) {
     el.addEventListener('click', function () { open(el); });
     el.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(el); }
