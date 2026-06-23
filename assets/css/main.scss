@@ -1387,13 +1387,23 @@ html[data-mode="light"] #about::after {
   transition: transform 0.44s var(--ease), opacity 0.3s var(--ease);
 }
 .exp-panel[hidden] { display: none; }
-/* Inner content fades in once the box has zoomed up, masking FLIP distortion */
+/* Inner content rises + fades in once the box has zoomed up (masks FLIP
+   distortion and gives the segment a clear "move into place" on open). */
 .exp-panel__inner {
   padding: 2rem 2.4rem 2.4rem;
   opacity: 0;
-  transition: opacity 0.28s var(--ease);
+  transform: translateY(18px);
+  transition: opacity 0.32s var(--ease), transform 0.45s var(--ease);
 }
-.exp-panel.is-open .exp-panel__inner { opacity: 1; transition-delay: 0.1s; }
+.exp-panel.is-open .exp-panel__inner {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.08s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .exp-panel__inner { transform: none; transition: opacity 0.2s var(--ease); }
+  .exp-panel.is-open .exp-panel__inner { transform: none; }
+}
 
 .exp-panel__back {
   display: inline-flex;
