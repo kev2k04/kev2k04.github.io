@@ -1326,7 +1326,24 @@ html[data-mode="light"] #about::after {
 }
 
 .exp-card__logo { width: 50px; height: 50px; font-size: 1.05rem; }
-.exp-card__name { font-family: var(--font-head); font-weight: 600; font-size: 1.18rem; color: var(--ink); letter-spacing: -0.01em; }
+.exp-card__name {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.18rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  transform-origin: left center;
+  transition: transform 0.2s var(--ease);
+}
+/* The heading — each experience's intro — gently enlarges on hover and settles
+   back, echoing the site's other interactive text. */
+.exp-card:hover .exp-card__name,
+.exp-card:focus-visible .exp-card__name { transform: scale(1.06); }
+@media (prefers-reduced-motion: reduce) {
+  .exp-card__name { transition: none; }
+  .exp-card:hover .exp-card__name,
+  .exp-card:focus-visible .exp-card__name { transform: none; }
+}
 .exp-card__role { font-size: 0.86rem; color: var(--muted); margin-top: -0.4rem; }
 
 /* Overlay = scrim (blurs page) + the single active panel, centred */
