@@ -1441,13 +1441,12 @@ html[data-mode="light"] #about::after {
   transition: transform 0.2s var(--ease), color 0.2s var(--ease);
   transform-origin: left center;
 }
-.exp-point:not(.exp-point--key):hover { transform: scale(1.02); color: var(--ink); }
+.exp-point:hover { transform: scale(1.03); color: var(--ink); }
 
-/* Key point — clickable, shining (faux-bold glow on a loop, no reflow) to invite
-   the hover/click; reveals a photo popup on hover or keyboard focus. */
+/* Key point — shining (faux-bold glow on a loop, no reflow) to invite the click;
+   reveals the photo popup only once clicked (focus), not on hover. */
 .exp-point--key { cursor: pointer; outline: none; }
 .exp-point--key .exp-point__text {
-  border-bottom: 1px dotted rgba(var(--accent-rgb), 0.5);
   animation: exp-shine 2.6s ease-in-out infinite;
 }
 @keyframes exp-shine {
@@ -1478,14 +1477,14 @@ html[data-mode="light"] #about::after {
   transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
 }
 .exp-point__pop img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) - 2px); }
-.exp-point--key:hover .exp-point__pop,
+/* Click (focus) reveals the photo — not hover. */
 .exp-point--key:focus-within .exp-point__pop {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 @media (prefers-reduced-motion: reduce) {
   .exp-point { transition: none; }
-  .exp-point:not(.exp-point--key):hover { transform: none; }
+  .exp-point:hover { transform: none; }
   .exp-point--key .exp-point__text { animation: none; }
   .exp-point__pop { transition: opacity 0.2s var(--ease); transform: none; }
 }

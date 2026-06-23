@@ -113,7 +113,7 @@ permalink: /experience/
             {%- assign ptext = point.text | default: point -%}
             {%- if point.key -%}
             <li class="exp-point exp-point--key" tabindex="0"
-                aria-label="Highlight — hover or focus to see the photo">
+                aria-label="Highlight — click to see the photo">
               <span class="exp-point__text">{{ ptext }}</span>
               {%- if point.image and point.image != '' -%}
               <span class="exp-point__pop" role="img" aria-label="CFO Town Hall photo">
