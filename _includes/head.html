@@ -7,8 +7,10 @@
   <script>
     (function () {
       try {
-        // Default is dark (attribute unset); only light is stored.
-        if (localStorage.getItem('kl-mode') === 'light') {
+        // Default is dark (attribute unset); only light is stored. Pages with
+        // force_dark (e.g. the résumé) always open dark, ignoring the saved pref.
+        var forceDark = {% if page.force_dark %}true{% else %}false{% endif %};
+        if (!forceDark && localStorage.getItem('kl-mode') === 'light') {
           document.documentElement.setAttribute('data-mode', 'light');
         }
       } catch (e) {}
