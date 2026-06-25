@@ -22,7 +22,10 @@
   featured: true
   title: Basketball Mens League
   icon: basketball
-  tagline: On the court with Bagwork 2.0 — live game stats and the latest highlight reel, pulled straight from the league.
+  tagline: >-
+    We're currently playing in a mens league in Richmond, and here is where you
+    can track my live game stats, latest highlight reels, and team pictures
+    pulled straight from the league.
   badge: Live stats
   cta: Step onto the court
   accent: "249, 115, 22"      # basketball orange
