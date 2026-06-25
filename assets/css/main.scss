@@ -828,6 +828,49 @@ html[data-mode="light"] .hero__facet:focus-visible .facet__k { color: #0c1730; }
   letter-spacing: -0.02em;
 }
 
+/* =========================================================================
+   Sunset banner — the home hero's photo carried across the top of the inner
+   pages so the whole site reads as one. A dark wash keeps the (forced white)
+   header copy legible in both themes, then it fades into the page background.
+   ========================================================================= */
+.exp, .pass, .resume, .build {
+  position: relative;
+  isolation: isolate;
+}
+.exp::before, .pass::before, .resume::before, .build::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 380px;
+  z-index: -1;
+  background-image:
+    linear-gradient(to bottom,
+      rgba(9, 13, 28, 0.52) 0%, rgba(9, 13, 28, 0.58) 42%, var(--bg) 100%),
+    linear-gradient(to right,
+      rgba(9, 13, 28, 0.5) 0%, rgba(9, 13, 28, 0.12) 36%,
+      rgba(9, 13, 28, 0.12) 64%, rgba(9, 13, 28, 0.5) 100%),
+    url('/assets/images/website-design/sunset.jpg');
+  background-size: cover, cover, cover;
+  background-position: center, center, center 42%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+/* Resume + Build put body text directly on the page, so keep their banner short
+   — just behind the header — to clear the copy below it. */
+.resume::before, .build::before { height: 240px; }
+
+/* Header copy sits on the dark part of the banner — force light ink in both
+   themes (mirrors how the home hero stays readable). */
+.exp__head, .pass__head, .resume__header, .build .section__head {
+  --ink: #f8fafe;
+  --ink-soft: rgba(248, 250, 254, 0.88);
+  --muted: rgba(248, 250, 254, 0.7);
+  --line: rgba(255, 255, 255, 0.18);
+  --line-strong: rgba(255, 255, 255, 0.42);
+}
+
 /* About — aurora photo background. Kept readable in both themes via a low
    image opacity plus a theme-coloured scrim (::after). Noticeable, not noise. */
 #about {
