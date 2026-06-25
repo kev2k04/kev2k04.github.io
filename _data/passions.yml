@@ -183,7 +183,7 @@
   kind: panel
   title: Sports
   icon: trophy
-  tagline: A lifetime of teams, positions, and box scores.
+  tagline: All of my accomplishments and accolades in sports.
   accent: "45, 212, 191"      # teal — distinct from the page's azure accent
   intro: >-
     TODO(Kevin): A line or two about growing up playing sports — what they
