@@ -1022,7 +1022,15 @@ html[data-mode="light"] #about::after {
    ========================================================================= */
 .contact { text-align: center; }
 .contact__inner { max-width: 700px; margin-inline: auto; }
-.contact .section__kicker { margin-bottom: 1.1rem; }
+/* Centre the "Contact" kicker over the title — a matching rule on each side so
+   the label sits dead-centre rather than offset by a single leading dash. */
+.contact .section__kicker { margin-bottom: 1.1rem; justify-content: center; }
+.contact .section__kicker::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--line-strong);
+}
 .contact .section__title { margin-bottom: 1.2rem; }
 .contact__lede { font-size: 1.12rem; color: var(--ink-soft); margin-bottom: 2.2rem; }
 .contact__social {
