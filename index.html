@@ -45,7 +45,7 @@ layout: default
         <div class="hero__social">
           {%- for social in p.socials -%}
             <a href="{{ social.url }}" class="social-link" aria-label="{{ social.name }}"
-               {% unless social.icon == 'email' %}target="_blank" rel="noopener noreferrer"{% endunless %}>
+               target="_blank" rel="noopener noreferrer">
               {% include icon.html name=social.icon %}
             </a>
           {%- endfor -%}
@@ -135,14 +135,15 @@ layout: default
       I'd be more than happy to respond! The quickest way to reach me is through
       my LinkedIn messages, but I do constantly check my email!
     </p>
-    <a class="btn btn--primary" href="mailto:{{ site.email }}">
+    <a class="btn btn--primary" href="https://mail.google.com/mail/?view=cm&fs=1&to={{ site.email }}"
+       target="_blank" rel="noopener noreferrer">
       {% include icon.html name="email" %} {{ site.email }}
     </a>
 
     <div class="contact__social">
       {%- for social in p.socials -%}
         <a href="{{ social.url }}" class="social-link social-link--lg" aria-label="{{ social.name }}"
-           {% unless social.icon == 'email' %}target="_blank" rel="noopener noreferrer"{% endunless %}>
+           target="_blank" rel="noopener noreferrer">
           {% include icon.html name=social.icon %}
           <span>{{ social.name }}</span>
         </a>

@@ -24,7 +24,7 @@ permalink: /resume/
           {%- if r.phone -%}
             <span>{{ r.phone }}</span>
           {%- endif -%}
-          <span><a href="mailto:{{ site.email }}">{{ site.email }}</a></span>
+          <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ site.email }}" target="_blank" rel="noopener noreferrer">{{ site.email }}</a></span>
           {%- if r.linkedin_url -%}
             <span><a href="{{ r.linkedin_url }}" target="_blank" rel="noopener noreferrer">{{ r.linkedin_text | default: r.linkedin_url }}</a></span>
           {%- endif -%}

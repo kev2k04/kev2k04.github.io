@@ -8,7 +8,7 @@
     <nav class="site-footer__social" aria-label="Social links">
       {%- for social in site.data.profile.socials -%}
         <a href="{{ social.url }}" class="social-link" aria-label="{{ social.name }}"
-           {% unless social.icon == 'email' %}target="_blank" rel="noopener noreferrer"{% endunless %}>
+           target="_blank" rel="noopener noreferrer">
           {% include icon.html name=social.icon %}
         </a>
       {%- endfor -%}
