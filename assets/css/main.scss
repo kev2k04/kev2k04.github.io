@@ -861,9 +861,19 @@ html[data-mode="light"] .hero__facet:focus-visible .facet__k { color: #0c1730; }
    — just behind the header — to clear the copy below it. */
 .resume::before, .build::before { height: 240px; }
 
-/* Header copy sits on the dark part of the banner — force light ink in both
-   themes (mirrors how the home hero stays readable). */
-.exp__head, .pass__head, .resume__header, .build .section__head {
+/* Light mode: drop the sunset banner entirely — the inner-page tops stay clean
+   off-white (the home hero already swaps to its daytime image in light mode). */
+html[data-mode="light"] .exp::before,
+html[data-mode="light"] .pass::before,
+html[data-mode="light"] .resume::before,
+html[data-mode="light"] .build::before { display: none; }
+
+/* Header copy sits on the dark banner only in dark mode → force light ink there.
+   In light mode (no banner) the headers keep their normal dark ink. */
+html:not([data-mode="light"]) .exp__head,
+html:not([data-mode="light"]) .pass__head,
+html:not([data-mode="light"]) .resume__header,
+html:not([data-mode="light"]) .build .section__head {
   --ink: #f8fafe;
   --ink-soft: rgba(248, 250, 254, 0.88);
   --muted: rgba(248, 250, 254, 0.7);
