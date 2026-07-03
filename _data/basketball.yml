@@ -7,8 +7,8 @@
 team: "Bagwork 2.0"
 league: "Roundball"                       # TODO(Kevin): confirm league/division name
 player: "Kevin Liu"
-jersey: "00"                              # TODO(Kevin): your jersey number
-position: "Guard"                         # TODO(Kevin): your position
+jersey: "6"                               # jersey number
+position: "Guard"                         # (no longer shown in the hero)
 youtube_channel: "https://www.youtube.com/@RoundballBC"
 
 # TODO(Kevin): write a few real lines about playing in the league.

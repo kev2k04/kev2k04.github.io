@@ -6,7 +6,7 @@ permalink: /passions/
 
 {%- assign passions = site.data.passions -%}
 
-<a class="back-btn" href="{{ '/' | relative_url }}" aria-label="Back to home">
+<a class="back-btn" href="{{ '/' | relative_url }}" aria-label="Back to home" data-scroll-fade>
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
   Back
 </a>
@@ -97,16 +97,22 @@ permalink: /passions/
           </header>
 
           {%- comment -%}
-            Panel body. Cards with a bespoke layout render their own partial
-            from _includes/passions/<id>.html; everything else falls back to
-            the generic blurb + photo + highlights template.
+            Panel body. Cards flagged `coming_soon: true` show a centered
+            "not yet created" state so the site can go live while they're built.
+            Otherwise cards with a bespoke layout render their own partial from
+            _includes/passions/<id>.html; everything else falls back to the
+            generic blurb + photo + highlights template.
           {%- endcomment -%}
-          {%- case p.id -%}
-            {%- when 'sports' -%}{% include passions/sports.html p=p %}
-            {%- when 'music' -%}{% include passions/music.html p=p %}
-            {%- when 'gaming' -%}{% include passions/gaming.html p=p %}
-            {%- else -%}{% include passions/generic.html p=p %}
-          {%- endcase -%}
+          {%- if p.coming_soon -%}
+            {% include passions/coming-soon.html %}
+          {%- else -%}
+            {%- case p.id -%}
+              {%- when 'sports' -%}{% include passions/sports.html p=p %}
+              {%- when 'music' -%}{% include passions/music.html p=p %}
+              {%- when 'gaming' -%}{% include passions/gaming.html p=p %}
+              {%- else -%}{% include passions/generic.html p=p %}
+            {%- endcase -%}
+          {%- endif -%}
         </div>
       </article>
       {%- endif -%}
@@ -119,3 +125,4 @@ permalink: /passions/
 <script src="{{ '/assets/js/lyrics.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/video.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/album-tilt.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/scroll-fade.js' | relative_url }}" defer></script>

@@ -156,6 +156,7 @@
     Robotics, which is focused on fostering an environment for the next
     generation of innovative engineers.
   image: "/assets/images/open-robotics-arm.jpg"
+  image_contain: true          # show the whole frame (no cover-crop) so it reads at full width
   points:
     - >-
       In this role, I served as a financial executive, helping manage a team of

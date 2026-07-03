@@ -1,49 +1,39 @@
 {%- comment -%}
-  Gaming panel body (League of Legends). Expects include.p with:
-  intro, ign, peak_rank, role, main_champ, opgg, champ_note, links[].
+  Gaming panel body — a chronological "journey" through the games that shaped
+  Kevin, oldest first. Each entry in _data/passions.yml's gaming `chapters:`
+  list renders as one numbered section (reusing the sports timeline styles):
+    game        — the game / chapter title
+    text        — the story paragraph
+    image       — set a path (e.g. /assets/images/passions/zuma.jpg) to show a
+                  real photo; leave blank to show the interactive placeholder
+    image_hint  — what photo to drop in (shown inside the placeholder)
+  To add / reorder / rename a chapter, just edit that list — no markup changes.
 {%- endcomment -%}
 {%- assign p = include.p -%}
 <p class="pass-panel__blurb">{{ p.intro }}</p>
 
-<div class="gg-id">
-  <div class="gg-id__cell">
-    <span class="gg-id__label">IGN</span>
-    <span class="gg-id__value">{{ p.ign }}</span>
-  </div>
-  <div class="gg-id__cell gg-id__cell--rank">
-    <span class="gg-id__label">Peak rank</span>
-    <span class="gg-id__value">{{ p.peak_rank }}</span>
-  </div>
-  <div class="gg-id__cell">
-    <span class="gg-id__label">Main role</span>
-    <span class="gg-id__value">{{ p.role }}</span>
-  </div>
-  <div class="gg-id__cell">
-    <span class="gg-id__label">Main champ</span>
-    <span class="gg-id__value">{{ p.main_champ }}</span>
-  </div>
-</div>
-
-{%- if p.opgg and p.opgg != '' -%}
-<a class="gg-link" href="{{ p.opgg }}" target="_blank" rel="noopener noreferrer">
-  View full profile {% include icon.html name="arrow" %}
-</a>
-{%- else -%}
-<p class="gg-hint">TODO(Kevin): paste your op.gg profile URL into <strong>opgg:</strong> in _data/passions.yml to link your live profile.</p>
-{%- endif -%}
-
-<h3 class="pass-panel__subhead">Main champ</h3>
-<p class="pass-note">{{ p.champ_note }}</p>
-
-{%- if p.links and p.links != empty -%}
-<h3 class="pass-panel__subhead">Content &amp; communities</h3>
-<ul class="pass-chips">
-  {%- for l in p.links -%}
-    {%- if l.url and l.url != '' -%}
-      <li><a class="pass-chip pass-chip--accent" href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.name }}</a></li>
-    {%- else -%}
-      <li><span class="pass-chip pass-chip--todo">{{ l.name }} — TODO(Kevin)</span></li>
-    {%- endif -%}
+<div class="sport-list gg-journey">
+  {%- for c in p.chapters -%}
+  <section class="sport-sec">
+    <span class="sport-sec__no" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+    <div class="sport-sec__body">
+      <h3 class="sport-sec__name">{{ c.game }}</h3>
+      {%- if c.text and c.text != '' -%}
+        <p class="sport-sec__memory">{{ c.text }}</p>
+      {%- endif -%}
+      {%- if c.image and c.image != '' -%}
+        <div class="sport-sec__media"><img src="{{ c.image | relative_url }}" alt="{{ c.game }}"></div>
+      {%- else -%}
+        <!-- PLACEHOLDER: set `image:` on this chapter in passions.yml to swap in a real photo. -->
+        <div class="pass-panel__media pass-panel__media--placeholder" role="img"
+             aria-label="Image placeholder: {{ c.image_hint }}">
+          <span class="pass-panel__media-label">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            {{ c.image_hint }}
+          </span>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
   {%- endfor -%}
-</ul>
-{%- endif -%}
+</div>

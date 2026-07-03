@@ -1190,12 +1190,14 @@ html[data-mode="light"] #about::after {
   text-decoration: none;
   box-shadow: var(--shadow-sm);
   transition: background 0.18s var(--ease), color 0.18s var(--ease),
-              border-color 0.18s var(--ease), transform 0.2s var(--ease),
+              border-color 0.18s var(--ease), left 0.2s var(--ease),
               opacity 0.25s var(--ease);
 }
+/* Nudge on hover via `left` (not transform) so it coexists with the
+   scroll-fade parallax, which drives `transform` on this element. */
 .back-btn:hover {
   background: var(--accent); color: var(--accent-deep);
-  border-color: var(--accent); transform: translateX(-3px);
+  border-color: var(--accent); left: calc(1.6rem - 3px);
   box-shadow: var(--glow-accent-sm);
 }
 /* While a detail panel is open (body.exp-lock, set by experience.js/passions.js),
@@ -1697,6 +1699,22 @@ body.exp-lock .back-btn { display: none; }
   max-height: 62vh;
   border-radius: var(--radius);
 }
+/* Contain fit — show the entire photo (no cover-crop) for wide images that
+   need to be read in full; scales down to fit rather than filling the box. */
+.exp-panel__media--contain {
+  display: flex;
+  justify-content: center;
+  padding: 0.6rem;
+  background: var(--surface-2);
+}
+.exp-panel__media--contain img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
 
 /* "Photo Gallery" toggle in the panel head. */
 .exp-panel__head { flex-wrap: wrap; }
@@ -2042,6 +2060,36 @@ body.exp-lock { overflow: hidden; }
 .pass-panel__name { font-size: clamp(1.5rem, 3vw, 1.9rem); margin: 0; letter-spacing: -0.01em; }
 .pass-panel__tagline { color: rgb(var(--card-accent)); font-weight: 600; font-size: 0.95rem; margin: 0.2rem 0 0; }
 .pass-panel__blurb { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.65; margin: 0 0 1.5rem; }
+
+/* "Not yet created" empty state (cards flagged coming_soon in passions.yml) */
+.pass-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.6rem;
+  min-height: 260px;
+  padding: 2.5rem 1rem 1rem;
+  color: var(--muted);
+}
+.pass-empty__icon {
+  display: grid;
+  place-items: center;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  color: rgb(var(--card-accent));
+  background: rgba(var(--card-accent), 0.12);
+  border: 1px solid rgba(var(--card-accent), 0.3);
+}
+.pass-empty__title {
+  margin: 0.3rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.pass-empty__note { margin: 0; font-size: 0.92rem; max-width: 30ch; }
 
 .pass-panel__media {
   border-radius: var(--radius-lg);

@@ -20,7 +20,7 @@
 - id: basketball
   kind: link
   featured: true
-  title: Basketball Mens League
+  title: "Kevin Liu #6"
   icon: basketball
   tagline: >-
     We're currently playing in a mens league in Richmond, and here is where you
@@ -147,7 +147,9 @@
       art: /assets/images/passions/boy.jpg
       video: /assets/images/website-design/2hollis-god.mp4   # hover "View" -> flash-warning -> square video
 
-# Gaming panel (League of Legends) — rendered by _includes/passions/gaming.html.
+# Gaming panel — a chronological journey, rendered by
+# _includes/passions/gaming.html from the `chapters:` list below (oldest first).
+# Each chapter shows an interactive image placeholder until you set its `image:`.
 - id: gaming
   kind: panel
   title: Gaming
@@ -155,75 +157,111 @@
   tagline: This is my extensive journey and history with video games.
   accent: "244, 63, 94"       # rose red
   intro: >-
-    TODO(Kevin): A short intro to your gaming — mainly League of Legends, how
-    competitively you play, and what keeps you queueing up.
-  ign: "TODO(Kevin): in-game name"
-  peak_rank: "TODO(Kevin): e.g. Diamond II"
-  role: "TODO(Kevin): e.g. Mid"
-  main_champ: "TODO(Kevin): e.g. Ahri"
-  # Paste your op.gg (or other tracker) profile URL. Leave blank to show a hint.
-  opgg: ""
-  champ_note: >-
-    TODO(Kevin): A line about your main champ or a favourite game — a clutch
-    play, a montage moment, or why you one-trick it.
-  # Optional content / community links. Fill a `url` to turn it into a real
-  # link; leave blank and it shows as a TODO chip you can wire up later.
-  links:
-    - name: "YouTube"
-      url: ""
-    - name: "TikTok"
-      url: ""
-    - name: "Discord"
-      url: ""
+    Here's my history with video games, told game by game from the very
+    beginning all the way to where I'm at today.
+  # Each chapter: game (title), text (the story), image_hint (what photo to add).
+  # Drop a real photo by setting `image:` on a chapter, e.g.
+  # image: /assets/images/passions/zuma.jpg — the placeholder swaps out.
+  chapters:
+    - game: "Zuma"
+      text: >-
+        My video game journey started when I was a young kid playing Zuma on my
+        grandparents' computer in China. I'd say that by the time I was around 2
+        years old, I already knew I had a passion for video games and technology.
+      image: ""
+      image_hint: "Add a Zuma gameplay shot or a retro Windows PC gaming setup"
 
-# Multi-sport history. Opens the zoom panel; each list item below renders as
-# one stat-line section via _includes/passions/sports.html. Add / remove /
-# rename sports by editing the `sports:` list — order here = display order.
+    - game: "Minecraft"
+      text: >-
+        When I was 8 years old, I remember my parents bought me Minecraft Pocket
+        Edition for my Christmas present, version 0.4.0 to be exact. I built a
+        house without a roof, with a staircase that connected different sections
+        of the home, one side for crafting and the other for furnaces. It was a
+        simple and cozy build, although definitely not ideal for surviving the
+        night. I continued playing Minecraft throughout my childhood, whether on
+        Xbox or PC, and I stayed a huge fan through both the Mojang era and after
+        Microsoft acquired the game.
+      image: ""
+      image_hint: "Add early Minecraft PE gameplay — a simple survival house, old textures"
+
+    - game: "Fortnite"
+      text: >-
+        The next major game I got into was Fortnite. I started as a mobile
+        player and actually competed at a fairly high level. I would play cross
+        platform with my PC friends, and despite being on mobile, I could still
+        keep up and even crank 90s and play competitively. I feel like such a
+        nerd talking about this, but one of my favorite experiences was playing
+        in a Valentine's Day tournament with my PC friends, where we placed quite
+        high competing against other elite PC players.
+      image: ""
+      image_hint: "Add Fortnite mobile gameplay — build fights, competitive tournament energy"
+
+    - game: "CS:GO"
+      text: >-
+        After that, I moved on to CSGO during COVID. At first, my Mac wasn't
+        strong enough to run the game properly, so I used NVIDIA GeForce Now to
+        play through cloud gaming. Even though the latency was pretty insane, I
+        was still excited just to get an hour of gameplay after waiting sometimes
+        over 30 minutes in queues for a virtual machine. Eventually, I realized I
+        needed a long term solution, so I worked with my dad over the summer as
+        an electrician to save up money. I used that to research and build my own
+        PC from scratch, where I eventually reached DMG in CSGO before it
+        transitioned to CS2, and now I mostly play casually with friends.
+      image: ""
+      image_hint: "Add the GeForce Now interface / lag meme, then the RGB PC build I saved up for"
+
+    - game: "League of Legends"
+      text: >-
+        The game I've spent the most time on is League of Legends. Once I tried
+        it, I got hooked immediately by the strategic depth and decision making
+        of the game. I realized that every small decision had consequences, and
+        that those decisions would ultimately determine whether you win or lose.
+        Over time, I became obsessed with finding the most optimal ways to play
+        and improve, and although I started as a hardstuck Silver player, I
+        eventually climbed to Masters and reached the top 1500 players in North
+        America.
+      image: ""
+      image_hint: "Add the ranked climb — Silver → Master, an OP.GG profile or leaderboard shot"
+
+    - game: "Collegiate League"
+      text: >-
+        Along the way, I got the chance to play with and against famous content
+        creators and my childhood idols like Tyler1, and I also became friends
+        with many micro celebrities in the North American competitive scene. I
+        also played collegiate League of Legends at UBC for a year, which allowed
+        me to experience the competitive environment I used to watch growing up.
+      image: ""
+      image_hint: "Add the UBC esports team — LAN setup, competitive environment, team photo"
+
+    - game: "Closing the chapter"
+      text: >-
+        At this point in my life, I feel like I'm ready to close this chapter of
+        gaming. It's not that my interest is completely gone, but my focus has
+        shifted toward other goals and priorities for the future. Gaming will
+        always be an important and fun part of my life, but I'm also excited to
+        see what I can achieve moving forward if I apply the same level of focus
+        and discipline elsewhere.
+      image: ""
+      image_hint: "Add a calm sunset desk setup — powering off the PC, a minimal closing scene"
+
+# Multi-sport history. `coming_soon: true` shows a centered "Not yet created"
+# state so the site can go live now — remove that flag and add an `intro:` +
+# `sports:` list (see git history) when you're ready to build this panel out.
 - id: sports
   kind: panel
   title: Sports
   icon: trophy
   tagline: All of my accomplishments and accolades in sports.
   accent: "45, 212, 191"      # teal — distinct from the page's azure accent
-  intro: >-
-    TODO(Kevin): A line or two about growing up playing sports — what they
-    taught you, the teams that meant the most, and how competing shaped you.
-  sports:
-    # Each section: name + years/level + position/role + a standout memory.
-    # Optional: add `image: /assets/images/<file>` to show a photo.
-    - name: "Soccer"                 # TODO(Kevin): your real sport
-      years: "TODO(Kevin): 2016–2020"
-      level: "TODO(Kevin): High school varsity"
-      position: "TODO(Kevin): Centre-back"
-      memory: "TODO(Kevin): A standout memory, achievement, or stat — a line or two."
-    - name: "Volleyball"             # TODO(Kevin)
-      years: "TODO(Kevin): years played"
-      level: "TODO(Kevin): club / school / intramural"
-      position: "TODO(Kevin): position / role"
-      memory: "TODO(Kevin): a standout memory or result."
-    - name: "Badminton"             # TODO(Kevin)
-      years: "TODO(Kevin): years played"
-      level: "TODO(Kevin): level"
-      position: "TODO(Kevin): singles / doubles"
-      memory: "TODO(Kevin): a standout memory or result."
-    - name: "Track & Field"          # TODO(Kevin)
-      years: "TODO(Kevin): years played"
-      level: "TODO(Kevin): level"
-      position: "TODO(Kevin): event(s)"
-      memory: "TODO(Kevin): a PR, medal, or memory."
+  coming_soon: true
 
-# Personal Fitness — its own card beneath Sports. Opens a panel (generic body:
-# blurb + photo placeholder + highlights). Fill in the placeholders.
+# Personal Fitness — its own card beneath Sports. `coming_soon: true` shows the
+# "Not yet created" state; remove it and add a `blurb:` + `highlights:` list
+# (generic panel body) when you're ready to write this section.
 - id: fitness
   kind: panel
   title: Personal Fitness
   icon: dumbbell
   tagline: My ongoing journey in the gym.
   accent: "34, 197, 94"       # green — health / fitness
-  blurb: >-
-    TODO(Kevin): Tell your gym story — how you got started, what keeps you
-    consistent week to week, and the goals you're chasing now.
-  highlights:
-    - "TODO(Kevin): Training split — e.g. Push / Pull / Legs, 5x a week."
-    - "TODO(Kevin): A milestone or personal record you're proud of (a big lift, a body recomp, a streak)."
-    - "TODO(Kevin): What fitness has taught you — discipline, consistency, stress relief."
+  coming_soon: true

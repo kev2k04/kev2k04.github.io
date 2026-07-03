@@ -6,7 +6,7 @@ permalink: /basketball/
 
 {%- assign b = site.data.basketball -%}
 
-<a class="back-btn" href="{{ '/passions/' | relative_url }}" aria-label="Back to passions">
+<a class="back-btn" href="{{ '/passions/' | relative_url }}" aria-label="Back to passions" data-scroll-fade>
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
   Back
 </a>
@@ -28,7 +28,7 @@ permalink: /basketball/
       <h1 class="bball-hero__title">{{ b.team }}</h1>
       <p class="bball-hero__meta">
         <span class="bball-jersey">#{{ b.jersey }}</span>
-        {{ b.player }} &middot; {{ b.position }}
+        {{ b.player }}
       </p>
     </div>
   </header>
@@ -59,7 +59,6 @@ permalink: /basketball/
     <!-- ===== C) Blurb + team photo ===== -->
     <div class="bball-about">
       <div class="bball-about__text">
-        <h2 class="bball-about__title">In the league</h2>
         <p class="bball-about__blurb">{{ b.blurb }}</p>
       </div>
       <!-- PLACEHOLDER: add a team/action photo via `image:` in _data/basketball.yml -->
@@ -96,3 +95,4 @@ permalink: /basketball/
 </section>
 
 <script src="{{ '/assets/js/basketball.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/scroll-fade.js' | relative_url }}" defer></script>
