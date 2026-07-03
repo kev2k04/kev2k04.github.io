@@ -1724,12 +1724,15 @@ html[data-mode="light"] #about::after {
 }
 .exp-gallery__tile {
   margin: 0;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
 }
 .exp-gallery__tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Wide photos (e.g. the group shot) show whole — letterboxed, nothing cropped. */
+.exp-gallery__tile--contain { background: var(--surface-2); }
+.exp-gallery__tile--contain img { object-fit: contain; }
 .exp-gallery__tile figcaption {
   padding: 0.5rem 0.6rem;
   font-size: 0.78rem;

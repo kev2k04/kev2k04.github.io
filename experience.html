@@ -144,7 +144,7 @@ permalink: /experience/
           <div class="exp-gallery">
             {%- for g in e.gallery -%}
               {%- if g.image and g.image != '' -%}
-              <figure class="exp-gallery__tile">
+              <figure class="exp-gallery__tile{% if g.contain %} exp-gallery__tile--contain{% endif %}">
                 <img src="{{ g.image | relative_url }}" alt="{{ g.caption | default: e.company }}" loading="lazy">
                 {%- if g.caption and g.caption != '' -%}<figcaption>{{ g.caption }}</figcaption>{%- endif -%}
               </figure>

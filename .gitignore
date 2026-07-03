@@ -42,3 +42,6 @@ assets/images/website design photos/
 .DS_Store
 Thumbs.db
 *~
+
+# Original camera uploads (processed web copies are committed instead)
+assets/images/Seaspan Pictures/

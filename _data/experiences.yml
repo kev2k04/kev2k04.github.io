@@ -52,15 +52,17 @@
     - Power BI
     - Variance Analysis
     - Forecasting
-  # Photo gallery — a "Photo Gallery" button in the panel switches to these tiles.
-  # Template for now: add `image:` (and an optional `caption:`) to each to fill it.
+  # Photo gallery — the "Photo Gallery" button in the panel switches to these
+  # square tiles. `contain: true` shows a wide photo whole (letterboxed) instead
+  # of cropping it — used for the group photo so no one is cut off.
   gallery:
-    - { caption: "Add a Seaspan photo" }
-    - { caption: "Add a Seaspan photo" }
-    - { caption: "Add a Seaspan photo" }
-    - { caption: "Add a Seaspan photo" }
-    - { caption: "Add a Seaspan photo" }
-    - { caption: "Add a Seaspan photo" }
+    - { image: "/assets/images/seaspan-gallery/1.jpg" }
+    - { image: "/assets/images/seaspan-gallery/2.jpg" }
+    - { image: "/assets/images/seaspan-gallery/3.jpg" }
+    - { image: "/assets/images/seaspan-gallery/4.jpg", contain: true }
+    - { image: "/assets/images/seaspan-gallery/5.jpg" }
+    - { image: "/assets/images/seaspan-gallery/6.jpg" }
+    - { image: "/assets/images/seaspan-gallery/7.jpg" }
 
 - id: bchydro
   company: BC Hydro
@@ -150,13 +152,36 @@
   dates: "Mar 2024 – May 2025"
   location: "Vancouver, Canada"
   blurb: >-
-    Placeholder — a short summary of my finance and sponsorship work
-    managing the club's budget and outreach.
+    My first involvement at UBC was with an engineering club called UBC Open
+    Robotics, which is focused on fostering an environment for the next
+    generation of innovative engineers.
   image: ""
   points:
-    - "Created the 2024 Sponsorship Package outlining the club's values and objectives for outreach."
-    - "Managed a $10,000 per-semester budget, tracking spend, identifying variances, and aligning spending with strategic priorities."
-    - "Coordinated with members, project leads, and administrators to keep funding and spending in sync."
+    - >-
+      In this role, I served as a financial executive, helping manage a team of
+      over 60 active participants within the executive structure. This involved
+      attending weekly leadership meetings and coordinating monthly in-person
+      events to support team engagement and club operations. During this time, I
+      also led the team through a period of significant transition, as we
+      underwent management changes and a full organizational restructuring, which
+      required revamping workflows, redefining roles, and maintaining stability
+      across the club during a confusing and uncertain phase.
+    - >-
+      I created the 2024 Sponsorship Package, outlining the values, mission, and
+      objectives of UBC Open Robotics to attract external sponsors and secure
+      funding opportunities. This initiative ultimately contributed to the club
+      securing sponsorship from Saber.
+    - >-
+      I led a cross-functional team of administrators, executives, social media
+      managers, and graphic designers in developing the sponsorship package,
+      coordinating efforts across more than 7 departments and 10 faculties, which
+      strengthened my project management and cross-team communication skills.
+    - >-
+      I also oversaw and managed a $10,000 per semester operational budget,
+      ensuring efficient allocation of resources across technical projects and
+      administrative needs. This included approving equipment purchases,
+      allocating funds for project development, and budgeting for team-building
+      and club events.
   skills:
     - Excel
     - Budgeting
