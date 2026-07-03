@@ -1201,11 +1201,11 @@ html[data-mode="light"] #about::after {
 /* While a detail panel is open (body.exp-lock, set by experience.js/passions.js),
    hide the fixed Back button so it doesn't float over the pop-up; it fades back
    in when the panel closes. */
-body.exp-lock .back-btn {
-  opacity: 0 !important;
-  transform: translateY(-6px);
-  pointer-events: none;
-}
+/* While a detail panel is open (body.exp-lock, set by experience.js/passions.js)
+   the fixed Back button is removed so it doesn't float over the pop-up; it comes
+   back on close. Uses display (not opacity) because the button's opacity
+   transition would otherwise outrank the hide. */
+body.exp-lock .back-btn { display: none; }
 
 /* =========================================================================
    Experience page -- trigger cards + origin-aware zoom panels
