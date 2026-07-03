@@ -1190,12 +1190,21 @@ html[data-mode="light"] #about::after {
   text-decoration: none;
   box-shadow: var(--shadow-sm);
   transition: background 0.18s var(--ease), color 0.18s var(--ease),
-              border-color 0.18s var(--ease), transform 0.15s var(--ease);
+              border-color 0.18s var(--ease), transform 0.2s var(--ease),
+              opacity 0.25s var(--ease);
 }
 .back-btn:hover {
   background: var(--accent); color: var(--accent-deep);
   border-color: var(--accent); transform: translateX(-3px);
   box-shadow: var(--glow-accent-sm);
+}
+/* While a detail panel is open (body.exp-lock, set by experience.js/passions.js),
+   hide the fixed Back button so it doesn't float over the pop-up; it fades back
+   in when the panel closes. */
+body.exp-lock .back-btn {
+  opacity: 0 !important;
+  transform: translateY(-6px);
+  pointer-events: none;
 }
 
 /* =========================================================================
