@@ -427,8 +427,10 @@ html { scrollbar-color: var(--muted) transparent; scrollbar-width: thin; }
   transform: translateY(-50%);
   transition: transform 0.32s var(--ease), background 0.3s var(--ease);
 }
-/* Light mode -> thumb slides to the sun side, sun lights up, moon dims. */
-html[data-mode="light"] .mode-toggle__thumb { transform: translate(28px, -50%); }
+/* Light mode -> thumb slides to the sun side, sun lights up, moon dims.
+   26px (not 28) because the track's 1px border shifts the icon row: the sun's
+   center sits at x=42 inside the border box, and 4px + 26px + 12px = 42. */
+html[data-mode="light"] .mode-toggle__thumb { transform: translate(26px, -50%); }
 html[data-mode="light"] .mode-toggle__icon--sun  { opacity: 1; }
 html[data-mode="light"] .mode-toggle__icon--moon { opacity: 0.45; }
 .mode-toggle:focus-visible { outline: none; }
