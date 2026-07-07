@@ -2880,8 +2880,12 @@ img.album__art {
   overflow: hidden;
   padding: 5rem 0 3.2rem;
   margin-bottom: 3rem;
+  /* Game photo backdrop under a dark navy wash so the white type stays
+     readable; the radial court glow sits on top for the same depth as before. */
   background:
-    radial-gradient(120% 130% at 50% -20%, var(--bb-court-2), var(--bb-court) 70%);
+    radial-gradient(120% 130% at 50% -20%, rgba(24, 33, 60, 0.55), rgba(15, 20, 38, 0.82) 70%),
+    url("/assets/images/Basketball.png") center 30% / cover no-repeat,
+    var(--bb-court);
   border-bottom: 3px solid var(--bb-orange);
   color: #fff;
 }
@@ -3202,7 +3206,10 @@ img.album__art {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5px;
+    /* Wider gap so the three bars span roughly the same vertical band as the
+       mode-toggle pill's thumb -- side by side they read as a matched, level
+       pair instead of a short icon floating below a taller pill. */
+    gap: 7px;
     width: 40px; height: 40px;
     cursor: pointer;
   }
@@ -3225,9 +3232,9 @@ img.album__art {
   }
   .nav-toggle:checked ~ .site-nav { display: flex; }
   .site-nav a { padding: 0.85rem 0; border-bottom: 1px solid var(--line); }
-  .nav-toggle:checked ~ .nav-toggle__label span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-toggle__label span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
   .nav-toggle:checked ~ .nav-toggle__label span:nth-child(2) { opacity: 0; }
-  .nav-toggle:checked ~ .nav-toggle__label span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-toggle:checked ~ .nav-toggle__label span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 }
 
 @media (max-width: 680px) {
