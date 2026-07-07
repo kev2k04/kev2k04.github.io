@@ -2874,143 +2874,113 @@ img.album__art {
   padding: 0 0 5.5rem;
 }
 
-/* ---- Court header (intentionally dark in both modes -- it's a court) ---- */
+/* ---- Hero (intentionally dark in both modes -- it's a game photo) ----
+   Editorial left-aligned block over the film still; the jersey number sits
+   behind the type as a giant ghosted numeral, like the back of a warm-up. */
 .bball-hero {
   position: relative;
   overflow: hidden;
-  padding: 5rem 0 3.2rem;
-  margin-bottom: 3rem;
-  /* Game photo backdrop under a dark navy wash so the white type stays
-     readable; the radial court glow sits on top for the same depth as before. */
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(340px, 46vh, 460px);
+  padding: 5.5rem 0 2.6rem;
+  margin-bottom: 3.2rem;
   background:
-    radial-gradient(120% 130% at 50% -20%, rgba(24, 33, 60, 0.55), rgba(15, 20, 38, 0.82) 70%),
+    linear-gradient(180deg, rgba(15, 20, 38, 0.55) 0%, rgba(15, 20, 38, 0.45) 40%, rgba(15, 20, 38, 0.88) 72%, rgba(15, 20, 38, 0.96) 100%),
     url("/assets/images/Basketball.png") center 30% / cover no-repeat,
     var(--bb-court);
   border-bottom: 3px solid var(--bb-orange);
   color: #fff;
 }
-/* Painted court lines */
-.bball-court { position: absolute; inset: 0; pointer-events: none; }
-.bball-court__circle,
-.bball-court__key,
-.bball-court__arc { position: absolute; border: 2px solid var(--bb-line); }
-.bball-court__circle {
-  width: 220px; height: 220px;
-  border-radius: 50%;
-  left: 50%; bottom: -110px;
-  transform: translateX(-50%);
+.bball-hero__ghost {
+  position: absolute;
+  right: -0.04em;
+  bottom: -0.22em;
+  z-index: 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(14rem, 34vw, 26rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+  user-select: none;
 }
-.bball-court__key {
-  width: 150px; height: 120px;
-  left: 50%; bottom: 0;
-  transform: translateX(-50%);
-  border-bottom: none;
-}
-.bball-court__arc {
-  width: 360px; height: 360px;
-  border-radius: 50%;
-  left: 50%; bottom: 0;
-  transform: translateX(-50%) translateY(60%);
-}
-.bball-hero__inner { position: relative; z-index: 1; text-align: center; }
-.bball-hero__icon {
-  display: inline-grid;
-  place-items: center;
-  width: 64px; height: 64px;
-  margin-bottom: 1rem;
-  color: var(--bb-orange);
-  background: rgba(249, 115, 22, 0.14);
-  border: 1px solid rgba(249, 115, 22, 0.4);
-  border-radius: 50%;
-}
-.bball-kicker { color: var(--bb-orange-soft); justify-content: center; }
+.bball-hero__inner { position: relative; z-index: 1; text-align: left; width: 100%; }
+.bball-kicker { color: var(--bb-orange-soft); }
 .bball-kicker::before { background: var(--bb-orange-soft); }
 .bball-hero__title {
   color: #fff;
-  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
   letter-spacing: -0.02em;
-  margin: 0.6rem 0 0.7rem;
+  margin: 0.7rem 0 0.5rem;
 }
-.bball-hero__meta { color: rgba(255, 255, 255, 0.78); font-size: 1.05rem; margin: 0; }
+.bball-hero__meta { color: rgba(255, 255, 255, 0.82); font-size: 1.05rem; margin: 0; }
 .bball-jersey {
   display: inline-block;
-  font-family: var(--font-head);
+  font-family: var(--font-mono);
   font-weight: 700;
   color: var(--bb-orange);
   margin-right: 0.5rem;
   font-variant-numeric: tabular-nums;
 }
 
-/* ---- A) Stat scoreboard ---- */
+/* ---- A) Box score ----
+   One stat line under a double rule, the way a paper scorebook reads —
+   mono numerals, hairline column dividers, no cards. */
+.bball-sheet { margin-bottom: 4.2rem; }
+.bball-sheet__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  margin-bottom: 1.1rem;
+}
 .bball-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.3rem;
+  grid-template-columns: repeat(6, 1fr);
+  border-top: 3px double var(--line-strong);
+  border-bottom: 1px solid var(--line);
 }
 .bball-stat {
-  position: relative;
+  padding: 1.2rem 0.5rem 1.35rem;
   text-align: center;
-  padding: 2.2rem 1rem 1.9rem;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-top: 4px solid var(--bb-orange);
-  border-radius: 12px;
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
+}
+.bball-stat + .bball-stat { border-left: 1px solid var(--line); }
+.bball-stat__label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: var(--muted);
 }
 .bball-stat__value {
   display: block;
-  font-family: var(--font-head);
+  font-family: var(--font-mono);
   font-weight: 700;
-  font-size: clamp(2.6rem, 6vw, 3.6rem);
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
   line-height: 1;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-  transform-origin: center bottom;
-  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
+  transition: color 0.25s var(--ease);
 }
-/* Hovering a card gently lifts it and grows its number — same interactive
-   feel as the experience cards, clipped so the grid never shifts. */
-.bball-stat {
-  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease),
-              box-shadow 0.25s var(--ease);
-}
-.bball-stat:hover {
-  transform: translateY(-3px);
-  border-color: var(--line-strong);
-  box-shadow: var(--shadow);
-}
-.bball-stat:hover .bball-stat__value { transform: scale(1.08); }
-@media (prefers-reduced-motion: reduce) {
-  .bball-stat, .bball-stat__value { transition: none; }
-  .bball-stat:hover { transform: none; }
-  .bball-stat:hover .bball-stat__value { transform: none; }
-}
-.bball-stat__label {
-  display: block;
-  margin-top: 0.7rem;
-  font-size: 0.74rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--ink);
-}
+/* The line stays ink; hovering a column warms its numeral orange. */
+.bball-stats[data-state="live"] .bball-stat:hover .bball-stat__value { color: var(--bb-orange); }
 /* Pre-season: dashes sit muted */
 .bball-stats[data-state="preseason"] .bball-stat__value { color: var(--muted); opacity: 0.7; }
-/* Live: numbers read in ink (white on dark, near-black in light mode) and
-   warm to orange when their card is hovered. */
-.bball-stats[data-state="live"] .bball-stat__value { color: var(--ink); }
-.bball-stats[data-state="live"] .bball-stat:hover .bball-stat__value { color: var(--bb-orange-deep); }
 /* Loading skeleton shimmer over the value */
 .bball-stats[data-state="loading"] .bball-stat__value {
   color: transparent;
-  border-radius: 6px;
+  border-radius: 4px;
   background: linear-gradient(90deg, var(--surface-2) 25%, var(--line-strong) 37%, var(--surface-2) 63%);
   background-size: 400% 100%;
   animation: bb-shimmer 1.4s ease infinite;
 }
 @media (prefers-reduced-motion: reduce) {
+  .bball-stat__value { transition: none; }
   .bball-stats[data-state="loading"] .bball-stat__value { animation: none; }
 }
 @keyframes bb-shimmer {
@@ -3018,24 +2988,34 @@ img.album__art {
   100% { background-position: 0 0; }
 }
 
+/* Scorer's notes: status on the head line, source note under the sheet. */
 .bball-status {
-  margin: 1.4rem 0 0;
-  text-align: center;
-  font-size: 0.95rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
   color: var(--muted);
 }
-.bball-stats[data-state="error"] + .bball-status { color: var(--bb-orange-deep); }
+.bball-sheet:has(.bball-stats[data-state="error"]) .bball-status { color: var(--bb-orange-deep); }
+.bball-sheet__note {
+  margin: 0.8rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
 
-/* ---- C) Blurb + team photo ---- */
+/* ---- C) The team ---- */
 .bball-about {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: 2.6rem;
   align-items: center;
-  margin: 4rem 0;
+  margin: 0 0 4.2rem;
 }
-.bball-about__title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 0.9rem; }
-.bball-about__blurb { color: var(--ink-soft); font-size: 1.08rem; line-height: 1.75; margin: 0; }
+.bball-about__text .bball-kicker { margin-bottom: 1rem; }
+.bball-about__blurb { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.75; margin: 0 0 1.1rem; }
+.bball-about__blurb:last-child { margin-bottom: 0; }
 .bball-about__photo {
   aspect-ratio: 4 / 3;
   display: grid;
@@ -3043,11 +3023,11 @@ img.album__art {
   text-align: center;
   padding: 1rem;
   color: var(--muted);
-  border: 1.5px dashed rgba(249, 115, 22, 0.45);
-  border-radius: 14px;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius);
   background:
     repeating-linear-gradient(-45deg,
-      rgba(249, 115, 22, 0.06) 0, rgba(249, 115, 22, 0.06) 10px,
+      rgba(var(--ink-rgb), 0.03) 0, rgba(var(--ink-rgb), 0.03) 10px,
       transparent 10px, transparent 20px);
 }
 .bball-about__photo-label {
@@ -3055,25 +3035,23 @@ img.album__art {
   font-size: 0.86rem; max-width: 240px;
 }
 
-/* ---- B) Highlight reel ---- */
-.bball-reel { margin-top: 1rem; }
-.bball-reel__head { text-align: center; max-width: 640px; margin: 0 auto 1.8rem; }
-.bball-reel__head .bball-kicker { margin-bottom: 0.8rem; }
-.bball-reel__title { font-size: clamp(1.7rem, 4vw, 2.4rem); margin: 0.4rem 0 0.6rem; }
+/* ---- B) Game film ---- */
+.bball-reel { margin-top: 0; }
+.bball-reel__head { text-align: left; max-width: 640px; margin: 0 0 1.6rem; }
+.bball-reel__head .bball-kicker { margin-bottom: 0.9rem; }
+.bball-reel__title { font-size: clamp(1.5rem, 3.5vw, 2.1rem); margin: 0 0 0.6rem; }
 .bball-reel__sub { color: var(--muted); margin: 0; }
 .bball-reel__sub a { color: var(--bb-orange-deep); font-weight: 600; }
 
 .bball-video {
   position: relative;
   width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
   aspect-ratio: 16 / 9;
   background: var(--bb-court);
   border: 1px solid var(--line-strong);
-  border-radius: 16px;
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
 }
 .bball-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .bball-video__placeholder {
@@ -3113,7 +3091,11 @@ img.album__art {
   .bball-about { grid-template-columns: 1fr; gap: 1.8rem; }
 }
 @media (max-width: 560px) {
-  .bball-stats { grid-template-columns: 1fr; gap: 1rem; }
+  /* The line folds to two scorebook rows of three. */
+  .bball-stats { grid-template-columns: repeat(3, 1fr); }
+  .bball-stat:nth-child(4) { border-left: none; }
+  .bball-stat:nth-child(n + 4) { border-top: 1px solid var(--line); }
+  .bball-hero__ghost { font-size: 13rem; }
 }
 
 /* =========================================================================

@@ -16,16 +16,11 @@ permalink: /basketball/
          data-static-highlight="{{ '/assets/data/latest-highlight.json' | relative_url }}"
          data-team="{{ b.team }}">
 
-  <!-- ===== Court header ===== -->
+  <!-- ===== Hero: game photo, editorial left block, ghosted jersey number ===== -->
   <header class="bball-hero">
-    <div class="bball-court" aria-hidden="true">
-      <span class="bball-court__circle"></span>
-      <span class="bball-court__key"></span>
-      <span class="bball-court__arc"></span>
-    </div>
+    <span class="bball-hero__ghost" aria-hidden="true">{{ b.jersey }}</span>
     <div class="container bball-hero__inner">
-      <span class="bball-hero__icon" aria-hidden="true">{% include icon.html name="basketball" %}</span>
-      <span class="section__kicker bball-kicker">{{ b.league }} League</span>
+      <span class="section__kicker bball-kicker">{{ b.league }} League &middot; Richmond</span>
       <h1 class="bball-hero__title">{{ b.team }}</h1>
       <p class="bball-hero__meta">
         <span class="bball-jersey">#{{ b.jersey }}</span>
@@ -36,42 +31,49 @@ permalink: /basketball/
 
   <div class="container">
 
-    <!-- ===== A) Headline stat cards ===== -->
-    <div class="bball-stats" id="bball-stats" data-state="loading">
-      <div class="bball-stat" data-stat="ppg">
-        <span class="bball-stat__value" data-value>&mdash;</span>
-        <span class="bball-stat__label">Points / Game</span>
+    <!-- ===== Box score: one stat line, the way a scorebook reads ===== -->
+    <div class="bball-sheet">
+      <div class="bball-sheet__head">
+        <span class="section__kicker bball-kicker">Box score</span>
+        <!-- Scorer's note: pre-season / loading / error / updated -->
+        <p class="bball-status" id="bball-status" role="status" aria-live="polite">
+          Loading the latest stats&hellip;
+        </p>
       </div>
-      <div class="bball-stat" data-stat="rpg">
-        <span class="bball-stat__value" data-value>&mdash;</span>
-        <span class="bball-stat__label">Rebounds / Game</span>
+
+      <div class="bball-stats" id="bball-stats" data-state="loading">
+        <div class="bball-stat" data-stat="ppg">
+          <span class="bball-stat__label">PTS</span>
+          <span class="bball-stat__value" data-value>&mdash;</span>
+        </div>
+        <div class="bball-stat" data-stat="rpg">
+          <span class="bball-stat__label">REB</span>
+          <span class="bball-stat__value" data-value>&mdash;</span>
+        </div>
+        <div class="bball-stat" data-stat="apg">
+          <span class="bball-stat__label">AST</span>
+          <span class="bball-stat__value" data-value>&mdash;</span>
+        </div>
+        <div class="bball-stat" data-stat="spg">
+          <span class="bball-stat__label">STL</span>
+          <span class="bball-stat__value" data-value>&mdash;</span>
+        </div>
+        <div class="bball-stat" data-stat="bpg">
+          <span class="bball-stat__label">BLK</span>
+          <span class="bball-stat__value" data-value>&mdash;</span>
+        </div>
+        <div class="bball-stat" data-stat="gp">
+          <span class="bball-stat__label">GP</span>
+          <span class="bball-stat__value" data-value>&mdash;</span>
+        </div>
       </div>
-      <div class="bball-stat" data-stat="apg">
-        <span class="bball-stat__value" data-value>&mdash;</span>
-        <span class="bball-stat__label">Assists / Game</span>
-      </div>
-      <div class="bball-stat" data-stat="spg">
-        <span class="bball-stat__value" data-value>&mdash;</span>
-        <span class="bball-stat__label">Steals / Game</span>
-      </div>
-      <div class="bball-stat" data-stat="bpg">
-        <span class="bball-stat__value" data-value>&mdash;</span>
-        <span class="bball-stat__label">Blocks / Game</span>
-      </div>
-      <div class="bball-stat" data-stat="gp">
-        <span class="bball-stat__value" data-value>&mdash;</span>
-        <span class="bball-stat__label">Games Played</span>
-      </div>
+      <p class="bball-sheet__note">Per-game averages, {{ b.league }} summer rec.</p>
     </div>
 
-    <!-- Live status line: pre-season / loading / error / updated -->
-    <p class="bball-status" id="bball-status" role="status" aria-live="polite">
-      Loading the latest stats&hellip;
-    </p>
-
-    <!-- ===== C) Blurb + team photo ===== -->
+    <!-- ===== The team ===== -->
     <div class="bball-about">
       <div class="bball-about__text">
+        <span class="section__kicker bball-kicker">The team</span>
         <p class="bball-about__blurb">{{ b.blurb }}</p>
         {%- if b.blurb2 -%}
         <p class="bball-about__blurb">{{ b.blurb2 }}</p>
@@ -86,14 +88,14 @@ permalink: /basketball/
       </div>
     </div>
 
-    <!-- ===== B) Highlight video ===== -->
+    <!-- ===== Game film ===== -->
     <div class="bball-reel">
       <div class="bball-reel__head">
-        <span class="section__kicker bball-kicker">Highlights</span>
-        <h2 class="bball-reel__title">Latest {{ b.team }} film</h2>
+        <span class="section__kicker bball-kicker">Game film</span>
+        <h2 class="bball-reel__title">The latest tape</h2>
         <p class="bball-reel__sub">
-          Auto-pulled from the
-          <a href="{{ b.youtube_channel }}" target="_blank" rel="noopener noreferrer">Roundball YouTube channel</a>.
+          Every game gets filmed — this is our most recent one, straight from the
+          <a href="{{ b.youtube_channel }}" target="_blank" rel="noopener noreferrer">{{ b.league }} channel</a>.
         </p>
       </div>
 
