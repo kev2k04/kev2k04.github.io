@@ -1883,10 +1883,12 @@ body.exp-lock { overflow: hidden; }
   transition: opacity 0.25s var(--ease);
   pointer-events: none;
 }
+/* Hover mirrors the experience cards: hairline brightens, surface lifts.
+   The accent stays confined to the spine + icon glyph. */
 .pass-card:hover,
 .pass-card:focus-visible {
   transform: translateY(-5px);
-  border-color: rgba(var(--card-accent), 0.6);
+  border-color: var(--line-strong);
   background: var(--surface-2);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), var(--shadow);
 }
@@ -1901,8 +1903,8 @@ body.exp-lock { overflow: hidden; }
   height: 54px;
   border-radius: var(--radius-lg);
   color: rgb(var(--card-accent));
-  background: rgba(var(--card-accent), 0.14);
-  border: 1px solid rgba(var(--card-accent), 0.32);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   transition: transform 0.22s var(--ease);
 }
 .pass-card:hover .pass-card__icon { transform: scale(1.06) rotate(-4deg); }
@@ -1919,12 +1921,15 @@ body.exp-lock { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(var(--card-accent));
+  color: var(--muted);
+  transition: color 0.2s var(--ease);
 }
+.pass-card:hover .pass-card__cue { color: var(--ink); }
 .pass-card__cue svg { transition: transform 0.2s var(--ease); }
 .pass-card:hover .pass-card__cue svg { transform: translateX(4px); }
 
@@ -1937,7 +1942,7 @@ body.exp-lock { overflow: hidden; }
   gap: 1.8rem;
   min-height: 0;
   padding: 2.1rem 2.4rem;
-  border-color: rgba(var(--card-accent), 0.45);
+  border-color: var(--line);
   background: var(--surface);
 }
 .pass-card--featured::before { width: 3px; opacity: 0.85; }
@@ -1964,7 +1969,7 @@ body.exp-lock { overflow: hidden; }
   gap: 1.4rem;
   min-height: 0;
   padding: 1.5rem 1.8rem;
-  border-color: rgba(var(--card-accent), 0.4);
+  border-color: var(--line);
   background: var(--surface);
 }
 .pass-card--banner:hover,
@@ -1975,7 +1980,12 @@ body.exp-lock { overflow: hidden; }
 .pass-card--banner .pass-card__tagline { font-size: 0.98rem; max-width: 64ch; }
 .pass-card--banner .pass-card__cue { margin-top: 0; margin-left: auto; flex: none; padding-left: 1rem; }
 
-/* "Live" badge with a softly pulsing dot */
+/* Work-in-progress tiles: hover like the rest, but nothing to click. */
+.pass-card--wip { cursor: default; }
+.pass-card--wip .pass-card__cue { color: var(--muted); }
+.pass-card--wip:hover .pass-card__cue { color: var(--muted); }
+
+/* "Live" badge: quiet mono label; the pulsing accent dot IS the signal. */
 .pass-card__badge {
   display: inline-flex;
   align-items: center;
@@ -1983,13 +1993,14 @@ body.exp-lock { overflow: hidden; }
   align-self: flex-start;
   margin-bottom: 0.1rem;
   padding: 0.32rem 0.8rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgb(var(--card-accent));
-  background: rgba(var(--card-accent), 0.12);
-  border: 1px solid rgba(var(--card-accent), 0.32);
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line-strong);
   border-radius: 100px;
 }
 .pass-card__dot {
@@ -2016,9 +2027,9 @@ body.exp-lock { overflow: hidden; }
   font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  /* Dark ink reads strongly on the bright accent pill in both themes. */
-  color: #15110b;
-  background: rgb(var(--card-accent));
+  /* Matches .btn--primary on the home page: ink pill, not a candy accent. */
+  color: var(--accent-deep);
+  background: var(--accent);
   border-radius: 100px;
   transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
@@ -2059,40 +2070,62 @@ body.exp-lock { overflow: hidden; }
   max-height: min(90vh, calc(100vh - var(--nav-h) - 16px - 1.5rem));
   overflow-y: auto;
   background: var(--surface);
-  border: 1px solid rgba(var(--card-accent), 0.4);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   will-change: transform, opacity;
   transform-origin: top left;
   transition: transform 0.46s var(--ease), opacity 0.3s var(--ease);
 }
+/* The card's accent spine carries into its panel — same 2px left line. */
+.pass-panel::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: rgb(var(--card-accent));
+  opacity: 0.85;
+  pointer-events: none;
+}
 .pass-panel[hidden] { display: none; }
 .pass-panel__inner {
   padding: 2.1rem 2.5rem 2.6rem;
   opacity: 0;
   transition: opacity 0.28s var(--ease);
-  /* Accent bar across the top of the panel ties it to its card. */
-  border-top: 4px solid rgb(var(--card-accent));
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 .pass-panel.is-open .pass-panel__inner { opacity: 1; transition-delay: 0.1s; }
 
+/* Same subtle pill as the experience panel's Back button. */
 .pass-panel__back {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.55rem;
   margin-bottom: 1.3rem;
-  padding: 0;
-  background: none;
-  border: none;
+  padding: 0.45rem 1rem 0.45rem 0.8rem;
+  background: rgba(var(--ink-rgb), 0.04);
+  border: 1px solid var(--line);
+  border-radius: 100px;
   cursor: pointer;
   font: inherit;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--muted);
-  transition: color 0.18s var(--ease);
+  transition: color 0.18s var(--ease), background 0.18s var(--ease),
+              border-color 0.18s var(--ease), transform 0.18s var(--ease);
 }
-.pass-panel__back:hover { color: rgb(var(--card-accent)); }
+.pass-panel__back:hover,
+.pass-panel__back:focus-visible {
+  color: var(--ink);
+  background: rgba(var(--ink-rgb), 0.08);
+  border-color: var(--line-strong);
+  transform: translateX(-2px);
+}
+.pass-panel__back:active { transform: translateX(-2px) scale(0.96); }
+@media (prefers-reduced-motion: reduce) {
+  .pass-panel__back,
+  .pass-panel__back:hover,
+  .pass-panel__back:active { transform: none; }
+}
 
 .pass-panel__head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
 .pass-panel__icon {
@@ -2102,11 +2135,11 @@ body.exp-lock { overflow: hidden; }
   flex: none;
   border-radius: var(--radius-lg);
   color: rgb(var(--card-accent));
-  background: rgba(var(--card-accent), 0.14);
-  border: 1px solid rgba(var(--card-accent), 0.32);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
 }
 .pass-panel__name { font-size: clamp(1.5rem, 3vw, 1.9rem); margin: 0; letter-spacing: -0.01em; }
-.pass-panel__tagline { color: rgb(var(--card-accent)); font-weight: 600; font-size: 0.95rem; margin: 0.2rem 0 0; }
+.pass-panel__tagline { color: var(--muted); font-weight: 600; font-size: 0.95rem; margin: 0.2rem 0 0; }
 .pass-panel__blurb { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.65; margin: 0 0 1.5rem; }
 
 /* "Not yet created" empty state (cards flagged coming_soon in passions.yml) */
@@ -2817,6 +2850,49 @@ img.album__art {
 }
 
 /* ---- Gaming panel: rank/identity grid + profile link ---- */
+/* ---- Gaming journey: wide scorebook-style rows, one per game era ----
+   Number + title sit in a fixed side column; the story runs the full
+   remaining width so long paragraphs read as prose, not a tall card. */
+.gg-journey {
+  display: grid;
+  gap: 0;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--line-strong);
+}
+.gg-sec {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 1.6rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.gg-sec__side { min-width: 0; }
+.gg-sec__no {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgba(var(--card-accent), 0.75);
+  margin-bottom: 0.45rem;
+  font-variant-numeric: tabular-nums;
+}
+.gg-sec__name {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.18rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+.gg-sec__body { min-width: 0; }
+.gg-sec__memory { margin: 0; color: var(--ink-soft); font-size: 0.97rem; line-height: 1.7; }
+.gg-sec__media { margin-top: 1rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+.gg-sec__media img { display: block; width: 100%; height: auto; }
+@media (max-width: 640px) {
+  .gg-sec { grid-template-columns: 1fr; gap: 0.7rem; }
+}
+
 .gg-id {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));

@@ -54,6 +54,19 @@ permalink: /passions/
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </a>
+        {%- elsif p.wip -%}
+        <!-- Work-in-progress tile: hoverable but not openable (no data-pass,
+             so passions.js never wires it; remove `wip:` in passions.yml to
+             turn it back into a live panel card). -->
+        <div class="pass-card pass-card--banner pass-card--wip pass-card--{{ p.id }}"
+             style="--card-accent: {{ p.accent }};" aria-disabled="true">
+          <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
+          <span class="pass-card__body">
+            <span class="pass-card__name">{{ p.title }}</span>
+            <span class="pass-card__tagline">{{ p.tagline }}</span>
+          </span>
+          <span class="pass-card__cue" aria-hidden="true">Work in progress</span>
+        </div>
         {%- else -%}
         <button type="button" class="pass-card pass-card--banner pass-card--{{ p.id }}" id="pass-card-{{ p.id }}"
                 data-pass="{{ p.id }}" style="--card-accent: {{ p.accent }};"
@@ -78,7 +91,7 @@ permalink: /passions/
     <div class="pass-scrim" data-pass-close></div>
 
     {%- for p in passions -%}
-      {%- if p.kind == 'panel' -%}
+      {%- if p.kind == 'panel' and p.wip != true -%}
       <article class="pass-panel pass-panel--{{ p.id }}" id="pass-panel-{{ p.id }}"
                data-panel="{{ p.id }}" style="--card-accent: {{ p.accent }};"
                role="dialog" aria-modal="true" aria-labelledby="pass-panel-{{ p.id }}-title" hidden>

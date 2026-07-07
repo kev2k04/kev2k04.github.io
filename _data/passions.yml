@@ -244,24 +244,24 @@
       image: ""
       image_hint: "Add a calm sunset desk setup — powering off the PC, a minimal closing scene"
 
-# Multi-sport history. `coming_soon: true` shows a centered "Not yet created"
-# state so the site can go live now — remove that flag and add an `intro:` +
-# `sports:` list (see git history) when you're ready to build this panel out.
+# Multi-sport history. `wip: true` renders the card as a non-clickable
+# "Work in progress" tile (still hoverable) — remove that flag and add an
+# `intro:` + `sports:` list (see git history) when you're ready to build it.
 - id: sports
   kind: panel
   title: Sports
   icon: trophy
   tagline: All of my accomplishments and accolades in sports.
   accent: "45, 212, 191"      # teal — distinct from the page's azure accent
-  coming_soon: true
+  wip: true
 
-# Personal Fitness — its own card beneath Sports. `coming_soon: true` shows the
-# "Not yet created" state; remove it and add a `blurb:` + `highlights:` list
-# (generic panel body) when you're ready to write this section.
+# Personal Fitness — its own card beneath Sports. `wip: true` renders the
+# non-clickable "Work in progress" tile; remove it and add a `blurb:` +
+# `highlights:` list (generic panel body) when you're ready to write this.
 - id: fitness
   kind: panel
   title: Personal Fitness
   icon: dumbbell
   tagline: My ongoing journey in the gym.
   accent: "34, 197, 94"       # green — health / fitness
-  coming_soon: true
+  wip: true
