@@ -1,0 +1,11 @@
+{
+  "_comment": "Roundball Stats — Kevin's Bagwork 2.0 season numbers. The basketball page reads this file directly (see data-static-stats on /basketball/). Update after each game: bump the per-game averages, gamesPlayed, and lastUpdated.",
+  "seasonStarted": true,
+  "ppg": 9,
+  "rpg": 4,
+  "apg": 3,
+  "spg": 3,
+  "bpg": 0,
+  "gamesPlayed": 1,
+  "lastUpdated": "2026-07-06"
+}

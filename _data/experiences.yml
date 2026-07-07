@@ -53,16 +53,16 @@
     - Variance Analysis
     - Forecasting
   # Photo gallery — the "Photo Gallery" button in the panel switches to these
-  # square tiles. `contain: true` shows a wide photo whole (letterboxed) instead
-  # of cropping it — used for the group photo so no one is cut off.
+  # tiles: a 3×2 grid of square shots, then the group photo (`wide: true`)
+  # spanning the full row on its own so no one is cropped out.
   gallery:
     - { image: "/assets/images/seaspan-gallery/1.jpg" }
     - { image: "/assets/images/seaspan-gallery/2.jpg" }
     - { image: "/assets/images/seaspan-gallery/3.jpg" }
-    - { image: "/assets/images/seaspan-gallery/4.jpg", contain: true }
     - { image: "/assets/images/seaspan-gallery/5.jpg" }
     - { image: "/assets/images/seaspan-gallery/6.jpg" }
     - { image: "/assets/images/seaspan-gallery/7.jpg" }
+    - { image: "/assets/images/seaspan-gallery/4.jpg", wide: true }
 
 - id: bchydro
   company: BC Hydro

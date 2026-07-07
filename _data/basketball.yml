@@ -8,14 +8,21 @@ team: "Bagwork 2.0"
 league: "Roundball"                       # TODO(Kevin): confirm league/division name
 player: "Kevin Liu"
 jersey: "6"                               # jersey number
-position: "Guard"                         # (no longer shown in the hero)
 youtube_channel: "https://www.youtube.com/@RoundballBC"
 
-# TODO(Kevin): write a few real lines about playing in the league.
+# About the team — rendered as two paragraphs next to the team photo.
 blurb: >-
-  TODO(Kevin): Write a short blurb about suiting up for Bagwork 2.0 — how you
-  got into the league, your role on the team, what you love about game night,
-  and any goals for the season. This sits next to a team/action photo below.
+  Bagwork 2.0 is the second edition of our basketball team this year. The team
+  originally started as a group of friends that I've met through different
+  parts of my life, from high school, to university, to the gym, but since
+  many of the original players are doing internships in different places
+  around the world, we decided to create Bagwork 2.0 as a new version of the
+  team.
+blurb2: >-
+  We are a group of gym and sports-loving guys who enjoy competing, staying
+  active, and playing basketball together, and after a tough previous season
+  where we finished 1-7, Bagwork 2.0 is all about redemption, improvement,
+  and having fun while trying to come back stronger.
 
 # Optional: drop in an API base if you host the serverless functions on a
 # different domain than the site (e.g. a Vercel deployment). Leave blank to

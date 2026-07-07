@@ -12,7 +12,7 @@ permalink: /basketball/
 </a>
 
 <section class="bball" data-api-base="{{ b.api_base }}"
-         data-static-stats="{{ '/assets/data/basketball-stats.json' | relative_url }}"
+         data-static-stats="{{ '/assets/data/roundball-stats.json' | relative_url }}"
          data-team="{{ b.team }}">
 
   <!-- ===== Court header ===== -->
@@ -41,13 +41,25 @@ permalink: /basketball/
         <span class="bball-stat__value" data-value>&mdash;</span>
         <span class="bball-stat__label">Points / Game</span>
       </div>
+      <div class="bball-stat" data-stat="rpg">
+        <span class="bball-stat__value" data-value>&mdash;</span>
+        <span class="bball-stat__label">Rebounds / Game</span>
+      </div>
       <div class="bball-stat" data-stat="apg">
         <span class="bball-stat__value" data-value>&mdash;</span>
         <span class="bball-stat__label">Assists / Game</span>
       </div>
-      <div class="bball-stat" data-stat="rpg">
+      <div class="bball-stat" data-stat="spg">
         <span class="bball-stat__value" data-value>&mdash;</span>
-        <span class="bball-stat__label">Rebounds / Game</span>
+        <span class="bball-stat__label">Steals / Game</span>
+      </div>
+      <div class="bball-stat" data-stat="bpg">
+        <span class="bball-stat__value" data-value>&mdash;</span>
+        <span class="bball-stat__label">Blocks / Game</span>
+      </div>
+      <div class="bball-stat" data-stat="gp">
+        <span class="bball-stat__value" data-value>&mdash;</span>
+        <span class="bball-stat__label">Games Played</span>
       </div>
     </div>
 
@@ -60,6 +72,9 @@ permalink: /basketball/
     <div class="bball-about">
       <div class="bball-about__text">
         <p class="bball-about__blurb">{{ b.blurb }}</p>
+        {%- if b.blurb2 -%}
+        <p class="bball-about__blurb">{{ b.blurb2 }}</p>
+        {%- endif -%}
       </div>
       <!-- PLACEHOLDER: add a team/action photo via `image:` in _data/basketball.yml -->
       <div class="bball-about__photo" role="img" aria-label="Team photo placeholder">

@@ -45,6 +45,12 @@
     return Number(n).toFixed(1);
   }
 
+  /* Counting stats (games played) read as whole numbers, not "1.0". */
+  function fmtInt(n) {
+    if (n === null || n === undefined || n === '' || isNaN(Number(n))) return null;
+    return String(Math.round(Number(n)));
+  }
+
   function setStat(key, val) {
     var card = statsEl.querySelector('[data-stat="' + key + '"] [data-value]');
     if (card) card.innerHTML = val === null ? '&mdash;' : val;
@@ -53,15 +59,19 @@
   function renderStats(data) {
     if (!data || data.seasonStarted !== true) {
       statsEl.setAttribute('data-state', 'preseason');
-      setStat('ppg', null); setStat('apg', null); setStat('rpg', null);
+      setStat('ppg', null); setStat('rpg', null); setStat('apg', null);
+      setStat('spg', null); setStat('bpg', null); setStat('gp', null);
       statusEl.textContent =
         "Season hasn't started yet — stats will appear here once games begin.";
       return;
     }
     statsEl.setAttribute('data-state', 'live');
     setStat('ppg', fmt(data.ppg));
-    setStat('apg', fmt(data.apg));
     setStat('rpg', fmt(data.rpg));
+    setStat('apg', fmt(data.apg));
+    setStat('spg', fmt(data.spg));
+    setStat('bpg', fmt(data.bpg));
+    setStat('gp', fmtInt(data.gamesPlayed));
     statusEl.textContent = data.lastUpdated
       ? 'Live stats · updated ' + formatDate(data.lastUpdated)
       : 'Live season stats.';
