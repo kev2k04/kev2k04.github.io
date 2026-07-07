@@ -20,6 +20,7 @@
 
   var apiBase = (root.getAttribute('data-api-base') || '').replace(/\/$/, '');
   var staticStats = root.getAttribute('data-static-stats') || '/assets/data/basketball-stats.json';
+  var staticHighlight = root.getAttribute('data-static-highlight') || '/assets/data/latest-highlight.json';
   var team = root.getAttribute('data-team') || 'the team';
 
   /* Fetch a URL and resolve to parsed JSON only when the response is OK and
@@ -131,7 +132,12 @@
 
   function loadVideo() {
     showVideoMessage('loading', 'Loading the latest highlight…');
+    // Serverless endpoint first; on plain GitHub Pages fall back to the static
+    // JSON that the weekly highlight workflow refreshes every Monday.
     fetchJson(apiBase + '/api/latest-highlight')
+      .then(function (data) {
+        return (data && data.found) ? data : fetchJson(staticHighlight);
+      })
       .then(function (data) {
         if (data && data.found && embedVideo(data)) return;
         showVideoMessage('empty', 'Latest ' + team + ' highlights will appear here.');
