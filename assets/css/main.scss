@@ -2963,6 +2963,25 @@ img.album__art {
   color: var(--ink);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
+  transform-origin: center bottom;
+  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
+}
+/* Hovering a card gently lifts it and grows its number — same interactive
+   feel as the experience cards, clipped so the grid never shifts. */
+.bball-stat {
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease),
+              box-shadow 0.25s var(--ease);
+}
+.bball-stat:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow);
+}
+.bball-stat:hover .bball-stat__value { transform: scale(1.08); }
+@media (prefers-reduced-motion: reduce) {
+  .bball-stat, .bball-stat__value { transition: none; }
+  .bball-stat:hover { transform: none; }
+  .bball-stat:hover .bball-stat__value { transform: none; }
 }
 .bball-stat__label {
   display: block;
@@ -2975,9 +2994,10 @@ img.album__art {
 }
 /* Pre-season: dashes sit muted */
 .bball-stats[data-state="preseason"] .bball-stat__value { color: var(--muted); opacity: 0.7; }
-/* Live: numbers glow orange */
-.bball-stats[data-state="live"] .bball-stat__value { color: var(--bb-orange-deep); }
-html[data-mode="light"] .bball-stats[data-state="live"] .bball-stat__value { color: var(--bb-orange-deep); }
+/* Live: numbers read in ink (white on dark, near-black in light mode) and
+   warm to orange when their card is hovered. */
+.bball-stats[data-state="live"] .bball-stat__value { color: var(--ink); }
+.bball-stats[data-state="live"] .bball-stat:hover .bball-stat__value { color: var(--bb-orange-deep); }
 /* Loading skeleton shimmer over the value */
 .bball-stats[data-state="loading"] .bball-stat__value {
   color: transparent;
