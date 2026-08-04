@@ -131,6 +131,34 @@ permalink: /experience/
           {%- endfor -%}
         </ul>
 
+        {%- comment -%}
+          Optional feature story — a clickable card that flips the panel to a
+          third view (see .exp-panel.is-story). Driven by `feature:` in
+          experiences.yml.
+        {%- endcomment -%}
+        {%- if e.feature -%}
+        <button type="button" class="exp-feature" data-story-open
+                aria-label="Open: {{ e.feature.title }}">
+          {%- if e.feature.hero and e.feature.hero != '' -%}
+          <span class="exp-feature__media">
+            <img src="{{ e.feature.hero | relative_url }}" alt="" loading="lazy">
+          </span>
+          {%- endif -%}
+          <span class="exp-feature__body">
+            <span class="exp-feature__pill">{{ e.feature.kicker | default: "Event" }}</span>
+            <span class="exp-feature__title">{{ e.feature.title }}</span>
+            {%- if e.feature.date and e.feature.date != '' -%}
+            <span class="exp-feature__meta">{{ e.feature.date }}{% if e.feature.place and e.feature.place != '' %} &middot; {{ e.feature.place }}{% endif %}</span>
+            {%- endif -%}
+            <span class="exp-feature__teaser">{{ e.feature.teaser }}</span>
+            <span class="exp-feature__cue">
+              View the event
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </span>
+        </button>
+        {%- endif -%}
+
         <h3 class="exp-panel__subhead">Skills &amp; Tools</h3>
         <ul class="taglist">
           {%- for skill in e.skills -%}
@@ -138,6 +166,45 @@ permalink: /experience/
           {%- endfor -%}
         </ul>
         </div><!-- /.exp-panel__detail -->
+
+        {%- if e.feature -%}
+        <div class="exp-panel__story" aria-label="{{ e.feature.title }}">
+          <button type="button" class="exp-story__back" data-story-close>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            Back to details
+          </button>
+
+          <article class="exp-story">
+            <span class="exp-story__pill">{{ e.feature.kicker | default: "Event" }}</span>
+            <h3 class="exp-story__title">{{ e.feature.title }}</h3>
+            {%- if e.feature.date and e.feature.date != '' -%}
+            <p class="exp-story__meta">{{ e.feature.date }}{% if e.feature.place and e.feature.place != '' %} &middot; {{ e.feature.place }}{% endif %}</p>
+            {%- endif -%}
+
+            {%- if e.feature.hero and e.feature.hero != '' -%}
+            <figure class="exp-story__hero">
+              <img src="{{ e.feature.hero | relative_url }}"
+                   alt="{{ e.feature.hero_alt | default: e.feature.title }}" loading="lazy">
+            </figure>
+            {%- endif -%}
+
+            {%- for para in e.feature.body -%}
+            <p class="exp-story__p">{{ para }}</p>
+            {%- endfor -%}
+
+            {%- if e.feature.photos -%}
+            <div class="exp-story__grid">
+              {%- for p in e.feature.photos -%}
+              <figure class="exp-story__tile">
+                <img src="{{ p.image | relative_url }}" alt="{{ p.caption | default: e.feature.title }}" loading="lazy">
+                {%- if p.caption and p.caption != '' -%}<figcaption>{{ p.caption }}</figcaption>{%- endif -%}
+              </figure>
+              {%- endfor -%}
+            </div>
+            {%- endif -%}
+          </article>
+        </div>
+        {%- endif -%}
 
         {%- if e.gallery -%}
         <div class="exp-panel__gallery" aria-label="{{ e.company }} photo gallery">
@@ -181,5 +248,6 @@ permalink: /experience/
 <script src="{{ '/assets/js/experience.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/highlight-photo.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/exp-gallery.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/exp-story.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/scroll-fade.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/experience-deeplink.js' | relative_url }}" defer></script>

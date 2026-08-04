@@ -46,6 +46,42 @@
         sources within the Excel master file, examine the variance, provide
         commentary, and then generate graphs to put in our financial reporting
         PowerPoint for executive reporting.
+  # Feature story — renders as a clickable card in the panel's detail view that
+  # opens a third view (alongside details / gallery). Add `feature:` to any
+  # experience to give it one.
+  feature:
+    id: open-house
+    kicker: Event
+    date: "25 July 2026"
+    place: Vancouver Shipyards
+    title: Seaspan Open House
+    teaser: >-
+      I attended the Seaspan Open House where I was able to tour the yard and
+      see the vessels being built in progress, along with the different stages
+      of construction!
+    hero: "/assets/images/seaspan-open-house/6.jpg"
+    hero_alt: "JSS1 under construction in the Seaspan Vancouver Shipyards dry dock"
+    body:
+      - >-
+        I attended the Seaspan Open House where I was able to tour the yard and
+        see the vessels being built in progress, along with the different stages
+        of construction!
+      - >-
+        The highlight for me was getting to see JSS1 up close. It's the first
+        Joint Support Ship we're delivering to the Royal Canadian Navy, and it's
+        set to launch in December 2026. Standing next to it, you get a sense of
+        scale that never really comes across in a spreadsheet.
+      - >-
+        Honestly, seeing the ship and all the different stages of construction
+        changed how I read the numbers I work with. Before this, the program was
+        mostly a set of balance sheet and income statement line items to me. Now
+        I picture the actual ship behind them, and the people building it.
+    photos:
+      - { image: "/assets/images/seaspan-open-house/1.jpg", caption: "The Block Assembly Shop, where hull sections begin as flat steel." }
+      - { image: "/assets/images/seaspan-open-house/4.jpg", caption: "Superstructure going up under crane." }
+      - { image: "/assets/images/seaspan-open-house/3.jpg", caption: "Walking the yard toward the berth." }
+      - { image: "/assets/images/seaspan-open-house/2.jpg", caption: "The yard's bays opened up for the day." }
+      - { image: "/assets/images/seaspan-open-house/5.jpg", caption: "Looking back across Burrard Inlet to downtown Vancouver." }
   skills:
     - Excel
     - SAP
