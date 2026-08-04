@@ -8,10 +8,23 @@
   var openers = Array.prototype.slice.call(document.querySelectorAll('[data-story-open]'));
   if (!openers.length) return;
 
-  function setView(panel, on) {
+  // Matches focusInto() in experience.js: the view that just appeared takes
+  // focus, so a keyboard user is never left on a button that is now display:none.
+  function focus(el) {
+    if (!el) return;
+    try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }
+  }
+
+  // moveFocus is false when the whole overlay is closing — experience.js is
+  // already returning focus to the trigger card, and two handlers competing
+  // for focus would fight.
+  function setView(panel, on, moveFocus) {
     // Story and gallery are mutually exclusive views of the same panel.
     if (on) panel.classList.remove('is-gallery');
     panel.classList.toggle('is-story', on);
+    if (moveFocus) {
+      focus(panel.querySelector(on ? '[data-story-close]' : '[data-story-open]'));
+    }
     if (panel.scrollTo) {
       try { panel.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { panel.scrollTop = 0; }
     }
@@ -22,7 +35,7 @@
   openers.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var panel = panelOf(btn);
-      if (panel) setView(panel, true);
+      if (panel) setView(panel, true, true);
     });
   });
 
@@ -31,7 +44,7 @@
     var back = e.target.closest('[data-story-close]');
     if (back) {
       var panel = panelOf(back);
-      if (panel) setView(panel, false);
+      if (panel) setView(panel, false, true);
       return;
     }
 
@@ -49,7 +62,7 @@
 
   function resetAll() {
     Array.prototype.slice.call(document.querySelectorAll('.exp-panel.is-story'))
-      .forEach(function (panel) { setView(panel, false); });
+      .forEach(function (panel) { setView(panel, false, false); });
   }
 
   document.addEventListener('keydown', function (e) {

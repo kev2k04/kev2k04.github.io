@@ -46,7 +46,7 @@
      pop-out panels always start below the bar (see .site-header__inner). */
   --nav-h: 68px;
 
-  --maxw: 1140px;
+  --maxw: clamp(1140px, calc(1140px + (100vw - 1440px) * 0.34), 1560px);
 
   /* Small, sharp, consistent radius scale */
   --radius-sm: 3px;
@@ -180,12 +180,29 @@ html.reveal-enabled .is-revealed {
 
 html { scroll-behavior: smooth; }
 
+/* =========================================================================
+   Fluid root sizing.
+   Every rem on the site resolves against this, so scaling it scales the whole
+   design together: type, spacing, radii, gaps. Held at the browser's own base
+   size up to 1440px so nothing below a large desktop shifts, then grown gently
+   so the layout stays proportional on 1600p/4K displays instead of shrinking
+   into a small island in the middle of the screen. Capped at 1.25x so it never
+   becomes cartoonish.
+
+   Expressed in rem, not px: on the root element rem resolves against the
+   browser's default size, so a reader who has raised their base font size for
+   legibility keeps it. A px value here would silently override that.
+   ========================================================================= */
+html {
+  font-size: clamp(1rem, calc(1rem + (100vw - 1440px) * 0.0045), 1.25rem);
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink-soft);
   font-family: var(--font-body);
-  font-size: 17px;
+  font-size: 1.0625rem;        /* 17px at the 16px root, scales with it */
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -1844,7 +1861,7 @@ body.exp-lock .back-btn { display: none; }
    page, so it gets its own rounding.
    Local tokens keep the curve consistent between card, photo and pills. */
 .exp-feature {
-  --feat-radius: 20px;
+  --feat-radius: 1.25rem;      /* scales with the fluid root */
 
   position: relative;
   display: grid;
@@ -1874,7 +1891,7 @@ body.exp-lock .back-btn { display: none; }
 
 .exp-feature__media {
   position: relative;
-  min-height: 200px;
+  min-height: 12.5rem;
   overflow: hidden;
 }
 .exp-feature__media img {
@@ -2010,7 +2027,7 @@ body.exp-lock .back-btn { display: none; }
 }
 .exp-story__hero {
   margin: 0 0 1.75rem;
-  border-radius: 18px;
+  border-radius: 1.125rem;
   overflow: hidden;
   border: 1px solid var(--line);
 }
@@ -2043,7 +2060,7 @@ body.exp-lock .back-btn { display: none; }
   display: flex;
   flex-direction: column;
   margin: 0;
-  border-radius: 16px;
+  border-radius: 1rem;
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--surface-2);
