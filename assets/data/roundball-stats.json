@@ -1,11 +1,66 @@
 {
-  "_comment": "Roundball Stats — Kevin's Bagwork 2.0 season numbers. The basketball page reads this file directly (see data-static-stats on /basketball/). Update after each game: bump the per-game averages, gamesPlayed, and lastUpdated.",
+  "_comment": "Roundball Stats — Kevin's Bagwork 2.0 season numbers. The basketball page reads this file directly (see data-static-stats on /basketball/). Update after each game: add the game to `games`, refresh `totals`, then recompute the per-game averages (total / gamesPlayed, rounded to 1dp) and bump lastUpdated. Only seasonStarted, ppg/rpg/apg/spg/bpg, gamesPlayed and lastUpdated are read by the page; games and totals are the audit trail behind those averages.",
   "seasonStarted": true,
-  "ppg": 9,
-  "rpg": 4,
-  "apg": 3,
-  "spg": 3,
+  "ppg": 6.8,
+  "rpg": 6.5,
+  "apg": 2.8,
+  "spg": 2,
   "bpg": 0,
-  "gamesPlayed": 1,
-  "lastUpdated": "2026-07-06"
+  "gamesPlayed": 6,
+  "lastUpdated": "2026-08-12",
+
+  "totals": {
+    "pts": 41,
+    "ftm": 1,
+    "fgm": 17,
+    "twoPm": 11,
+    "threePm": 6,
+    "reb": 39,
+    "ast": 17,
+    "stl": 12,
+    "blk": 0,
+    "fls": 4,
+    "tFls": 0,
+    "tos": 0,
+    "ppr": 139.2
+  },
+
+  "games": [
+    {
+      "opponent": "Club Buckets",
+      "date": "2026-07-03",
+      "pts": 9, "ftm": 1, "fgm": 3, "twoPm": 1, "threePm": 2,
+      "reb": 4, "ast": 3, "stl": 3, "blk": 0, "fls": 0, "tFls": 0, "tos": 0, "ppr": null
+    },
+    {
+      "opponent": "Below the Rim",
+      "date": "2026-07-12",
+      "pts": 8, "ftm": 0, "fgm": 4, "twoPm": 4, "threePm": 0,
+      "reb": 10, "ast": 5, "stl": 5, "blk": 0, "fls": 1, "tFls": 0, "tos": 0, "ppr": null
+    },
+    {
+      "opponent": "Like Blendz",
+      "date": "2026-07-17",
+      "pts": 6, "ftm": 0, "fgm": 2, "twoPm": 0, "threePm": 2,
+      "reb": 8, "ast": 2, "stl": 1, "blk": 0, "fls": 1, "tFls": 0, "tos": 0, "ppr": null
+    },
+    {
+      "opponent": "Retired Hoopers",
+      "date": "2026-07-24",
+      "pts": 0, "ftm": 0, "fgm": 0, "twoPm": 0, "threePm": 0,
+      "reb": 3, "ast": 2, "stl": 1, "blk": 0, "fls": 1, "tFls": 0, "tos": 0, "ppr": null
+    },
+    {
+      "opponent": "Triple T",
+      "date": "2026-07-31",
+      "pts": 11, "ftm": 0, "fgm": 5, "twoPm": 4, "threePm": 1,
+      "reb": 6, "ast": 2, "stl": 1, "blk": 0, "fls": 1, "tFls": 0, "tos": 0, "ppr": 23.5
+    },
+    {
+      "opponent": "One Tree Hill",
+      "date": "2026-08-07",
+      "pts": 7, "ftm": 0, "fgm": 3, "twoPm": 2, "threePm": 1,
+      "reb": 8, "ast": 3, "stl": 1, "blk": 0, "fls": 0, "tFls": 0, "tos": 0, "ppr": 23.5
+    }
+  ]
 }

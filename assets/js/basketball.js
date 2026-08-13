@@ -80,7 +80,14 @@
 
   function formatDate(iso) {
     try {
-      var d = new Date(iso);
+      /* A date-only ISO string parses as UTC midnight, which renders as the
+         PREVIOUS day for anyone west of UTC — "2026-08-12" showed as Aug 11
+         in Vancouver. Build a local date from the parts so the date shown is
+         the date written. */
+      var parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso).trim());
+      var d = parts
+        ? new Date(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3]))
+        : new Date(iso);
       if (isNaN(d.getTime())) return iso;
       return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
     } catch (e) { return iso; }
