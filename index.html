@@ -23,10 +23,28 @@ layout: default
     <header class="hero__lead">
       <h1 class="hero__title">
         <span class="hero__greet hero__greet--pre">Hi, my name is</span>
+        {%- comment -%}
+          The name is split per letter so it can cascade in on load. `--ci` is a
+          running index across every word, so the stagger reads as one continuous
+          left-to-right sweep rather than restarting on each line.
+
+          The real name is carried by a visually-hidden span and the letters are
+          aria-hidden, so a screen reader announces "Kevin Liu" instead of
+          spelling it out. (A plain aria-label on this span would not be
+          reliably exposed — it has no role.)
+        {%- endcomment -%}
         <span class="hero__name">
+          <span class="sr-only">{{ p.name }}</span>
           {%- assign nameparts = p.name | split: " " -%}
+          {%- assign ci = 0 -%}
           {%- for part in nameparts -%}
-          <span class="hero__line"><span class="hero__line-in">{{ part }}</span></span>
+          <span class="hero__line" aria-hidden="true"><span class="hero__line-in">
+            {%- assign chars = part | split: "" -%}
+            {%- for ch in chars -%}
+            <span class="hero__char" style="--ci:{{ ci }}">{{ ch }}</span>
+            {%- assign ci = ci | plus: 1 -%}
+            {%- endfor -%}
+          </span></span>
           {%- endfor -%}
         </span>
         <span class="hero__greet hero__greet--post">and welcome to my website!</span>
