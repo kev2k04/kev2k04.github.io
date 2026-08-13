@@ -2112,6 +2112,132 @@ body.exp-lock .back-btn { display: none; }
 body.exp-lock { overflow: hidden; }
 
 /* =========================================================================
+   Passions lead-in (homepage). A bento of the same cards the /passions/ page
+   carries: the featured one spans two columns, the rest sit compact beside it.
+   Each tile borrows its own accent from the data, so the row reads as five
+   distinct interests rather than five identical boxes.
+   ========================================================================= */
+.plead__lede {
+  max-width: 56ch;
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+}
+.plead-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2.2rem;
+}
+.plead-tile {
+  --tile-radius: 1.25rem;
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 1.15rem 1.2rem;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--tile-radius);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease),
+              transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.plead-tile:hover,
+.plead-tile:focus-visible {
+  background: var(--surface-2);
+  border-color: rgba(var(--card-accent), 0.55);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px -26px rgba(0, 0, 0, 0.85);
+}
+/* Basketball is the live, data-backed one — it earns the wide slot. */
+.plead-tile--featured { grid-column: span 2; }
+
+.plead-tile__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.85rem;
+  color: rgb(var(--card-accent));
+  background: rgba(var(--card-accent), 0.12);
+  transition: background 0.3s var(--ease);
+}
+.plead-tile:hover .plead-tile__icon { background: rgba(var(--card-accent), 0.2); }
+.plead-tile__icon svg { width: 1.3rem; height: 1.3rem; }
+
+.plead-tile__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.plead-tile__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+  margin-bottom: 0.15rem;
+  padding: 0.18rem 0.5rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgb(var(--card-accent));
+  background: rgba(var(--card-accent), 0.12);
+  border-radius: 100px;
+}
+.plead-tile__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.plead-tile__name {
+  font-family: var(--font-head);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.plead-tile--featured .plead-tile__name { font-size: 1.24rem; }
+.plead-tile__tag {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.plead-tile__go {
+  flex: none;
+  margin-left: auto;
+  align-self: center;
+  color: var(--muted);
+  transition: transform 0.3s var(--ease), color 0.3s var(--ease);
+}
+.plead-tile:hover .plead-tile__go {
+  color: rgb(var(--card-accent));
+  transform: translateX(4px);
+}
+
+.plead__more { margin-top: 1.8rem; }
+
+@media (max-width: 900px) {
+  .plead-grid { grid-template-columns: repeat(2, 1fr); }
+  .plead-tile--featured { grid-column: span 2; }
+}
+@media (max-width: 620px) {
+  .plead-grid { grid-template-columns: 1fr; }
+  .plead-tile--featured { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plead-tile,
+  .plead-tile__icon,
+  .plead-tile__go { transition: none; }
+  .plead-tile:hover { transform: none; }
+  .plead-tile:hover .plead-tile__go { transform: none; }
+}
+
+/* =========================================================================
    Passions & Interests -- themed tiles + origin-aware zoom panels.
    Each card carries its own --card-accent (RGB triplet from passions.yml).
    ========================================================================= */

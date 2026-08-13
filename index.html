@@ -52,11 +52,11 @@ layout: default
 
       <div class="hero__cta">
         <div class="hero__actions">
-          <a class="btn btn--primary" href="{{ '/experience/' | relative_url }}">
-            View Experience {% include icon.html name="arrow" %}
-          </a>
-          <a class="btn btn--ghost" href="{{ '/passions/' | relative_url }}">
+          <a class="btn btn--primary" href="{{ '/passions/' | relative_url }}">
             View Passions {% include icon.html name="arrow" %}
+          </a>
+          <a class="btn btn--ghost" href="{{ '/experience/' | relative_url }}">
+            View Experience {% include icon.html name="arrow" %}
           </a>
         </div>
 
@@ -90,26 +90,26 @@ layout: default
 
     {%- comment -%} Quick links — quietly interactive (see cards.js). {%- endcomment -%}
     <nav class="hero__facets" aria-label="Quick links">
+      <div class="hero__facet hero__facet--split" data-card data-href="{{ '/passions/' | relative_url }}"
+           role="link" tabindex="0" aria-label="Passions: Music, Sports and Gaming">
+        <span class="facet__no"><span class="facet__num">01</span><svg class="facet__arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        <span class="facet__k">Passions</span>
+        <span class="facet__v"><a class="facet__music" href="{{ p.music_url | default: '#' }}"{% if p.music_url and p.music_url != '' %} target="_blank" rel="noopener noreferrer"{% endif %}>Music</a> · Sports · Gaming</span>
+      </div>
+
       <a class="hero__facet" href="{{ '/experience/#exp-card-seaspan' | relative_url }}" data-press
          aria-label="Current Position: FP&A at Seaspan — view experience">
-        <span class="facet__no"><span class="facet__num">01</span><svg class="facet__arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        <span class="facet__no"><span class="facet__num">02</span><svg class="facet__arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         <span class="facet__k">Current Position</span>
         <span class="facet__v">FP&amp;A · Seaspan</span>
       </a>
 
       <a class="hero__facet" href="{{ '/build/' | relative_url }}" data-press
          aria-label="Build: this site and the stack behind it">
-        <span class="facet__no"><span class="facet__num">02</span><svg class="facet__arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        <span class="facet__no"><span class="facet__num">03</span><svg class="facet__arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         <span class="facet__k">Build</span>
         <span class="facet__v">This site &amp; the stack behind it</span>
       </a>
-
-      <div class="hero__facet hero__facet--split" data-card data-href="{{ '/passions/' | relative_url }}"
-           role="link" tabindex="0" aria-label="Passions: Music, Sports and Gaming">
-        <span class="facet__no"><span class="facet__num">03</span><svg class="facet__arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-        <span class="facet__k">Passions</span>
-        <span class="facet__v"><a class="facet__music" href="{{ p.music_url | default: '#' }}"{% if p.music_url and p.music_url != '' %} target="_blank" rel="noopener noreferrer"{% endif %}>Music</a> · Sports · Gaming</span>
-      </div>
 
       <a class="hero__facet" href="#contact" data-press data-scroll
          aria-label="Contact: get in touch">
@@ -120,10 +120,64 @@ layout: default
     </nav>
   </div>
 
-  <a class="hero__scroll" href="#about" aria-label="Scroll to about">
+  <a class="hero__scroll" href="#passions" aria-label="Scroll to passions">
     <span>Scroll</span>
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="6 13 12 19 18 13"/></svg>
   </a>
+</section>
+
+<!-- ===================== PASSIONS ===================== -->
+{%- comment -%}
+  Passions lead the page. Driven by the same _data/passions.yml the /passions/
+  page uses, so the two can't drift. The featured card (basketball) keeps its
+  badge and spans wide; the rest are compact tiles carrying their own accent.
+
+  Panel-kind cards open as in-page panels on /passions/ and have no standalone
+  URL, so their tiles link to that page; only `kind: link` cards deep-link.
+{%- endcomment -%}
+<section class="section plead" id="passions">
+  <div class="container">
+    <div class="section__head">
+      <span class="section__kicker">Beyond the résumé</span>
+      <h2 class="section__title">What I'm into</h2>
+      <p class="plead__lede">
+        The things I spend my time on outside of work. Some creative, some
+        competitive, most of them a bit of both.
+      </p>
+    </div>
+
+    <div class="plead-grid">
+      {%- for c in site.data.passions -%}
+        {%- if c.kind == 'link' and c.href -%}
+          {%- assign target = c.href -%}
+        {%- else -%}
+          {%- assign target = '/passions/' -%}
+        {%- endif -%}
+        <a class="plead-tile{% if c.featured %} plead-tile--featured{% endif %}"
+           href="{{ target | relative_url }}" style="--card-accent: {{ c.accent }};"
+           aria-label="{{ c.title }}">
+          <span class="plead-tile__icon" aria-hidden="true">{% include icon.html name=c.icon %}</span>
+          <span class="plead-tile__text">
+            {%- if c.badge -%}
+            <span class="plead-tile__badge"><span class="plead-tile__dot" aria-hidden="true"></span>{{ c.badge }}</span>
+            {%- endif -%}
+            <span class="plead-tile__name">{{ c.title }}</span>
+            {%- comment -%} truncatewords, so nothing is cut mid-word. {%- endcomment -%}
+            <span class="plead-tile__tag">{{ c.tagline | strip_html | truncatewords: 16 }}</span>
+          </span>
+          <span class="plead-tile__go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+
+    <div class="plead__more">
+      <a class="btn btn--primary" href="{{ '/passions/' | relative_url }}">
+        View all passions {% include icon.html name="arrow" %}
+      </a>
+    </div>
+  </div>
 </section>
 
 <!-- ===================== ABOUT ===================== -->
