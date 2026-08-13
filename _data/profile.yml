@@ -5,6 +5,8 @@
 name: Kevin Liu
 role: Student at the University of British Columbia
 location: Vancouver, BC
+# Hero portrait. Shot 4:5 to match the frame, so nothing is cropped at render.
+portrait: "/assets/images/headshot-professional.jpg"
 # Shown under the headshot as "Graduating <grad_date>". Leave blank to hide.
 grad_date: December 2027
 headline: >-
