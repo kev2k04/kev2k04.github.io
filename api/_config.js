@@ -26,6 +26,13 @@ module.exports = {
   // Read from the environment — never hard-code the key. See .env.example.
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY || '',
 
+  // -------- "Ask Kevin" chat proxy (Anthropic Messages API) ---------------
+  // Read from the environment — never hard-code the key. See .env.example.
+  // Used by api/ask.js, which is the ONLY place the key is ever seen; it is
+  // never sent to the browser.
+  ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY || '',
+  ASK_MODEL: process.env.ASK_MODEL || 'claude-opus-5',
+
   // -------- Server-side cache TTLs (ms) to protect API quota -------------
   STATS_CACHE_MS: 10 * 60 * 1000,    // 10 minutes
   VIDEO_CACHE_MS: 30 * 60 * 1000,    // 30 minutes

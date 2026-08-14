@@ -2,11 +2,12 @@
   "name": "kevin-liu-portfolio-api",
   "version": "1.0.0",
   "private": true,
-  "description": "Serverless API functions for the portfolio (basketball stats scrape + YouTube highlight). The site itself is a Jekyll static site; these power the /api/* routes when deployed to Vercel/Netlify.",
+  "description": "Serverless API functions for the portfolio (basketball stats scrape, YouTube highlight, and the Ask Kevin chat proxy). The site itself is a Jekyll static site; these power the /api/* routes when deployed to Vercel/Netlify.",
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.2",
     "cheerio": "^1.2.0"
   }
 }
