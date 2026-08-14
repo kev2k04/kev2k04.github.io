@@ -27,25 +27,41 @@
   # Points can be a plain string OR an object. A `key: true` point becomes a
   # clickable, shining highlight; add `image:` to show a popup on hover.
   points:
+    - text: >-
+        I own the weekly cash flow cycle end-to-end. Every week I consolidate
+        150+ invoices out of billing and SAP BI into AP and AR totals across our
+        3 shipyards and 5+ programs, then take the AP release through approval
+        with the Controller, VP Finance, and CFO.
+    - text: >-
+        That process used to be five days of manual entry, so I automated it.
+        Using Power Query, PivotTables, and slicers, I wired 20+ files from
+        billing, treasury, and program finance into a model that rebuilds on a
+        refresh instead of by hand, and cut the cycle from 5 days to 3.
     - key: true
       image: "/assets/images/CFO Townhall.jpg"
       text: >-
         During my first month at Seaspan, I had the opportunity to work on a
         long-term forecast model spanning 2027 to 2040. I ran scenario and
         sensitivity analyses that considered factors such as inflation,
-        project-win assumptions, and best/worst-case outcomes. The work supported
-        financial reporting for a CFO Town Hall, where the results were presented
-        by Seaspan's CFO, James Clarke.
+        project-win probability, and best/worst-case assumptions, which fed the
+        CFO's capital-investment initiatives across 10+ contract opportunities.
+        The work supported financial reporting for a CFO Town Hall, where the
+        results were presented by Seaspan's CFO, James Clarke.
     - text: >-
         This project gave me early exposure to how long-range financial planning
         supports executive decision-making, and helped me better understand the
         role FP&amp;A plays in translating complex assumptions into clear business
         insights.
     - text: >-
-        I currently own the monthly G&amp;A variance report, where I update data
-        sources within the Excel master file, examine the variance, provide
-        commentary, and then generate graphs to put in our financial reporting
-        PowerPoint for executive reporting.
+        I currently own the monthly OH&amp;GA variance analysis across 30+
+        departments and 8 C-suite functions. I dig into budget-to-actual and
+        forecast variances to find the drivers behind each misalignment, write
+        the commentary, and build the graphs that feed our management and Board
+        reporting.
+    - text: >-
+        I also run month-end variance analysis on the program-level P&amp;L for
+        all 3 shipyards, validating the balance sheet figures and catching
+        errors before anything reaches the CFO or the Board.
   # Feature story — renders as a clickable card in the panel's detail view that
   # opens a third view (alongside details / gallery). Add `feature:` to any
   # experience to give it one.
@@ -84,10 +100,24 @@
       - { image: "/assets/images/seaspan-open-house/5.jpg", caption: "Looking back across Burrard Inlet to downtown Vancouver." }
   skills:
     - Excel
-    - SAP
+    - Power Query
     - Power BI
+    - DAX
+    - Tableau
+    - Capital IQ
+    - PitchBook
+    - Bloomberg
+    - SQL
+    - Python
+    - Claude Code
+    - FP&A
+    - Financial Modeling
+    - Scenario & Sensitivity Analysis
     - Variance Analysis
-    - Forecasting
+    - Cash Flow Forecasting
+    - Cost Allocation (OH&GA)
+    - Process Automation
+    - Data Modelling
   # Photo gallery — the "Photo Gallery" button in the panel switches to these
   # tiles: a 3×2 grid of square shots, then the group photo (`wide: true`)
   # spanning the full row on its own so no one is cropped out.
@@ -123,6 +153,70 @@
     - "Nearing the end of my time at BC Hydro, I helped build a financial forecasting model that incorporated various growth assumptions, cost drivers, and scenarios to project changes in Canada Post expenses under different rate and fee structures. With annual Canada Post expenses exceeding $10 million, the model supported financial planning, reporting, and executive level decision making."
     - "One of the most impactful experiences for developing my software and analytical skills was supporting BC Hydro's Call for Power Energy Management Portfolio initiative, which enabled owners of multiple properties to consolidate their accounts and access preferred energy rates. To improve application quality and reporting accuracy, I reconciled data for 1,500+ external companies across two unstructured Excel trackers and submission databases, creating a reliable dataset for categorization, trend analysis, forecasting, and management reporting."
     - 'The most enjoyable experience I had at BC Hydro was organizing a team building event as an intern. At the time, three separate teams had recently been merged into one, creating some ambiguity around roles and responsibilities. I led team exercises to identify which responsibilities belonged to each department, encouraged open communication among team members, and helped coordinate a team outing afterward. As part of the event, we participated in a guided <a class="exp-link" href="https://chinatowngirl.ca" target="_blank" rel="noopener noreferrer">history tour of Vancouver''s Chinatown led by Judy Maxwell</a>, where we learned about the history and cultural significance of the neighborhood.'
+  # Feature story — same role-agnostic block the Seaspan Open House uses.
+  #
+  # TO FILL IN (all of these are optional in the template — anything left blank
+  # or commented out simply doesn't render, so nothing placeholder-looking ever
+  # reaches the live site):
+  #   date:      the Chinatown outing date. Blank hides the date AND place line.
+  #   hero:      a photo from the Chinatown tour, e.g.
+  #              /assets/images/bc-hydro-chinatown/hero.jpg (+ hero_alt).
+  #   photos:    uncomment the block at the bottom and point each `image:` at a
+  #              real file; each takes an optional `caption:`.
+  # The body copy below is drawn from the two stories already told in `points:`
+  # above — rewrite freely, it's yours.
+  feature:
+    id: chinatown-ivr
+    kicker: Deep dive
+    date: ""                     # e.g. "12 September 2025"
+    place: "Vancouver Chinatown"
+    title: Chinatown, and the calls that went nowhere
+    teaser: >-
+      The two things I remember most from BC Hydro: organizing a team-building
+      day for three teams that had just been merged into one, and untangling an
+      IVR system that couldn't tell what half our callers wanted.
+    hero: ""                     # e.g. "/assets/images/bc-hydro-chinatown/hero.jpg"
+    hero_alt: ""
+    body:
+      - >-
+        My time at BC Hydro really came down to two things I keep coming back
+        to. One was about people, and the other was about a system that quietly
+        wasn't working. They happened months apart, but I think about them
+        together, because both were really the same problem: something was
+        getting lost between the people involved.
+      - >-
+        The people one first. Three separate teams had recently been merged into
+        a single group, and nobody was quite sure where one team's
+        responsibilities ended and the next began. As the intern, I organized a
+        team-building day to work through it. I ran exercises to map which
+        responsibilities actually belonged to which department, pushed for open
+        conversation about the overlaps people had been quietly working around,
+        and then coordinated an outing afterwards so the day didn't end on a
+        whiteboard.
+      - >-
+        We spent that afternoon on a guided history tour of Vancouver's
+        Chinatown led by Judy Maxwell, learning about the history and cultural
+        significance of the neighbourhood. It was easily the most enjoyable
+        thing I did there, and it did more for how the team worked together than
+        any of the exercises I'd planned.
+      - >-
+        The system one was the Interactive Voice Response line. Inaccurate call
+        tagging meant over 50% of our call drivers were unidentifiable in the
+        database, so we had a huge volume of calls and almost no reliable
+        picture of what people were actually calling about. I worked on
+        utterance recognition in Google Dialogflow and brought the
+        misclassification rate down from 30% to 25%. Scaled across 600,000
+        annual calls, that 5-percentage-point improvement had the potential to
+        save over 150,000 minutes a year that were being spent sending people to
+        the wrong place.
+      - >-
+        What stuck with me is that the second problem was invisible until
+        someone went looking for it. Nothing was on fire. The line worked, calls
+        got answered, and a quarter of the people on them were still being
+        misrouted.
+    # photos:
+    #   - { image: "/assets/images/bc-hydro-chinatown/1.jpg", caption: "" }
+    #   - { image: "/assets/images/bc-hydro-chinatown/2.jpg", caption: "" }
   skills:
     - Excel
     - Power BI

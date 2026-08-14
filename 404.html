@@ -1,0 +1,32 @@
+---
+layout: default
+title: Page not found
+permalink: /404.html
+sitemap: false
+---
+
+{%- comment -%}
+  GitHub Pages serves this for any unmatched path. It inherits the site layout
+  (header, footer, light/dark) so a wrong URL still lands somewhere that looks
+  like the rest of the site rather than a bare GitHub error page.
+{%- endcomment -%}
+<section class="nf">
+  <div class="container nf__inner">
+    <span class="section__kicker">Error 404</span>
+    <p class="nf__code" aria-hidden="true">404</p>
+    <h1 class="nf__title">This page doesn't exist.</h1>
+    <p class="nf__text">
+      The link is either out of date or slightly mistyped. Nothing's broken on
+      your end — let's get you back to somewhere real.
+    </p>
+
+    <div class="nf__actions">
+      <a class="btn btn--primary" href="{{ '/' | relative_url }}">
+        Back to home
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="{{ '/experience/' | relative_url }}">Experience</a>
+      <a class="btn btn--ghost" href="{{ '/passions/' | relative_url }}">Passions</a>
+    </div>
+  </div>
+</section>

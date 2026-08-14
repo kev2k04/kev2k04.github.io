@@ -43,6 +43,18 @@ assets/images/website design photos/
 Thumbs.db
 *~
 
-# Original camera uploads (processed web copies are committed instead)
+# Original camera uploads (processed web copies are committed instead).
+# These are multi-megabyte masters — keep them outside the repo entirely so a
+# stray `git add -A` can never bake them into history.
 assets/images/Seaspan Pictures/
 assets/images/Open Robotics Arm.jpg
+assets/images/headshot professional.jpeg
+assets/images/BC Hydro desk.jpg
+assets/images/BC Hydro Wallpaper.jpg
+assets/images/bc hydro elevator.jpg
+assets/images/boat picture.heic
+assets/images/joshua tree.jpg
+assets/images/me sunset.jpg
+assets/images/kevin.jpeg
+# Convention: originals keep their camera / space-separated filename; the
+# shipped web copy is the hyphenated one (headshot-professional.jpg etc.).

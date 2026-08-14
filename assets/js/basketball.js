@@ -19,7 +19,7 @@
   if (!root) return;
 
   var apiBase = (root.getAttribute('data-api-base') || '').replace(/\/$/, '');
-  var staticStats = root.getAttribute('data-static-stats') || '/assets/data/basketball-stats.json';
+  var staticStats = root.getAttribute('data-static-stats') || '/assets/data/roundball-stats.json';
   var staticHighlight = root.getAttribute('data-static-highlight') || '/assets/data/latest-highlight.json';
   var team = root.getAttribute('data-team') || 'the team';
 
@@ -35,6 +35,16 @@
         return res.json();
       })
       .catch(function () { return null; });
+  }
+
+  /* The serverless functions only exist when `api_base` is set in
+     _data/basketball.yml (or the whole site is deployed somewhere that runs
+     them). On plain GitHub Pages there is no /api/*, so requesting it is a
+     guaranteed 404 on every page load before the static JSON fallback kicks
+     in. Return null instead and let the callers skip straight to the static
+     file — the API path below stays intact for when api_base IS set. */
+  function apiUrl(path) {
+    return apiBase ? apiBase + path : null;
   }
 
   /* ---------------- Stats ---------------------------------------------- */
@@ -96,8 +106,9 @@
   function loadStats() {
     statsEl.setAttribute('data-state', 'loading');
     statusEl.textContent = 'Loading the latest stats…';
-    // Try the serverless endpoint first, then the static JSON fallback.
-    fetchJson(apiBase + '/api/basketball-stats')
+    // Serverless endpoint first when one is configured, then the static JSON
+    // fallback (which is the only source on plain GitHub Pages).
+    fetchJson(apiUrl('/api/basketball-stats'))
       .then(function (data) { return data || fetchJson(staticStats); })
       .then(function (data) { renderStats(data); })
       .catch(function () {
@@ -139,9 +150,10 @@
 
   function loadVideo() {
     showVideoMessage('loading', 'Loading the latest highlight…');
-    // Serverless endpoint first; on plain GitHub Pages fall back to the static
-    // JSON that the weekly highlight workflow refreshes every Monday.
-    fetchJson(apiBase + '/api/latest-highlight')
+    // Serverless endpoint first when one is configured; on plain GitHub Pages
+    // this is skipped and the static JSON that the weekly highlight workflow
+    // refreshes every Monday is used directly.
+    fetchJson(apiUrl('/api/latest-highlight'))
       .then(function (data) {
         return (data && data.found) ? data : fetchJson(staticHighlight);
       })

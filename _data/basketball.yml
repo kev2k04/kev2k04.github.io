@@ -1,11 +1,15 @@
 # ---------------------------------------------------------------------------
 # Basketball page content. Editable copy lives here; live stats + the
 # highlight video are pulled by the JS from the /api/ functions (with a
-# static JSON fallback). Anything invented is marked TODO(Kevin).
+# static JSON fallback).
 # ---------------------------------------------------------------------------
 
 team: "Bagwork 2.0"
-league: "Roundball"                       # TODO(Kevin): confirm league/division name
+# Full league/division name, used for the hero kicker. `league_short` is the
+# name on its own, for the spots where the full string would read awkwardly
+# (the channel link, the box-score footnote).
+league: "Roundball BC – Richmond D3 Summer Oval League"
+league_short: "Roundball BC"
 player: "Kevin Liu"
 jersey: "6"                               # jersey number
 youtube_channel: "https://www.youtube.com/@RoundballBC"

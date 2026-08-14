@@ -3365,7 +3365,7 @@ img.album__art {
   margin-bottom: 3.2rem;
   background:
     linear-gradient(180deg, rgba(15, 20, 38, 0.55) 0%, rgba(15, 20, 38, 0.45) 40%, rgba(15, 20, 38, 0.88) 72%, rgba(15, 20, 38, 0.96) 100%),
-    url("/assets/images/Basketball.png") center 30% / cover no-repeat,
+    url("/assets/images/Basketball.jpg") center 30% / cover no-repeat,
     var(--bb-court);
   border-bottom: 3px solid var(--bb-orange);
   color: #fff;
@@ -3742,4 +3742,45 @@ img.album__art {
   .hero__facet:nth-child(n+3)::before { top: -1px; }
 
   .hero__scroll { display: none; }   /* redundant on a short mobile hero */
+}
+
+/* =========================================================================
+   404 — page not found
+   Reuses the site's type scale and button set; the oversized numeral is the
+   only bespoke piece, ghosted back so the message stays the focus.
+   ========================================================================= */
+.nf { padding: clamp(4rem, 14vh, 8rem) 0 clamp(5rem, 16vh, 9rem); }
+.nf__inner { max-width: 640px; }
+.nf__code {
+  margin: 1.4rem 0 0;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(5.5rem, 18vw, 9rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  opacity: 0.13;
+}
+.nf__title {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.nf__text {
+  margin: 0.9rem 0 0;
+  max-width: 46ch;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.nf__actions {
+  display: flex; flex-wrap: wrap; gap: 0.7rem;
+  margin-top: 2.2rem;
+}
+
+@media (max-width: 640px) {
+  .nf__actions .btn { flex: 1 1 100%; justify-content: center; }
 }

@@ -20,7 +20,7 @@ permalink: /basketball/
   <header class="bball-hero">
     <span class="bball-hero__ghost" aria-hidden="true">{{ b.jersey }}</span>
     <div class="container bball-hero__inner">
-      <span class="section__kicker bball-kicker">{{ b.league }} League &middot; Richmond</span>
+      <span class="section__kicker bball-kicker">{{ b.league }}</span>
       <h1 class="bball-hero__title">{{ b.team }}</h1>
       <p class="bball-hero__meta">
         <span class="bball-jersey">#{{ b.jersey }}</span>
@@ -67,7 +67,7 @@ permalink: /basketball/
           <span class="bball-stat__value" data-value>&mdash;</span>
         </div>
       </div>
-      <p class="bball-sheet__note">Per-game averages, {{ b.league }} summer rec.</p>
+      <p class="bball-sheet__note">Per-game averages, {{ b.league_short }} summer rec.</p>
     </div>
 
     <!-- ===== The team ===== -->
@@ -80,10 +80,10 @@ permalink: /basketball/
         {%- endif -%}
       </div>
       <!-- PLACEHOLDER: add a team/action photo via `image:` in _data/basketball.yml -->
-      <div class="bball-about__photo" role="img" aria-label="Team photo placeholder">
+      <div class="bball-about__photo" role="img" aria-label="Team photo coming soon">
         <span class="bball-about__photo-label">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          TODO(Kevin): add a {{ b.team }} team / action photo
+          Team picture not yet taken.
         </span>
       </div>
     </div>
@@ -95,7 +95,7 @@ permalink: /basketball/
         <h2 class="bball-reel__title">The latest tape</h2>
         <p class="bball-reel__sub">
           Every game gets filmed — this is our most recent one, straight from the
-          <a href="{{ b.youtube_channel }}" target="_blank" rel="noopener noreferrer">{{ b.league }} channel</a>.
+          <a href="{{ b.youtube_channel }}" target="_blank" rel="noopener noreferrer">{{ b.league_short }} channel</a>.
         </p>
       </div>
 

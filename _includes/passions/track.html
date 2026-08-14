@@ -24,7 +24,7 @@
     <span class="aplayer__time">0:00</span>
   </div>
   {%- else -%}
-  <div class="track__player" role="img" aria-label="Audio placeholder for {{ t.title }}">
+  <div class="track__player" role="img" aria-label="{{ t.title }} is not available to stream yet">
     <span class="track__play play-orb" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
     </span>
@@ -32,6 +32,6 @@
       {%- for i in (1..44) -%}<span style="height: {% cycle 'wf': '38%','64%','52%','86%','30%','58%','78%','44%','70%','34%','82%','48%','62%','40%' %}"></span>{%- endfor -%}
     </span>
   </div>
-  <p class="track__todo">TODO(Kevin): swap in the real MP3 — drop it in assets/audio/ and set file: in _data/passions.yml</p>
+  <p class="track__todo">Track coming soon</p>
   {%- endif -%}
 </div>

@@ -14,12 +14,32 @@ email: Kev2k04@gmail.com
 # For a user/organization page (username.github.io) leave baseurl as "".
 # For a project page (username.github.io/repo-name) set:
 #   baseurl: "/repo-name"
-url: "https://username.github.io"
+url: "https://kev2k04.github.io"
 baseurl: ""
+
+# Default share image for link previews (Open Graph / Twitter cards).
+# Expects a 1200x630 JPEG at the path below.
+#
+# jekyll-seo-tag reads `image` from a page's front matter, NOT from a top-level
+# site key — so the `defaults` block further down is what actually wires it in.
+# This key is the declared source of truth; keep the two paths identical.
+image: /assets/images/share-card.jpg
+
+# Render the share image as a full-bleed card rather than a small thumbnail.
+twitter:
+  card: summary_large_image
 
 # --- Build settings --------------------------------------------------------
 markdown: kramdown
 permalink: pretty
+
+# Give every page the default share image (see `image:` above). Any page can
+# override it by setting its own `image:` in front matter.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/share-card.jpg
 
 # Sass / CSS pipeline
 sass:

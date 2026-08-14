@@ -77,7 +77,8 @@ layout: default
           No width/height attributes here: .hero__portrait img sets its own
           aspect-ratio, and the height hint would override it and stretch the frame.
         {%- endcomment -%}
-        <img src="{{ p.portrait | default: '/assets/images/kevin-sunset.jpg' | relative_url }}" alt="{{ p.name }}" />
+        {%- comment -%} LCP element — hint the browser to fetch it first, and never lazy-load it. {%- endcomment -%}
+        <img src="{{ p.portrait | default: '/assets/images/kevin-sunset.jpg' | relative_url }}" alt="{{ p.name }}" fetchpriority="high" />
         <figcaption class="hero__portrait-cap">
           <span class="hero__pin">{{ p.location }}</span>
           <span>{{ p.role }}</span>

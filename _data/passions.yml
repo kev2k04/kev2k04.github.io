@@ -14,7 +14,6 @@
 #     Basketball is featured because it's the live, data-driven experience.
 # Each card carries its own accent (RGB triplet) used for icon tint + glow,
 # so the grid reads as distinct, themed tiles in both light and dark.
-# Body copy for the placeholder panels is marked TODO(Kevin) — swap freely.
 # ---------------------------------------------------------------------------
 
 - id: basketball
@@ -46,8 +45,7 @@
     friends to date, Alex, who introduced me to the DAW I use, Fruity Loops
     (FL Studio). My music taste has changed over time, from hip-hop, to
     digital-pop, to Electronic Dance Music, and so has my production style.
-  daw: "TODO(Kevin): DAW — e.g. FL Studio / Ableton Live"
-  gear: "TODO(Kevin): key gear — MIDI keyboard, interface, monitors"
+  daw: "FL Studio"
   # Styles I produce. Each track has a title, a credit line (inspired-by, or
   # collab/sample), and an MP3. To play a track: drop the .mp3 into
   # `assets/audio/` and set its `file:` (e.g. /assets/audio/neverless.mp3);

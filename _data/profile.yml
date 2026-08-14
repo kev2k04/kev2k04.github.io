@@ -13,8 +13,7 @@ headline: >-
   Hi my name is Kevin, and welcome to my website!
 
 # External music/tracks page linked from the "Music" word in the Passions card.
-# TODO(Kevin): set this to your SoundCloud / Spotify / tracks link.
-music_url: ""
+music_url: "https://soundcloud.com/kevxn04"
 
 # A short professional bio shown in the "About" section.
 about: >-
@@ -34,12 +33,15 @@ about: >-
 expertise:
   - name: Financial Modeling
     blurb: >-
-      Built scenario and sensitivity analysis on a 2027–2040 long-term forecast
-      model to support financial reporting and value contract opportunities.
+      I rebuilt our weekly cash flow model in Power Query so 20+ source files
+      consolidate on a refresh instead of by hand, and I run scenario and
+      sensitivity analysis on a 14-year forecast to value contract
+      opportunities.
   - name: FP&amp;A
     blurb: >-
-      Ran month-end budget-to-actual variance analysis across a consolidated
-      income statement and balance sheet for management and Board reporting.
+      I own the weekly cash flow cycle and the monthly OH&amp;GA variance
+      analysis across 30+ departments, digging into budget-to-actual and
+      forecast variances that feed management and Board reporting.
   - name: Financial Analysis
     blurb: >-
       Turned raw financial data into decision-ready insight across forecasting,
