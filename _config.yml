@@ -14,7 +14,12 @@ email: Kev2k04@gmail.com
 # For a user/organization page (username.github.io) leave baseurl as "".
 # For a project page (username.github.io/repo-name) set:
 #   baseurl: "/repo-name"
-url: "https://kev2k04.github.io"
+# The live custom domain. GitHub Pages serves the repo, but kev2k04.github.io
+# 301s here — so this, not the github.io address, is the canonical URL that
+# jekyll-seo-tag builds absolute og:/canonical links from. The CNAME file at
+# the repo root is what keeps the domain attached to the build (and is what
+# lets GitHub issue the TLS certificate); don't delete it.
+url: "https://www.kevliu.ca"
 baseurl: ""
 
 # Default share image for link previews (Open Graph / Twitter cards).
