@@ -11,131 +11,78 @@ permalink: /passions/
   Back
 </a>
 
-<section class="pass">
-  <div class="container">
-
-    <div class="pass__head">
-      <span class="section__kicker">Beyond the résumé</span>
-      <h1 class="pass__title">Passions &amp; Interests</h1>
-      <p class="pass__lede">
-        These are the things that I spend my time on outside of work, whether
-        it's something creative like music, or something repetitive like lifting
-        metal around at the gym.
+<section class="pass pass--sheet">
+  {%- comment -%}
+    Same structure as the homepage: a photo card that pins under the header
+    and recedes as the content sheet slides up over it. Passions with a
+    `photo:` lead as picture tiles; the rest follow as rows. Each passion has
+    its own page at /passions/<id>/ (passions/<id>.html); `href:` overrides it.
+  {%- endcomment -%}
+  <header class="page-hero page-hero--passions">
+    <div class="container page-hero__inner">
+      <h1 class="page-hero__title">Passions &amp; Interests</h1>
+      <p class="page-hero__lede">
+        The things I spend my time on outside of work, whether it's something
+        creative like music, or something repetitive like lifting metal around
+        at the gym.
       </p>
     </div>
+  </header>
 
-    <!-- Trigger row: 4 interest cards -->
-    <div class="pass-grid">
-      {%- for p in passions -%}
-        {%- if p.featured -%}
-        <a class="pass-card pass-card--{{ p.id }} pass-card--featured" href="{{ p.href | relative_url }}"
-           style="--card-accent: {{ p.accent }};" aria-label="Open {{ p.title }} — basketball stats and highlights">
-          <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
-          <span class="pass-card__body">
-            {%- if p.badge -%}<span class="pass-card__badge"><span class="pass-card__dot" aria-hidden="true"></span>{{ p.badge }}</span>{%- endif -%}
-            <span class="pass-card__name">{{ p.title }}</span>
-            <span class="pass-card__tagline">{{ p.tagline }}</span>
+  <div class="home-sheet page-sheet">
+    <span class="sheet-deco sheet-deco--rings" aria-hidden="true"></span>
+    <span class="sheet-deco sheet-deco--dots" aria-hidden="true"></span>
+    {% include pass-glow.html %}
+
+    <div class="container">
+      <div class="home-pass__photos">
+        {%- for p in passions -%}
+          {%- unless p.photo -%}{%- continue -%}{%- endunless -%}
+          {%- capture href_page -%}/passions/{{ p.id }}/{%- endcapture -%}
+          {%- capture tile_body -%}
+          <span class="photo-tile__media">
+            <img class="photo-tile__img" src="{{ p.photo | relative_url }}" alt="" loading="lazy" decoding="async"
+                 {% if p.photo_position %}style="object-position: {{ p.photo_position }};"{% endif %} />
+            {% include tile-outline.html %}
           </span>
-          <span class="pass-card__cta" aria-hidden="true">
-            {{ p.cta | default: "Explore" }}
-            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <span class="photo-tile__cap">
+            <span class="photo-tile__name">{{ p.title }}</span>
+            <span class="photo-tile__tag">{{ p.photo_note | default: p.tagline | strip_html }}</span>
           </span>
-        </a>
-        {%- elsif p.kind == 'link' -%}
-        <a class="pass-card pass-card--banner pass-card--{{ p.id }}" href="{{ p.href | relative_url }}"
-           style="--card-accent: {{ p.accent }};" aria-label="Open {{ p.title }}">
-          <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
-          <span class="pass-card__body">
-            <span class="pass-card__name">{{ p.title }}</span>
-            <span class="pass-card__tagline">{{ p.tagline }}</span>
-          </span>
-          <span class="pass-card__cue" aria-hidden="true">
-            Explore
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
-        </a>
-        {%- elsif p.wip -%}
-        <!-- Work-in-progress tile: hoverable but not openable (no data-pass,
-             so passions.js never wires it; remove `wip:` in passions.yml to
-             turn it back into a live panel card). -->
-        <div class="pass-card pass-card--banner pass-card--wip pass-card--{{ p.id }}"
-             style="--card-accent: {{ p.accent }};" aria-disabled="true">
-          <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
-          <span class="pass-card__body">
-            <span class="pass-card__name">{{ p.title }}</span>
-            <span class="pass-card__tagline">{{ p.tagline }}</span>
-          </span>
-          <span class="pass-card__cue" aria-hidden="true">Work in progress</span>
-        </div>
-        {%- else -%}
-        <button type="button" class="pass-card pass-card--banner pass-card--{{ p.id }}" id="pass-card-{{ p.id }}"
-                data-pass="{{ p.id }}" style="--card-accent: {{ p.accent }};"
-                aria-haspopup="dialog" aria-label="Open details for {{ p.title }}">
-          <span class="pass-card__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
-          <span class="pass-card__body">
-            <span class="pass-card__name">{{ p.title }}</span>
-            <span class="pass-card__tagline">{{ p.tagline }}</span>
-          </span>
-          <span class="pass-card__cue" aria-hidden="true">
-            Open
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
-        </button>
-        {%- endif -%}
-      {%- endfor -%}
+          {%- endcapture -%}
+          {%- if p.wip -%}
+          <div class="photo-tile is-wip" data-glow-for="{{ p.id }}" style="--card-accent: {{ p.accent }};">{{ tile_body }}</div>
+          {%- else -%}
+          <a class="photo-tile" data-glow-for="{{ p.id }}" href="{{ p.href | default: href_page | relative_url }}" style="--card-accent: {{ p.accent }};">{{ tile_body }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <ul class="home-pass__list">
+        {%- for p in passions -%}
+          {%- if p.photo -%}{%- continue -%}{%- endif -%}
+          <li>
+          {%- capture href_page -%}/passions/{{ p.id }}/{%- endcapture -%}
+          {%- if p.wip -%}
+            <div class="pass-row is-wip" style="--card-accent: {{ p.accent }};">
+              <span class="pass-row__name">{{ p.title }}</span>
+              <span class="pass-row__tag">{{ p.tagline }}</span>
+              <span class="pass-row__state">In progress</span>
+            </div>
+          {%- else -%}
+            <a class="pass-row" href="{{ p.href | default: href_page | relative_url }}" style="--card-accent: {{ p.accent }};">
+              <span class="pass-row__name">{{ p.title }}</span>
+              <span class="pass-row__tag">{{ p.tagline }}</span>
+            </a>
+          {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
     </div>
   </div>
 
-  <!-- Expand overlay: scrim (dims/blurs page) + one detail panel per panel-card -->
-  <div class="pass-overlay" id="pass-overlay" hidden>
-    <div class="pass-scrim" data-pass-close></div>
-
-    {%- for p in passions -%}
-      {%- if p.kind == 'panel' and p.wip != true -%}
-      <article class="pass-panel pass-panel--{{ p.id }}" id="pass-panel-{{ p.id }}"
-               data-panel="{{ p.id }}" style="--card-accent: {{ p.accent }};"
-               role="dialog" aria-modal="true" aria-labelledby="pass-panel-{{ p.id }}-title" hidden>
-        <div class="pass-panel__inner">
-          <button type="button" class="pass-panel__back" data-pass-close>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-            Back
-          </button>
-
-          <header class="pass-panel__head">
-            <span class="pass-panel__icon" aria-hidden="true">{% include icon.html name=p.icon %}</span>
-            <div>
-              <h2 class="pass-panel__name" id="pass-panel-{{ p.id }}-title">{{ p.title }}</h2>
-              <p class="pass-panel__tagline">{{ p.tagline }}</p>
-            </div>
-          </header>
-
-          {%- comment -%}
-            Panel body. Cards flagged `coming_soon: true` show a centered
-            "not yet created" state so the site can go live while they're built.
-            Otherwise cards with a bespoke layout render their own partial from
-            _includes/passions/<id>.html; everything else falls back to the
-            generic blurb + photo + highlights template.
-          {%- endcomment -%}
-          {%- if p.coming_soon -%}
-            {% include passions/coming-soon.html %}
-          {%- else -%}
-            {%- case p.id -%}
-              {%- when 'sports' -%}{% include passions/sports.html p=p %}
-              {%- when 'music' -%}{% include passions/music.html p=p %}
-              {%- when 'gaming' -%}{% include passions/gaming.html p=p %}
-              {%- else -%}{% include passions/generic.html p=p %}
-            {%- endcase -%}
-          {%- endif -%}
-        </div>
-      </article>
-      {%- endif -%}
-    {%- endfor -%}
-  </div>
 </section>
 
-<script src="{{ '/assets/js/passions.js' | relative_url }}" defer></script>
-<script src="{{ '/assets/js/audio-player.js' | relative_url }}" defer></script>
-<script src="{{ '/assets/js/lyrics.js' | relative_url }}" defer></script>
-<script src="{{ '/assets/js/video.js' | relative_url }}" defer></script>
-<script src="{{ '/assets/js/album-tilt.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/scroll-fade.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/pass-glow.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/tile-outline.js' | relative_url }}" defer></script>

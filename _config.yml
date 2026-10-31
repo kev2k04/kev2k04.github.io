@@ -65,7 +65,7 @@ exclude:
   - package-lock.json
   - .env
   - .env.example
-  - OVERNIGHT_LOG.md
+  - scripts
 
 # Jekyll plugins (all whitelisted by GitHub Pages)
 plugins:

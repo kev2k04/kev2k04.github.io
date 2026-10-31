@@ -29,6 +29,12 @@
   cta: Step onto the court
   accent: "249, 115, 22"      # basketball orange
   href: /basketball/
+  # Homepage photo tile. Passions with a `photo:` get a large picture tile on
+  # the homepage; the rest are listed beneath them.
+  photo: /assets/images/basketball/drive.jpg
+  photo_position: "center 62%"   # keep me and the defender in frame
+  # Short line under the homepage photo (falls back to the tagline).
+  photo_note: Live game stats, highlights and team photos
 
 # Music production panel — rendered by _includes/passions/music.html.
 - id: music
@@ -37,6 +43,7 @@
   icon: music
   tagline: These are the tracks that I've produced.
   accent: "168, 85, 247"      # violet
+  photo: /assets/images/home/studio.jpg
   intro: >-
     I've always had a love for music, as I felt like it was a form of
     communication of feelings that could transcend language. However, I had to
@@ -47,7 +54,7 @@
     digital-pop, to Electronic Dance Music, and so has my production style.
   daw: "FL Studio"
   # Styles I produce. Each track has a title, a credit line (inspired-by, or
-  # collab/sample), and an MP3. To play a track: drop the .mp3 into
+  # collab/sample), an MP3 and its `length` (shown on the cover). To play a track: drop the .mp3 into
   # `assets/audio/` and set its `file:` (e.g. /assets/audio/neverless.mp3);
   # leave `file:` blank for a waveform upload placeholder.
   sections:
@@ -59,6 +66,7 @@
           collab: "Lyrics by Alex"
           sample: "Samples Imogen Heap"
           file: /assets/audio/stay.mp3   # full song (original)
+          length: "1:30"
           lyrics: |
             baby stay
             i'm really missing your face
@@ -107,42 +115,66 @@
         - title: "Neverless"
           inspired: "Inspired by Tonser, 2hollis, and Nate Sib"
           file: /assets/audio/neverless.mp3   # 30s preview (0:57–1:27, 2s fades)
+          length: "0:30"
         - title: "Pink Noise"
           inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
           file: /assets/audio/pink-noise.mp3   # 30s preview (1:21–1:51, 2s fades)
+          length: "0:30"
         - title: "Worlds Away"
           inspired: "Inspired by Dabin"
           file: /assets/audio/worlds-away.mp3   # 1:00 preview (2:17–3:17, 2s fades)
+          length: "1:00"
     - name: "Experimental Hip-Hop"
       tracks:
         - title: "Exotic"
           inspired: "Inspired by Ginseng, 2hollis, and Lucy Bedroque"
           file: /assets/audio/exotic.mp3   # 30s preview (0:00–0:30, 2s fades)
+          length: "0:30"
         - title: "Catseye"
           inspired: "Inspired by Lucy Bedroque"
           file: /assets/audio/catseye.mp3   # 30s preview (1:10–1:40, 2s fades)
+          length: "0:30"
     - name: "Cinematic Soundtracks"
       tracks:
         - title: "Flashing Lights"
           file: /assets/audio/flashing-lights.mp3   # 1:00 preview (1:36.5–2:36.5, 2s fades)
+          length: "1:00"
         - title: "Neverless"
           file: /assets/audio/neverless-cinematic.mp3   # 1:00 preview (0:00–1:00, 2s fades)
+          length: "1:00"
         - title: "Exodia"
           file: /assets/audio/exodia.mp3   # 35s preview (0:00–0:35, 2s fades)
+          length: "0:35"
   # Favourite albums — square artwork. `art:` points at a square cover image.
+  # Album preview: hover a cover and press play for a 30-second clip of
+  # `preview_song`, starting `preview_start` seconds in, with a fade in/out.
+  # The files in assets/audio/albums/ are pre-cut 30s clips with the fades
+  # baked in (ffmpeg -ss <start> -t 30, afade in 2s / out 3s), so they start at 0.
   albums:
     - title: "Hypochondriac"
       artist: "Brakence"
       art: /assets/images/passions/hypochondriac.jpg
+      preview_song: "Hypochondriac"
+      preview_src: /assets/audio/albums/hypochondriac.mp3
+      preview_start: 0        # clip cut from 1:41
     - title: "Unmusique"
       artist: "Lucy Bedroque"
       art: /assets/images/passions/unmusique.jpeg
+      preview_song: "Made in Italy"
+      preview_src: /assets/audio/albums/made-in-italy.mp3
+      preview_start: 0        # clip cut from 0:36
     - title: "Bloodluxe"
       artist: "Slayr"
       art: /assets/images/passions/bloodluxe.jpeg
+      preview_song: "Toxic"
+      preview_src: /assets/audio/albums/toxic.mp3
+      preview_start: 0        # clip cut from 1:11
     - title: "Boy"
       artist: "2hollis"
       art: /assets/images/passions/boy.jpg
+      preview_song: "Light"
+      preview_src: /assets/audio/albums/light.mp3
+      preview_start: 0        # clip cut from 1:40
       video: /assets/images/website-design/2hollis-god.mp4   # hover "View" -> flash-warning -> square video
 
 # Gaming panel — a chronological journey, rendered by
@@ -154,6 +186,9 @@
   icon: gamepad
   tagline: This is my extensive journey and history with video games.
   accent: "244, 63, 94"       # rose red
+  # Photo tile on the homepage and Passions page.
+  photo: /assets/images/passions/gaming.jpg
+  photo_note: From Zuma to Master in League of Legends
   intro: >-
     Here's my history with video games, told game by game from the very
     beginning all the way to where I'm at today.
@@ -253,13 +288,25 @@
   accent: "45, 212, 191"      # teal — distinct from the page's azure accent
   wip: true
 
-# Personal Fitness — its own card beneath Sports. `wip: true` renders the
-# non-clickable "Work in progress" tile; remove it and add a `blurb:` +
-# `highlights:` list (generic panel body) when you're ready to write this.
+# Personal Fitness — its own card beneath Sports. Renders with the generic
+# panel body: `blurb:`, the `photos:` grid, and an optional `highlights:` list.
 - id: fitness
   kind: panel
   title: Personal Fitness
   icon: dumbbell
-  tagline: My ongoing journey in the gym.
+  tagline: My ongoing journey in the gym, and out on the trails.
   accent: "34, 197, 94"       # green — health / fitness
-  wip: true
+  # Homepage photo tile (see basketball above).
+  photo: /assets/images/passions/hiking/lake-crew.jpg
+  photo_position: "center 68%"   # keep the three of us in frame when cropped
+  # Panel copy — rewrite in your own words. `highlights:` (a list) is optional.
+  blurb: >-
+    Staying active is a big part of my routine. Most of it happens in the gym,
+    but some of my favourite days are spent hiking up to alpine lakes with
+    friends.
+  # Photo grid in the panel. `wide: true` spans the full row.
+  photos:
+    - { image: /assets/images/passions/hiking/lake-crew.jpg, alt: "With friends at an alpine lake" }
+    - { image: /assets/images/passions/hiking/trail.jpg, alt: "A trail through alpine meadow toward a campsite" }
+    - { image: /assets/images/passions/hiking/lookout.jpg, alt: "Looking out over the clouds from a rocky ridge" }
+    - { image: /assets/images/passions/hiking/alpine-lake.jpg, alt: "A misty alpine lake", wide: true }

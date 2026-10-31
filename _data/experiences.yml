@@ -6,7 +6,9 @@
 #   - logo: drop a real logo file in /assets/images/logos/ and set `logo:`
 #     to its path. While empty, the monogram in `logo_text` is shown instead.
 #   - blurb: replace the "Placeholder —" sentence with a real summary.
-#   - skills: tweak the tag list to taste.
+#   - skills: tweak the tag list to taste (shown in the details panel).
+#   - key_skills: optional short list for the timeline card; without it the
+#     card shows the first 4 skills.
 #   - image: each panel shows a sized photo placeholder; add a real photo via
 #     the `image:` field (path under /assets/images/) when you have one.
 # ---------------------------------------------------------------------------
@@ -98,18 +100,16 @@
       - { image: "/assets/images/seaspan-open-house/3.jpg", caption: "Walking the yard toward the berth." }
       - { image: "/assets/images/seaspan-open-house/2.jpg", caption: "The yard's bays opened up for the day." }
       - { image: "/assets/images/seaspan-open-house/5.jpg", caption: "Looking back across Burrard Inlet to downtown Vancouver." }
+  # Shown on the Experience timeline card.
+  key_skills: [Excel, Forecasting, Budgeting, Financial Modelling, Automation, SAP BI]
+  # Full list in the details panel.
   skills:
     - Excel
     - Power Query
     - Power BI
     - DAX
     - Tableau
-    - Capital IQ
-    - PitchBook
-    - Bloomberg
-    - SQL
-    - Python
-    - Claude Code
+    - SAP BI
     - FP&A
     - Financial Modeling
     - Scenario & Sensitivity Analysis
@@ -122,12 +122,15 @@
   # tiles: a 3×2 grid of square shots, then the group photo (`wide: true`)
   # spanning the full row on its own so no one is cropped out.
   gallery:
+    - { image: "/assets/images/seaspan-gallery/team-dinner.jpg", wide: true }
     - { image: "/assets/images/seaspan-gallery/1.jpg" }
     - { image: "/assets/images/seaspan-gallery/2.jpg" }
     - { image: "/assets/images/seaspan-gallery/3.jpg" }
     - { image: "/assets/images/seaspan-gallery/5.jpg" }
     - { image: "/assets/images/seaspan-gallery/6.jpg" }
     - { image: "/assets/images/seaspan-gallery/7.jpg" }
+    - { image: "/assets/images/seaspan-gallery/pier.jpg" }
+    - { image: "/assets/images/seaspan-gallery/office-move.jpg", span2: true }
     - { image: "/assets/images/seaspan-gallery/4.jpg", wide: true }
 
 - id: bchydro
@@ -217,11 +220,13 @@
     # photos:
     #   - { image: "/assets/images/bc-hydro-chinatown/1.jpg", caption: "" }
     #   - { image: "/assets/images/bc-hydro-chinatown/2.jpg", caption: "" }
+  key_skills: [Excel, Power BI, Power Query, SAP BI, DAX Studio]
   skills:
     - Excel
     - Power BI
     - Power Query
     - DAX Studio
+    - SAP BI
     - Google Dialogflow
     - Forecasting
 

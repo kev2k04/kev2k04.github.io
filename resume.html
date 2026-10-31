@@ -12,13 +12,20 @@ permalink: /resume/
   Back
 </a>
 
+<header class="page-hero" style="--hero-img: url('{{ '/assets/images/bc-hydro-wallpaper.jpg' | relative_url }}'); --hero-pos: center 55%;">
+  <div class="container page-hero__inner">
+    <h1 class="page-hero__title">Resume</h1>
+    <p class="page-hero__lede">{{ p.role | default: site.tagline }}</p>
+  </div>
+</header>
+
 <section class="resume">
   <div class="container container--narrow">
 
     <!-- Header -->
     <header class="resume__header">
       <div>
-        <h1 class="resume__name">{{ p.name }}</h1>
+        <h2 class="resume__name">{{ p.name }}</h2>
         <p class="resume__meta">
           <span>{% include icon.html name="location" %} {{ p.location }}</span>
           {%- if r.phone -%}

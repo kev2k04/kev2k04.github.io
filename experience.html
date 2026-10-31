@@ -11,42 +11,61 @@ permalink: /experience/
   Back
 </a>
 
+<header class="page-hero" style="--hero-img: url('{{ '/assets/images/seaspan.jpg' | relative_url }}'); --hero-pos: center 45%;">
+  <div class="container page-hero__inner">
+    <h1 class="page-hero__title">Where I've worked</h1>
+    <p class="page-hero__lede">
+      A brief summary of the teams I've worked with, my experiences, and
+      accomplishments. Feel free to view and download my resume, or open any
+      role to dig into the details!
+    </p>
+    <div class="page-hero__actions">
+      <a class="btn btn--primary" href="{{ '/resume/' | relative_url }}">
+        View Resume {% include icon.html name="arrow" %}
+      </a>
+    </div>
+  </div>
+</header>
+
 <section class="exp">
   <div class="container">
 
-    <!-- Page header + download -->
-    <div class="exp__head">
-      <span class="section__kicker">Experience</span>
-      <h1 class="exp__title">Where I've worked</h1>
-      <p class="exp__lede">
-        A brief summary of the teams I've worked with, my experiences, and
-        accomplishments. Feel free to view and download my resume, or open any
-        role to dig into the details!
-      </p>
-      <div class="exp__actions">
-        <a class="btn btn--primary" href="{{ '/resume/' | relative_url }}">
-          View Resume {% include icon.html name="arrow" %}
-        </a>
-      </div>
-    </div>
-
-    <!-- Trigger row: 4 experience buttons -->
-    <div class="exp-grid">
+    {%- comment -%}
+      Timeline: newest role first, down one blue-violet line. Each entry
+      is still an .exp-card button, so it opens the same detail panel.
+    {%- endcomment -%}
+    <ol class="exp-tl">
       {%- for e in experiences -%}
-      <button type="button" class="exp-card" id="exp-card-{{ e.id }}" data-exp="{{ e.id }}"
-              aria-haspopup="dialog" aria-label="Open details for {{ e.company }}">
-        <span class="exp-card__logo{% if e.logo_full %} exp-card__logo--full{% endif %}" aria-hidden="true">
-          {%- if e.logo and e.logo != '' -%}
-            <img src="{{ e.logo | relative_url }}" alt="">
-          {%- else -%}
-            {{ e.logo_text }}
-          {%- endif -%}
-        </span>
-        <span class="exp-card__name">{{ e.company }}</span>
-        <span class="exp-card__role">{{ e.role }}</span>
-      </button>
+      <li class="exp-tl__item{% if forloop.first %} is-current{% endif %}">
+        <span class="exp-tl__dot" aria-hidden="true"></span>
+        <span class="exp-tl__dates">{{ e.dates }}</span>
+        <button type="button" class="exp-card exp-tl__card" id="exp-card-{{ e.id }}" data-exp="{{ e.id }}"
+                aria-haspopup="dialog" aria-label="Open details for {{ e.company }}">
+          <span class="exp-card__logo{% if e.logo_full %} exp-card__logo--full{% endif %}" aria-hidden="true">
+            {%- if e.logo and e.logo != '' -%}
+              <img src="{{ e.logo | relative_url }}" alt="">
+            {%- else -%}
+              {{ e.logo_text }}
+            {%- endif -%}
+          </span>
+          <span class="exp-tl__body">
+            <span class="exp-card__name">{{ e.company }}</span>
+            <span class="exp-card__role">{{ e.role }}</span>
+            {%- if e.key_skills -%}
+            <span class="exp-tl__skills">
+              {%- for sk in e.key_skills -%}<span>{{ sk }}</span>{%- endfor -%}
+            </span>
+            {%- elsif e.skills -%}
+            <span class="exp-tl__skills">
+              {%- for sk in e.skills limit: 4 -%}<span>{{ sk }}</span>{%- endfor -%}
+            </span>
+            {%- endif -%}
+          </span>
+          <span class="exp-tl__more" aria-hidden="true">Details {% include icon.html name="arrow" %}</span>
+        </button>
+      </li>
       {%- endfor -%}
-    </div>
+    </ol>
   </div>
 
   <!-- Expand overlay: scrim + one detail panel per experience -->
@@ -122,7 +141,7 @@ permalink: /experience/
             {%- if point.key -%}
             <li class="exp-point exp-point--key" tabindex="0" role="button"
                 {% if point.image and point.image != '' %}data-hl-image="{{ point.image | relative_url }}" data-hl-alt="At the CFO Town Hall"{% endif %}
-                aria-haspopup="dialog" aria-label="Highlight — click to view the photo">
+                aria-haspopup="dialog" aria-label="Highlight: click to view the photo">
               <span class="exp-point__text">{{ ptext }}</span>
             </li>
             {%- else -%}
@@ -211,7 +230,7 @@ permalink: /experience/
           <div class="exp-gallery">
             {%- for g in e.gallery -%}
               {%- if g.image and g.image != '' -%}
-              <figure class="exp-gallery__tile{% if g.wide %} exp-gallery__tile--wide{% endif %}{% if g.contain %} exp-gallery__tile--contain{% endif %}">
+              <figure class="exp-gallery__tile{% if g.wide %} exp-gallery__tile--wide{% endif %}{% if g.span2 %} exp-gallery__tile--span2{% endif %}{% if g.contain %} exp-gallery__tile--contain{% endif %}">
                 <img src="{{ g.image | relative_url }}" alt="{{ g.caption | default: e.company }}" loading="lazy">
                 {%- if g.caption and g.caption != '' -%}<figcaption>{{ g.caption }}</figcaption>{%- endif -%}
               </figure>

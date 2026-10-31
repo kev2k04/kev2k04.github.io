@@ -13,9 +13,7 @@
 
   // Must stay in sync with the selector list in main.scss.
   var SELECTOR = [
-    '#about .section__head', '.about__body', '.about__expertise',
-    '.contact__inner > *',
-    '.exp__head', '.exp-card',
+    '.exp-card',
     '.pass__head', '.pass-card',
     '.resume__block',
     '.build .section__head', '.build__body > p',

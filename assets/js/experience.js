@@ -65,6 +65,8 @@
 
   function close() {
     if (!activePanel) return;
+    // Drop a deep-link hash so a reload doesn't pop the panel open again.
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
     var panel = activePanel;
     var card = activeCard;
 

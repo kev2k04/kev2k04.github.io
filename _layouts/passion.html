@@ -1,0 +1,42 @@
+---
+layout: default
+---
+{%- comment -%}
+  One passion as its own page (passions/<id>.html sets `passion: <id>`).
+  A photo header, then the passion's body: music, gaming and sports have
+  their own partial in _includes/passions/; everything else uses generic.html.
+{%- endcomment -%}
+{%- assign p = site.data.passions | where: "id", page.passion | first -%}
+
+<a class="back-btn" href="{{ '/passions/' | relative_url }}" aria-label="Back to passions" data-scroll-fade>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+  Back
+</a>
+
+<header class="page-hero"{% if p.photo %} style="--hero-img: url('{{ p.photo | relative_url }}'); --hero-pos: {{ p.photo_position | default: 'center 40%' }};"{% endif %}>
+  <div class="container page-hero__inner">
+    <h1 class="page-hero__title">{{ p.title }}</h1>
+    <p class="page-hero__lede">{{ p.tagline | strip_html }}</p>
+  </div>
+</header>
+
+<article class="pass-panel pass-panel--page pass-panel--{{ p.id }}" style="--card-accent: {{ p.accent }};">
+  <div class="container pass-panel__inner">
+    {%- if p.coming_soon -%}
+      {% include passions/coming-soon.html %}
+    {%- else -%}
+      {%- case p.id -%}
+        {%- when 'sports' -%}{% include passions/sports.html p=p %}
+        {%- when 'music' -%}{% include passions/music.html p=p %}
+        {%- when 'gaming' -%}{% include passions/gaming.html p=p %}
+        {%- else -%}{% include passions/generic.html p=p %}
+      {%- endcase -%}
+    {%- endif -%}
+  </div>
+</article>
+
+<script src="{{ '/assets/js/audio-player.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/album-clips.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/lyrics.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/video.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/scroll-fade.js' | relative_url }}" defer></script>

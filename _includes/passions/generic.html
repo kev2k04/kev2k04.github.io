@@ -1,12 +1,21 @@
 {%- comment -%}
-  Generic passion-panel body: blurb + photo placeholder + highlights.
+  Generic passion-panel body: blurb + photos (or a placeholder) + optional highlights.
   Fallback for any "kind: panel" card without a bespoke partial.
   Expects: include.p (a passions.yml entry with blurb + highlights).
 {%- endcomment -%}
 {%- assign p = include.p -%}
 <p class="pass-panel__blurb">{{ p.blurb }}</p>
 
-<!-- PLACEHOLDER: swap for a real photo via an `image:` field in passions.yml -->
+{%- if p.photos -%}
+<div class="exp-gallery pass-panel__photos">
+  {%- for ph in p.photos -%}
+  <figure class="exp-gallery__tile{% if ph.wide %} exp-gallery__tile--wide{% endif %}">
+    <img src="{{ ph.image | relative_url }}" alt="{{ ph.alt | default: p.title }}" loading="lazy" decoding="async">
+  </figure>
+  {%- endfor -%}
+</div>
+{%- else -%}
+<!-- PLACEHOLDER: add photos via a `photos:` list in passions.yml -->
 <div class="pass-panel__media pass-panel__media--placeholder" role="img"
      aria-label="Photos for {{ p.title }} are coming soon">
   <span class="pass-panel__media-label">
@@ -14,10 +23,13 @@
     Photos coming soon
   </span>
 </div>
+{%- endif -%}
 
+{%- if p.highlights -%}
 <h3 class="pass-panel__subhead">Highlights</h3>
 <ul class="pass-panel__points">
   {%- for h in p.highlights -%}
     <li>{{ h }}</li>
   {%- endfor -%}
 </ul>
+{%- endif -%}

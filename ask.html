@@ -2,6 +2,9 @@
 layout: default
 title: Ask Kevin
 permalink: /ask/
+# Hidden until the chat API is deployed (see api/README.md). Set to true and
+# restore the nav link in _includes/header.html to bring it back.
+published: false
 ---
 
 {%- assign p = site.data.profile -%}
@@ -21,10 +24,9 @@ permalink: /ask/
   <div class="container container--narrow ask__inner">
 
     <header class="ask__head">
-      <span class="section__kicker">Ask Kevin</span>
       <h1 class="ask__title">Skip the resume. Just ask.</h1>
       <p class="ask__lede">
-        This is an AI assistant that knows my background — where I've worked,
+        This is an AI assistant that knows my background: where I've worked,
         what I've built, and the tools I use. Ask it anything you'd ask me in a
         first screen. It answers from my experience only, and it will tell you
         when it doesn't know something.
@@ -36,7 +38,7 @@ permalink: /ask/
         <div class="ask-msg ask-msg--bot">
           <span class="ask-msg__who">Ask Kevin</span>
           <div class="ask-msg__body">
-            <p>Hey — ask me about Kevin's experience, the projects he's worked on, or the tools he uses.</p>
+            <p>Hey, ask me about Kevin's experience, the projects he's worked on, or the tools he uses.</p>
           </div>
         </div>
       </div>

@@ -1,20 +1,17 @@
 /* =========================================================================
-   Deep-link highlight: arriving at /experience/#exp-card-<id> (e.g. from the
-   homepage "Current Position" card) scrolls to that company's card and gives
-   it a brief highlight pulse.
+   Deep link: arriving at /experience/#exp-card-<id> (from the homepage
+   "Where I've worked" list) scrolls to that role and opens its details panel,
+   zooming out of the card (experience.js handles the click).
    ========================================================================= */
 (function () {
-  function flag() {
+  function openFromHash() {
     var id = (location.hash || '').slice(1);
-    if (!id) return;
-    var el = document.getElementById(id);
-    if (!el || el.className.indexOf('exp-card') === -1) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    el.classList.remove('is-flag');
-    void el.offsetWidth;            // restart the animation if re-triggered
-    el.classList.add('is-flag');
-    setTimeout(function () { el.classList.remove('is-flag'); }, 2800);
+    var el = id && document.getElementById(id);
+    if (!el || !el.hasAttribute('data-exp')) return;
+    if (document.querySelector('.exp-panel:not([hidden])')) return;
+    el.scrollIntoView({ behavior: 'instant', block: 'center' });
+    setTimeout(function () { el.click(); }, 120);
   }
-  if (location.hash) setTimeout(flag, 350);   // let layout settle first
-  window.addEventListener('hashchange', flag);
+  if (location.hash) setTimeout(openFromHash, 200);   // let layout settle first
+  window.addEventListener('hashchange', openFromHash);
 })();

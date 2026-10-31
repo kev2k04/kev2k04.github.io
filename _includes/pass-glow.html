@@ -1,0 +1,13 @@
+{%- comment -%}
+  Ambient glow behind the passion tiles: one heavily blurred, dimmed copy of
+  each tile photo. pass-glow.js shows the one nearest the middle of the screen
+  (or the hovered tile), so the background takes on that photo's colours.
+{%- endcomment -%}
+<div class="pass-glow" aria-hidden="true">
+  {%- for c in site.data.passions -%}
+    {%- if c.photo -%}
+    <span class="pass-glow__layer" data-glow="{{ c.id }}"
+          style="background-image: url('{{ c.photo | relative_url }}');{% if c.photo_position %} background-position: {{ c.photo_position }};{% endif %}"></span>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

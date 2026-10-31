@@ -58,3 +58,7 @@ assets/images/me sunset.jpg
 assets/images/kevin.jpeg
 # Convention: originals keep their camera / space-separated filename; the
 # shipped web copy is the hyphenated one (headshot-professional.jpg etc.).
+
+# Claude Code local settings
+.claude/settings.local.json
+.claude/launch.json

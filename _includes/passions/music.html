@@ -3,63 +3,103 @@
   intro, daw, gear, `sections` (each: name, optional label, optional blurb,
   and `tracks`), and `albums`.
   Each track has a title, an optional `inspired` credit OR `collab`/`sample`
-  credits, and a `file` mp3 path. A non-empty `file` renders a native <audio>
-  player; otherwise a waveform placeholder shows with a TODO note.
+  credits, a `file` mp3 path and a `length`. Tracks with a file play through
+  the shared player bar; the rest show as "coming soon" rows.
 {%- endcomment -%}
 {%- assign p = include.p -%}
 <p class="pass-panel__blurb">{{ p.intro }}</p>
 
-<h3 class="pass-panel__subhead">Home Studio</h3>
 <figure class="studio-photo">
-  <img src="/assets/images/passions/studio-photo.jpg" alt="Home studio setup" />
+  <img src="/assets/images/passions/studio-photo.jpg" alt="My home studio: FL Studio on two monitors" loading="lazy" />
+  <figcaption>My home studio, where everything below was made in {{ p.daw | default: "FL Studio" }}.</figcaption>
 </figure>
 
-<h3 class="pass-panel__subhead">Tracks I've Produced</h3>
-
-{%- comment -%} Featured section (full-width hero) — the songs I've written. {%- endcomment -%}
+{%- comment -%}
+  Tracks, laid out like a beat store: a featured card for the original songs,
+  then each genre as a list of rows. Every playable row feeds one shared
+  player bar at the bottom of the panel (audio-player.js). `ti` numbers the
+  playable tracks in order so the bar can step prev/next through them.
+{%- endcomment -%}
+{%- assign ti = 0 -%}
 {%- for sec in p.sections -%}{%- if sec.featured -%}
-<section class="genre genre--featured">
-  <div class="genre__head">
-    <span class="genre__badge genre__badge--star" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77 5.82 21l1.18-6.88-5-4.87 7.1-1.01L12 2z"/></svg>
-    </span>
-    <div>
-      <h4 class="genre__name">{{ sec.name }}</h4>
-    </div>
-    {%- for t in sec.tracks -%}{%- if t.lyrics and t.lyrics != '' -%}
-    <button type="button" class="lyrics-btn" data-lyrics-open="{{ t.title | slugify }}" aria-haspopup="dialog">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="17" x2="18" y2="17"/></svg>
-      Lyrics
+<section class="mx-sec">
+  <h3 class="mx-label">{{ sec.name }}</h3>
+  {%- for t in sec.tracks -%}
+  <article class="mx-feature">
+    <button type="button" class="mx-cover mx-cover--lg mx-cover--featured" data-track="{{ ti }}"
+            data-src="{{ t.file | relative_url }}" data-title="{{ t.title }}" data-genre="{{ sec.name }}"
+            aria-label="Play {{ t.title }}">
+      <span class="mx-cover__word">{{ t.title | downcase }}</span>
+      <span class="mx-cover__play" aria-hidden="true">{% include passions/mx-icons.html %}</span>
+      {%- if t.length -%}<span class="mx-cover__badge">{{ t.length }}</span>{%- endif -%}
     </button>
-    {%- endif -%}{%- endfor -%}
-  </div>
-  <div class="genre__tracks">
-    {%- for t in sec.tracks -%}{% include passions/track.html t=t %}{%- endfor -%}
-  </div>
+    <div class="mx-feature__body">
+      <h4 class="mx-feature__title">{{ t.title }}</h4>
+      <p class="mx-feature__by">Kevin Liu</p>
+      <ul class="mx-tags">
+        {%- if t.collab -%}<li>{{ t.collab }}</li>{%- endif -%}
+        {%- if t.sample -%}<li>{{ t.sample }}</li>{%- endif -%}
+        <li>Original song</li>
+      </ul>
+      <div class="mx-feature__actions">
+        <button type="button" class="mx-btn mx-btn--solid" data-track-play="{{ ti }}">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          Play
+        </button>
+        {%- if t.lyrics and t.lyrics != '' -%}
+        <button type="button" class="mx-btn" data-lyrics-open="{{ t.title | slugify }}" aria-haspopup="dialog">Lyrics</button>
+        {%- endif -%}
+      </div>
+    </div>
+  </article>
+  {%- assign ti = ti | plus: 1 -%}
+  {%- endfor -%}
 </section>
 {%- endif -%}{%- endfor -%}
 
-{%- comment -%} The remaining genres, in a grid underneath. {%- endcomment -%}
-<div class="music-genres">
-  {%- assign gi = 0 -%}
-  {%- for sec in p.sections -%}{%- unless sec.featured -%}
-  {%- assign gi = gi | plus: 1 -%}
-  <section class="genre">
-    <div class="genre__head">
-      <span class="genre__badge" aria-hidden="true">{{ gi }}</span>
-      <div>
-        <h4 class="genre__name">{{ sec.name }}</h4>
-        {%- if sec.label and sec.label != '' -%}<span class="genre__label">{{ sec.label }}</span>{%- endif -%}
-      </div>
-    </div>
-    <div class="genre__tracks">
-      {%- for t in sec.tracks -%}{% include passions/track.html t=t %}{%- endfor -%}
-    </div>
-  </section>
-  {%- endunless -%}{%- endfor -%}
+{%- for sec in p.sections -%}{%- unless sec.featured -%}
+<section class="mx-sec">
+  <h3 class="mx-label">{{ sec.name }}</h3>
+  <ol class="mx-list">
+    {%- for t in sec.tracks -%}
+    <li>{% include passions/track.html t=t ti=ti genre=sec.name %}</li>
+    {%- if t.file and t.file != '' -%}{%- assign ti = ti | plus: 1 -%}{%- endif -%}
+    {%- endfor -%}
+  </ol>
+</section>
+{%- endunless -%}{%- endfor -%}
+
+{%- comment -%} The shared player. Hidden until a track is first played. {%- endcomment -%}
+<div class="mx-player" data-mx-player hidden>
+  <audio preload="none" data-mx-audio></audio>
+  <span class="mx-cover mx-cover--sm" data-mx-cover aria-hidden="true"><span class="mx-cover__word" data-mx-word></span></span>
+  <div class="mx-player__meta">
+    <span class="mx-player__title" data-mx-title></span>
+    <span class="mx-player__genre" data-mx-genre></span>
+  </div>
+  <div class="mx-player__controls">
+    <button type="button" class="mx-icon-btn" data-mx-prev aria-label="Previous track">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg>
+    </button>
+    <button type="button" class="mx-icon-btn mx-icon-btn--main" data-mx-toggle aria-label="Pause">
+      {% include passions/mx-icons.html %}
+    </button>
+    <button type="button" class="mx-icon-btn" data-mx-next aria-label="Next track">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg>
+    </button>
+  </div>
+  <div class="mx-player__seek">
+    <span class="mx-player__time" data-mx-now>0:00</span>
+    <input type="range" class="mx-range" data-mx-seek min="0" max="1000" value="0" step="1" aria-label="Seek">
+    <span class="mx-player__time" data-mx-dur>0:00</span>
+  </div>
+  <label class="mx-player__vol">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    <input type="range" class="mx-range" data-mx-vol min="0" max="100" value="85" aria-label="Volume">
+  </label>
 </div>
 
-<h3 class="pass-panel__subhead">Favourite Albums</h3>
+<h3 class="mx-label">Albums I keep coming back to</h3>
 <div class="albums">
   {%- for a in p.albums -%}
   <figure class="album{% if a.video and a.video != '' %} album--video{% endif %}">
@@ -74,16 +114,23 @@
         </span>
       </div>
       {%- endif -%}
+      {%- if a.preview_src and a.preview_src != '' -%}
+      <button type="button" class="album__play" data-album-clip="{{ a.preview_src | relative_url }}"
+              data-clip-start="{{ a.preview_start | default: 0 }}"
+              aria-label="Play a 30-second clip of {{ a.preview_song }} by {{ a.artist }}">
+        {% include passions/mx-icons.html %}
+      </button>
+      {%- endif -%}
       {%- if a.video and a.video != '' -%}
-      <button type="button" class="album__view" data-video-open="{{ a.title | slugify }}" aria-haspopup="dialog" aria-label="View the {{ a.title }} video">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        View
+      <button type="button" class="album__view mx-btn" data-video-open="{{ a.title | slugify }}" aria-haspopup="dialog" aria-label="View the {{ a.title }} video">
+        Watch
       </button>
       {%- endif -%}
     </div>
     <figcaption class="album__caption">
       <span class="album__title">{{ a.title }}</span>
       <span class="album__artist">{{ a.artist }}</span>
+      {%- if a.preview_song -%}<span class="album__song">Playing &ldquo;{{ a.preview_song }}&rdquo;</span>{%- endif -%}
     </figcaption>
   </figure>
   {%- endfor -%}
@@ -138,7 +185,7 @@
       </p>
       <div class="video-warn__actions">
         <button type="button" class="video-btn video-btn--ghost" data-video-close>Go back</button>
-        <button type="button" class="video-btn video-btn--go" data-video-proceed>I understand — play</button>
+        <button type="button" class="video-btn video-btn--go" data-video-proceed>I understand, play it</button>
       </div>
     </div>
 
@@ -150,7 +197,7 @@
       <div class="video-frame">
         <video class="video-el" data-video-el src="{{ a.video | relative_url }}" playsinline loop controls preload="none"></video>
       </div>
-      <p class="video-cap">{{ a.title }} &middot; {{ a.artist }}</p>
+      <p class="video-cap">{{ a.title }}, {{ a.artist }}</p>
     </div>
   </div>
 </div>

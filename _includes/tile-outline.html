@@ -1,0 +1,12 @@
+{%- comment -%}
+  Hover lines for a 3:2 photo tile. Two short white lines start in the
+  top-right and bottom-left corners, each splits in two and runs along the
+  edges, and they collide in the other two corners and vanish
+  (tile-outline.js sizes them; .tile-outline in main.scss animates them).
+{%- endcomment -%}
+<svg class="tile-outline" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M299 7A6 6 0 0 0 293 1H7A6 6 0 0 0 1 7"/>
+  <path d="M293 1A6 6 0 0 1 299 7V193A6 6 0 0 1 293 199"/>
+  <path d="M1 193A6 6 0 0 0 7 199H293A6 6 0 0 0 299 193"/>
+  <path d="M7 199A6 6 0 0 1 1 193V7A6 6 0 0 1 7 1"/>
+</svg>

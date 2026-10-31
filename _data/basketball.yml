@@ -27,6 +27,8 @@ blurb2: >-
   active, and playing basketball together, and after a tough previous season
   where we finished 1-7, Bagwork 2.0 is all about redemption, improvement,
   and having fun while trying to come back stronger.
+# Team photo shown beside the blurb. Leave blank for the placeholder.
+team_photo: "/assets/images/basketball-team.jpg"
 
 # Optional: drop in an API base if you host the serverless functions on a
 # different domain than the site (e.g. a Vercel deployment). Leave blank to
