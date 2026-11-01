@@ -205,7 +205,7 @@
         disablePermanently(
           'This assistant is deployed but not configured yet, so it can’t ' +
           'answer right now. Everything it would tell you is on the ' +
-          'Experience page — or just email me.'
+          'Experience page, or you can just email me.'
         );
         return;
       }
@@ -215,7 +215,7 @@
       disablePermanently(
         'This assistant runs on a serverless function that isn’t deployed on ' +
         'this host yet, so it can’t answer right now. Everything it would ' +
-        'tell you is on the Experience page — or just email me.'
+        'tell you is on the Experience page, or you can just email me.'
       );
     });
 })();

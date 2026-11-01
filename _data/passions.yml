@@ -195,14 +195,6 @@
     beginning all the way to where I'm at today. Funny enough, when I look
     back at it, so much of my gaming life has run through EA without me even
     realizing it, all the way from the very first game I ever played.
-  # A few headline facts shown above the journey.
-  glance:
-    - value: "Master"
-      label: "League of Legends, top 1,500 in North America"
-    - value: "DMG"
-      label: "CS:GO, before it became CS2"
-    - value: "UBC"
-      label: "Collegiate League of Legends for a year"
   # Each chapter:
   #   game     the chapter title
   #   era      optional, e.g. "Age 2" or "2020", shown above the title
@@ -210,7 +202,6 @@
   #   ea: true highlights the studio line (EA and its studios)
   #   text     the story
   #   image    optional photo path; image_hint says what would fit
-  #   icon     chapter icon, a file in _includes/game-icons/ (no extension)
   #   games    game names in the story, highlighted and linked to a Google
   #            search: { word, query (defaults to word), image + credit for
   #            an optional hover picture }
@@ -220,7 +211,6 @@
     - game: "Zuma"
       games:
         - { word: "Zuma", query: "Zuma PopCap game" }
-      icon: ea
       era: "Age 2"
       studio: "PopCap"
       ea: true
@@ -238,7 +228,6 @@
       games:
         - { word: "The Sims", query: "The Sims video game" }
         - { word: "Age of Empires", query: "Age of Empires video game" }
-      icon: ea
       studio: "Maxis and Ensemble Studios"
       ea: true
       text: >-
@@ -255,7 +244,6 @@
         - { word: "Blood & Glory", query: "Blood & Glory Glu Mobile game" }
         - { word: "Dragon Slayer", query: "Dragon Slayer Glu Mobile game" }
         - { word: "Clash of Clans" }
-      icon: ea
       studio: "Glu Mobile"
       ea: true
       text: >-
@@ -270,7 +258,6 @@
     - game: "Minecraft"
       games:
         - { word: "Minecraft Pocket Edition" }
-      icon: pickaxe
       era: "Age 8"
       studio: "Mojang"
       text: >-
@@ -290,7 +277,6 @@
         - { word: "Battlefield 3", query: "Battlefield 3 game" }
         - { word: "Battlefield 1", query: "Battlefield 1 game", image: /assets/images/passions/gaming/battlefield1-gamescom.jpg, credit: "Battlefield 1 at Gamescom. Photo: dronepicr, CC BY 2.0" }
         - { word: "Frostbite 3", query: "Frostbite 3 engine" }
-      icon: ea
       studio: "DICE"
       ea: true
       text: >-
@@ -308,7 +294,6 @@
       games:
         - { word: "Plants vs. Zombies: Garden Warfare" }
         - { word: "Apex Legends" }
-      icon: ea
       studio: "PopCap and Respawn"
       ea: true
       text: >-
@@ -321,7 +306,6 @@
     - game: "Fortnite"
       games:
         - { word: "Fortnite" }
-      icon: epicgames
       era: "Grade 9"
       studio: "Epic Games"
       text: >-
@@ -338,7 +322,6 @@
     - game: "CS:GO"
       games:
         - { word: "CSGO", query: "Counter-Strike: Global Offensive" }
-      icon: counterstrike
       era: "2020"
       studio: "Valve"
       text: >-
@@ -357,7 +340,6 @@
     - game: "League of Legends"
       games:
         - { word: "League of Legends", image: /assets/images/passions/gaming/league-worlds.jpg, credit: "League of Legends Worlds 2022. Photo: Liga Latinoamérica, CC BY 3.0" }
-      icon: leagueoflegends
       era: "Grade 11"
       studio: "Riot Games"
       text: >-
@@ -375,7 +357,6 @@
     - game: "Tyler1"
       peeks:
         - { word: "Tyler1", image: /assets/images/passions/gaming/tyler1.jpg, credit: "Tyler1 at Twitch Rivals" }
-      icon: youtube
       studio: "loltyler1 on YouTube"
       text: >-
         Along the way, I got the chance to play with and against famous content
@@ -396,7 +377,6 @@
     - game: "UBC esports"
       games:
         - { word: "League of Legends" }
-      icon: graduation-cap
       studio: "Collegiate League of Legends"
       text: >-
         I also played collegiate League of Legends at UBC for a year, which

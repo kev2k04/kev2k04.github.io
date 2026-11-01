@@ -13,15 +13,6 @@
           document.documentElement.setAttribute('data-mode', 'light');
         }
       } catch (e) {}
-      // Arm scroll-reveal before first paint (so its hidden state applies with
-      // no flash). Skipped without IntersectionObserver or when the visitor
-      // prefers reduced motion — then everything is simply shown.
-      try {
-        var mql = window.matchMedia('(prefers-reduced-motion: reduce)');
-        if ('IntersectionObserver' in window && !mql.matches) {
-          document.documentElement.classList.add('reveal-enabled');
-        }
-      } catch (e) {}
     })();
   </script>
 
@@ -33,13 +24,10 @@
   <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
 
   {%- comment -%}
-    Geist (headings + body) is self-hosted in /assets/fonts and preloaded so
-    the first paint uses it. JetBrains Mono (data/labels) comes from Google Fonts.
+    Geist is the only typeface: self-hosted in /assets/fonts and preloaded so
+    the first paint uses it.
   {%- endcomment -%}
   <link rel="preload" href="{{ '/assets/fonts/Geist-Variable.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   {% seo %}
 </head>

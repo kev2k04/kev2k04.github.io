@@ -1,7 +1,6 @@
 /* =========================================================================
    Experience photo gallery — the "Photo Gallery" button in a panel head flips
-   that panel between its details and a grid of photos. Resets to details when
-   the panel is closed/reopened.
+   that panel between its details and a grid of photos. 
    ========================================================================= */
 (function () {
   var toggles = Array.prototype.slice.call(document.querySelectorAll('[data-gallery-toggle]'));
@@ -12,7 +11,10 @@
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     var label = btn.querySelector('[data-gallery-label]');
     if (label) label.textContent = on ? 'Back to details' : 'Photo Gallery';
-    if (panel.scrollTo) { try { panel.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { panel.scrollTop = 0; } }
+    // Job pages scroll the window back up to the top of the details.
+    var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 0;
+    var top = panel.getBoundingClientRect().top + window.pageYOffset - navH - 16;
+    if (window.pageYOffset > top) window.scrollTo({ top: top, behavior: 'smooth' });
   }
 
   toggles.forEach(function (btn) {

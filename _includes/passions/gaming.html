@@ -1,35 +1,22 @@
 {%- comment -%}
-  Gaming page body: a few headline facts, then the journey through the games
-  that shaped Kevin, oldest first, down one timeline rail. Everything comes
-  from the gaming entry in _data/passions.yml:
-    glance      { value, label } facts shown above the journey
-    chapters    one per game: game, era, studio, ea, text, image, videos
+  Gaming page body: the journey through the games that shaped Kevin, oldest
+  first, down one timeline rail. Everything comes from the gaming entry in
+  _data/passions.yml:
+    chapters    one per game: game, era, studio, ea, text, games, peeks,
+                image, videos
                 (see the comment above `chapters:` for what each field does)
   To add / reorder / rename a chapter, just edit that list; no markup changes.
 {%- endcomment -%}
 {%- assign p = include.p -%}
 <p class="pass-panel__blurb">{{ p.intro }}</p>
 
-{%- if p.glance -%}
-<div class="gg-glance">
-  {%- for g in p.glance -%}
-  <div class="gg-glance__item">
-    <span class="gg-glance__value">{{ g.value }}</span>
-    <span class="gg-glance__label">{{ g.label }}</span>
-  </div>
-  {%- endfor -%}
-</div>
-{%- endif -%}
+
 
 <ol class="gg-journey">
   {%- for c in p.chapters -%}
   <li class="gg-sec{% if c.ea %} is-ea{% endif %}">
     <span class="gg-sec__dot" aria-hidden="true"></span>
     <div class="gg-sec__head">
-      {%- if c.icon -%}
-        {%- capture icon_path -%}game-icons/{{ c.icon }}.svg{%- endcapture -%}
-        <span class="gg-sec__icon" aria-hidden="true">{% include {{ icon_path }} %}</span>
-      {%- endif -%}
       {%- if c.era and c.era != '' -%}<span class="gg-sec__era">{{ c.era }}</span>{%- endif -%}
       <h3 class="gg-sec__name">{{ c.game }}</h3>
       {%- if c.studio and c.studio != '' -%}<p class="gg-sec__studio">{{ c.studio }}</p>{%- endif -%}

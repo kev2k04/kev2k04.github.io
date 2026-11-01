@@ -273,9 +273,8 @@
   location: "Vancouver, Canada"
   blurb: >-
     My first professional experience was with Joshua Tree Health, a private
-    equity and venture capital firm dedicated to improving the healthcare
-    industry through innovative solutions that increase accessibility and
-    availability.
+    equity and venture capital firm focused on making healthcare more
+    accessible and available.
   image: "/assets/images/joshua-tree.jpg"
   points:
     - >-
@@ -321,8 +320,8 @@
   location: "Vancouver, Canada"
   blurb: >-
     My first involvement at UBC was with an engineering club called UBC Open
-    Robotics, which is focused on fostering an environment for the next
-    generation of innovative engineers.
+    Robotics, an engineering club focused on helping the next generation of
+    engineers grow.
   image: "/assets/images/open-robotics-arm.jpg"
   image_contain: true          # show the whole frame (no cover-crop) so it reads at full width
   points:

@@ -25,9 +25,10 @@
     if (moveFocus) {
       focus(panel.querySelector(on ? '[data-story-close]' : '[data-story-open]'));
     }
-    if (panel.scrollTo) {
-      try { panel.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { panel.scrollTop = 0; }
-    }
+    // Job pages scroll the window back up to the top of the details.
+    var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 0;
+    var top = panel.getBoundingClientRect().top + window.pageYOffset - navH - 16;
+    if (window.pageYOffset > top) window.scrollTo({ top: top, behavior: 'smooth' });
   }
 
   function panelOf(el) { return el.closest('.exp-panel'); }

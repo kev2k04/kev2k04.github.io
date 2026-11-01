@@ -31,7 +31,7 @@
 
   --ink:        #f3f5fa;   /* headings / primary text          */
   --ink-soft:   #c4c8d4;   /* body copy                        */
-  --muted:      #8389a0;   /* secondary text / labels          */
+  --muted:      #979db2;   /* secondary text / labels          */
 
   /* Near-monochrome accent = warm white. Reused via --accent so existing
      components keep working; hierarchy now comes from weight/size, not hue. */
@@ -49,8 +49,7 @@
                "Helvetica Neue", Arial, sans-serif;
   --font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "SFMono-Regular",
-               Menlo, Consolas, monospace;
+  --font-mono: var(--font-body);   /* no monospace: one typeface site-wide */
 
   /* Sticky navbar height — overlays offset their top padding by this so
      pop-out panels always start below the bar (see .site-header__inner). */
@@ -153,32 +152,6 @@ html[data-mode="light"] {
     animation-duration: 0.34s;
     animation-timing-function: var(--ease);
   }
-}
-
-/* =========================================================================
-   Scroll reveal — content lifts + fades in as it scrolls into view, once per
-   page load (stays revealed afterwards; a fresh load or returning to the page
-   reveals it again). `reveal-enabled` is set on <html> before paint — only when
-   IntersectionObserver is supported and motion is allowed — so no-JS, old, and
-   reduced-motion visitors just see everything. We offset with the `translate`
-   property (not `transform`) so it never fights a card's hover lift.
-   reveal.js adds .is-revealed; the lower-specificity hidden rule yields to it.
-   ========================================================================= */
-html.reveal-enabled :where(
-  .exp__head, .exp-card,
-  .pass__head, .pass-card,
-  .resume__block,
-  .build .section__head, .build__body > p,
-  .bball-hero__inner > *, .bball-stat, .bball-status, .bball-about, .bball-reel
-) {
-  opacity: 0;
-  translate: 0 24px;
-  transition: opacity 0.7s var(--ease), translate 0.7s var(--ease);
-  will-change: opacity, translate;
-}
-html.reveal-enabled .is-revealed {
-  opacity: 1;
-  translate: none;
 }
 
 /* =========================================================================
@@ -844,8 +817,6 @@ html:not([data-mode="light"]) .build .section__head {
   position: absolute;
   inset: 0;
   background: var(--scrim);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
   opacity: 0;
   transition: opacity 0.35s var(--ease);
 }
@@ -1129,108 +1100,6 @@ body.exp-lock .back-btn { display: none; }
   .exp-card.is-flag { animation: none; border-color: rgba(var(--accent-rgb), 0.65); }
 }
 
-/* ---- Current position (Seaspan): a living "water" card ----
-   The current role is the one we want clicked, so it churns like backlit water:
-   two stacked layers of soft red pools slosh on different, out-of-phase clocks —
-   growing, shrinking and wandering so the colour never sits still — while the red
-   border swells brighter and THICKER on the beat to pull the eye. Card content
-   sits above the water; reduced-motion gets a calm static version. */
-#exp-card-seaspan {
-  position: relative;
-  overflow: hidden;
-  border-color: rgba(229, 72, 72, 0.38);
-}
-#exp-card-seaspan > * { position: relative; z-index: 1; }
-#exp-card-seaspan::before,
-#exp-card-seaspan::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  background-repeat: no-repeat;
-}
-/* Deep layer — the body of water sloshing on a slower, offset clock. Three
-   pools drift on irregular paths and breathe in size so they read as swell,
-   not a tidy orbit. */
-#exp-card-seaspan::before {
-  background-image:
-    radial-gradient(closest-side at 50% 50%, rgba(235, 72, 72, 0.24), transparent 70%),
-    radial-gradient(closest-side at 50% 50%, rgba(208, 54, 70, 0.20), transparent 72%),
-    radial-gradient(closest-side at 50% 50%, rgba(255, 96, 96, 0.13), transparent 66%);
-  background-size: 158% 158%, 180% 180%, 118% 118%;
-  /* Same ~4.2s beat as the surface + border so the whole interior phases in and
-     out together — the red floods in as the border swells, holds full, then
-     drains as it shrinks. The irregular paths keep it churning while it breathes. */
-  animation: seaspan-slosh 4.2s ease-in-out infinite;
-}
-/* Surface layer — brighter, smaller ripples on the brisk beat, plus the
-   expanding red border ring. Out of phase with the deep layer, so where they
-   cross the red flares like a caustic and the whole surface looks choppy. */
-#exp-card-seaspan::after {
-  background-image:
-    radial-gradient(closest-side at 50% 50%, rgba(255, 108, 108, 0.20), transparent 64%),
-    radial-gradient(closest-side at 50% 50%, rgba(245, 84, 84, 0.15), transparent 68%);
-  background-size: 115% 115%, 140% 140%;
-  animation: seaspan-tide 4.2s ease-in-out infinite;
-}
-@keyframes seaspan-slosh {
-  /* opacity breathes 0.4 → 1 → 0.4 in lockstep with the border swell; positions
-     and sizes churn through five irregular stops so it reads as water, not a
-     simple fade. */
-  0%   { opacity: 0.12; background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 158% 158%, 180% 180%, 112% 112%; }
-  22%  { opacity: 0.34; background-position: 72% 12%, 28% 86%, 22% 62%; background-size: 182% 182%, 152% 152%, 148% 148%; }
-  /* swell to a gentle peak, hold (44%–58%) while the water keeps drifting */
-  44%  { opacity: 0.5;  background-position: 88% 72%, 14% 30%, 78% 40%; background-size: 144% 144%, 200% 200%, 100% 100%; }
-  58%  { opacity: 0.5;  background-position: 80% 64%, 20% 36%, 72% 46%; background-size: 150% 150%, 196% 196%, 104% 104%; }
-  78%  { opacity: 0.34; background-position: 38% 90%, 62% 16%, 30% 76%; background-size: 194% 194%, 148% 148%, 138% 138%; }
-  100% { opacity: 0.12; background-position: 18% 28%, 82% 72%, 55% 50%; background-size: 158% 158%, 180% 180%, 112% 112%; }
-}
-@keyframes seaspan-tide {
-  /* opacity = the swell; the inset ring is the red border — it brightens AND
-     thickens gently (2px → 4px → 2px); it floods to full then HOLDS fully red
-     across 44%–58% before easing back down. */
-  0% {
-    opacity: 0.16;
-    background-position: 30% 36%, 74% 68%;
-    background-size: 105% 105%, 128% 128%;
-    box-shadow: inset 0 0 8px rgba(229, 72, 72, 0.14), inset 0 0 0 1px rgba(229, 72, 72, 0.3);
-  }
-  44% {
-    opacity: 0.55;
-    background-position: 66% 60%, 30% 38%;
-    background-size: 150% 150%, 180% 180%;
-    box-shadow: inset 0 0 22px rgba(235, 70, 70, 0.28), inset 0 0 0 2px rgba(245, 90, 90, 0.6);
-  }
-  58% {
-    opacity: 0.55;
-    background-position: 62% 56%, 34% 42%;
-    background-size: 152% 152%, 182% 182%;
-    box-shadow: inset 0 0 22px rgba(235, 70, 70, 0.28), inset 0 0 0 2px rgba(245, 90, 90, 0.6);
-  }
-  100% {
-    opacity: 0.16;
-    background-position: 30% 36%, 74% 68%;
-    background-size: 105% 105%, 128% 128%;
-    box-shadow: inset 0 0 8px rgba(229, 72, 72, 0.14), inset 0 0 0 1px rgba(229, 72, 72, 0.3);
-  }
-}
-/* Hover: freeze the water mid-churn at full strength and warm the edge so the
-   click feels rewarded. */
-#exp-card-seaspan:hover { border-color: rgba(245, 90, 90, 0.65); }
-#exp-card-seaspan:hover::before,
-#exp-card-seaspan:hover::after { animation-play-state: paused; }
-#exp-card-seaspan:hover::after { opacity: 0.6; }
-@media (prefers-reduced-motion: reduce) {
-  #exp-card-seaspan::before { animation: none; opacity: 0.4; }
-  #exp-card-seaspan::after {
-    animation: none;
-    opacity: 0.4;
-    background-position: 30% 36%, 74% 68%;
-    box-shadow: inset 0 0 16px rgba(229, 72, 72, 0.22), inset 0 0 0 2px rgba(245, 84, 84, 0.45);
-  }
-}
 
 .exp-card__logo { width: 40px; height: 40px; font-size: 0.9rem; }
 .exp-card__name {
@@ -1253,13 +1122,15 @@ body.exp-lock .back-btn { display: none; }
 }
 .exp-card__role { font-size: 0.78rem; color: var(--muted); margin-top: -0.3rem; }
 
-/* ---- Experience timeline: dates on the left, one blue-violet line, a card per
-   role. Entries rise in as they scroll into view. ---- */
+/* ---- Experience timeline: three columns per role (dates, the rail with a
+   dot, the card), so the dates never touch the dot. On phones the dates sit
+   above each card and the rail runs down the left. ---- */
 .exp-tl {
   --tl-date: 9.5rem;
+  --tl-rail: 3.5rem;
   position: relative;
-  max-width: 900px;
-  margin: 0;
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
   display: grid;
@@ -1268,46 +1139,46 @@ body.exp-lock .back-btn { display: none; }
 .exp-tl::before {
   content: "";
   position: absolute;
-  left: calc(var(--tl-date) + 0.45rem);
-  top: 1.6rem;
-  bottom: 1.6rem;
+  left: calc(var(--tl-date) + var(--tl-rail) / 2 - 1px);
+  top: 2.5rem;
+  bottom: 2.5rem;
   width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(to bottom, #8a6ff0, #5d82ee 70%, rgba(93, 130, 238, 0.15));
-  opacity: 0.7;
+  background: var(--line);
 }
 .exp-tl__item {
   position: relative;
   display: grid;
-  grid-template-columns: var(--tl-date) 1fr;
-  column-gap: 2.2rem;
+  grid-template-columns: var(--tl-date) var(--tl-rail) minmax(0, 1fr);
   align-items: center;
 }
 .exp-tl__dates {
-  font-size: 0.85rem;
+  grid-column: 1;
+  font-size: 0.9rem;
+  line-height: 1.4;
   color: var(--muted);
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 .exp-tl__dot {
   position: absolute;
-  left: var(--tl-date);
+  left: calc(var(--tl-date) + var(--tl-rail) / 2);
   top: 50%;
-  width: 0.95rem;
-  height: 0.95rem;
-  translate: 0 -50%;
+  width: 0.8rem;
+  height: 0.8rem;
+  translate: -50% -50%;
   border-radius: 50%;
   background: var(--bg);
-  border: 2px solid #7a78ef;
+  border: 2px solid var(--line-strong);
   z-index: 1;
 }
 .exp-tl__item.is-current .exp-tl__dot {
-  background: #7a78ef;
-  box-shadow: 0 0 0 5px rgba(122, 120, 239, 0.16);
+  background: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 4px rgba(var(--ink-rgb), 0.12);
 }
 .exp-tl__item.is-current .exp-tl__dates { color: var(--ink); }
 .exp-card.exp-tl__card {
-  grid-column: 2;
+  grid-column: 3;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
@@ -1338,26 +1209,13 @@ body.exp-lock .back-btn { display: none; }
 .exp-tl__card:hover .exp-tl__more { color: var(--ink); translate: 3px 0; }
 .exp-tl__card:hover { transform: translateX(4px); }
 @media (max-width: 720px) {
-  .exp-tl { --tl-date: 0px; padding-left: 1.6rem; }
-  .exp-tl::before { left: 0.45rem; }
-  .exp-tl__item { grid-template-columns: 1fr; row-gap: 0.45rem; }
-  .exp-tl__dates { text-align: left; }
-  .exp-tl__dot { left: -1.6rem; top: 0.55rem; translate: 0 0; }
-  .exp-card.exp-tl__card { grid-column: 1; }
+  .exp-tl { padding-left: 1.6rem; }
+  .exp-tl::before { left: 0.4rem; top: 0.6rem; bottom: 2rem; }
+  .exp-tl__item { grid-template-columns: 1fr; row-gap: 0.5rem; }
+  .exp-tl__dates { grid-column: 1; text-align: left; }
+  .exp-tl__dot { left: calc(-1.6rem + 0.4rem + 1px); top: 0.7rem; }
+  .exp-card.exp-tl__card { grid-column: 1; align-items: flex-start; }
   .exp-tl__more { display: none; }
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .exp-tl__item {
-      animation: tl-rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
-    @keyframes tl-rise {
-      from { opacity: 0; translate: 0 24px; }
-      to   { opacity: 1; translate: 0 0; }
-    }
-  }
 }
 
 /* Overlay = scrim (blurs page) + the single active panel, centred */
@@ -1377,8 +1235,6 @@ body.exp-lock .back-btn { display: none; }
   position: absolute;
   inset: 0;
   background: var(--scrim);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
   opacity: 0;
   transition: opacity 0.4s var(--ease);
 }
@@ -1403,6 +1259,35 @@ body.exp-lock .back-btn { display: none; }
   transition: transform 0.44s var(--ease), opacity 0.3s var(--ease);
 }
 .exp-panel[hidden] { display: none; }
+/* Each job is its own page (_layouts/job.html): the panel becomes ordinary page
+   content under the photo header, with no pop-up box, scrolling or zoom. */
+.exp-panel.exp-panel--page {
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+  will-change: auto;
+}
+.exp-panel--page .exp-panel__inner {
+  max-width: 1000px;   /* a readable line length for the story text */
+  padding-block: clamp(2rem, 4vw, 3rem) clamp(4rem, 8vw, 6rem);
+  opacity: 1;
+  transform: none;
+}
+.exp-page__bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+}
+.exp-page__bar .exp-panel__logo { width: 48px; height: 48px; font-size: 0.95rem; }
+.exp-page__meta { display: flex; flex-wrap: wrap; gap: 0.2rem 1.2rem; margin: 0; flex: 1; color: var(--muted); font-size: 0.95rem; }
+.exp-page__bar .exp-panel__gallery-btn { margin-left: auto; }
+a.exp-card { text-decoration: none; }
 /* Inner content rises + fades in once the box has zoomed up (masks FLIP
    distortion and gives the segment a clear "move into place" on open). */
 .exp-panel__inner {
@@ -1568,8 +1453,6 @@ body.exp-lock .back-btn { display: none; }
   position: absolute;
   inset: 0;
   background: var(--scrim);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
   opacity: 0;
   transition: opacity 0.3s var(--ease);
   cursor: zoom-out;
@@ -2056,6 +1939,7 @@ body.exp-lock { overflow: hidden; }
 /* A crisp accent spine down the left edge -- the per-passion colour moment,
    brightening on hover instead of a soft gradient bloom. */
 .pass-card::before {
+  display: none;
   content: "";
   position: absolute;
   left: 0; top: 0; bottom: 0;
@@ -2237,6 +2121,7 @@ body.exp-lock { overflow: hidden; }
 }
 /* The card's accent spine carries into its panel — same 2px left line. */
 .pass-panel::before {
+  display: none;
   content: "";
   position: absolute;
   left: 0; top: 0; bottom: 0;
@@ -2399,7 +2284,6 @@ body.exp-lock { overflow: hidden; }
   padding: 1.05rem 1.2rem;
   background: var(--surface-2);
   border: 1px solid var(--line);
-  border-left: 3px solid rgb(var(--card-accent));
   border-radius: 10px;
 }
 .sport-sec__no {
@@ -2461,7 +2345,6 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   font-size: 0.97rem;
   line-height: 1.6;
   background: rgba(var(--card-accent), 0.06);
-  border-left: 3px solid rgb(var(--card-accent));
   border-radius: 0 8px 8px 0;
 }
 
@@ -2494,6 +2377,7 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
 }
 .mx-label::before {
   content: "";
+  display: none;
   width: 4px;
   height: 1.1em;
   border-radius: 1px;
@@ -2513,7 +2397,7 @@ a.pass-chip:hover { background: rgba(var(--card-accent), 0.18); border-color: rg
   overflow: hidden;
   border: 0;
   border-radius: 6px;
-  background: linear-gradient(150deg, var(--c1), var(--c2));
+  background: var(--c1);
   color: #fff;
   font: inherit;
   text-align: left;
@@ -2658,7 +2542,7 @@ span.mx-cover { cursor: default; }
 
 /* Small equalizer that bounces beside the playing row. */
 .mx-row__eq { display: none; align-items: flex-end; gap: 2px; height: 14px; margin-right: 0.4rem; }
-.mx-row__eq i { width: 3px; height: 100%; border-radius: 1px; background: #8a6ff0; transform-origin: bottom; animation: mx-eq 0.9s ease-in-out infinite; }
+.mx-row__eq i { width: 3px; height: 100%; border-radius: 1px; background: var(--ink); transform-origin: bottom; animation: mx-eq 0.9s ease-in-out infinite; }
 .mx-row__eq i:nth-child(2) { animation-delay: -0.3s; }
 .mx-row__eq i:nth-child(3) { animation-delay: -0.6s; }
 .mx-row.is-current .mx-row__eq { display: flex; }
@@ -2678,9 +2562,7 @@ span.mx-cover { cursor: default; }
   padding: 0.55rem 0.9rem 0.55rem 0.55rem;
   border-radius: 12px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  background: var(--surface);
   box-shadow: 0 16px 40px -18px rgba(0, 0, 0, 0.7);
   translate: 0 20px;
   opacity: 0;
@@ -2799,7 +2681,7 @@ span.mx-cover { cursor: default; }
   border-radius: 50%;
   color: #0b1020;
   background:
-    conic-gradient(#8a6ff0 calc(var(--clip, 0) * 1turn), transparent 0) border-box,
+    conic-gradient(#0b1020 calc(var(--clip, 0) * 1turn), transparent 0) border-box,
     #fff padding-box;
   border: 2px solid transparent;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
@@ -2821,7 +2703,7 @@ span.mx-cover { cursor: default; }
   height: 0;
   overflow: hidden;
   font-size: 0.75rem;
-  color: #a99bf5;
+  color: var(--muted);
   opacity: 0;
   transition: opacity 0.3s var(--ease);
 }
@@ -2847,8 +2729,6 @@ span.mx-cover { cursor: default; }
   position: absolute;
   inset: 0;
   background: var(--scrim);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
   opacity: 0;
   transition: opacity 0.35s var(--ease);
 }
@@ -2936,8 +2816,6 @@ span.mx-cover { cursor: default; }
   position: absolute;
   inset: 0;
   background: var(--scrim);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
   opacity: 0;
   transition: opacity 0.35s var(--ease);
 }
@@ -3048,42 +2926,6 @@ span.mx-cover { cursor: default; }
 /* ---- Gaming journey: wide scorebook-style rows, one per game era ----
    Number + title sit in a fixed side column; the story runs the full
    remaining width so long paragraphs read as prose, not a tall card. */
-/* At a glance: three facts in one panel, like the Basketball averages. */
-.gg-glance {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  overflow: hidden;
-  margin: 0 0 clamp(2.5rem, 5vw, 3.5rem);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 30px 60px -36px rgba(0, 0, 0, 0.7);
-}
-.gg-glance::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: var(--accent-grad);
-}
-.gg-glance__item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: clamp(1.3rem, 2.6vw, 1.9rem) clamp(1rem, 2vw, 1.6rem);
-}
-.gg-glance__item + .gg-glance__item { border-left: 1px solid var(--line); }
-.gg-glance__value {
-  font-family: var(--font-head);
-  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  color: var(--ink);
-}
-.gg-glance__label { font-size: 0.9rem; line-height: 1.45; color: var(--muted); }
-
 /* The journey: one rail down the left, a dot per game, the title block on
    the left and the story beside it. EA chapters get a blue-violet dot and
    studio line, so the thread through EA is visible at a glance. */
@@ -3154,21 +2996,6 @@ span.mx-cover { cursor: default; }
   box-shadow: 0 30px 60px -32px rgba(0, 0, 0, 0.7);
 }
 .gg-sec__media img { display: block; width: 100%; height: auto; }
-/* Chapter icon: the game's or studio's mark in a small tile above the title. */
-.gg-sec__icon {
-  display: grid;
-  place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  margin-bottom: 0.7rem;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-}
-.gg-sec__icon svg { width: 1.2rem; height: 1.2rem; }
-.gg-sec.is-ea .gg-sec__icon { color: #c9c2ff; border-color: rgba(122, 120, 239, 0.4); background: rgba(122, 120, 239, 0.1); }
-
 /* Game names in the story: highlighted, and each one opens a Google search
    for the game in a new tab. */
 .gg-game {
@@ -3301,8 +3128,6 @@ html[data-mode="light"] .gg-game:focus-visible { color: var(--ink); }
 }
 @media (max-width: 760px) {
   .gg-sec { grid-template-columns: 1fr; }
-  .gg-glance { grid-template-columns: 1fr; }
-  .gg-glance__item + .gg-glance__item { border-left: 0; border-top: 1px solid var(--line); }
 }
 
 .gg-id {
@@ -3451,6 +3276,7 @@ html[data-mode="light"] .gg-game:focus-visible { color: var(--ink); }
 }
 /* Blue-violet edge along the top, as on the homepage work card. */
 .bball-stats::before {
+  display: none;
   content: "";
   position: absolute;
   inset: 0 0 auto;
@@ -3654,7 +3480,7 @@ html[data-mode="light"] .gg-game:focus-visible { color: var(--ink); }
    hovering a photo shows its true colour.
    ========================================================================= */
 :root {
-  --accent-grad: linear-gradient(90deg, #5d82ee 0%, #8a6ff0 100%);
+  --accent-grad: linear-gradient(var(--ink), var(--ink));   /* solid: no colour gradients */
   --sheet-bg: #0d1328;
   --sheet-shadow: 0 -24px 60px -18px rgba(0, 0, 0, 0.7);
   --deco-line: rgba(160, 180, 255, 0.07);
@@ -3759,6 +3585,7 @@ html.home-nudge .home-sheet {
 }
 /* A very faint blue-violet light along the top edge of the sheet. */
 .home-sheet::before {
+  display: none;
   content: "";
   position: absolute;
   inset: 0 0 auto;
@@ -3860,11 +3687,8 @@ button.pass-row { border-top: 1px solid var(--line); }
 .pass-row.is-wip .pass-row__tag { translate: none; }
 .pass-row:has(.pass-row__state) { grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr) auto; }
 .pass-row__state {
-  padding: 0.15rem 0.6rem;
-  border-radius: 100px;
-  background: rgba(var(--ink-rgb), 0.08);
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   white-space: nowrap;
 }
 
@@ -4115,6 +3939,7 @@ html[data-mode="light"] .pass-glow__layer.is-on { opacity: 0.22; }
 }
 /* The passion's accent shows as a spine on hover, and the row steps in. */
 .pass-row::before {
+  display: none;
   content: "";
   position: absolute;
   left: 0; top: 0.9rem; bottom: 0.9rem;
@@ -4181,6 +4006,7 @@ html[data-mode="light"] .home-work-wrap::after { box-shadow: 0 18px 40px -26px r
 }
 /* Blue-violet edge along the top of the card. */
 .home-work::before {
+  display: none;
   content: "";
   position: absolute;
   inset: 0 0 auto;
@@ -4248,17 +4074,11 @@ a.home-work:focus-visible .home-link { background-size: 100% 2px, 100% 1px; }
   a.home-work:hover, a.home-work:focus-visible { translate: none; }
 }
 
-/* ---- Scroll-linked motion. Photos open up as they arrive and drift a little
-   slower than the page; the hero sunset sinks behind the name. Native scroll
+/* ---- Scroll-linked motion. Photos drift a little slower than the page; the hero sunset sinks behind the name. Native scroll
    timelines only — browsers without them, and reduced-motion visitors, get
    the still layout. ---- */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .photo-tile__media {
-      animation: photo-open linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 90%;
-    }
     .photo-tile__img {
       animation: photo-drift linear both;
       animation-timeline: view();
@@ -4280,10 +4100,6 @@ a.home-work:focus-visible .home-link { background-size: 100% 2px, 100% 1px; }
       from { clip-path: inset(0 0 0 0 round 0); }
       25%  { clip-path: inset(14px 18px 0 18px round 22px); }
       to   { clip-path: inset(14px 18px 0 18px round 22px); scale: 0.95; filter: brightness(0.55); }
-    }
-    @keyframes photo-open {
-      from { clip-path: inset(9% 5% 0 5% round var(--radius-lg)); opacity: 0.4; }
-      to   { clip-path: inset(0 0 0 0 round var(--radius-lg)); opacity: 1; }
     }
     /* A tile can opt out of the zoom with photo_full: true in passions.yml
        (sets --drift-scale: 1 and --drift-y: 0%), so the whole width shows. */

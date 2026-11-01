@@ -44,20 +44,20 @@ expertise:
       forecast variances that feed management and Board reporting.
   - name: Financial Analysis
     blurb: >-
-      Turned raw financial data into decision-ready insight across forecasting,
-      budgeting, and executive reporting.
+      Pulling income statement numbers for Seaspan's 2027 Board deck and
+      checking every figure in our presentations against the files behind it.
   - name: Statistical Data Analysis
     blurb: >-
-      Applied quantitative methods to translate large datasets into reliable,
-      actionable findings.
+      Cleaned and joined 600K+ call centre records at BC Hydro to find out why
+      calls were taking so long.
   - name: Business Analytics
     blurb: >-
-      Connected operational and financial data to surface the drivers behind
-      performance.
+      Found the IVR misrouting issue at BC Hydro that was sending half of our
+      callers to the general queue.
   - name: Valuation
     blurb: >-
-      Valued contract opportunities with scenario-driven, assumption-tested
-      models.
+      Valued 15+ seed-stage healthcare startups at Joshua Tree Health using
+      comparable companies and revenue multiples.
   - name: Forecasting
     blurb: >-
       Ran scenario and sensitivity analysis on a 14-year forecast, 2027 to 2040,
@@ -72,8 +72,8 @@ expertise:
       handle time was going.
   - name: Excel
     blurb: >-
-      Power user: dynamic models, scenario tooling, and clean, auditable
-      workbooks.
+      My favourite tool. XLOOKUP, LET, Power Query and PivotTables are what
+      took our weekly cash flow from 5 days down to 3.
 
 # ---------------------------------------------------------------------------
 # Social & professional links. Remove any you don't use; the icon is chosen
