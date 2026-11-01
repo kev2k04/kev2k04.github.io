@@ -8,7 +8,7 @@ location: Vancouver, BC
 # Hero portrait. Shot 4:5 to match the frame, so nothing is cropped at render.
 portrait: "/assets/images/headshot-professional.jpg"
 # Shown under the headshot as "Graduating <grad_date>". Leave blank to hide.
-grad_date: December 2027
+grad_date: May 2028
 headline: >-
   Hi my name is Kevin, and welcome to my website!
 
@@ -18,7 +18,7 @@ music_url: "https://soundcloud.com/kevxn04"
 # A short professional bio shown in the "About" section.
 about: >-
   I'm a 4th year finance student at the UBC Sauder School of Business, currently
-  working at Seaspan as a Financial Analyst Intern in the FP&amp;A department.
+  working at Seaspan as an FP&amp;A Analyst Intern.
   I've built financial models and used data to tell stories, ranging from
   supporting executive reporting at Seaspan to solving operational inefficiencies
   at BC Hydro. One of my biggest passions is technology, and I'm always looking
@@ -60,16 +60,16 @@ expertise:
       models.
   - name: Forecasting
     blurb: >-
-      Modeled a 2027–2040 long-term forecast across inflation, project-win, and
-      best / worst-case scenarios.
+      Ran scenario and sensitivity analysis on a 14-year forecast, 2027 to 2040,
+      and worked on the 5+7 forecast and the 2027 budget at Seaspan.
   - name: Variance Analysis
     blurb: >-
-      Performed month-end budget-to-actual variance analysis spanning 30+
-      departments.
+      Monthly OH&amp;GA variance analysis across 30+ departments, plus month-end
+      program P&amp;L variance analysis for all 3 shipyards.
   - name: Power BI
     blurb: >-
-      Translated long-term forecast output into executive-ready visuals for a
-      120+ person finance audience.
+      Visualized 600K+ call centre records at BC Hydro, with DAX, to show where
+      handle time was going.
   - name: Excel
     blurb: >-
       Power user: dynamic models, scenario tooling, and clean, auditable

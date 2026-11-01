@@ -9,37 +9,37 @@ linkedin_url: "https://www.linkedin.com/in/kev2k04/"
 linkedin_text: "linkedin.com/in/kev2k04"
 
 experience:
-  - role: "FP&A Analyst"
+  - role: "FP&A Analyst Intern"
     company: Seaspan ULC
     location: Vancouver, Canada
     start: "May 2026"
     end: Present
     points:
-      - "Own the weekly cash flow cycle end-to-end, consolidating 150+ invoices from billing and SAP BI totals across 3 shipyards and 5+ programs, then securing AP release approval from the Controller, VP Finance, and CFO."
-      - "Automating the weekly cash flow process with Power Query, PivotTables, and slicers, consolidating 20+ files across billing, treasury, and program finance to run on a refresh instead of manual entry, cutting the cycle from 5 days to 3."
-      - "Own the monthly OH&GA variance analysis across 30+ departments and 8 C-suite functions, investigating budget-to-actual and forecast variances to identify drivers behind misalignments, informing management and Board reporting."
+      - "Contributed to Seaspan's enterprise-wide Oracle ERP transformation, one of the largest ERP transitions in Canada, by consolidating reporting files, adapting legacy processes to new reporting structures, and streamlining finance workflows."
+      - "Own the weekly cash flow cycle end-to-end, consolidating 6,000+ invoices from billing and SAP BI into AP/AR totals across 3 shipyards and 5+ programs, then securing AP release approval from the Controller, VP Finance, and CFO."
+      - "Automating the weekly cash flow process using Power Query, PivotTables, formulas, and slicers, consolidating 20+ files across billing, treasury, and program finance into a refresh-driven workflow, reducing cycle time from 5 days to 3."
+      - "Supported the 2027 budgeting process by identifying cost-saving opportunities across 20+ departments through variance, trend, headcount, and spending analysis, partnering with non-finance stakeholders to reduce planned expenditures."
       - "Ran scenario and sensitivity analysis on a 14-year forecast model, refining inputs with inflation, project-win probability, and case assumptions to support CFO initiatives for capital investment requirements across 10+ contract opportunities."
-      - "Perform month-end variance analysis across program-level P&L for all 3 shipyards, pinpointing what drives budget-to-actual differences and validating balance sheet figures, catching errors before they reach CFO and Board reporting."
+      - "Performed month-end variance analysis across program-level P&Ls for all 3 shipyards, identifying budget-to-actual drivers and validating balance sheet figures, ROIC, and other key performance metrics before CFO and Board reporting."
 
-  - role: Business Analyst
+  - role: Business Analyst Intern
     company: BC Hydro
     location: Vancouver, Canada
     start: "May 2025"
     end: "Dec 2025"
     points:
-      - "Built financial forecasting models incorporating growth assumptions, cost drivers, and scenario analysis to project expenses exceeding $10 million YTD, supporting planning, reporting, and assisting in high-level decision-making."
+      - "Built financial forecasting models incorporating growth assumptions, cost drivers, and scenario analysis to project expenses exceeding $10 million YTD, supporting KPI planning, reporting, and assisting in high-level decision-making."
       - "Recovered and processed 50% more lost call center data by joining and cleaning 600K+ records in Power Query, then visualizing results to lift agent efficiency by 5% and drive $50,000+ annual savings via reduced customer handling time."
       - "Analyzed the same dataset to identify an IVR misrouting issue sending 50% of callers to the general queue due to failed verification, where repeated transfers and re-verification by multiple agents inflated handle time by 5 minutes per interaction."
       - "Improved IVR utterance recognition by analyzing Google Dialogflow call data for high-frequency intent phrases, reducing the error rate from 30% to 25% across 4,000 calls and projected to save 150,000+ minutes annually at scale."
 
-  - role: "Analyst, Private Equity"
+  - role: "Analyst, Private Equity Intern"
     company: Joshua Tree Health
     location: Vancouver, Canada
     start: "Oct 2024"
     end: "May 2025"
     points:
       - "Conducted market research and screening on U.S. healthcare firms under $1 million USD in EBITDA, assessing financial health and investment opportunities by evaluating earnings, working capital, and balance sheet risk."
-      - "Conducted an in-depth market analysis of select niches within the mental health care industry by evaluating total market revenue, growth trends, and demographic factors to support strategic decision making."
       - "Evaluated 15+ seed stage companies with limited or early revenue (under $500,000 ARR) using comparable company analysis, market benchmarks, and valuation metrics to assess growth drivers, scalability, and revenue sustainability."
 
 extracurriculars:
@@ -65,13 +65,13 @@ education:
   - degree: "Bachelor of Commerce, Major in Finance"
     school: "The University of British Columbia, Sauder School of Business"
     location: Vancouver, Canada
-    year: "Class of December 2027"
+    year: "Class of May 2028"
     courses: "Corporate Finance, Investment Theory, Investment Policy, Financial Institutions I, Managerial Economics & Accounting, Business Ethics & Communications, and Behavioural Finance."
 
 additional:
   - label: "Technical & Tools"
-    value: "Excel Advanced (PivotTables, SUMIFS, XLOOKUP, INDEX MATCH, IFERROR, etc), Power Query, Power BI, DAX, Tableau, Capital IQ, PitchBook, Bloomberg, Claude Code."
+    value: "Advanced Excel (Power Query, PivotTables, Slicers, XLOOKUP, SUMIFS, FILTER, IFERROR, and more), Oracle ERP, Power BI (DAX), SAP BI, Tableau, foundational SQL and Python, Capital IQ, PitchBook, Bloomberg, Claude Code."
   - label: Skills
-    value: "FP&A, Financial Modeling, Scenario & Sensitivity Analysis, Variance Analysis, Cash Flow Forecasting, Cost Allocation, Financial Statement Analysis, DCF Valuation, NPV/IRR, WACC & Cost of Capital, Comparable Company Analysis."
+    value: "FP&A, Financial Modeling, Scenario & Sensitivity Analysis, Variance Analysis, Cash Flow Forecasting, Cost Allocation (OH&GA), Financial Statement Analysis, Reporting & Dashboarding, Process Automation, Data Modelling, NPV/IRR, WACC."
   - label: Interests
-    value: "Music Production, Content Creation, Personal Fitness, Soccer, Baseball, Video Games, and Cooking."
+    value: "Technology, Music Production, Content Creation, Personal Fitness, Soccer, Basketball, Baseball, Video Games."

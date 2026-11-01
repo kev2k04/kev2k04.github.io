@@ -17,53 +17,87 @@
   company: Seaspan
   logo_text: SE
   logo: "/assets/images/logos/seaspan.png"            # e.g. /assets/images/logos/seaspan.svg
-  role: "FP&A Analyst"
+  role: "FP&A Analyst Intern"
   dates: "May 2026 – Present"
   location: "Vancouver, Canada"
   blurb: >-
-    I'm currently working at Seaspan as a Financial Analyst Intern within the
-    FP&amp;A department. Here, I support forecasting, budgeting, and executive
-    reporting initiatives as a primary responsibility along with any Ad Hoc
-    projects I can get my hands on!
+    I'm currently an FP&amp;A Analyst Intern at Seaspan. I own the weekly cash
+    flow cycle, helped build the 2027 budget, and support the forecasting and
+    reporting that goes up to the CFO and the Board, all while Seaspan moves
+    onto Oracle, one of the largest ERP transitions in Canada.
   image: "/assets/images/seaspan.jpg"
   # Points can be a plain string OR an object. A `key: true` point becomes a
   # clickable, shining highlight; add `image:` to show a popup on hover.
+  # Every number here matches the resume (assets/Kevin-Liu-FPA-Resume.pdf).
   points:
     - text: >-
-        I own the weekly cash flow cycle end-to-end. Every week I consolidate
-        150+ invoices out of billing and SAP BI into AP and AR totals across our
-        3 shipyards and 5+ programs, then take the AP release through approval
-        with the Controller, VP Finance, and CFO.
+        Cash flow is my baby at Seaspan. When the FA2 who owned it left the
+        company, I took over the 13-week rolling forecast of AP and AR, and
+        quickly learned what a poorly maintained legacy file looks like. Every
+        week I consolidate 6,000+ invoices from billing and SAP BI into AP and
+        AR totals across our 3 shipyards and 5+ programs, working with the AP,
+        AR, treasury, billing, and program finance teams, then take the AP
+        release through approval with the Controller, VP Finance, and CFO.
     - text: >-
-        That process used to be five days of manual entry, so I automated it.
-        Using Power Query, PivotTables, and slicers, I wired 20+ files from
-        billing, treasury, and program finance into a model that rebuilds on a
-        refresh instead of by hand, and cut the cycle from 5 days to 3.
+        The process started out almost entirely manual: hardcoded pastes, a long
+        weekly email of invoices to the billing team, and a Monday spent
+        checking their replies one by one. I replaced the email with a shared
+        file on Teams that feeds our AP file through XLOOKUP and LET formulas,
+        then tied the consolidated file to the AP, AR, treasury, and prior-week
+        numbers with lookups. Using Power Query, PivotTables, formulas, and
+        slicers, 20+ files across billing, treasury, and program finance now
+        update on a refresh, which cut the cycle from 5 days to 3.
+    - text: >-
+        I also contributed to Seaspan's Oracle ERP transformation, one of the
+        largest ERP transitions in Canada. When our invoice list changed format,
+        I learned the new mapping, automated a weekly Oracle download into the
+        AP file, and matched each invoice to its project and the chart of
+        accounts so unbillable costs are flagged automatically (IF and IFNA).
+        Before go-live came a blackout period where invoices had to be paid 4
+        weeks ahead, so we worked with the billing team against a forecasted AP
+        limit to decide what could be released before taking it to the VP
+        Finance.
+    - text: >-
+        For the 2027 budget, I worked across the three big pieces: headcount,
+        labour hours, and department costs. For the Board deck, I pulled income
+        statement numbers for the profitability graphs, built headcount
+        waterfall charts, calculated FTEs from labour and production hours,
+        consolidated slides from program finance and capex, and wrote the
+        commentary on OH&amp;GA variances between the 2027 budget and the 2026
+        forecast.
+    - text: >-
+        Alongside the budget, I helped track cost-saving opportunities across
+        20+ departments, including an intern headcount initiative. Each
+        department received an allocated number of interns, and I worked with
+        the department owners to confirm their counts, tracked which roles would
+        continue into 2027, followed up with the CFO on requests for more, and
+        delivered the final intern list for the budget. I also calculated the
+        roll-offs from Project Horizon, the team behind the Oracle move, as
+        people returned to their previous roles.
     - key: true
       image: "/assets/images/CFO Townhall.jpg"
       text: >-
-        During my first month at Seaspan, I had the opportunity to work on a
-        long-term forecast model spanning 2027 to 2040. I ran scenario and
-        sensitivity analyses that considered factors such as inflation,
-        project-win probability, and best/worst-case assumptions, which fed the
-        CFO's capital-investment initiatives across 10+ contract opportunities.
-        The work supported financial reporting for a CFO Town Hall, where the
-        results were presented by Seaspan's CFO, James Clarke.
+        One of my most memorable moments was the CFO Town Hall in North
+        Vancouver. I worked on a 14-year income statement forecast spanning
+        2027 to 2040, running scenario and sensitivity analysis on inflation,
+        project-win probability, and best and worst cases to support the CFO's
+        capital investment initiatives across 10+ contract opportunities. Seeing
+        my slide presented by Seaspan's CFO, James Clarke, was a highlight, even
+        if most of this work is appreciated in silence.
     - text: >-
-        This project gave me early exposure to how long-range financial planning
-        supports executive decision-making, and helped me better understand the
-        role FP&amp;A plays in translating complex assumptions into clear business
-        insights.
+        One of my first projects was the 5+7 forecast: five months of actuals
+        and seven months forecast. I compared January to May actuals against
+        budget, number-checked presentation material against our files, sat in
+        on meetings with budget owners, and uploaded the forecast to E1. When
+        the work picked up in June and the asks started stacking, I started
+        taking notes, recording our team meetings, and confirming asks in
+        1-on-1s. It taught me how much organization and accountability matter.
     - text: >-
-        I currently own the monthly OH&amp;GA variance analysis across 30+
-        departments and 8 C-suite functions. I dig into budget-to-actual and
-        forecast variances to find the drivers behind each misalignment, write
-        the commentary, and build the graphs that feed our management and Board
-        reporting.
-    - text: >-
-        I also run month-end variance analysis on the program-level P&amp;L for
-        all 3 shipyards, validating the balance sheet figures and catching
-        errors before anything reaches the CFO or the Board.
+        Every month I run the OH&amp;GA variance analysis across 30+ departments
+        and the month-end variance analysis on the program-level P&amp;Ls for all
+        3 shipyards, identifying the drivers behind budget-to-actual differences
+        and validating balance sheet figures, ROIC, and other key performance
+        metrics before they reach CFO and Board reporting.
   # Feature story — renders as a clickable card in the panel's detail view that
   # opens a third view (alongside details / gallery). Add `feature:` to any
   # experience to give it one.
@@ -110,6 +144,7 @@
     - DAX
     - Tableau
     - SAP BI
+    - Oracle ERP
     - FP&A
     - Financial Modeling
     - Scenario & Sensitivity Analysis
@@ -151,9 +186,9 @@
     within our workflows, softwares, and departments.
   image: "/assets/images/bc-hydro-wallpaper.jpg"
   points:
-    - "My largest project at BC Hydro focused on reducing the average handle time within the call centre, where costs were exceeding +$1M annually. I utilized software such as Excel, Power BI, Power Query, and DAX Studio to pull and consolidate datasets of over 600,000 rows, then delivered a proposal outlining initiatives around agent training, performance tracking, and system gap identification. This proposal looked to ultimately help reduce average handle time by 6 seconds per agent (or over $50,000 per year) at zero additional cost when fully integrated."
-    - "My second project focused on fixing the Interactive Voice Response (IVR) system, where inaccurate call tagging left over 50% of call drivers unidentifiable in our database. By improving utterance recognition through Google Dialogflow, I reduced the misclassification rate from 30% to 25%. This 5-percentage-point improvement, when scaled across 600,000 annual calls, had the potential to save over 150,000 minutes in misdirected handle time annually."
-    - "Nearing the end of my time at BC Hydro, I helped build a financial forecasting model that incorporated various growth assumptions, cost drivers, and scenarios to project changes in Canada Post expenses under different rate and fee structures. With annual Canada Post expenses exceeding $10 million, the model supported financial planning, reporting, and executive level decision making."
+    - "My largest project at BC Hydro focused on reducing the average handle time within the call centre. Using Excel, Power BI, Power Query, and DAX Studio, I recovered and processed 50% more of our lost call centre data by joining and cleaning 600K+ records, then delivered a proposal around agent training, performance tracking, and system gap identification. Visualizing the results showed a path to lift agent efficiency by 5% and save $50,000+ a year through reduced customer handling time, at zero additional cost once fully integrated."
+    - "My second project focused on the Interactive Voice Response (IVR) system. Analyzing the same dataset, I found a misrouting issue that sent 50% of callers to the general queue after failed verification, where repeated transfers and re-verification by multiple agents added 5 minutes to each interaction. By analyzing Google Dialogflow call data for high-frequency intent phrases, I improved utterance recognition and reduced the error rate from 30% to 25% across 4,000 calls, projected to save 150,000+ minutes a year at scale."
+    - "Nearing the end of my time at BC Hydro, I helped build a financial forecasting model that incorporated various growth assumptions, cost drivers, and scenarios to project changes in Canada Post expenses under different rate and fee structures. With Canada Post expenses exceeding $10 million YTD, the model supported financial planning, reporting, and executive level decision making."
     - "One of the most impactful experiences for developing my software and analytical skills was supporting BC Hydro's Call for Power Energy Management Portfolio initiative, which enabled owners of multiple properties to consolidate their accounts and access preferred energy rates. To improve application quality and reporting accuracy, I reconciled data for 1,500+ external companies across two unstructured Excel trackers and submission databases, creating a reliable dataset for categorization, trend analysis, forecasting, and management reporting."
     - 'The most enjoyable experience I had at BC Hydro was organizing a team building event as an intern. At the time, three separate teams had recently been merged into one, creating some ambiguity around roles and responsibilities. I led team exercises to identify which responsibilities belonged to each department, encouraged open communication among team members, and helped coordinate a team outing afterward. As part of the event, we participated in a guided <a class="exp-link" href="https://chinatowngirl.ca" target="_blank" rel="noopener noreferrer">history tour of Vancouver''s Chinatown led by Judy Maxwell</a>, where we learned about the history and cultural significance of the neighborhood.'
   # Feature story — same role-agnostic block the Seaspan Open House uses.
@@ -203,15 +238,13 @@
         thing I did there, and it did more for how the team worked together than
         any of the exercises I'd planned.
       - >-
-        The system one was the Interactive Voice Response line. Inaccurate call
-        tagging meant over 50% of our call drivers were unidentifiable in the
-        database, so we had a huge volume of calls and almost no reliable
-        picture of what people were actually calling about. I worked on
-        utterance recognition in Google Dialogflow and brought the
-        misclassification rate down from 30% to 25%. Scaled across 600,000
-        annual calls, that 5-percentage-point improvement had the potential to
-        save over 150,000 minutes a year that were being spent sending people to
-        the wrong place.
+        The system one was the Interactive Voice Response line. Half of our
+        callers were failing verification and landing in the general queue,
+        where repeated transfers and re-verification by multiple agents added
+        5 minutes to each interaction. I worked on utterance recognition in
+        Google Dialogflow and brought the error rate down from 30% to 25%
+        across 4,000 calls, which projected to save 150,000+ minutes a year at
+        scale that were being spent sending people to the wrong place.
       - >-
         What stuck with me is that the second problem was invisible until
         someone went looking for it. Nothing was on fire. The line worked, calls
@@ -235,7 +268,7 @@
   logo_text: JT
   logo: "/assets/images/logos/joshuatree.png"
   logo_full: true     # logo fills the chip edge-to-edge (no white padding)
-  role: "Analyst, Private Equity"
+  role: "Analyst, Private Equity Intern"
   dates: "Oct 2024 – May 2025"
   location: "Vancouver, Canada"
   blurb: >-
@@ -254,8 +287,8 @@
       opportunities, business models, and competitive dynamics within the
       healthcare sector.
     - >-
-      I conducted niche market research and screened U.S. healthcare startups with
-      under $1 million in EBITDA. As part of this process, I analyzed financial
+      I conducted niche market research and screened U.S. healthcare firms with
+      under $1 million USD in EBITDA. As part of this process, I analyzed financial
       statements, earnings performance, working capital trends, and balance sheet
       risk to better understand the financial characteristics of companies
       operating within the niche markets I was researching. This research helped
@@ -263,7 +296,7 @@
       our firm's investment strategy.
     - >-
       I evaluated the financial health of more than 15 seed-stage healthcare
-      startups using a variety of valuation methodologies, including comparable
+      startups with limited or early revenue (under $500,000 ARR) using a variety of valuation methodologies, including comparable
       company analysis, precedent transactions, and both EV/Revenue and EV/EBITDA
       multiples where appropriate, depending on each company's stage of maturity
       and financial profile. I assessed each company's scalability, revenue
