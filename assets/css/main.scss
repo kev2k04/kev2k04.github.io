@@ -3048,44 +3048,261 @@ span.mx-cover { cursor: default; }
 /* ---- Gaming journey: wide scorebook-style rows, one per game era ----
    Number + title sit in a fixed side column; the story runs the full
    remaining width so long paragraphs read as prose, not a tall card. */
-.gg-journey {
+/* At a glance: three facts in one panel, like the Basketball averages. */
+.gg-glance {
+  position: relative;
   display: grid;
-  gap: 0;
-  margin-top: 0.5rem;
-  border-top: 1px solid var(--line-strong);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  margin: 0 0 clamp(2.5rem, 5vw, 3.5rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -36px rgba(0, 0, 0, 0.7);
+}
+.gg-glance::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--accent-grad);
+}
+.gg-glance__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: clamp(1.3rem, 2.6vw, 1.9rem) clamp(1rem, 2vw, 1.6rem);
+}
+.gg-glance__item + .gg-glance__item { border-left: 1px solid var(--line); }
+.gg-glance__value {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
+}
+.gg-glance__label { font-size: 0.9rem; line-height: 1.45; color: var(--muted); }
+
+/* The journey: one rail down the left, a dot per game, the title block on
+   the left and the story beside it. EA chapters get a blue-violet dot and
+   studio line, so the thread through EA is visible at a glance. */
+.gg-journey {
+  --rail: 0.45rem;
+  position: relative;
+  display: grid;
+  gap: clamp(2rem, 4vw, 2.8rem);
+  margin: 0;
+  padding: 0 0 0 2rem;
+  list-style: none;
+}
+.gg-journey::before {
+  content: "";
+  position: absolute;
+  left: var(--rail);
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--line-strong), var(--line) 85%, transparent);
 }
 .gg-sec {
+  position: relative;
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 1.6rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  gap: 0.6rem clamp(1.5rem, 3vw, 2.6rem);
 }
-.gg-sec__side { min-width: 0; }
-.gg-sec__no {
+.gg-sec__dot {
+  position: absolute;
+  left: calc(-2rem + var(--rail) - 0.38rem + 1px);
+  top: 0.35rem;
+  width: 0.76rem;
+  height: 0.76rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--line-strong);
+}
+.gg-sec.is-ea .gg-sec__dot {
+  background: #7a78ef;
+  border-color: #7a78ef;
+  box-shadow: 0 0 0 4px rgba(122, 120, 239, 0.16);
+}
+.gg-sec__head { min-width: 0; }
+.gg-sec__era {
   display: block;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  color: rgba(var(--card-accent), 0.75);
-  margin-bottom: 0.45rem;
-  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.25rem;
+  font-size: 0.82rem;
+  color: var(--muted);
 }
 .gg-sec__name {
-  font-family: var(--font-head);
-  font-weight: 600;
-  font-size: 1.18rem;
-  letter-spacing: -0.01em;
-  color: var(--ink);
   margin: 0;
+  font-family: var(--font-head);
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink);
 }
+.gg-sec__studio { margin: 0.35rem 0 0; font-size: 0.85rem; line-height: 1.45; color: var(--muted); }
+.gg-sec.is-ea .gg-sec__studio { color: #a99bf5; }
 .gg-sec__body { min-width: 0; }
-.gg-sec__memory { margin: 0; color: var(--ink-soft); font-size: 0.97rem; line-height: 1.7; }
-.gg-sec__media { margin-top: 1rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+.gg-sec__memory { margin: 0; max-width: 68ch; color: var(--ink-soft); font-size: 1rem; line-height: 1.75; }
+.gg-sec__media {
+  margin-top: 1.1rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -32px rgba(0, 0, 0, 0.7);
+}
 .gg-sec__media img { display: block; width: 100%; height: auto; }
-@media (max-width: 640px) {
-  .gg-sec { grid-template-columns: 1fr; gap: 0.7rem; }
+/* Chapter icon: the game's or studio's mark in a small tile above the title. */
+.gg-sec__icon {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-bottom: 0.7rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.gg-sec__icon svg { width: 1.2rem; height: 1.2rem; }
+.gg-sec.is-ea .gg-sec__icon { color: #c9c2ff; border-color: rgba(122, 120, 239, 0.4); background: rgba(122, 120, 239, 0.1); }
+
+/* Game names in the story: highlighted, and each one opens a Google search
+   for the game in a new tab. */
+.gg-game {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+.gg-game:hover,
+.gg-game:focus-visible { color: #fff; text-decoration: underline; text-underline-offset: 3px; outline: none; }
+html[data-mode="light"] .gg-game,
+html[data-mode="light"] .gg-game:hover,
+html[data-mode="light"] .gg-game:focus-visible { color: var(--ink); }
+/* A game link that also has a hover picture keeps the plain highlight. */
+.gg-game.gg-peek { cursor: pointer; color: #fff; background: none; }
+
+/* Hover / focus pictures on words in the story. */
+.gg-peek {
+  position: relative;
+  color: var(--ink);
+  font-weight: 600;
+  cursor: default;
+  background: linear-gradient(var(--line-strong), var(--line-strong)) 0 100% / 100% 1px no-repeat;
+  outline: none;
+  transition: background 0.3s var(--ease);
+}
+.gg-peek:hover,
+.gg-peek:focus-visible { background: var(--accent-grad) 0 100% / 100% 2px no-repeat; }
+.gg-peek__card {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  z-index: 20;
+  width: 16rem;
+  padding: 0;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  visibility: hidden;
+  translate: -50% 6px;
+  transition: opacity 0.2s var(--ease), translate 0.2s var(--ease), visibility 0.2s;
+  pointer-events: none;
+}
+.gg-peek:hover .gg-peek__card,
+.gg-peek:focus-visible .gg-peek__card { opacity: 1; visibility: visible; translate: -50% 0; }
+.gg-peek__card img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 15%; }
+.gg-peek__card--logo img { object-fit: contain; padding: 1.1rem; background: #0f1426; }
+.gg-peek__credit {
+  display: block;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* Video cards: the thumbnail in the same 16:9 rounded frame as the Basketball
+   film, a play button, the start time, then the title and channel. */
+.gg-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1.4rem;
+  margin-top: 1.4rem;
+}
+.gg-video { margin: 0; }
+.gg-video__frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0f1426;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -32px rgba(0, 0, 0, 0.7);
+}
+.gg-video__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 0.6s var(--ease), filter 0.4s var(--ease);
+}
+.gg-video__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9, 13, 28, 0.55), transparent 55%);
+  pointer-events: none;
+}
+.gg-video__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.gg-video__frame.is-playing::after { display: none; }
+.gg-video__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  translate: -50% -50%;
+  border-radius: 50%;
+  color: #0b1020;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: scale 0.25s var(--ease), background 0.25s var(--ease);
+}
+.gg-video__play svg { margin-left: 3px; }
+.gg-video__time {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.7rem;
+  z-index: 1;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+}
+.gg-video__frame:hover img,
+.gg-video__frame:focus-visible img { scale: 1.04; filter: brightness(0.85); }
+.gg-video__frame:hover .gg-video__play,
+.gg-video__frame:focus-visible .gg-video__play { scale: 1.08; background: #fff; }
+.gg-video__meta { display: flex; gap: 0.7rem; align-items: flex-start; margin-top: 0.8rem; }
+.gg-video__icon { flex: none; color: #ff3d3d; margin-top: 0.1rem; }
+.gg-video__icon svg { width: 1.25rem; height: 1.25rem; }
+.gg-video__title { display: block; font-weight: 600; line-height: 1.35; color: var(--ink); }
+.gg-video__channel { display: block; margin-top: 0.15rem; font-size: 0.85rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .gg-video__frame img, .gg-video__play, .gg-peek__card { transition: none; }
+}
+@media (max-width: 760px) {
+  .gg-sec { grid-template-columns: 1fr; }
+  .gg-glance { grid-template-columns: 1fr; }
+  .gg-glance__item + .gg-glance__item { border-left: 0; border-top: 1px solid var(--line); }
 }
 
 .gg-id {

@@ -192,20 +192,87 @@
   photo_note: From Zuma to Master in League of Legends
   intro: >-
     Here's my history with video games, told game by game from the very
-    beginning all the way to where I'm at today.
-  # Each chapter: game (title), text (the story), image_hint (what photo to add).
-  # Drop a real photo by setting `image:` on a chapter, e.g.
-  # image: /assets/images/passions/zuma.jpg — the placeholder swaps out.
+    beginning all the way to where I'm at today. Funny enough, when I look
+    back at it, so much of my gaming life has run through EA without me even
+    realizing it, all the way from the very first game I ever played.
+  # A few headline facts shown above the journey.
+  glance:
+    - value: "Master"
+      label: "League of Legends, top 1,500 in North America"
+    - value: "DMG"
+      label: "CS:GO, before it became CS2"
+    - value: "UBC"
+      label: "Collegiate League of Legends for a year"
+  # Each chapter:
+  #   game     the chapter title
+  #   era      optional, e.g. "Age 2" or "2020", shown above the title
+  #   studio   who made it, shown under the title
+  #   ea: true highlights the studio line (EA and its studios)
+  #   text     the story
+  #   image    optional photo path; image_hint says what would fit
+  #   icon     chapter icon, a file in _includes/game-icons/ (no extension)
+  #   games    game names in the story, highlighted and linked to a Google
+  #            search: { word, query (defaults to word), image + credit for
+  #            an optional hover picture }
+  #   peeks    other words that show a picture on hover: { word, image, credit }
+  #   videos   optional YouTube clips: { id, title, channel, start (seconds) }
   chapters:
     - game: "Zuma"
+      games:
+        - { word: "Zuma", query: "Zuma PopCap game" }
+      icon: ea
+      era: "Age 2"
+      studio: "PopCap"
+      ea: true
       text: >-
         My video game journey started when I was a young kid playing Zuma on my
         grandparents' computer in China. I'd say that by the time I was around 2
         years old, I already knew I had a passion for video games and technology.
+        What I didn't know back then was that the little frog spitting out
+        marbles was made by PopCap, which is now a part of EA. Looking back,
+        that's kind of crazy to me!
       image: ""
-      image_hint: "Add a Zuma gameplay shot or a retro Windows PC gaming setup"
+      image_hint: "A Zuma screenshot, or a photo of the old family computer"
+
+    - game: "The Sims and Age of Empires"
+      games:
+        - { word: "The Sims", query: "The Sims video game" }
+        - { word: "Age of Empires", query: "Age of Empires video game" }
+      icon: ea
+      studio: "Maxis and Ensemble Studios"
+      ea: true
+      text: >-
+        Honestly, I think my love for video games runs in the family. My mom
+        played The Sims, and my dad played Age of Empires, so games were always
+        a part of our household. One was all about building a life and a home,
+        and the other was all about building an empire, and I like to think I
+        picked up a little bit of both.
+      image: ""
+      image_hint: "A family photo, or your parents at the computer"
+
+    - game: "Blood & Glory"
+      games:
+        - { word: "Blood & Glory", query: "Blood & Glory Glu Mobile game" }
+        - { word: "Dragon Slayer", query: "Dragon Slayer Glu Mobile game" }
+        - { word: "Clash of Clans" }
+      icon: ea
+      studio: "Glu Mobile"
+      ea: true
+      text: >-
+        I was a HUGE fan of the mobile games made by Glu growing up. Blood & Glory 1
+        and 2 and Dragon Slayer were the ones I played the most, and I loved them so
+        much that I actually named my Clash of Clans account Dragon Slayer because of
+        Glu. Glu ended up becoming a part of EA, which honestly makes it one more EA
+        studio that was a part of my childhood without me even knowing it.
+      image: ""
+      image_hint: "A screenshot of your favourite Glu game"
 
     - game: "Minecraft"
+      games:
+        - { word: "Minecraft Pocket Edition" }
+      icon: pickaxe
+      era: "Age 8"
+      studio: "Mojang"
       text: >-
         When I was 8 years old, I remember my parents bought me Minecraft Pocket
         Edition for my Christmas present, version 0.4.0 to be exact. I built a
@@ -216,9 +283,47 @@
         Xbox or PC, and I stayed a huge fan through both the Mojang era and after
         Microsoft acquired the game.
       image: ""
-      image_hint: "Add early Minecraft PE gameplay — a simple survival house, old textures"
+      image_hint: "Early Minecraft PE gameplay, a simple survival house with old textures"
+
+    - game: "Battlefield"
+      games:
+        - { word: "Battlefield 3", query: "Battlefield 3 game" }
+        - { word: "Battlefield 1", query: "Battlefield 1 game", image: /assets/images/passions/gaming/battlefield1-gamescom.jpg, credit: "Battlefield 1 at Gamescom. Photo: dronepicr, CC BY 2.0" }
+        - { word: "Frostbite 3", query: "Frostbite 3 engine" }
+      icon: ea
+      studio: "DICE"
+      ea: true
+      text: >-
+        I first played Battlefield 3 and 4 by borrowing the game disks from the
+        library, and it was extremely cool to see what the Frostbite engine could
+        do. The environment destruction was incredible, where walls and whole
+        buildings would come down around you mid-fight. But the first truly mind
+        blowing experience I had with Battlefield was Battlefield 1. Seeing how
+        realistic the graphics were on the Frostbite 3 engine was absolutely
+        mind blowing.
+      image: ""
+      image_hint: "A Battlefield 1 screenshot, or the BF3 / BF4 library disks"
+
+    - game: "Garden Warfare and Apex"
+      games:
+        - { word: "Plants vs. Zombies: Garden Warfare" }
+        - { word: "Apex Legends" }
+      icon: ea
+      studio: "PopCap and Respawn"
+      ea: true
+      text: >-
+        Not every EA game clicked for me, and that's okay! I was a huge fan of
+        Plants vs. Zombies: Garden Warfare, and even though I never actually got
+        the chance to play it, I loved the idea of PopCap taking Plants vs.
+        Zombies and turning it into a shooter. I also gave Apex Legends a real
+        shot, but honestly it was way too difficult for me to pick up.
 
     - game: "Fortnite"
+      games:
+        - { word: "Fortnite" }
+      icon: epicgames
+      era: "Grade 9"
+      studio: "Epic Games"
       text: >-
         The next major game I got into was Fortnite. I started as a mobile
         player and actually competed at a fairly high level. I would play cross
@@ -228,9 +333,14 @@
         in a Valentine's Day tournament with my PC friends, where we placed quite
         high competing against other elite PC players.
       image: ""
-      image_hint: "Add Fortnite mobile gameplay — build fights, competitive tournament energy"
+      image_hint: "Fortnite mobile gameplay, or a result from the Valentine's Day tournament"
 
     - game: "CS:GO"
+      games:
+        - { word: "CSGO", query: "Counter-Strike: Global Offensive" }
+      icon: counterstrike
+      era: "2020"
+      studio: "Valve"
       text: >-
         After that, I moved on to CSGO during COVID. At first, my Mac wasn't
         strong enough to run the game properly, so I used NVIDIA GeForce Now to
@@ -242,9 +352,14 @@
         PC from scratch, where I eventually reached DMG in CSGO before it
         transitioned to CS2, and now I mostly play casually with friends.
       image: ""
-      image_hint: "Add the GeForce Now interface / lag meme, then the RGB PC build I saved up for"
+      image_hint: "A photo of the PC you built"
 
     - game: "League of Legends"
+      games:
+        - { word: "League of Legends", image: /assets/images/passions/gaming/league-worlds.jpg, credit: "League of Legends Worlds 2022. Photo: Liga Latinoamérica, CC BY 3.0" }
+      icon: leagueoflegends
+      era: "Grade 11"
+      studio: "Riot Games"
       text: >-
         The game I've spent the most time on is League of Legends. Once I tried
         it, I got hooked immediately by the strategic depth and decision making
@@ -255,28 +370,40 @@
         eventually climbed to Masters and reached the top 1500 players in North
         America.
       image: ""
-      image_hint: "Add the ranked climb — Silver → Master, an OP.GG profile or leaderboard shot"
+      image_hint: "Your rank, an OP.GG profile or leaderboard screenshot"
 
-    - game: "Collegiate League"
+    - game: "Tyler1"
+      peeks:
+        - { word: "Tyler1", image: /assets/images/passions/gaming/tyler1.jpg, credit: "Tyler1 at Twitch Rivals" }
+      icon: youtube
+      studio: "loltyler1 on YouTube"
       text: >-
         Along the way, I got the chance to play with and against famous content
         creators and my childhood idols like Tyler1, and I also became friends
-        with many micro celebrities in the North American competitive scene. I
-        also played collegiate League of Legends at UBC for a year, which allowed
-        me to experience the competitive environment I used to watch growing up.
-      image: ""
-      image_hint: "Add the UBC esports team — LAN setup, competitive environment, team photo"
+        with many micro celebrities in the North American competitive scene. Two
+        of my games with Tyler1 made it onto his channel, so I've queued both
+        clips up to the moments I'm in them below.
+      videos:
+        - id: BDdTuG6I3EM
+          title: "TYLER1: MY ILLAOI TILTS DIAMOND PLAYERS"
+          channel: loltyler1
+          start: 1412          # 23:32
+        - id: kjVyN9LmXGs
+          title: "FULL BUILD"
+          channel: loltyler1
+          start: 28            # 0:28
 
-    - game: "Closing the chapter"
+    - game: "UBC esports"
+      games:
+        - { word: "League of Legends" }
+      icon: graduation-cap
+      studio: "Collegiate League of Legends"
       text: >-
-        At this point in my life, I feel like I'm ready to close this chapter of
-        gaming. It's not that my interest is completely gone, but my focus has
-        shifted toward other goals and priorities for the future. Gaming will
-        always be an important and fun part of my life, but I'm also excited to
-        see what I can achieve moving forward if I apply the same level of focus
-        and discipline elsewhere.
+        I also played collegiate League of Legends at UBC for a year, which
+        allowed me to experience the competitive environment I used to watch
+        growing up.
       image: ""
-      image_hint: "Add a calm sunset desk setup — powering off the PC, a minimal closing scene"
+      image_hint: "A UBC esports team photo or LAN setup"
 
 # Multi-sport history. `wip: true` renders the card as a non-clickable
 # "Work in progress" tile (still hoverable) — remove that flag and add an

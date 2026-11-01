@@ -1,33 +1,95 @@
 {%- comment -%}
-  Gaming panel body — a chronological "journey" through the games that shaped
-  Kevin, oldest first. Each entry in _data/passions.yml's gaming `chapters:`
-  list renders as one wide row: chapter number + game title in the side
-  column, the story spanning the full remaining width.
-    game        — the game / chapter title
-    text        — the story paragraph
-    image       — set a path (e.g. /assets/images/passions/zuma.jpg) to show a
-                  real photo under the story; leave blank and no placeholder
-                  renders (keeps the journey compact)
-  To add / reorder / rename a chapter, just edit that list — no markup changes.
+  Gaming page body: a few headline facts, then the journey through the games
+  that shaped Kevin, oldest first, down one timeline rail. Everything comes
+  from the gaming entry in _data/passions.yml:
+    glance      { value, label } facts shown above the journey
+    chapters    one per game: game, era, studio, ea, text, image, videos
+                (see the comment above `chapters:` for what each field does)
+  To add / reorder / rename a chapter, just edit that list; no markup changes.
 {%- endcomment -%}
 {%- assign p = include.p -%}
 <p class="pass-panel__blurb">{{ p.intro }}</p>
 
-<div class="gg-journey">
+{%- if p.glance -%}
+<div class="gg-glance">
+  {%- for g in p.glance -%}
+  <div class="gg-glance__item">
+    <span class="gg-glance__value">{{ g.value }}</span>
+    <span class="gg-glance__label">{{ g.label }}</span>
+  </div>
+  {%- endfor -%}
+</div>
+{%- endif -%}
+
+<ol class="gg-journey">
   {%- for c in p.chapters -%}
-  <section class="gg-sec">
-    <div class="gg-sec__side">
-      <span class="gg-sec__no" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+  <li class="gg-sec{% if c.ea %} is-ea{% endif %}">
+    <span class="gg-sec__dot" aria-hidden="true"></span>
+    <div class="gg-sec__head">
+      {%- if c.icon -%}
+        {%- capture icon_path -%}game-icons/{{ c.icon }}.svg{%- endcapture -%}
+        <span class="gg-sec__icon" aria-hidden="true">{% include {{ icon_path }} %}</span>
+      {%- endif -%}
+      {%- if c.era and c.era != '' -%}<span class="gg-sec__era">{{ c.era }}</span>{%- endif -%}
       <h3 class="gg-sec__name">{{ c.game }}</h3>
+      {%- if c.studio and c.studio != '' -%}<p class="gg-sec__studio">{{ c.studio }}</p>{%- endif -%}
     </div>
     <div class="gg-sec__body">
       {%- if c.text and c.text != '' -%}
-        <p class="gg-sec__memory">{{ c.text }}</p>
+        {%- comment -%}
+          `games` words become highlighted links to a Google search for the
+          game (with a hover picture when one is set); `peeks` words just get
+          the hover picture.
+        {%- endcomment -%}
+        {%- assign story = c.text -%}
+        {%- for g in c.games -%}
+          {%- assign q = g.query | default: g.word | url_encode -%}
+          {%- capture link -%}<a class="gg-game{% if g.image %} gg-peek{% endif %}" href="https://www.google.com/search?q={{ q }}" target="_blank" rel="noopener noreferrer" title="Search Google for {{ g.word }}">{{ g.word }}{% if g.image %}<span class="gg-peek__card" role="tooltip"><img src="{{ g.image | relative_url }}" alt="" loading="lazy">{% if g.credit %}<span class="gg-peek__credit">{{ g.credit }}</span>{% endif %}</span>{% endif %}</a>{%- endcapture -%}
+          {%- assign story = story | replace_first: g.word, link -%}
+        {%- endfor -%}
+        {%- for k in c.peeks -%}
+          {%- capture peek -%}<span class="gg-peek" tabindex="0">{{ k.word }}<span class="gg-peek__card" role="tooltip"><img src="{{ k.image | relative_url }}" alt="" loading="lazy">{% if k.credit %}<span class="gg-peek__credit">{{ k.credit }}</span>{% endif %}</span></span>{%- endcapture -%}
+          {%- assign story = story | replace_first: k.word, peek -%}
+        {%- endfor -%}
+        <p class="gg-sec__memory">{{ story }}</p>
       {%- endif -%}
       {%- if c.image and c.image != '' -%}
         <div class="gg-sec__media"><img src="{{ c.image | relative_url }}" alt="{{ c.game }}" loading="lazy"></div>
       {%- endif -%}
+      {%- if c.videos -%}
+        {%- comment -%}
+          Video cards: the YouTube thumbnail with a play button, title, channel
+          and start time. Clicking swaps in the player at that moment
+          (gaming-videos.js); without JS the card links to YouTube.
+        {%- endcomment -%}
+        <div class="gg-videos">
+          {%- for v in c.videos -%}
+          {%- assign st = v.start | default: 0 -%}
+          {%- assign mm = st | divided_by: 60 -%}
+          {%- assign ss = st | modulo: 60 | prepend: '0' | slice: -2, 2 -%}
+          <figure class="gg-video">
+            <a class="gg-video__frame" href="https://www.youtube.com/watch?v={{ v.id }}&amp;t={{ st }}s"
+               target="_blank" rel="noopener noreferrer"
+               data-yt="{{ v.id }}" data-start="{{ st }}" data-title="{{ v.title | escape }}"
+               aria-label="Play {{ v.title | escape }} from {{ mm }}:{{ ss }}">
+              <img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" loading="lazy">
+              <span class="gg-video__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="gg-video__time">Starts at {{ mm }}:{{ ss }}</span>
+            </a>
+            <figcaption class="gg-video__meta">
+              <span class="gg-video__icon" aria-hidden="true">{% include game-icons/youtube.svg %}</span>
+              <span>
+                <span class="gg-video__title">{{ v.title }}</span>
+                <span class="gg-video__channel">{{ v.channel }}</span>
+              </span>
+            </figcaption>
+          </figure>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
-  </section>
+  </li>
   {%- endfor -%}
-</div>
+</ol>
+
+<script src="{{ '/assets/js/gaming-videos.js' | relative_url }}" defer></script>
