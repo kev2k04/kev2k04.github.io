@@ -33,6 +33,7 @@
   # the homepage; the rest are listed beneath them.
   photo: /assets/images/basketball/drive.jpg
   photo_position: "center 62%"   # keep me and the defender in frame
+  photo_full: true               # no scroll zoom on the tile, so the full width shows
   # Short line under the homepage photo (falls back to the tagline).
   photo_note: Live game stats, highlights and team photos
 

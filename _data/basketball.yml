@@ -5,16 +5,14 @@
 # ---------------------------------------------------------------------------
 
 team: "Bagwork 2.0"
-# Full league/division name, used for the hero kicker. `league_short` is the
-# name on its own, for the spots where the full string would read awkwardly
-# (the channel link, the box-score footnote).
-league: "Roundball BC – Richmond D3 Summer Oval League"
+# The division, and the organizer that runs it (also used for the channel link).
+league: "Richmond D3 Summer Oval League"
 league_short: "Roundball BC"
 player: "Kevin Liu"
 jersey: "6"                               # jersey number
 youtube_channel: "https://www.youtube.com/@RoundballBC"
 
-# About the team — rendered as two paragraphs next to the team photo.
+# About the team, rendered as two paragraphs next to the team photo.
 blurb: >-
   Bagwork 2.0 is the second edition of our basketball team this year. The team
   originally started as a group of friends that I've met through different

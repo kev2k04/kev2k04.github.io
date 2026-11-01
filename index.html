@@ -126,7 +126,7 @@ layout: default
         <a class="photo-tile" data-glow-for="{{ c.id }}" href="{{ target }}" style="--card-accent: {{ c.accent }};">
           <span class="photo-tile__media">
             <img class="photo-tile__img" src="{{ c.photo | relative_url }}" alt="" loading="lazy" decoding="async"
-                 {% if c.photo_position %}style="object-position: {{ c.photo_position }};"{% endif %} />
+                 style="{% if c.photo_position %}object-position: {{ c.photo_position }};{% endif %}{% if c.photo_full %} --drift-scale: 1; --drift-y: 0%;{% endif %}" />
             {% include tile-outline.html %}
           </span>
           <span class="photo-tile__cap">

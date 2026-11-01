@@ -42,7 +42,7 @@ permalink: /passions/
           {%- capture tile_body -%}
           <span class="photo-tile__media">
             <img class="photo-tile__img" src="{{ p.photo | relative_url }}" alt="" loading="lazy" decoding="async"
-                 {% if p.photo_position %}style="object-position: {{ p.photo_position }};"{% endif %} />
+                 style="{% if p.photo_position %}object-position: {{ p.photo_position }};{% endif %}{% if p.photo_full %} --drift-scale: 1; --drift-y: 0%;{% endif %}" />
             {% include tile-outline.html %}
           </span>
           <span class="photo-tile__cap">

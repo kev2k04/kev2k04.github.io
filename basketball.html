@@ -16,26 +16,24 @@ permalink: /basketball/
          data-static-highlight="{{ '/assets/data/latest-highlight.json' | relative_url }}"
          data-team="{{ b.team }}">
 
-  <!-- ===== Hero: game photo, editorial left block, ghosted jersey number ===== -->
+  <!-- Hero: the game photo on the right, title on the left, jersey number
+       ghosted behind. -->
   <header class="bball-hero">
     <span class="bball-hero__ghost" aria-hidden="true">{{ b.jersey }}</span>
     <div class="container bball-hero__inner">
-      <span class="section__kicker bball-kicker">{{ b.league }}</span>
+      <p class="bball-hero__league">{{ b.league }} with {{ b.league_short }}</p>
       <h1 class="bball-hero__title">{{ b.team }}</h1>
-      <p class="bball-hero__meta">
-        <span class="bball-jersey">#{{ b.jersey }}</span>
-        {{ b.player }}
-      </p>
+      <p class="bball-hero__meta">{{ b.player }}, number {{ b.jersey }}</p>
     </div>
   </header>
 
   <div class="container">
 
-    <!-- ===== Box score: one stat line, the way a scorebook reads ===== -->
-    <div class="bball-sheet">
-      <div class="bball-sheet__head">
-        <span class="section__kicker bball-kicker">Box score</span>
-        <!-- Scorer's note: pre-season / loading / error / updated -->
+    <!-- Season averages -->
+    <section class="bball-sec bball-sheet" aria-labelledby="bball-avg-title">
+      <div class="bball-sec__head">
+        <h2 class="bball-sec__title" id="bball-avg-title">Season averages</h2>
+        <!-- pre-season / loading / error / updated -->
         <p class="bball-status" id="bball-status" role="status" aria-live="polite">
           Loading the latest stats&hellip;
         </p>
@@ -43,37 +41,36 @@ permalink: /basketball/
 
       <div class="bball-stats" id="bball-stats" data-state="loading">
         <div class="bball-stat" data-stat="ppg">
-          <span class="bball-stat__label">PTS</span>
-          <span class="bball-stat__value" data-value>&mdash;</span>
+          <span class="bball-stat__value" data-value></span>
+          <span class="bball-stat__label">Points</span>
         </div>
         <div class="bball-stat" data-stat="rpg">
-          <span class="bball-stat__label">REB</span>
-          <span class="bball-stat__value" data-value>&mdash;</span>
+          <span class="bball-stat__value" data-value></span>
+          <span class="bball-stat__label">Rebounds</span>
         </div>
         <div class="bball-stat" data-stat="apg">
-          <span class="bball-stat__label">AST</span>
-          <span class="bball-stat__value" data-value>&mdash;</span>
+          <span class="bball-stat__value" data-value></span>
+          <span class="bball-stat__label">Assists</span>
         </div>
         <div class="bball-stat" data-stat="spg">
-          <span class="bball-stat__label">STL</span>
-          <span class="bball-stat__value" data-value>&mdash;</span>
+          <span class="bball-stat__value" data-value></span>
+          <span class="bball-stat__label">Steals</span>
         </div>
         <div class="bball-stat" data-stat="bpg">
-          <span class="bball-stat__label">BLK</span>
-          <span class="bball-stat__value" data-value>&mdash;</span>
+          <span class="bball-stat__value" data-value></span>
+          <span class="bball-stat__label">Blocks</span>
         </div>
         <div class="bball-stat" data-stat="gp">
-          <span class="bball-stat__label">GP</span>
-          <span class="bball-stat__value" data-value>&mdash;</span>
+          <span class="bball-stat__value" data-value></span>
+          <span class="bball-stat__label">Games played</span>
         </div>
       </div>
-      <p class="bball-sheet__note">Per-game averages, {{ b.league_short }} summer rec.</p>
-    </div>
+    </section>
 
-    <!-- ===== The team ===== -->
-    <div class="bball-about">
+    <!-- The team -->
+    <section class="bball-sec bball-about" aria-labelledby="bball-team-title">
       <div class="bball-about__text">
-        <span class="section__kicker bball-kicker">The team</span>
+        <h2 class="bball-sec__title" id="bball-team-title">The team</h2>
         <p class="bball-about__blurb">{{ b.blurb }}</p>
         {%- if b.blurb2 -%}
         <p class="bball-about__blurb">{{ b.blurb2 }}</p>
@@ -84,36 +81,32 @@ permalink: /basketball/
         <img src="{{ b.team_photo | relative_url }}" alt="{{ b.team }} team photo" loading="lazy" decoding="async" />
       </figure>
       {%- else -%}
-      <!-- PLACEHOLDER: add a team/action photo via `team_photo:` in _data/basketball.yml -->
+      <!-- Add a team photo via `team_photo:` in _data/basketball.yml -->
       <div class="bball-about__photo" role="img" aria-label="Team photo coming soon">
-        <span class="bball-about__photo-label">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          Team picture not yet taken.
-        </span>
+        <span class="bball-about__photo-label">Team photo coming soon.</span>
       </div>
       {%- endif -%}
-    </div>
+    </section>
 
-    <!-- ===== Game film ===== -->
-    <div class="bball-reel">
-      <div class="bball-reel__head">
-        <span class="section__kicker bball-kicker">Game film</span>
-        <h2 class="bball-reel__title">The latest tape</h2>
+    <!-- Game film -->
+    <section class="bball-sec bball-reel" aria-labelledby="bball-film-title">
+      <div class="bball-sec__head bball-sec__head--stack">
+        <h2 class="bball-sec__title" id="bball-film-title">Latest game film</h2>
         <p class="bball-reel__sub">
-          Every game gets filmed, and this is our most recent one, straight from the
-          <a href="{{ b.youtube_channel }}" target="_blank" rel="noopener noreferrer">{{ b.league_short }} channel</a>.
+          Every game gets filmed. This is our most recent one, from the
+          <a href="{{ b.youtube_channel }}" target="_blank" rel="noopener noreferrer">{{ b.league_short }} YouTube channel</a>.
         </p>
       </div>
 
       <div class="bball-video" id="bball-video" data-state="loading">
         <!-- JS swaps in an <iframe> when a matching video is found; otherwise
-             this graceful placeholder stays. -->
+             this placeholder stays. -->
         <div class="bball-video__placeholder">
           <span class="bball-video__icon" aria-hidden="true">{% include icon.html name="youtube" %}</span>
           <p class="bball-video__msg" id="bball-video-msg">Loading the latest highlight&hellip;</p>
         </div>
       </div>
-    </div>
+    </section>
 
   </div>
 </section>

@@ -1,5 +1,5 @@
 /* =========================================================================
-   Basketball page — stat cards + highlight video.
+   Basketball page: season averages + highlight video.
 
    Data sources (all server-side; no keys or scraping ever run here):
      • Stats   → {apiBase}/api/basketball-stats  (manual JSON override first,
@@ -64,7 +64,7 @@
 
   function setStat(key, val) {
     var card = statsEl.querySelector('[data-stat="' + key + '"] [data-value]');
-    if (card) card.innerHTML = val === null ? '&mdash;' : val;
+    if (card) card.textContent = val === null ? '' : val;   // empty shows a short muted bar (CSS)
   }
 
   function renderStats(data) {
@@ -73,7 +73,7 @@
       setStat('ppg', null); setStat('rpg', null); setStat('apg', null);
       setStat('spg', null); setStat('bpg', null); setStat('gp', null);
       statusEl.textContent =
-        "Season hasn't started yet — stats will appear here once games begin.";
+        "The season hasn't started yet. Stats show up here once games begin.";
       return;
     }
     statsEl.setAttribute('data-state', 'live');
@@ -84,8 +84,8 @@
     setStat('bpg', fmt(data.bpg));
     setStat('gp', fmtInt(data.gamesPlayed));
     statusEl.textContent = data.lastUpdated
-      ? 'Live stats · updated ' + formatDate(data.lastUpdated)
-      : 'Live season stats.';
+      ? 'Per game, updated ' + formatDate(data.lastUpdated)
+      : 'Per game, this season';
   }
 
   function formatDate(iso) {
@@ -113,7 +113,7 @@
       .then(function (data) { renderStats(data); })
       .catch(function () {
         statsEl.setAttribute('data-state', 'error');
-        statusEl.textContent = 'Stats are taking a breather — check back soon.';
+        statusEl.textContent = 'Stats are taking a breather. Check back soon.';
       });
   }
 
