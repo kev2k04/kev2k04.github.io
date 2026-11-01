@@ -745,6 +745,20 @@ html[data-mode="light"] .hero {
 /* Resume + Build put body text directly on the page, so keep their banner short
    — just behind the header — to clear the copy below it. */
 .resume::before, .build::before { height: 240px; }
+/* Experience opens with a photo header, so its sunset banner is off. */
+.exp::before { display: none; }
+/* Resume keeps the sunset behind the name, but it rises out of the page
+   colour at the top so it blends into the blurred bottom of the photo header. */
+.resume::before {
+  height: 320px;
+  background-image:
+    linear-gradient(to bottom,
+      var(--bg) 0%, rgba(9, 13, 28, 0.55) 38%, rgba(9, 13, 28, 0.6) 62%, var(--bg) 100%),
+    linear-gradient(to right,
+      rgba(9, 13, 28, 0.5) 0%, rgba(9, 13, 28, 0.12) 36%,
+      rgba(9, 13, 28, 0.12) 64%, rgba(9, 13, 28, 0.5) 100%),
+    url('/assets/images/website-design/sunset.jpg');
+}
 
 /* Light mode: drop the sunset banner entirely — the inner-page tops stay clean
    off-white (the home hero already swaps to its daytime image in light mode). */
@@ -3568,6 +3582,21 @@ html.home-nudge .home-sheet {
     #090d1c var(--hero-img, url('/assets/images/website-design/aurora.jpg')) var(--hero-pos, center 32%) / cover no-repeat;
 }
 .page-hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.6rem; }
+/* --fade: instead of a hard bottom edge, the photo blurs and dissolves into
+   the page background over its last stretch. */
+.page-hero--fade > .page-hero__inner { position: relative; z-index: 1; }
+.page-hero--fade::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 45%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--bg) 92%);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 60%);
+  mask-image: linear-gradient(to bottom, transparent, #000 60%);
+}
 .page-hero__inner { width: 100%; }
 .page-hero__title {
   margin: 0;
