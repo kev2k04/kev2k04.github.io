@@ -46,6 +46,11 @@ defaults:
     values:
       image: /assets/images/share-card.jpg
 
+# Hidden /vault/ page: the Google Apps Script web app that tailors and emails
+# the résumé and cover letter (see apps-script/Code.gs). Paste the deployment's
+# /exec URL here. Leave blank until it is deployed.
+vault_endpoint: "https://script.google.com/macros/s/AKfycbzeanUGeHIrx0aBi5sOHy0Kw37VhD1ZvDxN-g6IVIZectvUySWF7SiTpe9fKSOLbZRo/exec"
+
 # Sass / CSS pipeline
 sass:
   style: compressed
@@ -66,6 +71,7 @@ exclude:
   - .env
   - .env.example
   - scripts
+  - apps-script
 
 # Jekyll plugins (all whitelisted by GitHub Pages)
 plugins:
