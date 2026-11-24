@@ -138,6 +138,18 @@ sitemap: false
       font-weight: 500;
     }
 
+    /* Back link, top-left of the login card */
+    .gate { position: relative; }
+    .back {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .head-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
     .msg {
       min-height: 1.2em;
       margin: 12px 0 0;
@@ -168,7 +180,7 @@ sitemap: false
       line-height: 1.45;
     }
     .tool__head strong { color: var(--ink-soft); font-weight: 500; }
-    .tool__head .btn-ghost { padding: 8px 14px; font-size: 0.85rem; flex-shrink: 0; }
+    .tool__head .btn-ghost { padding: 8px 14px; font-size: 0.85rem; }
 
     .tool form {
       flex: 1;
@@ -271,6 +283,7 @@ sitemap: false
 
   <!-- Login -->
   <main class="panel gate" id="gate">
+    <button class="btn-ghost back" type="button" data-back aria-label="Back to the site">&larr; Back</button>
     <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
       <rect x="4.5" y="10.5" width="15" height="10" rx="2"/>
       <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
@@ -291,7 +304,10 @@ sitemap: false
         <h1>Application kit</h1>
         <p>Paste a job description. A tailored résumé and cover letter are emailed to <strong>{{ site.email }}</strong> within the hour.</p>
       </div>
-      <button class="btn-ghost" id="lockAgain" type="button">Lock</button>
+      <div class="head-actions">
+        <button class="btn-ghost" type="button" data-back>&larr; Back to site</button>
+        <button class="btn-ghost" id="lockAgain" type="button">Lock</button>
+      </div>
     </div>
 
     <form id="kit" autocomplete="off" novalidate>
@@ -318,6 +334,7 @@ sitemap: false
         <div class="checks">
           <label class="check"><input type="checkbox" id="wantResume" checked> Résumé</label>
           <label class="check"><input type="checkbox" id="wantCover" checked> Cover letter</label>
+          <label class="check"><input type="checkbox" id="wantTranscript"> Transcript</label>
         </div>
         <div class="actions">
           <button class="btn-ghost" id="clearBtn" type="button">Clear</button>
@@ -350,6 +367,7 @@ sitemap: false
       var jdCount = document.getElementById('jdCount');
       var wantResume = document.getElementById('wantResume');
       var wantCover = document.getElementById('wantCover');
+      var wantTranscript = document.getElementById('wantTranscript');
       var sendBtn = document.getElementById('sendBtn');
       var statusEl = document.getElementById('status');
 
@@ -414,6 +432,17 @@ sitemap: false
         show(false);
       });
 
+      /* Back: lock, then close this tab if the headshot opened it,
+         otherwise go to the home page. */
+      Array.prototype.forEach.call(document.querySelectorAll('[data-back]'), function (btn) {
+        btn.addEventListener('click', function () {
+          store(KEY, null);
+          store(PASS_KEY, null);
+          window.close();
+          setTimeout(function () { window.location.href = '/'; }, 150);
+        });
+      });
+
       /* ---------- Application kit ---------- */
       function words(text) {
         var t = text.trim();
@@ -442,7 +471,7 @@ sitemap: false
         sending = on;
         sendBtn.disabled = on;
         sendBtn.textContent = on ? 'Working…' : 'Generate & email';
-        [company, role, jd, wantResume, wantCover].forEach(function (el) { el.disabled = on; });
+        [company, role, jd, wantResume, wantCover, wantTranscript].forEach(function (el) { el.disabled = on; });
       }
 
       document.getElementById('clearBtn').addEventListener('click', function () {
@@ -462,14 +491,16 @@ sitemap: false
         var outputs = [];
         if (wantResume.checked) outputs.push('resume');
         if (wantCover.checked) outputs.push('coverLetter');
+        if (wantTranscript.checked) outputs.push('transcript');
+        var writing = wantResume.checked || wantCover.checked;
 
-        if (words(jd.value) < MIN_WORDS) {
+        if (writing && words(jd.value) < MIN_WORDS) {
           setStatus('Paste the full job description (at least ' + MIN_WORDS + ' words).', 'err');
           jd.focus();
           return;
         }
         if (!outputs.length) {
-          setStatus('Pick a résumé, a cover letter, or both.', 'err');
+          setStatus('Pick at least one: résumé, cover letter, or transcript.', 'err');
           return;
         }
 
@@ -508,7 +539,10 @@ sitemap: false
             } else if (!r.res.ok || !r.data.ok) {
               setStatus((r.data && r.data.error) || 'Something went wrong. Try again in a minute.', 'err');
             } else {
-              var what = outputs.length === 2 ? 'Résumé and cover letter' : (outputs[0] === 'resume' ? 'Résumé' : 'Cover letter');
+              var names = { resume: 'résumé', coverLetter: 'cover letter', transcript: 'transcript' };
+              var list = outputs.map(function (o) { return names[o]; });
+              var what = list.length > 1 ? list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1] : list[0];
+              what = what.charAt(0).toUpperCase() + what.slice(1);
               var co = r.data.company || payload.company;
               var forWhom = co ? ' for ' + co : '';
               setStatus('Queued. ' + what + forWhom + ' will be in your inbox within the hour.', 'ok');

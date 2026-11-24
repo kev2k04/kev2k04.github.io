@@ -5,8 +5,8 @@
    script checks the password and a daily limit, then emails the request to
    you with the subject "[Application Kit] Request: ...". An hourly scheduled
    Claude task finds those emails, writes the tailored résumé and cover
-   letter, emails them back as Word files, and labels the request
-   "Application Kit/Done".
+   letter, emails them back as Word files (plus your transcript if you ticked
+   it), and labels the request "Application Kit/Done".
 
    No AI runs here and no API key is needed.
 
@@ -34,10 +34,11 @@ function doPost(e) {
     var jd = clean(req.jobDescription, 20000);
     var company = clean(req.company, 120);
     var role = clean(req.role, 160);
-    var outputs = (req.outputs || []).filter(function (o) { return o === 'resume' || o === 'coverLetter'; });
+    var outputs = (req.outputs || []).filter(function (o) { return o === 'resume' || o === 'coverLetter' || o === 'transcript'; });
+    var writing = outputs.indexOf('resume') !== -1 || outputs.indexOf('coverLetter') !== -1;
 
-    if (jd.split(/\s+/).length < 40) return reply({ ok: false, error: 'The job description is too short.' });
-    if (!outputs.length) return reply({ ok: false, error: 'Pick a résumé, a cover letter, or both.' });
+    if (!outputs.length) return reply({ ok: false, error: 'Pick at least one: résumé, cover letter, or transcript.' });
+    if (writing && jd.split(/\s+/).length < 40) return reply({ ok: false, error: 'The job description is too short.' });
     if (!underDailyLimit(props)) return reply({ ok: false, error: 'Daily limit reached. Try again tomorrow.' });
 
     var id = Utilities.getUuid().slice(0, 8);
@@ -50,7 +51,7 @@ function doPost(e) {
       'Role: ' + (role || '(take it from the posting)'),
       '',
       '----- JOB DESCRIPTION START -----',
-      jd,
+      jd || '(none given)',
       '----- JOB DESCRIPTION END -----'
     ].join('\n');
 
